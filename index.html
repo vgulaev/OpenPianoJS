@@ -3,22 +3,31 @@
 <head>
 	<title></title>
 </head>
+<script type="text/javascript" src="js/classes/chord.js"></script>
+<script type="text/javascript" src="js/classes/kbSign.js"></script>
+<script type="text/javascript" src="js/classes/musicDoc.js"></script>
+<script type="text/javascript" src="js/classes/note.js"></script>
+<script type="text/javascript" src="js/classes/piano.js"></script>
+<script type="text/javascript" src="js/classes/svgBuilder.js"></script>
+<script type="text/javascript" src="js/classes/ut.js"></script>
+<script type="text/javascript" src="js/coachers/playFive.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <body id="root">
   <div id="GrandStaffHead" style="float: left;"></div>
   <div id="TenLines"></div>
-<!--svg id = "GrandStaff" height="140" width="500" style="position: absolute; left: 0px;">
-  <ellipse cx="200" cy="80" rx="100" ry="50"
-  style="fill:yellow;stroke:purple;stroke-width:2" />
-  <line x1="0" y1="0" x2="100" y2="100"/>
-</svg-->
-<div>
-
-<div>
-  <div>1</div>
-  <div>2</div>
-</div>
-
+<div style="text-align: center;">
+  <div style="float: left;">
+    <h2 id="Stat">
+      Statistic <br> one more
+    </h2>
+  </div>
+  <div>
+  <h1><span>Темп:</span><span id="Temp">0</span></h1>
+  <h1 style="color: green;"><span>Правильно:</span><span id="Correct">0</span></h1>
+  <h1 style="color: red;"><span>Ошибок:</span><span id="Error">0</span></h1>
+  <h1><span>%%:</span><span id="Percent">0</span></h1>
+  </div>
+<button onclick="doStep();">Step</button>
 <div>Hello!!!</div>
 <h1 id="Time"></h1>
 </body>
