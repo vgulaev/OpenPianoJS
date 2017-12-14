@@ -89,7 +89,7 @@ class PlayFive {
   }
 
   init() {
-    this.piano.perMinute = 60;
+    this.piano.perMinute = 80;
     this.createChords();
   }
 }

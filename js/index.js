@@ -108,26 +108,29 @@ function onHappy(obj) {
   element.innerHTML = App.piano.coacher.event.length; 
 }
 
-async function doStep() {
-  App.piano.practiceStep();
-  await Ut.sleep(900);
-  doStep()
+function doStep() {
+  async function stepByStep() {
+    App.piano.practiceStep();
+    await Ut.sleep(240);
+    stepByStep();
+  }
+  startWatch();
+  stepByStep();
   //console.log(App.piano.actualX);
 }
 
 function startWatch() {
   var startms = Date.now();
+  var element = document.getElementById("Time");
   async function worker() {
     var p = 0;
     var c = 0;
     while (true) {
-      await sleep(100);
-      //await new Promise(resolve => { resolve("Hello") });
+      await Ut.sleep(100);
       c = Date.now() / 1000;
       if (p == c) {
         continue;
       }
-      var element = document.getElementById("Time");
       element.innerHTML = ( c - startms / 1000 ).toFixed(2);
       p = c;
     }  
