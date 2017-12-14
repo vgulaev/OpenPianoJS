@@ -31,9 +31,9 @@ class SVGBuilder {
 
   static createNote( x, n, g ) {
     if (1 == n.staff) {
-    var y = 69 + (31 - n.stepLine) * 7.5;
+    var y = 129 + (31 - n.stepLine) * 7.5;
   } else {
-    var y = 227 + (19 - n.stepLine) * 7.5;
+    var y = 287 + (19 - n.stepLine) * 7.5;    
   }
     var path = SVGBuilder.createSVG("path");
     path.setAttributeNS (null, 'stroke', "#000000");
@@ -62,7 +62,7 @@ class SVGBuilder {
       }
       x -= SVGBuilder.measurePadding;
 
-      var barLine = SVGBuilder.drawLine(x, 24, x, 242);
+      var barLine = SVGBuilder.drawLine(x, 84, x, 302);
       gForMove.appendChild(barLine);
       gForMove.appendChild(g);
     }

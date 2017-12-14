@@ -21,7 +21,7 @@ class App {
     var width = window.innerWidth - head.width.baseVal.value - 20
     tenLines.setAttributeNS (null, "width", width);
     tenLines.setAttributeNS (null, "height", head.height.baseVal.value);
-    for (var j = 24; j <= 182; j += 158) {
+    for (var j = 84; j <= 262; j += 158) {
       for (var i = 0; i < 5; i++) {
         var line = SVGBuilder.createSVG ("line");
         line.setAttributeNS (null, "x1", 0);    
@@ -35,7 +35,7 @@ class App {
     }
 
     var rubicon = SVGBuilder.createSVG("polygon");
-    rubicon.setAttributeNS(null, "points", "380,0 400,0 400,242 380,242")
+    rubicon.setAttributeNS(null, "points", "380,54 400,54 400,332 380,332")
     rubicon.setAttributeNS(null, "stroke", "blue");
     rubicon.setAttributeNS(null, "fill", "blue");
     rubicon.setAttributeNS(null, "opacity", "0.5");    
