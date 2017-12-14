@@ -9,9 +9,11 @@ class PlayFive {
 
   createChords() {
    var chords = this.piano.musicDoc.chords;
+    var k = 0;
     for (var i = 0; i < 1000; i++) {
       var chord = new Chord();
-      var step = Note.stepToS[Ut.getRandomInt( 0, 5 )]; 
+      var step = Note.stepToS[Ut.getRandomInt( 0, 5 )]; //Note.stepToS[k % 5];  
+      k += 1;
       for (var j = 0; j < 2; j++) {
         var note = new Note( {type: 'quarter',
           staff: j + 1,
@@ -30,8 +32,8 @@ class PlayFive {
   checkTemp() {
     this.step += 1;
     if (this.step > 4) {
-      var s = 600 * 1000 / (this.event[9][0].timeStamp - this.event[0][0].timeStamp);
-      if (s > this.piano.perMinute) {
+      var s = 60 * 1000 * this.event.length / (this.event[this.event.length - 1][0].timeStamp - this.event[0][0].timeStamp);
+      if (s > (this.piano.perMinute + 10)) {
         this.piano.perMinute = s.toFixed(0); 
       } else {
         this.piano.perMinute -= 5;
@@ -42,7 +44,8 @@ class PlayFive {
 
   analyseStream() {
     if (!this.haveError) return;
-    var key = Note.tonesToS[this.event[8][1]] + "-" + Note.tonesToS[this.event[9][1]];
+    var lastIndex = this.event.length - 1;
+    var key = Note.tonesToS[this.event[lastIndex - 1][1]] + "-" + Note.tonesToS[this.event[lastIndex][1]];
     if (undefined === this.statistic[key]) {
       this.statistic[key] = 1;
     } else {
@@ -73,7 +76,12 @@ class PlayFive {
 
   push(event, kb) {
     this.event.push([event, kb - 72]);
-    if (10 == this.event.length) {
+    if (this.haveError) {
+      this.event.length = 0;
+      this.haveError = false;
+      this.piano.perMinute -= 1;
+    }
+    if (20 == this.event.length) {
       this.analyseStream();
       this.checkTemp();
       this.event.shift();
