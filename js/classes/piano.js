@@ -1,9 +1,11 @@
 class Piano {
   constructor(tenLines) {
-    this.musicDoc = new MusicDoc();
     this._perMinute = 60;
+
+    this.musicDoc = new MusicDoc();
     this.tenLines = tenLines;
     this.frames = new Array();
+    this.movingStep = new Array();
     this.lastRenderedIndex = 0;
     this.globalX = 0;
     this.actualX = 0;
@@ -47,16 +49,9 @@ class Piano {
     }
   }
 
-  moveDX(dx) {
-      this.actualX += dx;
-      for (var f of this.frames) {
-        f[1].x.baseVal.value = f[1].x.baseVal.value + dx;
-      }
-  }
-
   practiceStep() {
-    this.moveLength += 50;
-    this.moveTime += 1000;
+    var ms = Math.floor(60000/this._perMinute);
+    this.movingStep.push({s: 50, t: ms})
     this.curentChordIndex += 1;
   }
 
@@ -103,22 +98,48 @@ class Piano {
     });
   }
 
+  moveDX(dx) {
+      this.actualX += dx;
+      for (var f of this.frames) {
+        f[1].x.baseVal.value = f[1].x.baseVal.value + dx;
+      }
+  }
+
   startMoving() {
     var dx = -1;
     var obj = this;
-    var startTime = Date.now();
-    var nowTime = Date.now();
+    var startTime = window.performance.now();
+    var nowTime = window.performance.now();
+    var moveLength = 0;
+    var moveTime = 0;
+    var mStep;
+    var news;
+    var curX;
     async function step() {
-      await Ut.sleep(1000 / obj.perMinute);
-      if (obj.moveLength <= 0) {
-        obj.moveLength = 0;
-      } else {
-        obj.moveDX(dx);
-        obj.chordOpacity();
-        obj.moveLength += dx;
-      }
-      if (obj.actualX < -300) {
-        obj.updateFrames();
+      await Ut.sleep(1);
+      nowTime = window.performance.now();
+      if ((obj.movingStep.length > 0)||(0 < moveLength)) {
+        if (moveLength == 0) {
+          //console.log(obj.movingStep.length);
+          mStep = obj.movingStep.shift();
+          moveLength = mStep.s;
+          moveTime = mStep.t;
+          curX = obj.actualX;
+          startTime = window.performance.now();
+        }
+        news = Math.ceil((mStep.s / mStep.t) * (nowTime - startTime));
+
+        if ( (curX - news) < obj.actualX ) {
+          dx = curX - news - obj.actualX
+          obj.moveDX(dx);
+          obj.chordOpacity();
+          moveLength += dx;
+        }
+        if (moveLength <= 0) { 
+          moveLength = 0;
+          console.log(obj.actualX);
+          if (obj.actualX < -300) obj.updateFrames();
+        }
       }
       step();
     }
@@ -135,7 +156,9 @@ class Piano {
     this.curentChordIndex = 0;
     this.lastRenderedIndex = 0;
     this.actualX = 418;
-    this.moveLength = 28;
+//    this.moveLength = 28;
+    var ms = Math.floor(60000/this._perMinute);
+    this.movingStep.push({s: 28, t: ms})
     this.coacher.init();
     this.updateFrames();
     this.start();
