@@ -1,19 +1,7 @@
 class App {
-    static async get(url, callback) {
-    await new Promise( resolve => {
-      var myRequest = new XMLHttpRequest();
-      myRequest.open("get", url);
-      myRequest.onload = function () {
-        callback.call(this);
-        resolve("Ok");
-      };
-      myRequest.send();      
-    });
-  }
-
   static async initSVG() {
     var element = document.getElementById("GrandStaffHead");
-    await App.get("svg/GrandStaffHead.svg", function() {
+    await Ut.get("svg/GrandStaffHead.svg", function() {
       element.innerHTML = this.responseText;
     });
     var head = element.children[0];
@@ -87,10 +75,12 @@ class App {
 
 window.addEventListener("load", async function( event ) {
   await App.init();
-  App.piano.onError = onHappy;
+  var md = new MusicDoc();
+  md.loadFromURL("data/xml/No woman no cry.xml");
+  /* App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
   App.piano.onSetTemp = onHappy;  
-  App.piano.practice(new PlayFive());
+  App.piano.practice(new PlayFive()); */
 });
 
 function onHappy(obj) {

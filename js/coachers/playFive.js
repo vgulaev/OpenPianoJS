@@ -12,13 +12,14 @@ class PlayFive {
     var k = 0;
     for (var i = 0; i < 1000; i++) {
       var chord = new Chord();
-      var step = Note.stepToS[Ut.getRandomInt( 2, 7 )]; //Note.stepToS[k % 5];  
+      //var step = Note.stepToS[Ut.getRandomInt( 2, 7 )]; //Note.stepToS[k % 5];
+      var step = Note.stepToS[Ut.getRandomInt( 0, 5 )];
       for (var j = 0; j < 2; j++) {
         var rr = Ut.getRandomInt( 0, 5 );
         var step = Note.stepToS[rr];
         var note = new Note( {type: 'quarter',
           staff: j + 1,
-          octave: -j * 2 + 4,
+          octave: -j * 2 + 5,
           duration: 1,
           fingering: ( 1 == (j + 1) ) ? rr + 1 : 5 - rr,
           step: step
