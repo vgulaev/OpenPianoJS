@@ -30,9 +30,18 @@ class MusicDoc {
       }
     }
     this.chordArray = Object.keys(this.chordOnTick).
-      map(x => [parseInt(x), this.chordOnTick[x]]).
-      sort((a, b) => a[0] < b[0] ? -1 : ( a[0] > b[0] ? 1 : 0) );
-    this.chordArray.forEach(x => x[1].update());
+      map(x => ( { "tick": parseInt(x), "chord": this.chordOnTick[x] } ) ).
+      sort((a, b) => a.tick < b.tick ? -1 : ( a.tick > b.tick ? 1 : 0) );
+    var options = {};
+    this.chordArray.forEach((x, i, a) => {
+      x.chord.update();
+      if ((i > 0) && (a[i-1].chord.measure != a[i].chord.measure)) {
+        options["drawBarLine"] = true;
+      } else {
+        options["drawBarLine"] = false;
+      }
+      x.chord.render(options);
+    });
     //this.beats = 
     console.log("Hello");
   }

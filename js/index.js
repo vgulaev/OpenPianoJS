@@ -12,9 +12,9 @@ class App {
     for (var j = 84; j <= 262; j += 158) {
       for (var i = 0; i < 5; i++) {
         var line = SVGBuilder.createSVG ("line");
-        line.setAttributeNS (null, "x1", 0);    
-        line.setAttributeNS (null, "y1", j + 15 * i);    
-        line.setAttributeNS (null, "x2", width);    
+        line.setAttributeNS (null, "x1", 0);
+        line.setAttributeNS (null, "y1", j + 15 * i);
+        line.setAttributeNS (null, "x2", width);
         line.setAttributeNS (null, "y2", j + 15 * i);
         line.setAttributeNS (null, "stroke-width", 2);
         line.style.stroke = "black";
@@ -26,8 +26,8 @@ class App {
     rubicon.setAttributeNS(null, "points", "380,54 400,54 400,332 380,332")
     rubicon.setAttributeNS(null, "stroke", "blue");
     rubicon.setAttributeNS(null, "fill", "blue");
-    rubicon.setAttributeNS(null, "opacity", "0.5");    
-    tenLines.append(rubicon);
+    rubicon.setAttributeNS(null, "opacity", "0.5");
+    //tenLines.append(rubicon);
 
     var element = document.getElementById("TenLines");
     element.append(tenLines);
@@ -76,7 +76,15 @@ class App {
 window.addEventListener("load", async function( event ) {
   await App.init();
   var md = new MusicDoc();
-  md.loadFromURL("data/xml/No woman no cry.xml");
+  //await md.loadFromURL("data/xml/No woman no cry.xml");
+  await md.loadFromURL("data/xml/test.xml");
+  var x = 0;
+  for (var i = 0; i < md.chordArray.length; i++) {
+    var c = md.chordArray[i].chord;
+    c.g.setAttributeNS(null, "transform", `translate(${x})`);
+    App.tenLines.append(md.chordArray[i].chord.g);
+    x += c.weight;
+  }
   /* App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
   App.piano.onSetTemp = onHappy;  
