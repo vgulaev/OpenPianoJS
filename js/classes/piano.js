@@ -58,6 +58,7 @@ class Piano {
   chordOpacity() {
     for (var i = this.curentChordIndex - 1; i >= 0 && i > this.curentChordIndex - 7; i--) {
       var g = this.musicDoc.chords[i].g;
+      if (g == null) continue;
       g.setAttributeNS(null, "opacity", g.getAttributeNS(null,"opacity") - 0.003);
     }
   }
@@ -137,7 +138,6 @@ class Piano {
         }
         if (moveLength <= 0) { 
           moveLength = 0;
-          console.log(obj.actualX);
           if (obj.actualX < -300) obj.updateFrames();
         }
       }
