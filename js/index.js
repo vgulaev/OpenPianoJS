@@ -27,7 +27,7 @@ class App {
     rubicon.setAttributeNS(null, "stroke", "blue");
     rubicon.setAttributeNS(null, "fill", "blue");
     rubicon.setAttributeNS(null, "opacity", "0.5");
-    //tenLines.append(rubicon);
+    tenLines.append(rubicon);
 
     var element = document.getElementById("TenLines");
     element.append(tenLines);
@@ -78,13 +78,8 @@ window.addEventListener("load", async function( event ) {
   var md = new MusicDoc();
   //await md.loadFromURL("data/xml/No woman no cry.xml");
   await md.loadFromURL("data/xml/test.xml");
-  var x = 0;
-  for (var i = 0; i < md.chordArray.length; i++) {
-    var c = md.chordArray[i].chord;
-    c.g.setAttributeNS(null, "transform", `translate(${x})`);
-    App.tenLines.append(md.chordArray[i].chord.g);
-    x += c.weight;
-  }
+
+  App.piano.practice(md);
   /* App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
   App.piano.onSetTemp = onHappy;  
@@ -107,6 +102,8 @@ function onHappy(obj) {
 }
 
 function doStep() {
+  App.piano.practiceStep();
+  /*
   async function stepByStep() {
     App.piano.practiceStep();
     await Ut.sleep(240);
@@ -114,6 +111,7 @@ function doStep() {
   }
   startWatch();
   stepByStep();
+  */
   //console.log(App.piano.actualX);
 }
 

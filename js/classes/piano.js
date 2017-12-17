@@ -1,17 +1,16 @@
 class Piano {
   constructor(tenLines) {
     this._perMinute = 60;
-
     this.musicDoc = new MusicDoc();
     this.tenLines = tenLines;
-    this.frames = new Array();
-    this.movingStep = new Array();
-    this.lastRenderedIndex = 0;
-    this.globalX = 0;
-    this.actualX = 0;
     this.midi = null;
-    this.moveLength = 0;
     this.kb = new KBSign();
+
+    this.steps = new Array();
+    this.observerStatus = "work";
+    this.curentX = 0;
+
+    this.mover = null;
     this.Errors = 0;
     this.Rights = 0;
     this.onError = null;
@@ -29,30 +28,39 @@ class Piano {
   }
 
   updateFrames() {
-    var c = this.musicDoc.chords;
-    var frameSize = 2;
-    var measure = new Array();
-    if (3 == this.frames.length) {
-      var element = this.frames.shift();
-      element[0].remove();
-      element[1].remove();
-      this.actualX += 1 * this.musicDoc.beats * 50 * frameSize
-    }     
-    while(this.frames.length < 3) {
-      for (var i = 0; i < frameSize; i++) {
-        measure.push(c.slice(this.lastRenderedIndex, this.lastRenderedIndex + 4));
-        this.lastRenderedIndex += 4;
-      }
-      var svgFrame = SVGBuilder.render(this.tenLines, measure, this.lastRenderedIndex, this.actualX + this.frames.length * this.musicDoc.beats * 50 * frameSize);
-      this.frames.push(svgFrame);
-      measure = new Array();
-    }
-  }
+    var g = SVGBuilder.createSVG("g");
+    g.setAttributeNS (null, "id", "SheetMusic");
 
-  practiceStep() {
-    var ms = Math.floor(60000/this._perMinute);
-    this.movingStep.push({s: 50, t: ms})
-    this.curentChordIndex += 1;
+    var x = 0;
+    for (var i = 0; i < this.musicDoc.chordArray.length; i++) {
+      var c = this.musicDoc.chordArray[i].chord;
+      c.g.setAttributeNS(null, "transform", `translate(${x})`);
+      g.append(c.g);
+
+      x += c.weight;
+    }
+
+    var def = SVGBuilder.createSVG("def");
+    def.append(g)
+    this.tenLines.append(def);
+    
+    var use = SVGBuilder.createSVG("use");
+    use.setAttributeNS(null, "x", 450);
+    use.setAttributeNS(null, "href", "#SheetMusic");
+    
+    this.mover = SVGBuilder.createSVG("animate");
+    this.mover.setAttributeNS(null, "attributeType", "XML"); 
+    this.mover.setAttributeNS(null, "attributeName", "x"); 
+    this.mover.setAttributeNS(null, "from", "0"); 
+    this.mover.setAttributeNS(null, "to", "500"); 
+    this.mover.setAttributeNS(null, "dur", "2000ms");
+    this.mover.setAttributeNS(null, "begin", "indefinite");
+    this.mover.setAttributeNS(null, "fill", "freeze");
+    var obj = this;
+    this.mover.onend = function () { obj.moverEnd() };
+    use.append(this.mover);
+    this.tenLines.append(use);
+    console.log("Play");
   }
 
   chordOpacity() {
@@ -71,9 +79,13 @@ class Piano {
 
   onMIDIMessage( event ) {
     this.kb.push(event);
-    //console.log(event.timeStamp);
-    //if (128 == event.data[0]) return;
-    //console.log(this.kb.sign);
+    var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
+    if (this.kb.include(c.sign)) {
+      this.practiceStep();
+    } else {
+      console.log("no");
+    }
+    /*
     if (2 == this.kb.count) {
       if (this.kb.sign == this.musicDoc.chords[this.curentChordIndex].sign) {  
         this.practiceStep();
@@ -86,6 +98,7 @@ class Piano {
         this.invokeEvent("onError");
       }
     }
+    */
   }
 
   setMIDI(midiAccess) {
@@ -99,68 +112,55 @@ class Piano {
     });
   }
 
-  moveDX(dx) {
-      this.actualX += dx;
-      for (var f of this.frames) {
-        f[1].x.baseVal.value = f[1].x.baseVal.value + dx;
-      }
+  practiceStep() {
+    var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
+    var length = c.weight - c.xborder; 
+    this.curentChordIndex += 1;
+    c = this.musicDoc.chordArray[this.curentChordIndex].chord;
+    length += c.xborder;
+    var ms = 60000 / this._perMinute;
+    this.steps.push({length: -length, dur: ms});
   }
 
-  startMoving() {
-    var dx = -1;
-    var obj = this;
-    var startTime = window.performance.now();
-    var nowTime = window.performance.now();
-    var moveLength = 0;
-    var moveTime = 0;
-    var mStep;
-    var news;
-    var curX;
-    async function step() {
-      await Ut.sleep(1);
-      nowTime = window.performance.now();
-      if ((obj.movingStep.length > 0)||(0 < moveLength)) {
-        if (moveLength == 0) {
-          //console.log(obj.movingStep.length);
-          mStep = obj.movingStep.shift();
-          moveLength = mStep.s;
-          moveTime = mStep.t;
-          curX = obj.actualX;
-          startTime = window.performance.now();
-        }
-        news = Math.ceil((mStep.s / mStep.t) * (nowTime - startTime));
-
-        if ( (curX - news) < obj.actualX ) {
-          dx = curX - news - obj.actualX
-          obj.moveDX(dx);
-          obj.chordOpacity();
-          moveLength += dx;
-        }
-        if (moveLength <= 0) { 
-          moveLength = 0;
-          if (obj.actualX < -300) obj.updateFrames();
-        }
-      }
-      step();
+  moverEnd() {
+    if (this.steps.length > 0) {
+      this.animationStep();  
+    } else {
+      this.observerStatus = "work";
+      this.moveObserver(); 
     }
-    step();
+  }
+
+  animationStep() {
+    var curMove = this.steps.shift();
+    this.mover.setAttributeNS(null, "from", this.curentX);
+    this.mover.setAttributeNS(null, "to", this.curentX + curMove.length);
+    this.mover.setAttributeNS(null, "dur", curMove.dur + "ms");
+    this.mover.beginElement();
+    this.curentX += curMove.length;
+  }
+
+  async moveObserver() {
+    while ("work" == this.observerStatus) {
+      await Ut.sleep(1);
+      if (0 == this.steps.length) continue;
+      this.animationStep();
+      this.observerStatus = "stop";
+    }
   }
 
   start() {
-    this.startMoving();
+    this.steps.push({length: -60, dur: 2000});
+    this.observerStatus = "work";
+    this.curentChordIndex = 0;
+    this.curentX = 450;
+    this.moveObserver();
   }
 
-  practice(coacher) {
-    this.coacher = coacher;
-    this.coacher.piano = this;
-    this.curentChordIndex = 0;
-    this.lastRenderedIndex = 0;
-    this.actualX = 418;
-//    this.moveLength = 28;
-    var ms = Math.floor(60000/this._perMinute);
-    this.movingStep.push({s: 28, t: ms})
-    this.coacher.init();
+  practice(md) {
+    this.musicDoc = md;
     this.updateFrames();
+    this.perMinute = 60;
     this.start();
   }
 }

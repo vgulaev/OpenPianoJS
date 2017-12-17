@@ -42,7 +42,5 @@ class MusicDoc {
       }
       x.chord.render(options);
     });
-    //this.beats = 
-    console.log("Hello");
   }
 }

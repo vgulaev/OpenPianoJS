@@ -8,9 +8,13 @@ class Chord {
 
   update() {
     this.sign = this.notes.
-      map(n => n.midiByte).
-      filter(x => x > 0).
-      sort().join(",");
+      reduce(function (p, c) {
+        p.push(c);
+        return p;
+      }, new KBSign());
+//       map(n => n.midiByte).
+//       filter(x => x > 0).
+//       sort().join(",");
   }
 
   render(options = {}) {
@@ -19,7 +23,7 @@ class Chord {
     var dx = 0;
     if (options["drawBarLine"]) {
       dx = 30;
-      var line = SVGBuilder.drawLine(0, 0, 0, 300);
+      var line = SVGBuilder.drawLine(0, 84, 0, 302);
       g.append(line);
     }
 
@@ -45,10 +49,9 @@ class Chord {
         }        
       }
       var note = SVGBuilder.drawNote(g, this.notes[i], dx + shift, skipStem);
-      //g.append(note);
     }
     this.g = g;
+    this.xborder = 10 + dx;
     this.weight = 70 + dx;
-    console.log('render');
   }
 }
