@@ -77,7 +77,7 @@ window.addEventListener("load", async function( event ) {
   await App.init();
   var md = new MusicDoc();
   //await md.loadFromURL("data/xml/No woman no cry.xml");
-  await md.loadFromURL("data/xml/test.xml");
+  await md.loadFromURL(Settings.fileName);
 
   App.piano.practice(md);
   App.piano.onError = onHappy;
@@ -97,8 +97,8 @@ function onHappy(obj) {
   element.innerHTML = (App.piano.Rights / (App.piano.Rights + App.piano.Errors) * 100).toFixed(1);
 //   var element = document.getElementById("Stat");
 //   element.innerHTML = App.piano.coacher.statFormat(); 
-  var element = document.getElementById("InLine");
-  element.innerHTML = App.piano.coacher.event.length; 
+//   var element = document.getElementById("InLine");
+//   element.innerHTML = App.piano.coacher.event.length; 
 }
 
 function doStep() {

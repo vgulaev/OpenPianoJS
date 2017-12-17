@@ -43,16 +43,16 @@ class Piano {
     var def = SVGBuilder.createSVG("def");
     def.append(g)
     this.tenLines.append(def);
-    
+
     this.use = SVGBuilder.createSVG("use");
     this.use.setAttributeNS(null, "x", 450);
     this.use.setAttributeNS(null, "href", "#SheetMusic");
-    
+
     this.mover = SVGBuilder.createSVG("animate");
-    this.mover.setAttributeNS(null, "attributeType", "XML"); 
-    this.mover.setAttributeNS(null, "attributeName", "x"); 
-    this.mover.setAttributeNS(null, "from", "0"); 
-    this.mover.setAttributeNS(null, "to", "500"); 
+    this.mover.setAttributeNS(null, "attributeType", "XML");
+    this.mover.setAttributeNS(null, "attributeName", "x");
+    this.mover.setAttributeNS(null, "from", "0");
+    this.mover.setAttributeNS(null, "to", "500");
     this.mover.setAttributeNS(null, "dur", "2000ms");
     this.mover.setAttributeNS(null, "begin", "indefinite");
     this.mover.setAttributeNS(null, "fill", "freeze");
@@ -80,6 +80,7 @@ class Piano {
   onMIDIMessage( event ) {
     //128 - up 144 - press key
     this.kb.push(event);
+    if (128 == event.data[0]) return;
     var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
     if (this.kb.include(c.sign)) {
       c.makeGreen();
@@ -88,7 +89,7 @@ class Piano {
     } else {
       if ((144 == event.data[0])&&(this.kb.kb.length == c.sign.kb.length)) {
         this.Errors += 1;
-        this.invokeEvent("onError");        
+        this.invokeEvent("onError");
       }
     }
   }
@@ -106,7 +107,7 @@ class Piano {
 
   practiceStep() {
     var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
-    var length = c.weight - c.xborder; 
+    var length = c.weight - c.xborder;
     this.curentChordIndex += 1;
     if (this.curentChordIndex == this.musicDoc.chordArray.length) {
       this.use.setAttributeNS(null, "x", 450);
@@ -117,14 +118,15 @@ class Piano {
     length += c.xborder;
     var ms = 60000 / this._perMinute;
     this.steps.push({length: -length, dur: ms});
+    if ("" == c.sign.sign) this.practiceStep();
   }
 
   moverEnd() {
     if (this.steps.length > 0) {
-      this.animationStep();  
+      this.animationStep();
     } else {
       this.observerStatus = "work";
-      this.moveObserver(); 
+      this.moveObserver();
     }
   }
 
