@@ -44,9 +44,9 @@ class Piano {
     def.append(g)
     this.tenLines.append(def);
     
-    var use = SVGBuilder.createSVG("use");
-    use.setAttributeNS(null, "x", 450);
-    use.setAttributeNS(null, "href", "#SheetMusic");
+    this.use = SVGBuilder.createSVG("use");
+    this.use.setAttributeNS(null, "x", 450);
+    this.use.setAttributeNS(null, "href", "#SheetMusic");
     
     this.mover = SVGBuilder.createSVG("animate");
     this.mover.setAttributeNS(null, "attributeType", "XML"); 
@@ -58,8 +58,8 @@ class Piano {
     this.mover.setAttributeNS(null, "fill", "freeze");
     var obj = this;
     this.mover.onend = function () { obj.moverEnd() };
-    use.append(this.mover);
-    this.tenLines.append(use);
+    this.use.append(this.mover);
+    this.tenLines.append(this.use);
     console.log("Play");
   }
 
@@ -78,27 +78,19 @@ class Piano {
   }
 
   onMIDIMessage( event ) {
+    //128 - up 144 - press key
     this.kb.push(event);
     var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
     if (this.kb.include(c.sign)) {
+      c.makeGreen();
       this.practiceStep();
+      //console.log("ok == " + event.data[0]);
     } else {
-      console.log("no");
-    }
-    /*
-    if (2 == this.kb.count) {
-      if (this.kb.sign == this.musicDoc.chords[this.curentChordIndex].sign) {  
-        this.practiceStep();
-        this.Rights += 1;
-        this.invokeEvent("onCorrect");
-        this.coacher.push(event, this.kb.kb[this.kb.kb.length - 1]);
-      } else {
-        this.coacher.haveError = true;
+      if ((144 == event.data[0])&&(this.kb.kb.length == c.sign.kb.length)) {
         this.Errors += 1;
-        this.invokeEvent("onError");
+        this.invokeEvent("onError");        
       }
     }
-    */
   }
 
   setMIDI(midiAccess) {
@@ -116,6 +108,11 @@ class Piano {
     var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
     var length = c.weight - c.xborder; 
     this.curentChordIndex += 1;
+    if (this.curentChordIndex == this.musicDoc.chordArray.length) {
+      this.use.setAttributeNS(null, "x", 450);
+      this.start();
+      return;
+    }
     c = this.musicDoc.chordArray[this.curentChordIndex].chord;
     length += c.xborder;
     var ms = 60000 / this._perMinute;
@@ -150,9 +147,10 @@ class Piano {
   }
 
   start() {
-    this.steps.push({length: -60, dur: 2000});
+    this.steps = [{length: -60, dur: 2000}];
     this.observerStatus = "work";
     this.curentChordIndex = 0;
+    this.Errors = 0;
     this.curentX = 450;
     this.moveObserver();
   }

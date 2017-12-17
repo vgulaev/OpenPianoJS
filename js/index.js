@@ -80,10 +80,10 @@ window.addEventListener("load", async function( event ) {
   await md.loadFromURL("data/xml/test.xml");
 
   App.piano.practice(md);
-  /* App.piano.onError = onHappy;
+  App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
   App.piano.onSetTemp = onHappy;  
-  App.piano.practice(new PlayFive()); */
+  //App.piano.practice(new PlayFive()); */
 });
 
 function onHappy(obj) {
@@ -95,8 +95,8 @@ function onHappy(obj) {
   element.innerHTML = App.piano.perMinute;
   var element = document.getElementById("Percent");
   element.innerHTML = (App.piano.Rights / (App.piano.Rights + App.piano.Errors) * 100).toFixed(1);
-  var element = document.getElementById("Stat");
-  element.innerHTML = App.piano.coacher.statFormat(); 
+//   var element = document.getElementById("Stat");
+//   element.innerHTML = App.piano.coacher.statFormat(); 
   var element = document.getElementById("InLine");
   element.innerHTML = App.piano.coacher.event.length; 
 }

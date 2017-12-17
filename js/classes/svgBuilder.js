@@ -13,14 +13,14 @@ class SVGBuilder {
     line.setAttributeNS (null, 'y1', y1);
     line.setAttributeNS (null, 'x2', x2);
     line.setAttributeNS (null, 'y2', y2);
-    line.setAttributeNS (null, 'stroke', "black");
+    //line.setAttributeNS (null, 'stroke', "black");
     line.setAttributeNS (null, 'stroke-width', 3);
     return line;
   }
 
   static svgElementsForNote(g, x, y, n, skipStem) {
     var path = SVGBuilder.createSVG("path");
-    path.setAttributeNS (null, 'stroke', "#000000");
+    //path.setAttributeNS (null, 'stroke', "#000000");
     path.setAttributeNS (null, 'stroke-width', 1);
 
     var res = "";
@@ -83,44 +83,6 @@ class SVGBuilder {
     }
 
     this.svgElementsForNote(g, x, y, n, skipStem);
-  }
-
-  static render(tenLines, measure, id, xShift) {
-    var gForMove = SVGBuilder.createSVG("g");
-    gForMove.setAttributeNS(null, "id", "piece" + id);
-
-    var x = 0;
-    for (var m of measure) {
-      x += SVGBuilder.measurePadding;
-      for (var c of m) {
-        var g = SVGBuilder.createSVG("g");
-        g.setAttributeNS(null, "opacity", 1);
-        for (var n of c.notes) {
-          SVGBuilder.createNote(x, n, g);
-        }
-        c.g = g;
-        x += 50;
-        gForMove.appendChild(g);
-      }
-      x -= SVGBuilder.measurePadding;
-
-      var barLine = SVGBuilder.drawLine(x, 84, x, 302);
-      gForMove.appendChild(barLine);
-      gForMove.appendChild(g);
-    }
-
-    var defs = SVGBuilder.createSVG("defs")
-    defs.appendChild(gForMove);
-
-    var u = SVGBuilder.createSVG("use");
-    //u.setAttributeNS(null, "id", "piece1");
-    u.setAttributeNS(null, "href", "#piece" + id);
-    u.setAttributeNS(null, "x", xShift);
-    u.setAttributeNS(null, "y", 0);
-
-    tenLines.appendChild(defs);
-    tenLines.appendChild(u);
-    return [defs, u];
   }
 }
 SVGBuilder.measurePadding = 25;
