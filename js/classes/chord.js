@@ -23,6 +23,19 @@ class Chord {
       dx = 30;
       var line = SVGBuilder.drawLine(0, 84, 0, 302);
       g.append(line);
+      var text = SVGBuilder.createSVG("text");
+      text.setAttributeNS(null, "y", "60");
+      text.innerHTML = this.measure;
+      g.append(text);
+      if (this.measure == 1) {
+        var text = SVGBuilder.createSVG("text");
+        text.setAttributeNS(null, "font-family", "Emmentaler");
+        text.setAttributeNS(null, "font-size", "62");
+        text.setAttributeNS(null, "y", "60");
+        text.setAttributeNS(null, "x", "-30");
+        text.innerHTML = 1248;
+        g.append(text);
+      }
     }
 
     var gg = SVGBuilder.createSVG ("g");
@@ -60,7 +73,7 @@ class Chord {
         } else {
           shift = 0;
           skipStem = false;
-        }        
+        }
       }
       var note = SVGBuilder.drawNote(gg, this.notes[i], dx + shift, skipStem);
     }

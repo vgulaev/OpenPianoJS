@@ -28,6 +28,7 @@ class Piano {
   }
 
   updateFrames() {
+    //this.createHeader();
     var g = SVGBuilder.createSVG("g");
     g.setAttributeNS (null, "id", "SheetMusic");
 
@@ -82,7 +83,8 @@ class Piano {
     this.kb.push(event);
     if (128 == event.data[0]) return;
     var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
-    if (this.kb.include(c.sign)) {
+    //if (this.kb.include(c.sign)) {
+    if (this.kb.last(c.sign.count) == c.sign.sign) {
       c.makeGreen();
       this.practiceStep();
       //console.log("ok == " + event.data[0]);

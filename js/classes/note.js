@@ -9,12 +9,12 @@ class Note {
       }
     }
   }
-  
+
   loadFromXML(options) {
     var properties = [
       [() => true, ["rest", "chord"] ],
       [x => parseInt(x.innerHTML), ["duration", "octave", "voice", "staff", "alter"]],
-      [x => x.innerHTML, ["step", "type", "stem"]],
+      [x => x.innerHTML, ["step", "type", "stem", "beam"]],
       [x => x.getAttribute("type"), ["tie"]]
     ];
     this._propFromXML(properties, options);
@@ -56,7 +56,7 @@ class Note {
   get midiByte() {
     if (this.rest == true) return -1;
     return 12 + this.octave * 12 + Note.tones[this.step] + ( this.alter ? this.alter : 0 );
-  } 
+  }
 }
 
 Note.tonesToS = {

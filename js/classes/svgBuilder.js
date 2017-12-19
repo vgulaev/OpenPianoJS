@@ -30,8 +30,8 @@ class SVGBuilder {
         res = `m 10,${y - 16} h 21 v -8 h -21 v 8`;
       }
     } else {
-      if ("quarter" == n.type) {
-        if (true != skipStem) {
+      if (("quarter" == n.type)||("16th" == n.type)||("eighth" == n.type)) {
+        if ((true != skipStem) && (undefined == n.beam)) {
           var coord = ("down" == n.stem) ? [x - 13, y + 55, x - 13, y + 10] : [x + 7, y - 39, x + 7, y + 6];
           var stem = this.drawLine.apply(this, coord)
           g.append(stem);
@@ -50,7 +50,7 @@ class SVGBuilder {
       if ((n.alter == -1)||(n.alter == 1)) {
         var accidental = SVGBuilder.createSVG("path");
         accidental.setAttributeNS (null, 'stroke-width', 1);
-        accidental.setAttributeNS (null, 'd', SVGTmp.flat(x, y));
+        accidental.setAttributeNS (null, 'd', ( -1 == n.alter ? SVGTmp.flat(x, y) : SVGTmp.sharp(x, y) ) );
         g.append(accidental);
         console.log("write bemmol");
       }
