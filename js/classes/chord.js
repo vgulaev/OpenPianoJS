@@ -28,6 +28,7 @@ class Chord {
       text.innerHTML = this.measure;
       g.append(text);
       if (this.measure == 1) {
+        /*
         var text = SVGBuilder.createSVG("text");
         text.setAttributeNS(null, "font-family", "Emmentaler");
         text.setAttributeNS(null, "font-size", "62");
@@ -35,6 +36,7 @@ class Chord {
         text.setAttributeNS(null, "x", "-30");
         text.innerHTML = 1248;
         g.append(text);
+        */
       }
     }
 

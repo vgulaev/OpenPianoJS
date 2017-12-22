@@ -31,7 +31,7 @@ class App {
 
     var element = document.getElementById("TenLines");
     element.append(tenLines);
-    
+
     App.tenLines = tenLines;
   }
 
@@ -69,6 +69,7 @@ class App {
     App.tenLines = ""; // SVG element to GrandStaff
     await App.initSVG();
     App.piano = new Piano(App.tenLines);
+    App.piano.header = document.querySelector("#GrandStaffHead > svg");
     App.initMIDI();
   }
 }
@@ -82,7 +83,7 @@ window.addEventListener("load", async function( event ) {
   App.piano.practice(md);
   App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
-  App.piano.onSetTemp = onHappy;  
+  App.piano.onSetTemp = onHappy;
   //App.piano.practice(new PlayFive()); */
 });
 
@@ -95,10 +96,11 @@ function onHappy(obj) {
   element.innerHTML = App.piano.perMinute;
   var element = document.getElementById("Percent");
   element.innerHTML = (App.piano.Rights / (App.piano.Rights + App.piano.Errors) * 100).toFixed(1);
-//   var element = document.getElementById("Stat");
-//   element.innerHTML = App.piano.coacher.statFormat(); 
+  var element = document.getElementById("Stat");
+  var c = App.piano.currentChord();
+  element.innerHTML = c.chord.notes.slice().sort((a, b) => a.stepLine - b.stepLine).map(x => x.toS()).join(",");
 //   var element = document.getElementById("InLine");
-//   element.innerHTML = App.piano.coacher.event.length; 
+//   element.innerHTML = App.piano.coacher.event.length;
 }
 
 function doStep() {
@@ -129,7 +131,7 @@ function startWatch() {
       }
       element.innerHTML = ( c - startms / 1000 ).toFixed(2);
       p = c;
-    }  
+    }
   }
   worker();
 }
@@ -139,7 +141,7 @@ function sendMiddleC( midiAccess, portID ) {
   var noteOnMessage = [0x90, 60, 0x7f];    // note on, middle C, full velocity
   var output = midiAccess.outputs.get(portID);
   output.send( noteOnMessage );  //omitting the timestamp means send immediately.
-  output.send( [0x80, 60, 0x40], window.performance.now() + 1000.0 ); // Inlined array creation- note off, middle C,  
+  output.send( [0x80, 60, 0x40], window.performance.now() + 1000.0 ); // Inlined array creation- note off, middle C,
                                                                       // release velocity = 64, timestamp = now + 1000ms.
 }
 */

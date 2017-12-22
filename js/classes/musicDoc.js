@@ -2,18 +2,19 @@ class MusicDoc {
   constructor() {
     this.chordOnTick = {};
     this.chordArray = new Array;
-  }  
-  
+  }
+
   async loadFromURL(url) {
     var xml;
     await Ut.get(url, function () {
       xml = this.responseXML;
     });
     var attr = xml.getElementsByTagName("attributes")[0];
+    this.keyFifths = parseInt(attr.getElementsByTagName("fifths")[0].innerHTML);
     this.divisions = parseInt(attr.getElementsByTagName("divisions")[0].innerHTML);
     this.beats = parseInt(attr.getElementsByTagName("beats")[0].innerHTML);
     this.beatType = parseInt(attr.getElementsByTagName("beat-type")[0].innerHTML);
-    
+
     var voiceTicker = new VoiceTicker();
     var measureXML = xml.getElementsByTagName("measure");
     var curChordTick = 0;
@@ -26,6 +27,7 @@ class MusicDoc {
           if (undefined === this.chordOnTick[curChordTick]) this.chordOnTick[curChordTick] = new Chord(i);
           curChord = this.chordOnTick[curChordTick];
         }
+        note.chord = curChord;
         curChord.notes.push(note);
       }
     }
@@ -35,12 +37,6 @@ class MusicDoc {
     var options = {};
     this.chordArray.forEach((x, i, a) => {
       x.chord.update();
-      if ((i > 0) && (a[i-1].chord.measure != a[i].chord.measure)) {
-        options["drawBarLine"] = true;
-      } else {
-        options["drawBarLine"] = false;
-      }
-      x.chord.render(options);
     });
   }
 }

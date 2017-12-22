@@ -27,14 +27,67 @@ class Piano {
     return this._perMinute;
   }
 
+  createHeader() {
+    App.keyFifths = {};
+    var g = SVGBuilder.createSVG("g");
+    function _text(x, y, t) {
+      var text = SVGBuilder.createSVG("text");
+      text.setAttributeNS(null, "font-family", "Emmentaler");
+      text.setAttributeNS(null, "font-size", "64");
+      text.setAttributeNS(null, "font-weight", "normal");
+      text.setAttributeNS(null, "text-anchor", "middle");
+      text.setAttributeNS(null, "y", y);
+      text.setAttributeNS(null, "x", x);
+      text.innerHTML = t;
+      return text;
+    }
+    g.append(_text(120, 115, this.musicDoc.beats));
+    g.append(_text(120, 146, this.musicDoc.beatType));
+    g.append(_text(120, 273, this.musicDoc.beats));
+    g.append(_text(120, 304, this.musicDoc.beatType));
+
+    if (-1 == this.musicDoc.keyFifths) {
+      var n = new Note({step: "B", alter: -1, octave: 4});
+      var y = 129 + (31 - n.stepLine) * 7.5;
+      SVGBuilder.drawAccidental(115, y, n, g);
+      n = new Note({step: "B", alter: -1, octave: 2});
+      y = 287 + (19 - n.stepLine) * 7.5;
+      SVGBuilder.drawAccidental(115, y, n, g);
+      App.keyFifths["B-1"] = true;
+    } else if (2 == this.musicDoc.keyFifths) {
+      var n = new Note({step: "C", alter: 1, octave: 5});
+      var y = 129 + (31 - n.stepLine) * 7.5;
+      SVGBuilder.drawAccidental(115, y, n, g);
+      n = new Note({step: "F", alter: 1, octave: 5});
+      y = 129 + (31 - n.stepLine) * 7.5;
+      SVGBuilder.drawAccidental(105, y, n, g);
+      App.keyFifths["C1"] = true;      
+      App.keyFifths["F1"] = true;      
+    }
+
+    this.header.append(g);
+  }
+
   updateFrames() {
-    //this.createHeader();
+    this.createHeader();
     var g = SVGBuilder.createSVG("g");
     g.setAttributeNS (null, "id", "SheetMusic");
 
     var x = 0;
-    for (var i = 0; i < this.musicDoc.chordArray.length; i++) {
-      var c = this.musicDoc.chordArray[i].chord;
+    var a = this.musicDoc.chordArray;
+    var options = {};
+    App.tieBuilder = {"1": {}, "2": {}, x: x};
+    for (var i = 0; i < a.length; i++) {
+      var c = a[i].chord;
+
+      if ((i > 0) && (a[i-1].chord.measure != a[i].chord.measure)) {
+        options["drawBarLine"] = true;
+      } else {
+        options["drawBarLine"] = false;
+      }
+      App.tieBuilder.x = x;
+      c.render(options);
+
       c.g.setAttributeNS(null, "transform", `translate(${x})`);
       g.append(c.g);
 
@@ -107,8 +160,12 @@ class Piano {
     });
   }
 
+  currentChord() {
+    return this.musicDoc.chordArray[this.curentChordIndex];
+  }
+
   practiceStep() {
-    var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
+    var c = this.currentChord().chord;
     var length = c.weight - c.xborder;
     this.curentChordIndex += 1;
     if (this.curentChordIndex == this.musicDoc.chordArray.length) {
