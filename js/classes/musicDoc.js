@@ -36,7 +36,7 @@ class MusicDoc {
       sort((a, b) => a.tick < b.tick ? -1 : ( a.tick > b.tick ? 1 : 0) );
     var options = {};
     this.chordArray.forEach((x, i, a) => {
-      x.chord.update();
+      x.chord.update(Settings.staff);
     });
   }
 }

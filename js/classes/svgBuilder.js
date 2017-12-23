@@ -78,6 +78,16 @@ class SVGBuilder {
     delete obj[n.stepLine];
   }
 
+  static drawFingering(x, y, n, g) {
+    var text = SVGBuilder.createSVG("text");
+    text.setAttributeNS(null, "font-size", "20");
+    var dy = (1 == n.staff) ? 10 : -50
+    text.setAttributeNS(null, "y", y - dy);
+    text.setAttributeNS(null, "x", x);
+    text.innerHTML = n.fingering;
+    g.append(text);
+  }
+
   static svgElementsForNote(g, x, y, n, skipStem) {
     var path = SVGBuilder.createSVG("path");
     path.setAttributeNS (null, 'stroke-width', 1);
@@ -112,6 +122,7 @@ class SVGBuilder {
       if ((n.alter == -1)||(n.alter == 1)) this.drawAccidental(x, y, n, g);
       if (true == n.dot) this.drawDot(x, y, n, g);
       if (undefined !== n.tie) this.drawTie(x, y, n, g);
+      if (undefined !== n.fingering) this.drawFingering(x, y, n, g);
     }
 
     //path.setAttributeNS (null, 'opacity', 0.5);

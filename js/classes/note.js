@@ -17,7 +17,7 @@ class Note {
   loadFromXML(options) {
     var properties = [
       [() => true, ["rest", "chord", "dot"] ],
-      [x => parseInt(x.innerHTML), ["duration", "octave", "voice", "staff", "alter"]],
+      [x => parseInt(x.innerHTML), ["duration", "octave", "voice", "staff", "alter", "fingering"]],
       [x => x.innerHTML, ["step", "type", "stem", "beam"]],
       [x => x.getAttribute("type"), ["tie"]]
     ];

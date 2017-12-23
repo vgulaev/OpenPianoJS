@@ -6,9 +6,10 @@ class Chord {
     this.measure = measure;
   }
 
-  update() {
-    this.sign = this.notes.
-      reduce(function (p, c) {
+  update(staff) {
+    var a = this.notes;
+    if ((1 == staff) || (2 == staff)) a = this.notes.filter( (x) => { return x.staff == staff } );
+    this.sign = a.reduce( function (p, c) {
         p.push(c);
         return p;
       }, new KBSign());
@@ -23,21 +24,12 @@ class Chord {
       dx = 30;
       var line = SVGBuilder.drawLine(0, 84, 0, 302);
       g.append(line);
+      /*
       var text = SVGBuilder.createSVG("text");
       text.setAttributeNS(null, "y", "60");
       text.innerHTML = this.measure;
       g.append(text);
-      if (this.measure == 1) {
-        /*
-        var text = SVGBuilder.createSVG("text");
-        text.setAttributeNS(null, "font-family", "Emmentaler");
-        text.setAttributeNS(null, "font-size", "62");
-        text.setAttributeNS(null, "y", "60");
-        text.setAttributeNS(null, "x", "-30");
-        text.innerHTML = 1248;
-        g.append(text);
-        */
-      }
+      */
     }
 
     var gg = SVGBuilder.createSVG ("g");

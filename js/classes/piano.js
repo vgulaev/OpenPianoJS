@@ -61,8 +61,8 @@ class Piano {
       n = new Note({step: "F", alter: 1, octave: 5});
       y = 129 + (31 - n.stepLine) * 7.5;
       SVGBuilder.drawAccidental(105, y, n, g);
-      App.keyFifths["C1"] = true;      
-      App.keyFifths["F1"] = true;      
+      App.keyFifths["C1"] = true;
+      App.keyFifths["F1"] = true;
     }
 
     this.header.append(g);
@@ -168,7 +168,8 @@ class Piano {
     var c = this.currentChord().chord;
     var length = c.weight - c.xborder;
     this.curentChordIndex += 1;
-    if (this.curentChordIndex == this.musicDoc.chordArray.length) {
+    //if (this.curentChordIndex == this.musicDoc.chordArray.length) {
+    if (this.curentChordIndex == 12) {
       this.use.setAttributeNS(null, "x", 450);
       this.start();
       return;
