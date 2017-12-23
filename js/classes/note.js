@@ -6,7 +6,7 @@ class Note {
     } */
     function initProperty(name, options, defaults) {
       if (options[name] === undefined) {
-        obj[name] = defaults;
+        if (undefined != defaults) obj[name] = defaults;
       } else {
         obj[name] = options[name];
       }
@@ -17,6 +17,7 @@ class Note {
     initProperty("duration", options, 0);
     initProperty("type", options, "");
     initProperty("staff", options, 0);
+    initProperty("fingering", options, undefined);
   }
 
   static intStepTo(step) {
@@ -29,10 +30,10 @@ class Note {
 
   get midiByte() {
     return 12 + this.octave * 12 + Note.tones[this.step] + this.alter;
-  } 
+  }
 }
 
-Note.tonesToS = { 
+Note.tonesToS = {
   0: 'C',
   2: 'D',
   4: 'E',

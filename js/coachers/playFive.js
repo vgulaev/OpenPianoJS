@@ -12,13 +12,16 @@ class PlayFive {
     var k = 0;
     for (var i = 0; i < 1000; i++) {
       var chord = new Chord();
-      var step = Note.stepToS[Ut.getRandomInt( 0, 5 )]; //Note.stepToS[k % 5];  
+      //var step = Note.stepToS[Ut.getRandomInt( 0, 5 )]; //Note.stepToS[k % 5];
       k += 1;
       for (var j = 0; j < 2; j++) {
+        var rr = Ut.getRandomInt( 0, 5 );
+        var step = Note.stepToS[rr];
         var note = new Note( {type: 'quarter',
           staff: j + 1,
           octave: -j * 2 + 5,
           duration: 1,
+          fingering: ( 1 == (j + 1) ) ? rr + 1 : 5 - rr,
           step: step
         } );
         chord.notes.push(note);
@@ -34,11 +37,11 @@ class PlayFive {
     if (this.step > 4) {
       var s = 60 * 1000 * this.event.length / (this.event[this.event.length - 1][0].timeStamp - this.event[0][0].timeStamp);
       if (s > (this.piano.perMinute + 10)) {
-        this.piano.perMinute = s.toFixed(0); 
+        this.piano.perMinute = s.toFixed(0);
       } else {
         this.piano.perMinute -= 5;
       }
-      this.step = 0; 
+      this.step = 0;
     }
   }
 
@@ -49,7 +52,7 @@ class PlayFive {
     if (undefined === this.statistic[key]) {
       this.statistic[key] = 1;
     } else {
-      this.statistic[key] += 1;      
+      this.statistic[key] += 1;
     }
     this.haveError = false;
   }
@@ -89,7 +92,7 @@ class PlayFive {
   }
 
   init() {
-    this.piano.perMinute = 80;
+    this.piano.perMinute = Settings.temp;
     this.createChords();
   }
 }
