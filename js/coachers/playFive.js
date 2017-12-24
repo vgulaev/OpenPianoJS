@@ -39,7 +39,7 @@ class PlayFive {
       if (s > (this.piano.perMinute + 10)) {
         this.piano.perMinute = s.toFixed(0);
       } else {
-        this.piano.perMinute -= 5;
+        //this.piano.perMinute -= 5;
       }
       this.step = 0;
     }
