@@ -1,5 +1,34 @@
 class Note {
+  static intStepTo(step) {
+    return Note.stepToS[step];
+  }
+
+  _propFromXML(properties, options) {
+    for (var p of properties) {
+      for (var name of p[1]) {
+        var curNode = options.querySelector(name);
+        if (null != curNode) {
+          this[name] = p[0].call(this, curNode);
+        }
+      }
+    }
+  }
+
+  loadFromXML(options) {
+    var properties = [
+      [() => true, ["rest", "chord", "dot"] ],
+      [x => parseInt(x.innerHTML), ["duration", "octave", "voice", "staff", "alter", "fingering"]],
+      [x => x.innerHTML, ["step", "type", "stem", "beam"]],
+      [x => x.getAttribute("type"), ["tie"]]
+    ];
+    this._propFromXML(properties, options);
+  }
+
   constructor(options = {}) {
+    if ( "Element" == options.constructor.name ) {
+      this.loadFromXML(options);
+      return;
+    }
     var obj = this;
     /* if (undefined === _options) {
       _options = {};
@@ -20,16 +49,18 @@ class Note {
     initProperty("fingering", options, undefined);
   }
 
-  static intStepTo(step) {
-    return Note.stepToS[step];
-  }
-
   get stepLine() {
     return this.octave * 7 + Note.sToStep[this.step];
   }
 
   get midiByte() {
-    return 12 + this.octave * 12 + Note.tones[this.step] + this.alter;
+    if ((this.rest == true)||("stop" == this.tie)) return -1;
+    return 12 + this.octave * 12 + Note.tones[this.step] + ( this.alter ? this.alter : 0 );
+  }
+
+  toS() {
+    if (true == this.rest) return "";
+    return this.step + (-1 == this.alter ? "b":"") + (1 == this.alter ? "#":"") + this.octave;
   }
 }
 

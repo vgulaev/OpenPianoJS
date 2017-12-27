@@ -12,8 +12,8 @@ class PlayFive {
     var k = 0;
     for (var i = 0; i < 1000; i++) {
       var chord = new Chord();
-      //var step = Note.stepToS[Ut.getRandomInt( 0, 5 )]; //Note.stepToS[k % 5];
-      k += 1;
+      //var step = Note.stepToS[Ut.getRandomInt( 2, 7 )]; //Note.stepToS[k % 5];
+      var step = Note.stepToS[Ut.getRandomInt( 0, 5 )];
       for (var j = 0; j < 2; j++) {
         var rr = Ut.getRandomInt( 0, 5 );
         var step = Note.stepToS[rr];
@@ -27,6 +27,7 @@ class PlayFive {
         chord.notes.push(note);
         //break;
       }
+      k += 1;
       chord.update();
       chords.push(chord);
     }

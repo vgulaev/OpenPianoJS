@@ -1,19 +1,7 @@
 class App {
-    static async get(url, callback) {
-    await new Promise( resolve => {
-      var myRequest = new XMLHttpRequest();
-      myRequest.open("get", url);
-      myRequest.onload = function () {
-        callback.call(this);
-        resolve("Ok");
-      };
-      myRequest.send();      
-    });
-  }
-
   static async initSVG() {
     var element = document.getElementById("GrandStaffHead");
-    await App.get("svg/GrandStaffHead.svg", function() {
+    await Ut.get("svg/GrandStaffHead.svg", function() {
       element.innerHTML = this.responseText;
     });
     var head = element.children[0];
@@ -21,12 +9,12 @@ class App {
     var width = window.innerWidth - head.width.baseVal.value - 20
     tenLines.setAttributeNS (null, "width", width);
     tenLines.setAttributeNS (null, "height", head.height.baseVal.value);
-    for (var j = 24; j <= 182; j += 158) {
+    for (var j = 84; j <= 262; j += 158) {
       for (var i = 0; i < 5; i++) {
         var line = SVGBuilder.createSVG ("line");
-        line.setAttributeNS (null, "x1", 0);    
-        line.setAttributeNS (null, "y1", j + 15 * i);    
-        line.setAttributeNS (null, "x2", width);    
+        line.setAttributeNS (null, "x1", 0);
+        line.setAttributeNS (null, "y1", j + 15 * i);
+        line.setAttributeNS (null, "x2", width);
         line.setAttributeNS (null, "y2", j + 15 * i);
         line.setAttributeNS (null, "stroke-width", 2);
         line.style.stroke = "black";
@@ -35,15 +23,15 @@ class App {
     }
 
     var rubicon = SVGBuilder.createSVG("polygon");
-    rubicon.setAttributeNS(null, "points", "380,0 400,0 400,242 380,242")
+    rubicon.setAttributeNS(null, "points", "380,54 400,54 400,332 380,332")
     rubicon.setAttributeNS(null, "stroke", "blue");
     rubicon.setAttributeNS(null, "fill", "blue");
-    rubicon.setAttributeNS(null, "opacity", "0.5");    
+    rubicon.setAttributeNS(null, "opacity", "0.5");
     tenLines.append(rubicon);
 
     var element = document.getElementById("TenLines");
     element.append(tenLines);
-    
+
     App.tenLines = tenLines;
   }
 
@@ -81,16 +69,22 @@ class App {
     App.tenLines = ""; // SVG element to GrandStaff
     await App.initSVG();
     App.piano = new Piano(App.tenLines);
+    App.piano.header = document.querySelector("#GrandStaffHead > svg");
     App.initMIDI();
   }
 }
 
 window.addEventListener("load", async function( event ) {
   await App.init();
+  var md = new MusicDoc();
+  //await md.loadFromURL("data/xml/No woman no cry.xml");
+  await md.loadFromURL(Settings.fileName);
+
+  App.piano.practice(md);
   App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
-  App.piano.onSetTemp = onHappy;  
-  App.piano.practice(new PlayFive());
+  App.piano.onSetTemp = onHappy;
+  //App.piano.practice(new PlayFive()); */
 });
 
 function onHappy(obj) {
@@ -103,12 +97,15 @@ function onHappy(obj) {
   var element = document.getElementById("Percent");
   element.innerHTML = (App.piano.Rights / (App.piano.Rights + App.piano.Errors) * 100).toFixed(1);
   var element = document.getElementById("Stat");
-  element.innerHTML = App.piano.coacher.statFormat(); 
-  var element = document.getElementById("InLine");
-  element.innerHTML = App.piano.coacher.event.length; 
+  var c = App.piano.currentChord();
+  element.innerHTML = c.chord.notes.slice().sort((a, b) => a.stepLine - b.stepLine).map(x => x.toS()).join(",");
+//   var element = document.getElementById("InLine");
+//   element.innerHTML = App.piano.coacher.event.length;
 }
 
 function doStep() {
+  App.piano.practiceStep();
+  /*
   async function stepByStep() {
     App.piano.practiceStep();
     await Ut.sleep(240);
@@ -116,6 +113,7 @@ function doStep() {
   }
   startWatch();
   stepByStep();
+  */
   //console.log(App.piano.actualX);
 }
 
@@ -133,7 +131,7 @@ function startWatch() {
       }
       element.innerHTML = ( c - startms / 1000 ).toFixed(2);
       p = c;
-    }  
+    }
   }
   worker();
 }
@@ -143,7 +141,7 @@ function sendMiddleC( midiAccess, portID ) {
   var noteOnMessage = [0x90, 60, 0x7f];    // note on, middle C, full velocity
   var output = midiAccess.outputs.get(portID);
   output.send( noteOnMessage );  //omitting the timestamp means send immediately.
-  output.send( [0x80, 60, 0x40], window.performance.now() + 1000.0 ); // Inlined array creation- note off, middle C,  
+  output.send( [0x80, 60, 0x40], window.performance.now() + 1000.0 ); // Inlined array creation- note off, middle C,
                                                                       // release velocity = 64, timestamp = now + 1000ms.
 }
 */
