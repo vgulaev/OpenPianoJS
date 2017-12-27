@@ -168,8 +168,8 @@ class Piano {
     var c = this.currentChord().chord;
     var length = c.weight - c.xborder;
     this.curentChordIndex += 1;
-    //if (this.curentChordIndex == this.musicDoc.chordArray.length) {
-    if (this.curentChordIndex == 12) {
+    if (this.curentChordIndex == this.musicDoc.chordArray.length) {
+    //if (this.curentChordIndex == 12) {
       this.use.setAttributeNS(null, "x", 450);
       this.start();
       return;
@@ -220,7 +220,7 @@ class Piano {
   practice(md) {
     this.musicDoc = md;
     this.updateFrames();
-    this.perMinute = 60;
+    this.perMinute = Settings.temp;
     this.start();
   }
 }
