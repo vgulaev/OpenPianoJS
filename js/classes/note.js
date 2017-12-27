@@ -6,8 +6,9 @@ class Note {
   _propFromXML(properties, options) {
     for (var p of properties) {
       for (var name of p[1]) {
-        var curNode = options.querySelector(name);
-        if (null != curNode) {
+        //var curNode = options.querySelector(name);
+        var nodes = options.getElementsByTagName(name);
+        for (var curNode of nodes) {
           this[name] = p[0].call(this, curNode);
         }
       }
@@ -18,8 +19,13 @@ class Note {
     var properties = [
       [() => true, ["rest", "chord", "dot"] ],
       [x => parseInt(x.innerHTML), ["duration", "octave", "voice", "staff", "alter", "fingering"]],
-      [x => x.innerHTML, ["step", "type", "stem", "beam"]],
-      [x => x.getAttribute("type"), ["tie"]]
+      [x => x.innerHTML, ["step", "type", "stem"]],
+      [x => x.getAttribute("type"), ["tie"]],
+      [x => {
+        var el = [x.getAttribute("number"), x.innerHTML];
+        (undefined == this.beam) ? this.beam = [el] : this.beam.push(el);
+        return this.beam;
+      }, ["beam"] ]
     ];
     this._propFromXML(properties, options);
   }

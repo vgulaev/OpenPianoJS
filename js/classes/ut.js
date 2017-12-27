@@ -18,4 +18,12 @@ class Ut {
   static sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  static max(numArray) {
+    return Math.max.apply(null, numArray);
+  }
+
+  static min(numArray) {
+    return Math.min.apply(null, numArray);
+  }
 }

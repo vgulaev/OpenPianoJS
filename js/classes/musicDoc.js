@@ -27,7 +27,7 @@ class MusicDoc {
           if (undefined === this.chordOnTick[curChordTick]) this.chordOnTick[curChordTick] = new Chord(i);
           curChord = this.chordOnTick[curChordTick];
         }
-        note.chord = curChord;
+        note.parentChord = curChord;
         curChord.notes.push(note);
       }
     }
