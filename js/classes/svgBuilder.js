@@ -18,11 +18,68 @@ class SVGBuilder {
     return line;
   }
 
-  static drawStem(coord, tails) {
-    var g = SVGBuilder.createSVG("g");
+  static drawPath(d, g) {
+    var path = SVGBuilder.createSVG("path");
+    path.setAttributeNS (null, 'stroke-width', 1);
+    path.setAttributeNS (null, 'd', d );
+    g.append(path);
+  }
+
+  static drawBeam(b, n, g) {
+    var a = App.beamBuilder[n.staff][1];
+    var ax = [], ay = [];
+    a.forEach((x) => {
+      ax.push(x[1] - App.tieBuilder.x + x[0][0]);
+      ay.push( ("down" == n.stem) ? Math.max(x[0][1], x[0][3]) : Math.min(x[0][1], x[0][3]));
+    });
+    var y1 = 0, y2 = 0, x1 = 0, x2 = 0;
+    x1 = Ut.min(ax);
+    x2 = Ut.max(ax);
+
+    var maxy = Ut.max(ay);
+    var miny = Ut.min(ay);
+
+    var li = ay.length - 1;
+    if ((maxy == ay[0])&&(miny == ay[li])) {
+      y1 = maxy; y2 = miny;
+    } else if ((maxy == ay[li])&&(miny == ay[0])) {
+      y2 = maxy; y1 = miny;
+    } else {
+      ("down" == n.stem) ? y1 = y2 = maxy : y1 = y2 = miny;
+    }
+
+    var dy = (b - 1) * 5;
+    var l = this.drawLine(x1, y1 + dy, x2, y2 + dy);
+    g.append(l);
+
+    for (var i = 0; i < a.length; i++) {
+      var l = this.drawLine(ax[i], a[i][0][1], ax[i], a[i][0][3]);
+      g.append(l);
+    }
+
+    a.length = 0;
+  }
+
+  static drawStem(coord, n, g) {
+    //return;
+    if (undefined !== n.beam) {
+      for (var b of n.beam) {
+        var beamPull = App.beamBuilder[n.staff][b[0]];
+        beamPull.push([coord, App.tieBuilder.x, n]);
+        if (("end" == b[1])&&("1" == b[0])) this.drawBeam(b[0], n, g);
+      }
+      return;
+    }
+    if ((true == n.chord) && (App.beamBuilder[n.staff][1].length > 0)) return;
+    //var g = SVGBuilder.createSVG("g");
     var line = this.drawLine.apply(this, coord);
+    if ("eighth" == n.type) {
+      var d = ("down" == n.stem) ? SVGTmp.tail8Down(coord[2] + 13, coord[3] + 10) : SVGTmp.tail8Up(coord[2] + 13, coord[3] - 10);
+      this.drawPath(d, g);
+      console.log("Hello");
+    }
     g.append(line);
-    return g;
+    //return g;
   }
 
   static drawDot(x, y, n, g) {
@@ -69,7 +126,7 @@ class SVGBuilder {
       return;
     }
     var s = App.tieBuilder[n.staff][n.stepLine];
-    var w = s.n.chord.weight;
+    var w = s.n.parentChord.weight;
     var dx = App.tieBuilder.x - s.absolutX;
     var coord = [x, y + 10, 0 - (dx - s.x), y + 10];
     var path = this.tiePath(x, y, dx - s.x, n);
@@ -98,15 +155,16 @@ class SVGBuilder {
         res = SVGTmp.quarterRest(x, y);
       } else if ("half" == n.type){
         res = `m 10,${y - 16} h 21 v -8 h -21 v 8`;
+      } else if ("16th" == n.type){
+        res = SVGTmp._16thRest(x, y);
       } else {
         res = `m 10,${y - 21} h 21 v -8 h -21 v 8`;
       }
     } else {
-      if (("quarter" == n.type)||("16th" == n.type)||("eighth" == n.type)) {
-        if ((true != skipStem) && (undefined == n.beam)) {
+      if (("16th" == n.type)||("32nd" == n.type)||("64th" == n.type)||("eighth" == n.type)||("quarter" == n.type)) {
+        if (true != skipStem) { // && (undefined == n.beam)) {
           var coord = ("down" == n.stem) ? [x - 13, y + 55, x - 13, y + 10] : [x + 7, y - 39, x + 7, y + 6];
-          var stem = this.drawStem(coord, n.type);
-          g.append(stem);
+          this.drawStem(coord, n, g);
         }
         res = SVGTmp.quarterNote(x, y);
       } else if ("half" == n.type) {
@@ -157,8 +215,8 @@ class SVGBuilder {
         var y = 287 + (19 - n.stepLine) * 7.5;
         if (n.stepLine > 27) {
             this.additionalLine(g, x, 227, 28, n.stepLine);
-        } else if (n.stepLine < 29) {
-            //this.additionalLine(g, x, 159, 28, n.stepLine);
+        } else if (n.stepLine < 17) {
+            this.additionalLine(g, x, 317, 16, n.stepLine);
         }
       }
     }

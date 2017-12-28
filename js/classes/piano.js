@@ -77,6 +77,8 @@ class Piano {
     var a = this.musicDoc.chordArray;
     var options = {};
     App.tieBuilder = {"1": {}, "2": {}, x: x};
+    App.beamBuilder = {"1": {"1": [], "2": [], "3": [], "4": [], "5": []},
+      "2": {"1": [], "2": [], "3": [], "4": [], "5": []}};
     for (var i = 0; i < a.length; i++) {
       var c = a[i].chord;
 
