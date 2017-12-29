@@ -77,7 +77,6 @@ class App {
 window.addEventListener("load", async function( event ) {
   await App.init();
   var md = new MusicDoc();
-  //await md.loadFromURL("data/xml/No woman no cry.xml");
   await md.loadFromURL(Settings.fileName);
 
   App.piano.practice(md);
@@ -105,7 +104,6 @@ function onHappy(obj) {
 
 function doStep() {
   App.piano.practiceStep();
-  /*
   async function stepByStep() {
     App.piano.practiceStep();
     await Ut.sleep(240);
@@ -113,7 +111,6 @@ function doStep() {
   }
   startWatch();
   stepByStep();
-  */
   //console.log(App.piano.actualX);
 }
 
