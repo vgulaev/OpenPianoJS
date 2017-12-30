@@ -50,14 +50,41 @@ class SVGBuilder {
 
     var dy = (b - 1) * 5;
     var l = this.drawLine(x1, y1 + dy, x2, y2 + dy);
+    l.setAttributeNS(null, "stroke-width", 6);
     g.append(l);
 
+    var k = (x2 - x1) / (y2 - y1);
     for (var i = 0; i < a.length; i++) {
-      var l = this.drawLine(ax[i], a[i][0][1], ax[i], a[i][0][3]);
+      var ey = y1 + (ax[i] - x1) / k;
+      if ("down" == n.stem) {
+        var cy = Math.min(a[i][0][1], a[i][0][3]);
+      } else {
+        cy = Math.max(a[i][0][1], a[i][0][3]);
+      }
+      var l = this.drawLine(ax[i], ey, ax[i], cy);
       g.append(l);
     }
 
     a.length = 0;
+
+    for (var i = 2; i < 4; i++) {
+      a = App.beamBuilder[n.staff][i];
+      if (0 == a.length) break;
+      ax.length = 0;
+      a.forEach((x) => {
+        ax.push(x[1] - App.tieBuilder.x + x[0][0]);
+      });
+      var xx1 = Ut.min(ax);
+      var xx2 = Ut.max(ax);
+      if (1 == a.length) xx2 += -20;
+      var yy1 = y1 + (xx1 - x1) / k + n.k * (i - 1) * 12;
+      var yy2 = y1 + (xx2 - x1) / k + n.k * (i - 1) * 12;
+
+      var l = this.drawLine(xx1, yy1, xx2, yy2);
+      l.setAttributeNS(null, "stroke-width", 6);
+      g.append(l);
+      a.length = 0;
+    }
   }
 
   static drawStem(coord, n, g) {

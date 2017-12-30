@@ -28,6 +28,7 @@ class Note {
       }, ["beam"] ]
     ];
     this._propFromXML(properties, options);
+    if (undefined != this.beam) this.beam.reverse();
   }
 
   constructor(options = {}) {
@@ -62,6 +63,18 @@ class Note {
   get midiByte() {
     if ((this.rest == true)||("stop" == this.tie)) return -1;
     return 12 + this.octave * 12 + Note.tones[this.step] + ( this.alter ? this.alter : 0 );
+  }
+
+  get y() {
+    if (1 == this.staff) {
+      return 129 + (31 - this.stepLine) * 7.5;
+    } else {
+      return 287 + (19 - this.stepLine) * 7.5;
+    }
+  }
+
+  get k() {
+    return ("down" == this.stem) ? -1 : 1;
   }
 
   toS() {
