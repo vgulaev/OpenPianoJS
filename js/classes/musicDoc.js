@@ -4,6 +4,16 @@ class MusicDoc {
     this.chordArray = new Array;
   }
 
+  postProccess() {
+    this.chordArray = Object.keys(this.chordOnTick).
+      map(x => ( { "tick": parseInt(x), "chord": this.chordOnTick[x] } ) ).
+      sort((a, b) => a.tick < b.tick ? -1 : ( a.tick > b.tick ? 1 : 0) );
+    var options = {};
+    this.chordArray.forEach((x, i, a) => {
+      x.chord.update(Settings.staff);
+    });
+  }
+
   async loadFromURL(url) {
     var xml;
     await Ut.get(url, function () {
@@ -31,12 +41,6 @@ class MusicDoc {
         curChord.notes.push(note);
       }
     }
-    this.chordArray = Object.keys(this.chordOnTick).
-      map(x => ( { "tick": parseInt(x), "chord": this.chordOnTick[x] } ) ).
-      sort((a, b) => a.tick < b.tick ? -1 : ( a.tick > b.tick ? 1 : 0) );
-    var options = {};
-    this.chordArray.forEach((x, i, a) => {
-      x.chord.update(Settings.staff);
-    });
+    this.postProccess();
   }
 }

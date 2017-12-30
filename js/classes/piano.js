@@ -16,6 +16,7 @@ class Piano {
     this.onError = null;
     this.onCorrect = null;
     this.onSetTemp = null;
+    this.onSelfRepeat = null;
   }
 
   set perMinute( value ) {
@@ -141,6 +142,7 @@ class Piano {
     //if (this.kb.include(c.sign)) {
     if (this.kb.last(c.sign.count) == c.sign.sign) {
       c.makeGreen();
+      this.kb.pop(c.sign.count);
       this.practiceStep();
       //console.log("ok == " + event.data[0]);
     } else {
@@ -173,16 +175,29 @@ class Piano {
     if (this.curentChordIndex == this.musicDoc.chordArray.length) {
     //if (this.curentChordIndex == 12) {
       this.use.setAttributeNS(null, "x", 450);
-      this.start();
+      if ("work" == this.observerStatus) {
+        this.onSelfRepeat = function () {
+          this.start();
+        }
+        this.steps = [];
+      } else {
+        this.start();
+      }
       return;
     }
-    c = this.musicDoc.chordArray[this.curentChordIndex].chord;
-    length += c.xborder;
-    var ms = 60000 / this._perMinute;
+    c = this.musicDoc.chordArray[this.curentChordIndex];
+    length += c.chord.xborder;
+    var ticks = c.tick - this.musicDoc.chordArray[this.curentChordIndex - 1].tick;
+    var ms = 60000 / this._perMinute / this.musicDoc.divisions * ticks;
     this.steps.push({length: -length, dur: ms});
-    if ("" == c.sign.sign) this.practiceStep();
+    if ("" == c.chord.sign.sign) this.practiceStep();
+    if ("stop" == this.observerStatus) {
+      this.observerStatus = "work";
+      this.moveObserver();
+    }
   }
 
+  /*
   moverEnd() {
     if (this.steps.length > 0) {
       this.animationStep();
@@ -200,18 +215,58 @@ class Piano {
     this.mover.beginElement();
     this.curentX += curMove.length;
   }
+  */
 
   async moveObserver() {
-    while ("work" == this.observerStatus) {
-      await Ut.sleep(1);
-      if (0 == this.steps.length) continue;
-      this.animationStep();
-      this.observerStatus = "stop";
+    var last_x = 0, new_x = 0, new_x_k = 0;
+    var start = window.performance.now();
+    var ss = window.performance.now();
+    var use = this.use;
+    var obj = this;
+    var k = parseInt(use.getAttributeNS(null, "x"));
+
+    function step() {
+      if (0 == obj.steps.length) {
+        obj.observerStatus = "stop";
+        if (null != obj.onSelfRepeat) {
+          obj.invokeEvent("onSelfRepeat");
+          obj.onSelfRepeat = null;
+        }
+        return;
+      }
+      var v = obj.steps[0].length / obj.steps[0].dur;
+      new_x = Math.ceil((window.performance.now() - start) * v);
+      new_x_k = new_x + k;
+      if (new_x < obj.steps[0].length) {
+        k += obj.steps[0].length;
+        start += obj.steps[0].dur;
+        new_x_k = k;
+        obj.steps.shift();
+      }
+      if (new_x_k != last_x) {
+        use.setAttributeNS(null, "x", new_x_k);
+        last_x = new_x_k;
+        //console.log(Math.ceil((window.performance.now() - ss)/1000) );
+      }
+      requestAnimationFrame(step);
     }
+
+    requestAnimationFrame(step);
   }
 
   start() {
     this.steps = [{length: -60, dur: 2000}];
+    /*
+    for (var i = 0; i < 5; i++) {
+      var c = this.musicDoc.chordArray[i];
+      //var r = Math.ceil(2000 / Math.ceil(Math.random() * 4));
+      var r = Math.ceil(60000 / this.perMinute);
+      console.log(c.chord.weight);
+      var d = {length: -c.chord.weight, dur: r};
+      this.steps.push(d)
+    }
+    */
+    //this.steps = [{length: -60, dur: 500}];
     this.observerStatus = "work";
     this.curentChordIndex = 0;
     this.Errors = 0;
