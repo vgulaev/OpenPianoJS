@@ -18,8 +18,10 @@ class KBSign {
         a.push(msg.data[1]);
         this.queue.push(msg.data[1]);
       } else if (128 == msg.data[0]) {
+        if (this.queue.length == a.length) {
+          this.queue.shift();
+        }
         a.splice(a.indexOf(msg.data[1]), 1);
-        this.queue.shift();
       }
     }
     a.sort();
@@ -39,5 +41,9 @@ class KBSign {
     var l = a.length;
     if (count > l) return "";
     return a.slice(l - count, l).sort().join(',')
+  }
+
+  pop(count) {
+    for (var i = 0; i < count; i ++ ) this.queue.pop();
   }
 }

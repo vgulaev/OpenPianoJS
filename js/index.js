@@ -78,7 +78,7 @@ window.addEventListener("load", async function( event ) {
   await App.init();
   var md = new MusicDoc();
   await md.loadFromURL(Settings.fileName);
-
+  // md = createMD();
   App.piano.practice(md);
   App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
@@ -109,8 +109,8 @@ function doStep() {
     await Ut.sleep(240);
     stepByStep();
   }
-  startWatch();
-  stepByStep();
+  // startWatch();
+  // stepByStep();
   //console.log(App.piano.actualX);
 }
 

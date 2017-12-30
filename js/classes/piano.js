@@ -16,6 +16,7 @@ class Piano {
     this.onError = null;
     this.onCorrect = null;
     this.onSetTemp = null;
+    this.onSelfRepeat = null;
   }
 
   set perMinute( value ) {
@@ -141,6 +142,7 @@ class Piano {
     //if (this.kb.include(c.sign)) {
     if (this.kb.last(c.sign.count) == c.sign.sign) {
       c.makeGreen();
+      this.kb.pop(c.sign.count);
       this.practiceStep();
       //console.log("ok == " + event.data[0]);
     } else {
@@ -173,7 +175,14 @@ class Piano {
     if (this.curentChordIndex == this.musicDoc.chordArray.length) {
     //if (this.curentChordIndex == 12) {
       this.use.setAttributeNS(null, "x", 450);
-      this.start();
+      if ("work" == this.observerStatus) {
+        this.onSelfRepeat = function () {
+          this.start();
+        }
+        this.steps = [];
+      } else {
+        this.start();
+      }
       return;
     }
     c = this.musicDoc.chordArray[this.curentChordIndex];
@@ -183,7 +192,7 @@ class Piano {
     this.steps.push({length: -length, dur: ms});
     if ("" == c.chord.sign.sign) this.practiceStep();
     if ("stop" == this.observerStatus) {
-      this.observerStatus = "start"
+      this.observerStatus = "work";
       this.moveObserver();
     }
   }
@@ -217,8 +226,12 @@ class Piano {
     var k = parseInt(use.getAttributeNS(null, "x"));
 
     function step() {
-      if (0 == obj.steps.length) { 
-        obj.observerStatus = "stop"; 
+      if (0 == obj.steps.length) {
+        obj.observerStatus = "stop";
+        if (null != obj.onSelfRepeat) {
+          obj.invokeEvent("onSelfRepeat");
+          obj.onSelfRepeat = null;
+        }
         return;
       }
       var v = obj.steps[0].length / obj.steps[0].dur;
