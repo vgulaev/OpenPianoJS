@@ -7,7 +7,7 @@ class Piano {
     this.kb = new KBSign();
 
     this.steps = new Array();
-    this.observerStatus = "work";
+    this.observerStatus = "stop";
     this.curentX = 0;
 
     this.mover = null;
@@ -17,6 +17,9 @@ class Piano {
     this.onCorrect = null;
     this.onSetTemp = null;
     this.onSelfRepeat = null;
+
+    this.beforePracticeStep = null;
+    this.onTrackOver = null;
   }
 
   set perMinute( value ) {
@@ -29,6 +32,7 @@ class Piano {
   }
 
   createHeader() {
+    if (undefined != this._heder_clean) this._heder_clean.remove();
     App.keyFifths = {};
     var g = SVGBuilder.createSVG("g");
     function _text(x, y, t) {
@@ -77,10 +81,15 @@ class Piano {
       App.keyFifths["E-1"] = true;
     }
 
+    this._heder_clean = g;
     this.header.append(g);
   }
 
   updateFrames() {
+    //this.tenLines.innerHTML = "";
+    if (undefined != this.def) this.def.remove();
+    if (undefined != this.use) this.use.remove();
+
     this.createHeader();
     var g = SVGBuilder.createSVG("g");
     g.setAttributeNS (null, "id", "SheetMusic");
@@ -111,6 +120,7 @@ class Piano {
     var def = SVGBuilder.createSVG("def");
     def.append(g)
     this.tenLines.append(def);
+    this.def = def;
 
     this.use = SVGBuilder.createSVG("use");
     this.use.setAttributeNS(null, "x", 450);
@@ -155,6 +165,7 @@ class Piano {
       c.makeGreen();
       this.kb.pop(c.sign.count);
       this.practiceStep();
+      this.invokeEvent("onCorrect");
       //console.log("ok == " + event.data[0]);
     } else {
       if ((144 == event.data[0])&&(this.kb.kb.length == c.sign.kb.length)) {
@@ -180,19 +191,22 @@ class Piano {
   }
 
   practiceStep() {
+    this.invokeEvent("beforePracticeStep");
     var c = this.currentChord().chord;
     var length = c.weight - c.xborder;
     this.curentChordIndex += 1;
     if (this.curentChordIndex == this.musicDoc.chordArray.length) {
-    //if (this.curentChordIndex == 12) {
-      this.use.setAttributeNS(null, "x", 450);
-      if ("work" == this.observerStatus) {
-        this.onSelfRepeat = function () {
+      if (null == this.onTrackOver) {
+        if ("work" == this.observerStatus) {
+          this.onSelfRepeat = function () {
+            this.start();
+          }
+          this.steps = [];
+        } else {
           this.start();
         }
-        this.steps = [];
       } else {
-        this.start();
+        this.invokeEvent("onTrackOver");
       }
       return;
     }
@@ -266,6 +280,7 @@ class Piano {
   }
 
   start() {
+    this.use.setAttributeNS(null, "x", 450);
     this.steps = [{length: -60, dur: 2000}];
     /*
     for (var i = 0; i < 5; i++) {
@@ -285,10 +300,21 @@ class Piano {
     this.moveObserver();
   }
 
+  restart() {
+    if ("work" == this.observerStatus) {
+      this.onSelfRepeat = function () {
+        this.start();
+      }
+      this.steps = [];
+    } else {
+      this.start();
+    }
+  }
+
   practice(md) {
     this.musicDoc = md;
     this.updateFrames();
     this.perMinute = Settings.temp;
-    this.start();
+    this.restart();
   }
 }
