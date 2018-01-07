@@ -6,6 +6,12 @@ class Chord {
     this.measure = measure;
   }
 
+  copy() {
+    var res = new Chord();
+    res.notes = this.notes;
+    return res;
+  }
+
   update(staff) {
     var a = this.notes;
     if ((1 == staff) || (2 == staff)) a = this.notes.filter( (x) => { return x.staff == staff } );

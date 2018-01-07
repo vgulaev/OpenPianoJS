@@ -6,7 +6,7 @@ class App {
     });
     var head = element.children[0];
     var tenLines = SVGBuilder.createSVG ("svg");
-    var width = window.innerWidth - head.width.baseVal.value - 20
+    var width = window.innerWidth - head.width.baseVal.value - 20;
     tenLines.setAttributeNS (null, "width", width);
     tenLines.setAttributeNS (null, "height", head.height.baseVal.value);
     for (var j = 84; j <= 262; j += 158) {
@@ -72,23 +72,36 @@ class App {
     App.piano.header = document.querySelector("#GrandStaffHead > svg");
     App.initMIDI();
   }
+
+  static log(text) {
+    var el = document.getElementById("console");
+    el.innerHTML = "";
+  }
 }
 
 window.addEventListener("load", async function( event ) {
   await App.init();
-  var md = new MusicDoc();
-  await md.loadFromURL(Settings.fileName);
+
+  playSong(Settings.fileName);
   // md = createMD();
-  App.piano.practice(md);
+  //App.piano.practice(md);
+
   App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
   App.piano.onSetTemp = onHappy;
   //App.piano.practice(new PlayFive()); */
 });
 
+async function playSong(name) {
+  var md = new MusicDoc();
+  await md.loadFromURL(name);
+  var coach = new Play10timesRule(App.piano, md);
+}
+
 function onHappy(obj) {
   var element = document.getElementById("Correct");
-  element.innerHTML = App.piano.Rights;
+  element.innerHTML = App.piano.musicDoc.chordArray.length;
+  // element.innerHTML = App.piano.Rights;
   var element = document.getElementById("Error");
   element.innerHTML = App.piano.Errors;
   var element = document.getElementById("Temp");
@@ -97,9 +110,11 @@ function onHappy(obj) {
   element.innerHTML = (App.piano.Rights / (App.piano.Rights + App.piano.Errors) * 100).toFixed(1);
   var element = document.getElementById("Stat");
   var c = App.piano.currentChord();
-  element.innerHTML = c.chord.notes.slice().sort((a, b) => a.stepLine - b.stepLine).map(x => x.toS()).join(",");
-//   var element = document.getElementById("InLine");
-//   element.innerHTML = App.piano.coacher.event.length;
+  if (undefined != c) {
+    element.innerHTML = c.chord.notes.slice().sort((a, b) => a.stepLine - b.stepLine).map(x => x.toS()).join(",");
+  }
+  var element = document.getElementById("InLine");
+  element.innerHTML = App.piano.curentChordIndex;
 }
 
 function doStep() {
@@ -133,6 +148,33 @@ function startWatch() {
   worker();
 }
 
+function changeSong(button) {
+  var items = [ {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
+  {name:"Cherny Op. 453-1", fileName: "data/xml/Cherny-Op._453-1.xml"},
+  {name:"Cherny Op. 453-2", fileName: "data/xml/Cherny-Op._453-2.xml"},
+  {name:"Cherny Op. 453-3", fileName: "data/xml/Cherny-Op._453-3.xml"},
+  {name:"Cherny Op. 453-4", fileName: "data/xml/Cherny-Op._453-4.xml"},
+  {name:"Cherny Op. 453-5", fileName: "data/xml/Cherny-Op._453-5.xml"},
+  {name:"Cherny Op. 453-6", fileName: "data/xml/Cherny-Op._453-6.xml"},
+  {name:"Cherny Op. 453-7", fileName: "data/xml/Cherny-Op._453-7.xml"}
+  ];
+  var m = new Menu(button, items.map( (x, i) => [i, x.name] ) );
+  m.select(function(key, value) {
+    button.innerHTML = value;
+    playSong(items[key].fileName);
+  });
+}
+
+function changeHands(button) {
+  var m = new Menu(button, [[0, "Both"], [1, "Left"], [2, "Rights"]]);
+  m.select(function(key, value) {
+    if ("Both" == value) {
+      button.innerHTML = value + " hands";
+    } else {
+      button.innerHTML = value + " hand";
+    }
+  });
+}
 /*
 function sendMiddleC( midiAccess, portID ) {
   var noteOnMessage = [0x90, 60, 0x7f];    // note on, middle C, full velocity
