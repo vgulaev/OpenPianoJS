@@ -85,8 +85,6 @@ window.addEventListener("load", async function( event ) {
   App.setting = new SettingsCore();
   var p = pieceList();
   playSong(p[App.setting.fileName].fileName);
-  // md = createMD();
-  //App.piano.practice(md);
 
   App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
