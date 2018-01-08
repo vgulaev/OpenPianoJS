@@ -3,13 +3,14 @@
 <head>
 	<title></title>
 </head>
-<script type="text/javascript" src="conf/settings.js"></script>
+<!--script type="text/javascript" src="conf/settings.js"></script-->
 <script type="text/javascript" src="js/classes/chord.js"></script>
 <script type="text/javascript" src="js/classes/kbSign.js"></script>
 <script type="text/javascript" src="js/classes/menu.js"></script>
 <script type="text/javascript" src="js/classes/musicDoc.js"></script>
 <script type="text/javascript" src="js/classes/note.js"></script>
 <script type="text/javascript" src="js/classes/piano.js"></script>
+<script type="text/javascript" src="js/classes/settingsCore.js"></script>
 <script type="text/javascript" src="js/classes/svgBuilder.js"></script>
 <script type="text/javascript" src="js/classes/svgTemplate.js"></script>
 <script type="text/javascript" src="js/classes/ut.js"></script>
@@ -17,7 +18,7 @@
 <script type="text/javascript" src="js/coachers/play10timesRule.js"></script>
 <script type="text/javascript" src="js/coachers/playFive.js"></script>
 <script type="text/javascript" src="js/coachers/playFive_v2.js"></script>
-<script type="text/javascript" src="conf/settings.js"></script>
+<script type="text/javascript" src="js/coachers/playRepeat.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <style type="text/css">
   @font-face {
@@ -42,16 +43,19 @@
     </h2>
   </div>
   <div>
-  <h1><span>Темп:</span><span id="Temp">0</span></h1>
+    <label for="Temp" style="font-size: 32px;">
+      Tempo: <input id="Temp" value="0" size="4" type="text" autocomplete="off" style="font-size: inherit;"/>
+    </label>
+  <!-- h1><span>Tempo:</span></h1-->
   <h1><span style="color: green;"><span>Подряд:</span><span id="InLine">0</span></span><span> Всего:</span><span id="Correct">0</span></h1>
   <h1 style="color: red;"><span>Ошибок:</span><span id="Error">0</span></h1>
   <h1><span>%%:</span><span id="Percent">0</span></h1>
   </div>
 </div>
-<!-- button onclick="doStep();">Step</button>
-<div>Hello!!!</div>
+<button onclick="doStep();">Step</button>
+<!-- div>Hello!!!</div>
 <h1 id="Time"></h1-->
-<div id="console" style="border: solid red 1px">
-</div>
+<!--div id="console" style="border: solid red 1px">
+</div -->
 </body>
 </html>

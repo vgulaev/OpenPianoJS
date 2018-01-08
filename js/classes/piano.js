@@ -1,6 +1,6 @@
 class Piano {
   constructor(tenLines) {
-    this._perMinute = 60;
+    this._perMinute = 0;
     this.musicDoc = new MusicDoc();
     this.tenLines = tenLines;
     this.midi = null;
@@ -314,7 +314,9 @@ class Piano {
   practice(md) {
     this.musicDoc = md;
     this.updateFrames();
-    this.perMinute = Settings.temp;
+    if (0 == this.perMinute) {
+      this.perMinute = App.setting.temp;
+    }
     this.restart();
   }
 }
