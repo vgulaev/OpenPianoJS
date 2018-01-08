@@ -82,20 +82,32 @@ class App {
 window.addEventListener("load", async function( event ) {
   await App.init();
 
-  playSong(Settings.fileName);
+  App.setting = new SettingsCore();
+  var p = pieceList();
+  playSong(p[App.setting.fileName].fileName);
   // md = createMD();
   //App.piano.practice(md);
 
   App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
-  App.piano.onSetTemp = onHappy;
+  App.piano.onSetTemp = onSetTemp;
   //App.piano.practice(new PlayFive()); */
+  var e = document.getElementById("Temp");
+  e.addEventListener("keyup", tempKeyUp, false);
+  e.value = App.piano.perMinute;
 });
 
 async function playSong(name) {
   var md = new MusicDoc();
   await md.loadFromURL(name);
-  var coach = new Play10timesRule(App.piano, md);
+  //var coach = new Play10timesRule(App.piano, md);
+  var coach = new PlayRepeat(App.piano, md);
+}
+
+function onSetTemp() {
+  App.setting.temp = App.piano.perMinute;
+  var element = document.getElementById("Temp");
+  element.value = App.piano.perMinute;
 }
 
 function onHappy(obj) {
@@ -104,8 +116,6 @@ function onHappy(obj) {
   // element.innerHTML = App.piano.Rights;
   var element = document.getElementById("Error");
   element.innerHTML = App.piano.Errors;
-  var element = document.getElementById("Temp");
-  element.innerHTML = App.piano.perMinute;
   var element = document.getElementById("Percent");
   element.innerHTML = (App.piano.Rights / (App.piano.Rights + App.piano.Errors) * 100).toFixed(1);
   var element = document.getElementById("Stat");
@@ -148,8 +158,8 @@ function startWatch() {
   worker();
 }
 
-function changeSong(button) {
-  var items = [ {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
+function pieceList() {
+  return [ {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
   {name:"Cherny Op. 453-1", fileName: "data/xml/Cherny-Op._453-1.xml"},
   {name:"Cherny Op. 453-2", fileName: "data/xml/Cherny-Op._453-2.xml"},
   {name:"Cherny Op. 453-3", fileName: "data/xml/Cherny-Op._453-3.xml"},
@@ -158,9 +168,14 @@ function changeSong(button) {
   {name:"Cherny Op. 453-6", fileName: "data/xml/Cherny-Op._453-6.xml"},
   {name:"Cherny Op. 453-7", fileName: "data/xml/Cherny-Op._453-7.xml"}
   ];
+}
+
+function changeSong(button) {
+  var items = pieceList();
   var m = new Menu(button, items.map( (x, i) => [i, x.name] ) );
   m.select(function(key, value) {
     button.innerHTML = value;
+    App.setting.fileName = key;
     playSong(items[key].fileName);
   });
 }
@@ -175,12 +190,12 @@ function changeHands(button) {
     }
   });
 }
-/*
-function sendMiddleC( midiAccess, portID ) {
-  var noteOnMessage = [0x90, 60, 0x7f];    // note on, middle C, full velocity
-  var output = midiAccess.outputs.get(portID);
-  output.send( noteOnMessage );  //omitting the timestamp means send immediately.
-  output.send( [0x80, 60, 0x40], window.performance.now() + 1000.0 ); // Inlined array creation- note off, middle C,
-                                                                      // release velocity = 64, timestamp = now + 1000ms.
+
+function tempKeyUp() {
+  var v = parseInt(this.value);
+  if (true == isNaN(v)) {
+    this.value = App.piano.perMinute;
+  } else {
+    App.piano.perMinute = v;
+  }
 }
-*/
