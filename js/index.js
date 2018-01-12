@@ -42,6 +42,9 @@ class App {
         console.log( "Input port [type:'" + input.type + "'] id:'" + input.id +
           "' manufacturer:'" + input.manufacturer + "' name:'" + input.name +
           "' version:'" + input.version + "'" );
+
+        var e = document.getElementById("midiMSG");
+        e.style.display = "none";
       }
       for (var entry of midiAccess.outputs) {
         var output = entry[1];
@@ -80,6 +83,7 @@ class App {
 }
 
 window.addEventListener("load", async function( event ) {
+  showMidiDiv();
   await App.init();
 
   App.setting = new SettingsCore();
@@ -94,6 +98,12 @@ window.addEventListener("load", async function( event ) {
   e.addEventListener("keyup", tempKeyUp, false);
   e.value = App.piano.perMinute;
 });
+
+function showMidiDiv() {
+  var e = document.getElementById("midiMSG");
+  e.style.left = (screen.availWidth - e.clientWidth) / 2 +  "px";
+  e.style.top = "100px";
+}
 
 async function playSong(name) {
   var md = new MusicDoc();
