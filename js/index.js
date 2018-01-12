@@ -164,7 +164,13 @@ function pieceList() {
   {name:"Cherny Op. 453-4", fileName: "data/xml/Cherny-Op._453-4.xml"},
   {name:"Cherny Op. 453-5", fileName: "data/xml/Cherny-Op._453-5.xml"},
   {name:"Cherny Op. 453-6", fileName: "data/xml/Cherny-Op._453-6.xml"},
-  {name:"Cherny Op. 453-7", fileName: "data/xml/Cherny-Op._453-7.xml"}
+  {name:"Cherny Op. 453-6-left", fileName: "data/xml/Cherny-Op._453-6-left.xml"},
+  {name:"Cherny Op. 453-7", fileName: "data/xml/Cherny-Op._453-7.xml"},
+  {name:"Mozart Sonata 16", fileName: "data/xml/Mozart-Sonata_16.xml"},
+  {name:"Mozart Sonata 16 1-4", fileName: "data/xml/Mozart-Sonata_16-1-4.xml"},
+  {name:"Mozart Sonata 16 4", fileName: "data/xml/Mozart-Sonata_16-4.xml"},
+  {name:"Mozart Sonata 16 5-10", fileName: "data/xml/Mozart-Sonata_16-5-10.xml"},
+  {name:"Mozart-Sonata 16-5-10-original", fileName: "data/xml/Mozart-Sonata_16-5-10-original.xml"},
   ];
 }
 
@@ -182,17 +188,31 @@ function changeHands(button) {
   var m = new Menu(button, [[0, "Both"], [1, "Left"], [2, "Rights"]]);
   m.select(function(key, value) {
     if ("Both" == value) {
+      App.setting.staff = 0;
       button.innerHTML = value + " hands";
     } else {
+      if ("Left" == value){
+        App.setting.staff = 2;
+      } else {
+        App.setting.staff = 1;
+      }
       button.innerHTML = value + " hand";
     }
+    App.piano.restart();
   });
 }
 
 function tempKeyUp() {
   var v = parseInt(this.value);
   if (true == isNaN(v)) {
-    this.value = App.piano.perMinute;
+    if (0 < this.value.length) {
+      this.value = App.piano.perMinute;
+    } else {
+      var obj = this;
+      setTimeout(function () {
+        if (0 == obj.value.length) obj.value = App.piano.perMinute;
+      }, 4000);
+    }
   } else {
     App.piano.perMinute = v;
   }

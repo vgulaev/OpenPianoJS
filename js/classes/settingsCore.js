@@ -3,7 +3,7 @@ class SettingsCore {
     this.hash = {};
     this._fileName = 0;
     this._temp = 60;
-    this.staff = 0;
+    this._staff = 0;
     this.parseFromHash();
   }
 
@@ -15,6 +15,9 @@ class SettingsCore {
       }
       if (undefined != s["f"]) {
         this.fileName = parseInt(s["f"]);
+      }
+      if (undefined != s["s"]) {
+        this.staff = parseInt(s["s"]);
       }
     } catch (e) {
       console.log("parseFromHash");
@@ -42,5 +45,14 @@ class SettingsCore {
 
   get fileName() {
     return this._fileName;
+  }
+
+  set staff( value ) {
+    this._staff = value;
+    this.updateHash("s", value);
+  }
+
+  get staff() {
+    return this._staff;
   }
 }
