@@ -61,7 +61,7 @@
 <div>
   <button onclick="changeSong(this);">Change song</button>
   <button>Change coach</button>
-  <button>Open music.xml</button>
+  <button onclick="openMusicXML(this);">Open music.xml</button>
   <button id = "buttonHand" onclick="changeHands(this);">Both hands</button>
   <a href="about.html">About</a>
   <a href="limitation.html">Limitation</a>
@@ -71,7 +71,7 @@
 <div id="GrandStaffHead" style="float: left;"></div>
 <div id="TenLines"></div>
 <div style="text-align: center;">
-  <div style="float: left;">
+  <div style="float: left; width: 200px;">
     <h2 id="Stat">
       Statistic <br> one more
     </h2>
@@ -87,6 +87,7 @@
   </div>
 </div>
 <button onclick="doStep();">Step</button>
+<input id="musicXML" type="file" style="display: none;"/>
 <!-- div>Hello!!!</div>
 <h1 id="Time"></h1-->
 <!--div id="console" style="border: solid red 1px">

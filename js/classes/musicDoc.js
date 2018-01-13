@@ -14,11 +14,21 @@ class MusicDoc {
     });
   }
 
+  loadFromStr(content) {
+    var p = new DOMParser();
+    var xml = p.parseFromString(content, "text/xml");
+    this.loadFromXML(xml);
+  }
+
   async loadFromURL(url) {
     var xml;
     await Ut.get(url, function () {
       xml = this.responseXML;
     });
+    this.loadFromXML(xml);
+  }
+
+  loadFromXML(xml) {
     var attr = xml.getElementsByTagName("attributes")[0];
     this.keyFifths = parseInt(attr.getElementsByTagName("fifths")[0].innerHTML);
     this.divisions = parseInt(attr.getElementsByTagName("divisions")[0].innerHTML);

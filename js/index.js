@@ -97,7 +97,24 @@ window.addEventListener("load", async function( event ) {
   var e = document.getElementById("Temp");
   e.addEventListener("keyup", tempKeyUp, false);
   e.value = App.piano.perMinute;
+
+  e = document.getElementById("musicXML");
+  e.addEventListener("change", readMusicXML, false);
 });
+
+function readMusicXML(e) {
+  var file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    playSong(contents);
+  };
+  reader.readAsText(file);
+}
 
 function showMidiDiv() {
   var e = document.getElementById("midiMSG");
@@ -107,7 +124,11 @@ function showMidiDiv() {
 
 async function playSong(name) {
   var md = new MusicDoc();
-  await md.loadFromURL(name);
+  if (100 < name.length) {
+    md.loadFromStr(name);
+  } else {
+    await md.loadFromURL(name);
+  }
   //var coach = new Play10timesRule(App.piano, md);
   var coach = new PlayRepeat(App.piano, md);
 }
@@ -178,6 +199,7 @@ function pieceList() {
   {name:"Cherny Op. 453-7", fileName: "data/xml/Cherny-Op._453-7.xml"},
   {name:"Mozart Sonata 16", fileName: "data/xml/Mozart-Sonata_16.xml"},
   {name:"Mozart Sonata 16 1-4", fileName: "data/xml/Mozart-Sonata_16-1-4.xml"},
+  {name:"Mozart Sonata 16 1-8", fileName: "data/xml/Mozart-Sonata_16-1-8.xml"},
   {name:"Mozart Sonata 16 4", fileName: "data/xml/Mozart-Sonata_16-4.xml"},
   {name:"Mozart Sonata 16 5-10", fileName: "data/xml/Mozart-Sonata_16-5-10.xml"},
   {name:"Mozart-Sonata 16-5-10-original", fileName: "data/xml/Mozart-Sonata_16-5-10-original.xml"},
@@ -209,6 +231,20 @@ function changeHands(button) {
       button.innerHTML = value + " hand";
     }
     App.piano.restart();
+  });
+}
+
+function openMusicXML(button) {
+  var m = new Menu(button, [[0, "Open file"], [1, "What is Music XML"], [2, "Download Musescore"]]);
+  m.select(function(key, value) {
+    if ("What is Music XML" == value) {
+      window.open("https://en.wikipedia.org/wiki/MusicXML");
+    } else if ("Download Musescore" == value) {
+      window.open("https://musescore.org");
+    } else if ("Open file" == value) {
+      var e = document.getElementById("musicXML");
+      e.click();
+    }
   });
 }
 
