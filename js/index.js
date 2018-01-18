@@ -200,9 +200,13 @@ function pieceList() {
   {name:"Mozart Sonata 16", fileName: "data/xml/Mozart-Sonata_16.xml"},
   {name:"Mozart Sonata 16 1-4", fileName: "data/xml/Mozart-Sonata_16-1-4.xml"},
   {name:"Mozart Sonata 16 1-8", fileName: "data/xml/Mozart-Sonata_16-1-8.xml"},
-  {name:"Mozart Sonata 16 4", fileName: "data/xml/Mozart-Sonata_16-4.xml"},
-  {name:"Mozart Sonata 16 5-10", fileName: "data/xml/Mozart-Sonata_16-5-10.xml"},
-  {name:"Mozart-Sonata 16-5-10-original", fileName: "data/xml/Mozart-Sonata_16-5-10-original.xml"},
+  //{name:"Mozart Sonata 16 4", fileName: "data/xml/Mozart-Sonata_16-4.xml"},
+  //{name:"Mozart Sonata 16 5-10", fileName: "data/xml/Mozart-Sonata_16-5-10.xml"},
+  //{name:"Mozart-Sonata 16-5-10-original", fileName: "data/xml/Mozart-Sonata_16-5-10-original.xml"},
+  {name:"Mozart Sonata 16 8-10", fileName: "data/xml/Mozart-Sonata_16-8-10.xml"},
+  {name:"Mozart Sonata 16 8-10-original", fileName: "data/xml/Mozart-Sonata_16-8-10-original.xml"},
+  {name:"Mozart Sonata 16 11", fileName: "data/xml/Mozart-Sonata_16-11.xml"},
+  {name:"Mozart Sonata 16 11 vise-versa", fileName: "data/xml/Mozart-Sonata_16-11-vise-versa.xml"}
   ];
 }
 
