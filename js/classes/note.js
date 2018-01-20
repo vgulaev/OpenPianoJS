@@ -56,6 +56,15 @@ class Note {
     initProperty("fingering", options, undefined);
   }
 
+  copy(options) {
+    var n = new Note();
+    Object.keys(this).forEach( (x) => {
+      if (true == options["clearBeam"] && "beam" == x) return;
+      n[x] = this[x];
+    });
+    return n;
+  }
+
   get stepLine() {
     return this.octave * 7 + Note.sToStep[this.step];
   }

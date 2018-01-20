@@ -129,7 +129,7 @@ async function playSong(name) {
   } else {
     await md.loadFromURL(name);
   }
-  //var coach = new Play10timesRule(App.piano, md);
+  // var coach = new Play10timesRule(App.piano, md);
   var coach = new PlayRepeat(App.piano, md);
 }
 
@@ -150,7 +150,10 @@ function onHappy(obj) {
   var element = document.getElementById("Stat");
   var c = App.piano.currentChord();
   if (undefined != c) {
-    element.innerHTML = c.chord.notes.slice().sort((a, b) => a.stepLine - b.stepLine).map(x => x.toS()).join(",");
+    element.innerHTML = c.chord.notes.slice().
+                                      sort((a, b) => a.stepLine - b.stepLine).
+                                      map(x => x.toS()).
+                                      join(",") + "<br>" + App.piano.curentChordIndex;
   }
   var element = document.getElementById("InLine");
   element.innerHTML = App.piano.curentChordIndex;
@@ -188,7 +191,8 @@ function startWatch() {
 }
 
 function pieceList() {
-  return [ {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
+  return [ {name:"Test", fileName: "data/xml/test.xml"},
+  {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
   {name:"Cherny Op. 453-1", fileName: "data/xml/Cherny-Op._453-1.xml"},
   {name:"Cherny Op. 453-2", fileName: "data/xml/Cherny-Op._453-2.xml"},
   {name:"Cherny Op. 453-3", fileName: "data/xml/Cherny-Op._453-3.xml"},

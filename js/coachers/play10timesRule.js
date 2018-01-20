@@ -2,7 +2,11 @@ class Play10timesRule {
   constructor(piano, md) {
     this.aim = md;
     this.piano = piano;
-    this.status = ""; //aim or practice
+    this.status = "aim"; //aim or practice
+
+    this.from = 0;
+    this.to = 144;
+
     var obj = this;
     this.piano.beforePracticeStep = function () {
       obj.beforePracticeStep();
@@ -10,7 +14,13 @@ class Play10timesRule {
     this.piano.onTrackOver = function () {
       obj.onTrackOver();
     }
-    this.start();
+
+    this.piano.afterPracticeStep = function () {
+      if ((obj.piano.curentChordIndex >= obj.to)&&("aim" == obj.status)) obj.onTrackOver();
+    };
+
+    this.piano.practice(this.aim);
+    this.piano.restart(this.from);
   }
 
   timeSign() {
@@ -27,8 +37,9 @@ class Play10timesRule {
     var stats = [];
     var ms = 60000 / this.piano.perMinute / m.divisions;
     var el = {};
-    el.right = m.chordArray[0];
-    for (var i = 1; i < m.chordArray.length; i++) {
+    el.right = m.chordArray[this.from];
+    for (var i = this.from + 1; i < m.chordArray.length; i++) {
+      if (undefined == m.chordArray[i].userTime) break;
       var el = { left: el.right };
       el.right = m.chordArray[i];
       el.dTick = el.right.tick - el.left.tick;
@@ -53,11 +64,11 @@ class Play10timesRule {
     function copyChord(md, curTick, from, length, count) {
       var measure = 0;
       for (var j = 0; j < count; j++) {
-        md.chordOnTick[curTick] = m.chordArray[from].chord.copy();
+        md.chordOnTick[curTick] = m.chordArray[from].chord.copy({clearBeam: true});
         md.chordOnTick[curTick].measure = measure;
         for (var i = 1; i < length; i++) {
           curTick = curTick + m.chordArray[from + i].tick - m.chordArray[from + i - 1].tick;
-          md.chordOnTick[curTick] = m.chordArray[from + i].chord.copy();
+          md.chordOnTick[curTick] = m.chordArray[from + i].chord.copy({clearBeam: true});
           md.chordOnTick[curTick].measure = measure;
           //md.chordOnTick[curTick].measure = Math.floor(curTick / md.beats / md.divisions);
         }
@@ -96,9 +107,11 @@ class Play10timesRule {
       this.status = "practice";
       var practiceTrack = this.createPracticeTrack();
       this.piano.practice(practiceTrack);
+      this.piano.restart(0);
     } else {
       this.status = "aim";
       this.piano.practice(this.aim);
+      this.piano.restart(this.from);
     }
   }
 

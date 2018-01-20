@@ -103,7 +103,9 @@ class SVGBuilder {
     if ("eighth" == n.type) {
       var d = ("down" == n.stem) ? SVGTmp.tail8Down(coord[2] + 13, coord[3] + 10) : SVGTmp.tail8Up(coord[2] + 13, coord[3] - 10);
       this.drawPath(d, g);
-      console.log("Hello");
+    } else if ("16th" == n.type) {
+      var d = ("down" == n.stem) ? SVGTmp.tail16Down(coord[2], coord[3]) : SVGTmp.tail16Up(coord[2], coord[3]);
+      this.drawPath(d, g);
     }
     g.append(line);
     //return g;
