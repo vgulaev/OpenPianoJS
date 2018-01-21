@@ -8,6 +8,7 @@ class Piano {
 
     this.steps = new Array();
     this.observerStatus = "stop";
+    this.pullUp = false;
 
     this.mover = null;
     this.Errors = 0;
@@ -259,6 +260,11 @@ class Piano {
           obj.onSelfRepeat = null;
         }
         return;
+      } else if (2 < obj.steps.length) {
+        for (var i = 1; i < obj.steps.length - 1; i++) {
+          if (false == obj.pullUp) break;
+          obj.steps[i].dur = Math.ceil(obj.steps[i].dur * 0.99);
+        }
       }
       var v = obj.steps[0].length / obj.steps[0].dur;
       new_x = Math.ceil((window.performance.now() - start) * v);

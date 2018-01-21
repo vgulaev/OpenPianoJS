@@ -2,8 +2,10 @@ class PlayRepeat {
   constructor(piano, md) {
     this.aim = md;
     this.piano = piano;
-    this.from = 145;
-    this.to = 180;
+    var a = [125, 141];
+    var a = [161, 225];
+    this.from = a[0];
+    this.to = a[1];
     var obj = this;
     this.piano.onTrackOver = function () {
       obj.piano.practice(obj.aim);

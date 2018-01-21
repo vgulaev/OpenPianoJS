@@ -4,8 +4,12 @@ class Play10timesRule {
     this.piano = piano;
     this.status = "aim"; //aim or practice
 
-    this.from = 0;
-    this.to = 144;
+    //var a = [161, 225];
+    var a = [225, 1000];
+    //var a = [177, 193];
+    //var a = [0, 225];
+    this.from = a[0];
+    this.to = a[1];
 
     var obj = this;
     this.piano.beforePracticeStep = function () {
@@ -106,10 +110,12 @@ class Play10timesRule {
     if ("aim" == this.status) {
       this.status = "practice";
       var practiceTrack = this.createPracticeTrack();
+      this.piano.pullUp = true;
       this.piano.practice(practiceTrack);
       this.piano.restart(0);
     } else {
       this.status = "aim";
+      this.piano.pullUp = false;
       this.piano.practice(this.aim);
       this.piano.restart(this.from);
     }
