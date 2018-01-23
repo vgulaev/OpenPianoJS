@@ -3,12 +3,13 @@ class PlayRepeat {
     this.aim = md;
     this.piano = piano;
     var a = [125, 141];
-    var a = [161, 225];
+    var a = [0, 225];
     this.from = a[0];
     this.to = a[1];
     var obj = this;
     this.piano.onTrackOver = function () {
       obj.piano.practice(obj.aim);
+      obj.piano.restart(0);
     };
 
     this.piano.afterPracticeStep = function () {

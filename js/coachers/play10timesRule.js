@@ -5,9 +5,9 @@ class Play10timesRule {
     this.status = "aim"; //aim or practice
 
     //var a = [161, 225];
-    var a = [225, 1000];
+    //var a = [225, 1000];
     //var a = [177, 193];
-    //var a = [0, 225];
+    var a = [0, 1000];
     this.from = a[0];
     this.to = a[1];
 
@@ -62,8 +62,9 @@ class Play10timesRule {
     var md = new MusicDoc();
 
     md.divisions = m.divisions;
-    md.beats = m.beats;
+    md.keyFifths = m.keyFifths;
     md.beatType = m.beatType;
+    md.beats = m.beats;
 
     function copyChord(md, curTick, from, length, count) {
       var measure = 0;

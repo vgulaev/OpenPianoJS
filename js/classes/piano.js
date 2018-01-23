@@ -160,6 +160,7 @@ class Piano {
     //128 - up 144 - press key
     this.kb.push(event);
     if (128 == event.data[0]) return;
+    Stats.pressKey();
     var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
     //if (this.kb.include(c.sign)) {
     if (this.kb.last(c.sign.count) == c.sign.sign) {
