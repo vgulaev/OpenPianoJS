@@ -129,8 +129,9 @@ async function playSong(name) {
   } else {
     await md.loadFromURL(name);
   }
-  var coach = new Play10timesRule(App.piano, md);
+  //var coach = new Play10timesRule(App.piano, md);
   //var coach = new PlayRepeat(App.piano, md);
+  var coach = new PlayFaster(App.piano, md);
 }
 
 function onSetTemp() {
@@ -204,8 +205,10 @@ function pieceList() {
   {name:"Cherny Op. 453-6-left", fileName: "data/xml/Cherny-Op._453-6-left.xml"},
   {name:"Cherny Op. 453-7", fileName: "data/xml/Cherny-Op._453-7.xml"},
   {name:"Cherny Op. 453-8", fileName: "data/xml/Cherny-Op._453-8.xml"},
+  {name:"Cherny Op. 453-9", fileName: "data/xml/Cherny-Op._453-9.xml"},
   {name:"Gymnopedie", fileName: "data/xml/Gymnopedie.xml"},
   {name:"Mozart Sonata 16", fileName: "data/xml/Mozart-Sonata_16.xml"},
+  {name:"Mozart Sonata 16 11", fileName: "data/xml/Mozart-Sonata_16-11.xml"},
   // {name:"Mozart Sonata 16 1-4", fileName: "data/xml/Mozart-Sonata_16-1-4.xml"},
   // {name:"Mozart Sonata 16 1-8", fileName: "data/xml/Mozart-Sonata_16-1-8.xml"},
   //{name:"Mozart Sonata 16 4", fileName: "data/xml/Mozart-Sonata_16-4.xml"},

@@ -225,26 +225,6 @@ class Piano {
     this.invokeEvent("afterPracticeStep");
   }
 
-  /*
-  moverEnd() {
-    if (this.steps.length > 0) {
-      this.animationStep();
-    } else {
-      this.observerStatus = "work";
-      this.moveObserver();
-    }
-  }
-
-  animationStep() {
-    var curMove = this.steps.shift();
-    this.mover.setAttributeNS(null, "from", this.curentX);
-    this.mover.setAttributeNS(null, "to", this.curentX + curMove.length);
-    this.mover.setAttributeNS(null, "dur", curMove.dur + "ms");
-    this.mover.beginElement();
-    this.curentX += curMove.length;
-  }
-  */
-
   async moveObserver() {
     var last_x = 0, new_x = 0, new_x_k = 0;
     var start = window.performance.now();
