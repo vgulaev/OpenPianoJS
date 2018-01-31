@@ -1,15 +1,11 @@
 class Play10timesRule {
-  constructor(piano, md) {
+  constructor(piano, md, range) {
     this.aim = md;
     this.piano = piano;
     this.status = "aim"; //aim or practice
 
-    //var a = [161, 225];
-    //var a = [225, 1000];
-    //var a = [177, 193];
-    var a = [0, 1000];
-    this.from = a[0];
-    this.to = a[1];
+    this.from = range[0];
+    this.to = range[1];
 
     var obj = this;
     this.piano.beforePracticeStep = function () {

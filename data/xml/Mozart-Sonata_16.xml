@@ -5730,6 +5730,11 @@
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
         <beam number="3">continue</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="168.96" default-y="5.00">
         <pitch>
@@ -5746,6 +5751,11 @@
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
         <beam number="3">continue</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="184.63" default-y="10.00">
         <pitch>

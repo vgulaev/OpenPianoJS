@@ -1,14 +1,10 @@
 class PlayFaster {
-  constructor(piano, md) {
+  constructor(piano, md, range) {
     this.aim = md;
     this.piano = piano;
 
-    //var a = [34, 49];
-    //var a = [145, 225];
-    //var a = [225, 290];
-    var a = [289, 308];
-    this.from = a[0];
-    this.to = a[1];
+    this.from = range[0];
+    this.to = range[1];
 
     var obj = this;
     this.piano.beforePracticeStep = function () {

@@ -129,9 +129,9 @@ async function playSong(name) {
   } else {
     await md.loadFromURL(name);
   }
-  //var coach = new Play10timesRule(App.piano, md);
+  var coach = new Play10timesRule(App.piano, md, Settings.range);
   //var coach = new PlayRepeat(App.piano, md);
-  var coach = new PlayFaster(App.piano, md);
+  //var coach = new PlayFaster(App.piano, md, Settings.range);
 }
 
 function onSetTemp() {
