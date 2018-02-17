@@ -209,7 +209,7 @@ function pieceList() {
   return [ {name:"Test", fileName: "data/xml/test.xml"},
   {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
   {name:"Beethoven Op. 27 №2", fileName: "data/xml/Beethoven-Op._27_№2.xml"},
-  {name:"BWV-846 Prelude C Major", fileName: "data/xml/BWV-846 Prelude_C_Major.xml"},
+  {name:"BWV-846 Prelude C Major", fileName: "data/xml/BWV-846_Prelude_C_Major.xml"},
   {name:"BWV-846 Harmony", fileName: "data/xml/BWV-846-Harmony.xml"},
   {name:"BWV-858 Prelude F-sharp Major", fileName: "data/xml/BWV-858 Prelude_F_sharp_Major.xml"},
   {name:"Cherny Op. 453-1", fileName: "data/xml/Cherny-Op._453-1.xml"},
