@@ -167,7 +167,8 @@ class SVGBuilder {
   static drawFingering(x, y, n, g) {
     var text = SVGBuilder.createSVG("text");
     text.setAttributeNS(null, "font-size", "20");
-    var dy = (1 == n.staff) ? 10 : -50
+    //var dy = (1 == n.staff) ? 10 : -50
+    var dy = ("down" == n.stem) ? 10 : -50
     text.setAttributeNS(null, "y", y - dy);
     text.setAttributeNS(null, "x", x);
     text.innerHTML = n.fingering;

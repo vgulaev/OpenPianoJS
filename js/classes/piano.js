@@ -17,6 +17,7 @@ class Piano {
     this.onCorrect = null;
     this.onSetTemp = null;
     this.onSelfRepeat = null;
+    this.onStart = null;
 
     this.beforePracticeStep = null;
     this.afterPracticeStep = null;
@@ -280,6 +281,7 @@ class Piano {
   }
 
   start(index) {
+    this.invokeEvent("onStart");
     if ((undefined == index)||(0 == index)) {
       this.curentChordIndex = 0;
       this.steps = [{length: -60, dur: 2000}];
