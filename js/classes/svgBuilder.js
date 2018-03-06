@@ -121,10 +121,19 @@ class SVGBuilder {
   }
 
   static drawAccidental(x, y, n, g) {
-    if (true == App.keyFifths[n.step + n.alter]) return;
+    if (undefined == n.alter) {
+      if ((undefined == App.keyFifths[n.step + "1"])&&(undefined == App.keyFifths[n.step + "-1"])) return;
+    } else {
+      if (true == App.keyFifths[n.step + n.alter]) return;
+    }
     var accidental = SVGBuilder.createSVG("path");
     accidental.setAttributeNS (null, 'stroke-width', 1);
-    accidental.setAttributeNS (null, 'd', ( -1 == n.alter ? SVGTmp.flat(x, y) : SVGTmp.sharp(x, y) ) );
+    var d = "";
+    if (undefined == n.alter) d = SVGTmp.natural(x, y); 
+    if (-1 == n.alter) d = SVGTmp.flat(x, y);
+    if (1 == n.alter) d = SVGTmp.sharp(x, y);
+    if (2 == n.alter) d = SVGTmp.doubleSharp(x, y);
+    accidental.setAttributeNS (null, 'd', d);
     g.append(accidental);
   }
 
@@ -207,7 +216,8 @@ class SVGBuilder {
       } else if ("whole" ==  n.type) {
         res = SVGTmp.wholeNote(x, y + 7);
       }
-      if ((n.alter == -1)||(n.alter == 1)) this.drawAccidental(x, y, n, g);
+      // if ((n.alter == -1)||(n.alter == 1)||(n.alter == 2))
+      this.drawAccidental(x, y, n, g);
       if (true == n.dot) this.drawDot(x, y, n, g);
       if (undefined !== n.tie) this.drawTie(x, y, n, g);
       if (undefined !== n.fingering) this.drawFingering(x, y, n, g);

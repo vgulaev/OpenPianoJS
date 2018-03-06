@@ -60,6 +60,7 @@ class Note {
     var n = new Note();
     Object.keys(this).forEach( (x) => {
       if (true == options["clearBeam"] && "beam" == x) return;
+      if (true == options["clearBeam"] && "tie" == x) return;
       n[x] = this[x];
     });
     return n;
@@ -86,9 +87,21 @@ class Note {
     return ("down" == this.stem) ? -1 : 1;
   }
 
+  alterSign() {
+    switch (this.alter) {
+      case -1:
+        return "b";
+      case 1:
+        return "#";
+      case 2:
+        return "##";
+    }
+    return "";
+  }
+
   toS() {
     if (true == this.rest) return "";
-    return this.step + (-1 == this.alter ? "b":"") + (1 == this.alter ? "#":"") + this.octave;
+    return this.step + this.alterSign() + this.octave;
   }
 }
 
