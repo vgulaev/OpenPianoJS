@@ -8,7 +8,7 @@ class Piano {
 
     this.steps = new Array();
     this.observerStatus = "stop";
-    this.curentX = 0;
+    this.pullUp = false;
 
     this.mover = null;
     this.Errors = 0;
@@ -17,8 +17,10 @@ class Piano {
     this.onCorrect = null;
     this.onSetTemp = null;
     this.onSelfRepeat = null;
+    this.onStart = null;
 
     this.beforePracticeStep = null;
+    this.afterPracticeStep = null;
     this.onTrackOver = null;
   }
 
@@ -68,6 +70,22 @@ class Piano {
       SVGBuilder.drawAccidental(105, n.y, n, g);
       App.keyFifths["C1"] = true;
       App.keyFifths["F1"] = true;
+    } else if (6 == this.musicDoc.keyFifths) {
+      // var n = new Note({step: "C", alter: 1, octave: 5, staff: 1});
+      // SVGBuilder.drawAccidental(115, n.y, n, g);
+      // n = new Note({step: "F", alter: 1, octave: 5, staff: 1});
+      // SVGBuilder.drawAccidental(105, n.y, n, g);
+      // var n = new Note({step: "C", alter: 1, octave: 3, staff: 2});
+      // SVGBuilder.drawAccidental(115, n.y, n, g);
+      // n = new Note({step: "F", alter: 1, octave: 3, staff: 2});
+      // SVGBuilder.drawAccidental(105, n.y, n, g);
+      App.keyFifths["C1"] = true;
+      App.keyFifths["D1"] = true;
+      App.keyFifths["E1"] = true;
+      App.keyFifths["F1"] = true;
+      App.keyFifths["G1"] = true;
+      App.keyFifths["A1"] = true;
+
     } else if (-2 == this.musicDoc.keyFifths) {
       var n = new Note({step: "B", alter: -1, octave: 4, staff: 1});
       SVGBuilder.drawAccidental(115, n.y, n, g);
@@ -159,6 +177,7 @@ class Piano {
     //128 - up 144 - press key
     this.kb.push(event);
     if (128 == event.data[0]) return;
+    Stats.pressKey();
     var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
     //if (this.kb.include(c.sign)) {
     if (this.kb.last(c.sign.count) == c.sign.sign) {
@@ -220,27 +239,8 @@ class Piano {
       this.observerStatus = "work";
       this.moveObserver();
     }
+    this.invokeEvent("afterPracticeStep");
   }
-
-  /*
-  moverEnd() {
-    if (this.steps.length > 0) {
-      this.animationStep();
-    } else {
-      this.observerStatus = "work";
-      this.moveObserver();
-    }
-  }
-
-  animationStep() {
-    var curMove = this.steps.shift();
-    this.mover.setAttributeNS(null, "from", this.curentX);
-    this.mover.setAttributeNS(null, "to", this.curentX + curMove.length);
-    this.mover.setAttributeNS(null, "dur", curMove.dur + "ms");
-    this.mover.beginElement();
-    this.curentX += curMove.length;
-  }
-  */
 
   async moveObserver() {
     var last_x = 0, new_x = 0, new_x_k = 0;
@@ -258,6 +258,11 @@ class Piano {
           obj.onSelfRepeat = null;
         }
         return;
+      } else if (2 < obj.steps.length) {
+        for (var i = 1; i < obj.steps.length - 1; i++) {
+          if (false == obj.pullUp) break;
+          obj.steps[i].dur = Math.ceil(obj.steps[i].dur * 0.99);
+        }
       }
       var v = obj.steps[0].length / obj.steps[0].dur;
       new_x = Math.ceil((window.performance.now() - start) * v);
@@ -279,9 +284,28 @@ class Piano {
     requestAnimationFrame(step);
   }
 
-  start() {
-    this.use.setAttributeNS(null, "x", 450);
-    this.steps = [{length: -60, dur: 2000}];
+  xForChord(index) {
+    var x = 450;
+    if (index > 0) {
+      x -= 50;
+      for (var i = 0; i < index; i ++) {
+        x -= this.musicDoc.chordArray[i].chord.weight;
+      }
+      x -= this.musicDoc.chordArray[index].chord.xborder;
+    }
+    return x;
+  }
+
+  start(index) {
+    this.invokeEvent("onStart");
+    if ((undefined == index)||(0 == index)) {
+      this.curentChordIndex = 0;
+      this.steps = [{length: -60, dur: 2000}];
+    } else {
+      this.curentChordIndex = index;
+      this.steps = [];
+    }
+    this.use.setAttributeNS(null, "x", this.xForChord(index));
     /*
     for (var i = 0; i < 5; i++) {
       var c = this.musicDoc.chordArray[i];
@@ -294,20 +318,18 @@ class Piano {
     */
     //this.steps = [{length: -60, dur: 500}];
     this.observerStatus = "work";
-    this.curentChordIndex = 0;
     this.Errors = 0;
-    this.curentX = 450;
     this.moveObserver();
   }
 
-  restart() {
+  restart(index) {
     if ("work" == this.observerStatus) {
       this.onSelfRepeat = function () {
-        this.start();
+        this.start(index);
       }
       this.steps = [];
     } else {
-      this.start();
+      this.start(index);
     }
   }
 
@@ -317,6 +339,5 @@ class Piano {
     if (0 == this.perMinute) {
       this.perMinute = App.setting.temp;
     }
-    this.restart();
   }
 }

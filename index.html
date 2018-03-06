@@ -4,7 +4,7 @@
 	<title></title>
 </head>
 
-<!--script type="text/javascript" src="conf/settings.js"></script-->
+<script type="text/javascript" src="conf/settings.js"></script>
 <script type="text/javascript" src="js/classes/chord.js"></script>
 <script type="text/javascript" src="js/classes/kbSign.js"></script>
 <script type="text/javascript" src="js/classes/menu.js"></script>
@@ -12,13 +12,14 @@
 <script type="text/javascript" src="js/classes/note.js"></script>
 <script type="text/javascript" src="js/classes/piano.js"></script>
 <script type="text/javascript" src="js/classes/settingsCore.js"></script>
+<script type="text/javascript" src="js/classes/stats.js"></script>
 <script type="text/javascript" src="js/classes/svgBuilder.js"></script>
 <script type="text/javascript" src="js/classes/svgTemplate.js"></script>
 <script type="text/javascript" src="js/classes/ut.js"></script>
 <script type="text/javascript" src="js/classes/voiceTicker.js"></script>
 <script type="text/javascript" src="js/coachers/play10timesRule.js"></script>
+<script type="text/javascript" src="js/coachers/playFaster.js"></script>
 <script type="text/javascript" src="js/coachers/playFive.js"></script>
-<!-- script type="text/javascript" src="js/coachers/playFive_v2.js"></script-->
 <script type="text/javascript" src="js/coachers/playRepeat.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <style type="text/css">
@@ -59,10 +60,11 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/47287518" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 <div>
-  <button onclick="changeSong(this);">Change song</button>
+  <button onclick="changeSong(this);">Change song (mosly Czerny)></button>
   <button>Change coach</button>
   <button onclick="openMusicXML(this);">Open music.xml</button>
   <button id = "buttonHand" onclick="changeHands(this);">Both hands</button>
+  <a href="report.html">report</a>
   <a href="about.html">About</a>
   <a href="limitation.html">Limitation</a>
   <a href="donate.html">Подайте грошик(Donate)</a>
@@ -84,6 +86,7 @@
   <h1><span style="color: green;"><span>Подряд:</span><span id="InLine">0</span></span><span> Всего:</span><span id="Correct">0</span></h1>
   <h1 style="color: red;"><span>Ошибок:</span><span id="Error">0</span></h1>
   <h1><span>%%:</span><span id="Percent">0</span></h1>
+  <h1><span>№№:</span><span id="Repeats">0</span><button onclick="resetNN();">reset</button></h1>
   </div>
 </div>
 <button onclick="doStep();">Step</button>

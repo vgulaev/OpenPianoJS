@@ -6,9 +6,9 @@ class Chord {
     this.measure = measure;
   }
 
-  copy() {
+  copy(options) {
     var res = new Chord();
-    res.notes = this.notes;
+    res.notes = this.notes.map((x) => (x.copy(options)));
     return res;
   }
 
