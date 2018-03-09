@@ -12,14 +12,14 @@ function fillReport() {
       a = key.substring(key.length - 2);
       key = key.substring(0, key.length - 3);
     }
+    key = key.split("-").map((x) => {return x.length == 1 ? "0"+x : x}).join("-");
     if (d[key] == undefined) {
       d[key] = {};
     }
     d[key][a] = localStorage.getItem(localStorage.key(i));
-
   }
   //var dd = Object
-  Object.keys(d).forEach( function (x) {
+  Object.keys(d).sort().forEach( function (x) {
     var el = document.createElement("div");
     el.classList.add('divTableRow');
     //el.innerHTML = `<span>${x}==<span><span>${d[x]["k"]}<span>`;
