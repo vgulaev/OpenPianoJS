@@ -9,7 +9,8 @@ class SettingsCore {
 
   parseFromHash() {
     try {
-      var s = JSON.parse(document.location.hash.substring(1));
+      var s = eval('(' + document.location.hash.substring(1) + ')');
+      //JSON.parse(document.location.hash.substring(1));
       if (undefined != s["t"]) {
         this.temp = parseInt(s["t"]);
       }
@@ -26,7 +27,7 @@ class SettingsCore {
 
   updateHash(key, value) {
     this.hash[key] = value;
-    document.location.hash = JSON.stringify(this.hash);
+    document.location.hash = JSON.stringify(this.hash).split('"').join('');
   }
 
   set temp( value ) {
