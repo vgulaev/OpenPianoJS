@@ -141,8 +141,8 @@ async function playSong(name) {
     await md.loadFromURL(name);
   }
   App.nn = 0;
-  //var coach = new Play10timesRule(App.piano, md, Settings.range);
-  //var coach = new PlayRepeat(App.piano, md, Settings.range);
+  // var coach = new Play10timesRule(App.piano, md, Settings.range);
+  // var coach = new PlayRepeat(App.piano, md, Settings.range);
   var coach = new PlayFaster(App.piano, md, Settings.range);
 }
 
@@ -206,39 +206,7 @@ function startWatch() {
 }
 
 function pieceList() {
-  return [ {name:"Test", fileName: "data/xml/test.xml"},
-  {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
-  {name:"Beethoven Op. 27 №2", fileName: "data/xml/Beethoven-Op._27_№2.xml"},
-  {name:"Beethoven Op. 53", fileName: "data/xml/Beethoven-Op._53.xml"},
-  {name:"BWV-846 Prelude C Major", fileName: "data/xml/BWV-846_Prelude_C_Major.xml"},
-  {name:"BWV-846 Harmony", fileName: "data/xml/BWV-846-Harmony.xml"},
-  {name:"BWV-858 Prelude F-sharp Major", fileName: "data/xml/BWV-858_Prelude_F_sharp_Major.xml"},
-  {name:"C Major", fileName: "data/xml/C Major.xml"},
-  {name:"Cherny Op. 453-1", fileName: "data/xml/Cherny-Op._453-1.xml"},
-  {name:"Cherny Op. 453-2", fileName: "data/xml/Cherny-Op._453-2.xml"},
-  {name:"Cherny Op. 453-3", fileName: "data/xml/Cherny-Op._453-3.xml"},
-  {name:"Cherny Op. 453-4", fileName: "data/xml/Cherny-Op._453-4.xml"},
-  {name:"Cherny Op. 453-5", fileName: "data/xml/Cherny-Op._453-5.xml"},
-  {name:"Cherny Op. 453-6", fileName: "data/xml/Cherny-Op._453-6.xml"},
-  {name:"Cherny Op. 453-6-left", fileName: "data/xml/Cherny-Op._453-6-left.xml"},
-  {name:"Cherny Op. 453-7", fileName: "data/xml/Cherny-Op._453-7.xml"},
-  {name:"Cherny Op. 453-8", fileName: "data/xml/Cherny-Op._453-8.xml"},
-  {name:"Cherny Op. 453-9", fileName: "data/xml/Cherny-Op._453-9.xml"},
-  {name:"Gymnopedie", fileName: "data/xml/Gymnopedie.xml"},
-  {name:"Mozart Sonata 16", fileName: "data/xml/Mozart-Sonata_16.xml"},
-  {name:"Mozart Sonata 16 simple", fileName: "data/xml/Mozart-Sonata_16-simple.xml"},
-  // {name:"Mozart Sonata 16 1-4", fileName: "data/xml/Mozart-Sonata_16-1-4.xml"},
-  // {name:"Mozart Sonata 16 1-8", fileName: "data/xml/Mozart-Sonata_16-1-8.xml"},
-  //{name:"Mozart Sonata 16 4", fileName: "data/xml/Mozart-Sonata_16-4.xml"},
-  //{name:"Mozart Sonata 16 5-10", fileName: "data/xml/Mozart-Sonata_16-5-10.xml"},
-  //{name:"Mozart-Sonata 16-5-10-original", fileName: "data/xml/Mozart-Sonata_16-5-10-original.xml"},
-  // {name:"Mozart Sonata 16 8-10", fileName: "data/xml/Mozart-Sonata_16-8-10.xml"},
-  // {name:"Mozart Sonata 16 8-10-original", fileName: "data/xml/Mozart-Sonata_16-8-10-original.xml"},
-  // {name:"Mozart Sonata 16 11 vise-versa", fileName: "data/xml/Mozart-Sonata_16-11-vise-versa.xml"},
-  {name:"Mozart Sonata 16 26", fileName: "data/xml/Mozart-Sonata_16-26.xml"},
-  {name:"Mozart Sonata 16 29", fileName: "data/xml/Mozart-Sonata_16-29.xml"},
-  {name:"Mozart Sonata 16 32", fileName: "data/xml/Mozart-Sonata_16-32.xml"}
-  ];
+  return MusicFiles;
 }
 
 function changeSong(button) {
