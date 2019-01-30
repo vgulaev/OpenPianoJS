@@ -75,6 +75,12 @@ class Piano {
       n = new Note({step: "B", alter: -1, octave: 2, staff: 2});
       SVGBuilder.drawAccidental(115, n.y, n, g);
       App.keyFifths["B-1"] = true;
+    } else if (1 == this.musicDoc.keyFifths) {
+      n = new Note({step: "F", alter: 1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(105, n.y, n, g);
+      n = new Note({step: "F", alter: 1, octave: 3, staff: 2});
+      SVGBuilder.drawAccidental(105, n.y, n, g);
+      App.keyFifths["F1"] = true;
     } else if (2 == this.musicDoc.keyFifths) {
       var n = new Note({step: "C", alter: 1, octave: 5, staff: 1});
       SVGBuilder.drawAccidental(115, n.y, n, g);
@@ -86,6 +92,19 @@ class Piano {
       SVGBuilder.drawAccidental(105, n.y, n, g);
       App.keyFifths["C1"] = true;
       App.keyFifths["F1"] = true;
+    } else if (4 == this.musicDoc.keyFifths) {
+      n = new Note({step: "F", alter: 1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(105, n.y, n, g);
+      var n = new Note({step: "C", alter: 1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(115, n.y, n, g);
+      var n = new Note({step: "G", alter: 1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(125, n.y, n, g);
+      var n = new Note({step: "D", alter: 1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(135, n.y, n, g);
+      App.keyFifths["F1"] = true;
+      App.keyFifths["C1"] = true;
+      App.keyFifths["G1"] = true;
+      App.keyFifths["D1"] = true;
     } else if (6 == this.musicDoc.keyFifths) {
       // var n = new Note({step: "C", alter: 1, octave: 5, staff: 1});
       // SVGBuilder.drawAccidental(115, n.y, n, g);
@@ -101,7 +120,6 @@ class Piano {
       App.keyFifths["F1"] = true;
       App.keyFifths["G1"] = true;
       App.keyFifths["A1"] = true;
-
     } else if (-2 == this.musicDoc.keyFifths) {
       var n = new Note({step: "B", alter: -1, octave: 4, staff: 1});
       SVGBuilder.drawAccidental(115, n.y, n, g);
