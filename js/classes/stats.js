@@ -39,7 +39,12 @@ class Stats {
   static info() {
     var s = Math.floor(Stats.spendTime / 1000) % 60;
     var m = Math.floor(Stats.spendTime / 1000 / 60);
-    return `${m}m ${s}s`;
+    let res = `${m}m ${s}s`;
+    if (m > 120) {
+      let h = Math.floor(m / 60);
+      res = `${h}h ${m % 60}`
+    }
+    return res;
   }
 }
 

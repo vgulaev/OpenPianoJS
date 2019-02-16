@@ -29,36 +29,6 @@
   }
 </style>
 <body id="root">
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-    (function (d, w, c) {
-        if (("127.0.0.1:8080" == document.location.host)||(-1 != document.cookie.search("name=vgulaev"))) return;
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter47287518 = new Ya.Metrika({
-                    id:47287518,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                });
-            } catch(e) { }
-        });
-
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/47287518" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 <div>
   <button style="min-width: 250px;" onclick="changeSong(this);">Change song (mosly Czerny)></button>
   <button>Change coach</button>
@@ -79,9 +49,15 @@
     </h2>
   </div>
   <div>
-    <label for="Temp" style="font-size: 32px;">
+    <div style="font-size: 32px;">
+    <label for="Temp">
       Tempo: <input id="Temp" value="0" size="4" type="text" autocomplete="off" style="font-size: inherit;"/>
     </label>
+    <span>From</span>
+    <input id="posFrom" size="4" style="font-size: inherit;">
+    <span>To</span>
+    <input id="posTo" size="4" style="font-size: inherit;">
+    </div>
   <!-- h1><span>Tempo:</span></h1-->
   <h1><span style="color: green;"><span>Подряд:</span><span id="InLine">0</span></span><span> Всего:</span><span id="Correct">0</span></h1>
   <h1 style="color: red;"><span>Ошибок:</span><span id="Error">0</span></h1>
@@ -94,8 +70,9 @@
 <!-- div>Hello!!!</div>
 <h1 id="Time"></h1-->
 <!--div id="console" style="border: solid red 1px">
+block
 </div -->
-<div id="midiMSG" style="position: absolute;border: 2px solid red;background: white; text-align: center;font-size: 16px;padding: 20px;font-weight: bold; display: block;">
+<div id="midiMSG" style="position: absolute;border: 2px solid red;background: white; text-align: center;font-size: 16px;padding: 20px;font-weight: bold; display: none;">
   Используйте ноутбук c подключённым
   <br>
   <a href="https://www.google.ru/search?q=%D1%86%D0%B8%D1%84%D1%80%D0%BE%D0%B2%D0%BE%D0%B5+%D0%BF%D0%B8%D0%B0%D0%BD%D0%B8%D0%BD%D0%BE">цифровое пианино</a>

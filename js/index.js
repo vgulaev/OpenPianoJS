@@ -106,6 +106,32 @@ window.addEventListener("load", async function( event ) {
 
   e = document.getElementById("musicXML");
   e.addEventListener("change", readMusicXML, false);
+
+  e = document.getElementById("posFrom");
+  e.value = Settings.range[0];
+  e.addEventListener("change", function() {
+    Settings.range[0] = parseInt(e.value);
+  }, false)
+
+  e = document.getElementById("posTo");
+  e.value = Settings.range[1];
+  e.addEventListener("change", function() {
+    Settings.range[1] = parseInt(e.value);
+  }, false)
+});
+
+window.addEventListener("keydown", function (event) {
+  if (('ArrowRight' == event.key) || ('ArrowLeft' == event.key) && ('root' == event.srcElement.id)) {
+    if ('ArrowRight' == event.key) {
+      Settings.range[0] += 1;
+      App.piano.practiceStep();
+    } else {
+      Settings.range[0] = App.piano.curentChordIndex - 1;
+      playSong(App.songName);
+    }
+    e = document.getElementById("posFrom");
+    e.value = Settings.range[0];
+    }
 });
 
 function resetNN() {
@@ -134,6 +160,7 @@ function showMidiDiv() {
 }
 
 async function playSong(name) {
+  App.songName = name;
   var md = new MusicDoc();
   if (100 < name.length) {
     md.loadFromStr(name);
@@ -141,9 +168,10 @@ async function playSong(name) {
     await md.loadFromURL(name);
   }
   App.nn = 0;
+  var coach = Settings.coach(App.piano, md, Settings.range);
   // var coach = new Play10timesRule(App.piano, md, Settings.range);
   // var coach = new PlayRepeat(App.piano, md, Settings.range);
-  var coach = new PlayFaster(App.piano, md, Settings.range);
+  // var coach = new PlayFaster(App.piano, md, Settings.range);
 }
 
 function onSetTemp() {
@@ -163,6 +191,7 @@ function onHappy(obj) {
   var element = document.getElementById("Stat");
   var c = App.piano.currentChord();
   if (undefined != c) {
+    console.log(c.chord.notes);
     element.innerHTML = c.chord.notes.slice().
                                       sort((a, b) => a.stepLine - b.stepLine).
                                       map(x => x.toS()).
@@ -181,9 +210,6 @@ function doStep() {
     await Ut.sleep(240);
     stepByStep();
   }
-  // startWatch();
-  // stepByStep();
-  //console.log(App.piano.actualX);
 }
 
 function startWatch() {

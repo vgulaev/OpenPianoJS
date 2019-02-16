@@ -30,12 +30,10 @@ class Chord {
       dx = 30;
       var line = SVGBuilder.drawLine(0, 84, 0, 302);
       g.append(line);
-      /*
       var text = SVGBuilder.createSVG("text");
       text.setAttributeNS(null, "y", "60");
       text.innerHTML = this.measure;
       g.append(text);
-      */
     }
 
     var gg = SVGBuilder.createSVG ("g");

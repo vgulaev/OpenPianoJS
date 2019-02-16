@@ -16,8 +16,19 @@ class Note {
   }
 
   loadFromXML(options) {
+    this.v2 = {
+      tie: {}
+    };
+    this.raw = options;
+    if (null != options.querySelector("tie[type='start']")) {
+      this.v2.tie.start = true;
+    }
+    if (null != options.querySelector("tie[type='stop']")) {
+      this.v2.tie.stop = true;
+    }
+
     var properties = [
-      [() => true, ["rest", "chord", "dot"] ],
+      [() => true, ["rest", "chord", "dot", "staccato"] ],
       [x => parseInt(x.innerHTML), ["duration", "octave", "voice", "staff", "alter", "fingering"]],
       [x => x.innerHTML, ["step", "type", "stem"]],
       [x => x.getAttribute("type"), ["tie"]],
@@ -67,11 +78,12 @@ class Note {
   }
 
   get stepLine() {
+    if (this.rest) return 0;
     return this.octave * 7 + Note.sToStep[this.step];
   }
 
   get midiByte() {
-    if ((this.rest == true)||("stop" == this.tie)) return -1;
+    if ((this.rest == true)||(true == this.v2.tie.stop)) return -1;
     return 12 + this.octave * 12 + Note.tones[this.step] + ( this.alter ? this.alter : 0 );
   }
 

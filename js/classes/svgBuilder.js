@@ -26,11 +26,11 @@ class SVGBuilder {
   }
 
   static drawBeam(b, n, g) {
-    var a = App.beamBuilder[n.staff][1];
+    var a = App.beamBuilder[n.v2.beamIndex][1];
     var ax = [], ay = [];
     a.forEach((x) => {
       ax.push(x[1] - App.tieBuilder.x + x[0][0]);
-      ay.push( ("down" == n.stem) ? Math.max(x[0][1], x[0][3]) : Math.min(x[0][1], x[0][3]));
+      ay.push( ("down" == x[2].stem) ? Math.max(x[0][1], x[0][3]) : Math.min(x[0][1], x[0][3]));
     });
     var y1 = 0, y2 = 0, x1 = 0, x2 = 0;
     x1 = Ut.min(ax);
@@ -56,7 +56,7 @@ class SVGBuilder {
     var k = (x2 - x1) / (y2 - y1);
     for (var i = 0; i < a.length; i++) {
       var ey = y1 + (ax[i] - x1) / k;
-      if ("down" == n.stem) {
+      if ("down" == a[i][2].stem) {
         var cy = Math.min(a[i][0][1], a[i][0][3]);
       } else {
         cy = Math.max(a[i][0][1], a[i][0][3]);
@@ -68,7 +68,7 @@ class SVGBuilder {
     a.length = 0;
 
     for (var i = 2; i < 4; i++) {
-      a = App.beamBuilder[n.staff][i];
+      a = App.beamBuilder[n.v2.beamIndex][i];
       if (0 == a.length) break;
       ax.length = 0;
       a.forEach((x) => {
@@ -91,13 +91,16 @@ class SVGBuilder {
     //return;
     if (undefined !== n.beam) {
       for (var b of n.beam) {
-        var beamPull = App.beamBuilder[n.staff][b[0]];
+        if (undefined == App.beamBuilder[n.v2.beamIndex]) {
+          App.beamBuilder[n.v2.beamIndex] = {"1": [], "2": [], "3": [], "4": [], "5": []};
+        }
+        var beamPull = App.beamBuilder[n.v2.beamIndex][b[0]];
         beamPull.push([coord, App.tieBuilder.x, n]);
         if (("end" == b[1])&&("1" == b[0])) this.drawBeam(b[0], n, g);
       }
       return;
     }
-    if ((true == n.chord) && (App.beamBuilder[n.staff][1].length > 0)) return;
+    if ((true == n.chord) && undefined != App.beamBuilder[n.v2.beamIndex] && (App.beamBuilder[n.v2.beamIndex][1].length > 0)) return;
     //var g = SVGBuilder.createSVG("g");
     var line = this.drawLine.apply(this, coord);
     if ("eighth" == n.type) {
@@ -111,13 +114,21 @@ class SVGBuilder {
     //return g;
   }
 
+  static drawCircle(g, x, y, r) {
+    var dot = SVGBuilder.createSVG("circle");
+    dot.setAttributeNS(null, "cx", x);
+    dot.setAttributeNS(null, "cy", y);
+    dot.setAttributeNS(null, "r", r);
+    g.append(dot);
+  }
+
   static drawDot(x, y, n, g) {
     var dy = (0 == n.stepLine % 2) ? 7.5 : 0;
-    var dot = SVGBuilder.createSVG("circle");
-    dot.setAttributeNS(null, "cx", x + 15);
-    dot.setAttributeNS(null, "cy", y + 7 - dy);
-    dot.setAttributeNS(null, "r", 3);
-    g.append(dot);
+    this.drawCircle(g, x + 15, y + 7 - dy, 3)
+  }
+
+  static drawStaccato(x, y, n, g) {
+    this.drawCircle(g, x, y - 10, 3);
   }
 
   static drawAccidental(x, y, n, g) {
@@ -129,7 +140,7 @@ class SVGBuilder {
     var accidental = SVGBuilder.createSVG("path");
     accidental.setAttributeNS (null, 'stroke-width', 1);
     var d = "";
-    if (undefined == n.alter) d = SVGTmp.natural(x, y); 
+    if (undefined == n.alter) d = SVGTmp.natural(x, y);
     if (-1 == n.alter) d = SVGTmp.flat(x, y);
     if (1 == n.alter) d = SVGTmp.sharp(x, y);
     if (2 == n.alter) d = SVGTmp.doubleSharp(x, y);
@@ -159,18 +170,20 @@ class SVGBuilder {
   }
 
   static drawTie(x, y, n, g) {
-    if ("start" == n.tie) {
+    if (true == n.v2.tie.stop) {
+      var s = App.tieBuilder[n.staff][n.stepLine];
+      var w = s.n.parentChord.weight;
+      var dx = App.tieBuilder.x - s.absolutX;
+      var coord = [x, y + 10, 0 - (dx - s.x), y + 10];
+      var path = this.tiePath(x, y, dx - s.x, n);
+      g.append(path);
+      var obj = App.tieBuilder[n.staff];
+      delete obj[n.stepLine];
+    }
+    if (true == n.v2.tie.start) {
       App.tieBuilder[n.staff][n.stepLine] = {x: x, y: y, n: n, g: g, absolutX: App.tieBuilder.x};
       return;
     }
-    var s = App.tieBuilder[n.staff][n.stepLine];
-    var w = s.n.parentChord.weight;
-    var dx = App.tieBuilder.x - s.absolutX;
-    var coord = [x, y + 10, 0 - (dx - s.x), y + 10];
-    var path = this.tiePath(x, y, dx - s.x, n);
-    g.append(path);
-    var obj = App.tieBuilder[n.staff];
-    delete obj[n.stepLine];
   }
 
   static drawFingering(x, y, n, g) {
@@ -218,6 +231,8 @@ class SVGBuilder {
       }
       // if ((n.alter == -1)||(n.alter == 1)||(n.alter == 2))
       this.drawAccidental(x, y, n, g);
+      // console.log(n.notations);
+      if (true == n.staccato) this.drawStaccato(x, y, n, g);
       if (true == n.dot) this.drawDot(x, y, n, g);
       if (undefined !== n.tie) this.drawTie(x, y, n, g);
       if (undefined !== n.fingering) this.drawFingering(x, y, n, g);

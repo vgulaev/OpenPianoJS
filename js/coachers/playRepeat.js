@@ -8,11 +8,13 @@ class PlayRepeat {
 
     var obj = this;
     this.piano.onTrackOver = function () {
+      console.log("onTrackOver");
       obj.piano.practice(obj.aim);
-      obj.piano.restart(0);
+      obj.piano.restart(obj.from);
     };
 
     this.piano.afterPracticeStep = function () {
+      console.log("afterPracticeStep");
       if (obj.piano.curentChordIndex >= obj.to) obj.piano.restart(obj.from);
     };
 

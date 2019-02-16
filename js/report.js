@@ -18,12 +18,33 @@ function fillReport() {
     }
     d[key][a] = localStorage.getItem(localStorage.key(i));
   }
+  function addSubTotalRow(subTotal) {
+    var el = document.createElement("div");
+    let minute = (subTotal/1000/60 % 60).toFixed(0);
+    let hour = subTotal/1000/60/60;
+    el.classList.add('divTableRow');
+    el.innerHTML = `<div class="divTableCell">Total:</div>
+        <div class="divTableCell">${hour.toFixed(0)} h ${minute} m</div>
+        <div class="divTableCell"></div>
+        <div class="divTableCell"></div>`;
+    body.append(el);
+  }
   //var dd = Object
   var total_hour = 0;
+  var monthTotal = 0;
+  var curMonth = undefined;
   Object.keys(d).sort().forEach( function (x) {
+    if (curMonth != x.substring(0, 7)){
+      if (curMonth != undefined) addSubTotalRow(monthTotal);
+      monthTotal = 0;
+      curMonth = x.substring(0, 7);
+    }
+
     var el = document.createElement("div");
     el.classList.add('divTableRow');
-    total_hour += parseInt(d[x]['ms']);
+    let minute = parseInt(d[x]['ms']);
+    total_hour += minute;
+    monthTotal += minute;
     //el.innerHTML = `<span>${x}==<span><span>${d[x]["k"]}<span>`;
     el.innerHTML = `<div class="divTableCell">${x}</div>
         <div class="divTableCell">${(d[x]['ms']/1000/60).toFixed(0)}</div>
@@ -31,6 +52,7 @@ function fillReport() {
         <div class="divTableCell">${(d[x]['k']/d[x]['ms'] * 1000 * 60).toFixed(1)}</div>`;
     body.append(el);
   })
+  addSubTotalRow(monthTotal);
   var el = document.createElement("div");
   el.classList.add('divTableRow');
   minute = (total_hour/1000/60 % 60).toFixed(0);
