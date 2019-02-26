@@ -5,7 +5,6 @@ class VoiceTicker {
     voices.forEach((v) => {
       this.indexes[parseInt(v.innerHTML)] = {index: 0};
     });
-    console.log('Hello');
   }
 
   nextTick(voice, duration) {

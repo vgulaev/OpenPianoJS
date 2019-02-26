@@ -5,6 +5,7 @@ class Piano {
     this.tenLines = tenLines;
     this.midi = null;
     this.kb = new KBSign();
+    this.currentClef = null;
 
     this.steps = new Array();
     this.observerStatus = "stop";
@@ -32,6 +33,30 @@ class Piano {
 
   get perMinute() {
     return this._perMinute;
+  }
+
+  drawClef(clef) {
+    let prevClef = document.getElementById('currentClef');
+    if (prevClef != null) prevClef.remove();
+    let d = '';
+    let g = SVGBuilder.createSVG("g");
+    g.setAttributeNS (null, "id", "currentClef");
+    let clefSVG = SVGBuilder.createSVG("path");
+    clefSVG.setAttributeNS (null, 'stroke-width', 3);
+    if ('G2' == clef['1']) d = SVGTmp.clefG2(0, 114);
+    if ('F4' == clef['1']) d = SVGTmp.clefF4(71, 85);
+    clefSVG.setAttributeNS (null, 'd', d);
+    g.append(clefSVG);
+    this.header.append(g);
+  }
+
+  updateClef() {
+    let clef = this.currentChord().chord.clef;
+
+    if (clef.key != this.currentClef) {
+      this.currentClef = clef.key;
+      this.drawClef(clef);
+    }
   }
 
   createHeader() {
@@ -262,6 +287,7 @@ class Piano {
 
   practiceStep() {
     this.invokeEvent("beforePracticeStep");
+    this.updateClef();
     var c = this.currentChord().chord;
     var length = c.weight - c.xborder;
     this.curentChordIndex += 1;
@@ -357,6 +383,8 @@ class Piano {
       this.steps = [];
     }
     this.use.setAttributeNS(null, "x", this.xForChord(index));
+
+    this.updateClef();
     /*
     for (var i = 0; i < 5; i++) {
       var c = this.musicDoc.chordArray[i];
