@@ -191,10 +191,10 @@ function onHappy(obj) {
   var element = document.getElementById("Stat");
   var c = App.piano.currentChord();
   if (undefined != c) {
-    console.log(c.chord.notes);
     element.innerHTML = c.chord.notes.slice().
                                       sort((a, b) => a.stepLine - b.stepLine).
                                       map(x => x.toS()).
+                                      filter((value, index, self) => self.indexOf(value) === index).
                                       join(",") +
                                       "<br>" + App.piano.curentChordIndex +
                                       "<br>" + Stats.info();

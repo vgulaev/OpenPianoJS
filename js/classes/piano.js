@@ -19,6 +19,7 @@ class Piano {
     this.onSelfRepeat = null;
     this.onStart = null;
 
+    this.onErrorCoach = null;
     this.beforePracticeStep = null;
     this.afterPracticeStep = null;
     this.onTrackOver = null;
@@ -208,8 +209,16 @@ class Piano {
     }
   }
 
+  processError() {
+    this.Errors += 1;
+    this.invokeEvent("onError");
+    this.invokeEvent("onErrorCoach");
+  }
+
   onMIDIMessage( event ) {
     //128 - up 144 - press key
+    //skip pedal
+    if (176 == event.data[0] || 177 == event.data[0]) return;
     this.kb.push(event);
     if (128 == event.data[0]) return;
     Stats.pressKey();
@@ -222,17 +231,24 @@ class Piano {
       this.invokeEvent("onCorrect");
       //console.log("ok == " + event.data[0]);
     } else {
+      // if ((144 == event.data[0])){
       if ((144 == event.data[0])&&(this.kb.kb.length == c.sign.kb.length)) {
-        this.Errors += 1;
-        this.invokeEvent("onError");
+        this.processError();
       }
     }
   }
 
+  getMIDIDevice() {
+    let t = this.midi.outputs.values().next();
+    return t.value;
+  }
+
   setMIDI(midiAccess) {
     this.midi = midiAccess;
-    this.inPort = midiAccess;
+    //delete this.inPort = midiAccess;
     var obj = this;
+    this.output = this.getMIDIDevice();
+
     midiAccess.inputs.forEach( function(entry) {
       entry.onmidimessage = function (event) {
         obj.onMIDIMessage(event);

@@ -29,24 +29,27 @@ class MusicDoc {
   }
 
   loadFromXML(xml) {
-    var attr = xml.getElementsByTagName("attributes")[0];
+    let attr = xml.getElementsByTagName("attributes")[0];
     this.keyFifths = parseInt(attr.getElementsByTagName("fifths")[0].innerHTML);
     this.divisions = parseInt(attr.getElementsByTagName("divisions")[0].innerHTML);
     this.beats = parseInt(attr.getElementsByTagName("beats")[0].innerHTML);
     this.beatType = parseInt(attr.getElementsByTagName("beat-type")[0].innerHTML);
 
-    var voiceTicker = new VoiceTicker(xml);
-    var measureXML = xml.getElementsByTagName("measure");
-    var curChordTick = 0;
-    var curChord = null;
+    let voiceTicker = new VoiceTicker(xml);
+    let measureXML = xml.getElementsByTagName("measure");
+    let curChordTick = 0;
+    let curChord = null;
+    let clef = Clef.get('G2:F4');
+
     for (var i = 0; i < measureXML.length; i++) {
       if (i != 0) voiceTicker.calibrate();
+      clef = Clef.checkClef(measureXML[i], clef);
       let beamIndex = 0;
       for (var noteXML of measureXML[i].getElementsByTagName("note")) {
         var note = new Note(noteXML);
         if (note.chord != true) {
           curChordTick = voiceTicker.nextTick(note.voice, note.duration);
-          if (undefined === this.chordOnTick[curChordTick]) this.chordOnTick[curChordTick] = new Chord(i);
+          if (undefined === this.chordOnTick[curChordTick]) this.chordOnTick[curChordTick] = new Chord(i, clef);
           curChord = this.chordOnTick[curChordTick];
         }
         note.parentChord = curChord;

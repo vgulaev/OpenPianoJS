@@ -12,7 +12,7 @@ class KBSign {
     if ("Note" == msg.constructor.name) {
       var key = msg.midiByte;
       if (-1 == key) return;
-      a.push(key);
+      if (-1 == a.indexOf(key)) a.push(key);
     } else {
       if (144 == msg.data[0]) {
         a.push(msg.data[1]);

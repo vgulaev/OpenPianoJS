@@ -1,9 +1,10 @@
 class Chord {
-  constructor(measure = 0) {
+  constructor(measure = 0, clef) {
     this.notes = new Array();
     this.g = null;
     this.sign = "";
     this.measure = measure;
+    this.clef = clef;
   }
 
   copy(options) {

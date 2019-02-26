@@ -255,19 +255,26 @@ class SVGBuilder {
   }
 
   static drawNote( g, n, dx, skipStem ) {
-    var x = 25 + dx;
+    let x = 25 + dx;
+    let y = 0;
     if (true === n.rest) {
       y = (1 == n.staff) ? 129 : 287;
     } else {
       if (1 == n.staff) {
-        var y = 129 + (31 - n.stepLine) * 7.5;
-        if (n.stepLine > 39) {
-            this.additionalLine(g, x, 69, 40, n.stepLine);
-        } else if (n.stepLine < 29) {
-            this.additionalLine(g, x, 159, 28, n.stepLine);
+        let dn = 31;
+        if ('G2' == n.parentChord.clef[1]) {
+          dn = 31;
+        } else if ('F4' == n.parentChord.clef[1]) {
+          dn = 19;
+        };
+        y = 129 + (dn - n.stepLine) * 7.5;
+        if (n.stepLine > dn + 8) {
+            this.additionalLine(g, x, 69, dn + 9, n.stepLine);
+        } else if (n.stepLine < dn - 2) {
+            this.additionalLine(g, x, 159, dn - 3, n.stepLine);
         }
       } else {
-        var y = 287 + (19 - n.stepLine) * 7.5;
+        y = 287 + (19 - n.stepLine) * 7.5;
         if (n.stepLine > 27) {
             this.additionalLine(g, x, 227, 28, n.stepLine);
         } else if (n.stepLine < 17) {
