@@ -274,11 +274,17 @@ class SVGBuilder {
             this.additionalLine(g, x, 159, dn - 3, n.stepLine);
         }
       } else {
-        y = 287 + (19 - n.stepLine) * 7.5;
-        if (n.stepLine > 27) {
-            this.additionalLine(g, x, 227, 28, n.stepLine);
-        } else if (n.stepLine < 17) {
-            this.additionalLine(g, x, 317, 16, n.stepLine);
+        let dn = 19;
+        if ('G2' == n.parentChord.clef[2]) {
+          dn = 31;
+        } else if ('F4' == n.parentChord.clef[2]) {
+          dn = 19;
+        };
+        y = 287 + (dn - n.stepLine) * 7.5;
+        if (n.stepLine > dn + 8) {
+            this.additionalLine(g, x, 227, dn + 9, n.stepLine);
+        } else if (n.stepLine < dn - 2) {
+            this.additionalLine(g, x, 317, dn - 3, n.stepLine);
         }
       }
     }

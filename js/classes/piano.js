@@ -39,14 +39,24 @@ class Piano {
     let prevClef = document.getElementById('currentClef');
     if (prevClef != null) prevClef.remove();
     let d = '';
+
     let g = SVGBuilder.createSVG("g");
     g.setAttributeNS (null, "id", "currentClef");
-    let clefSVG = SVGBuilder.createSVG("path");
-    clefSVG.setAttributeNS (null, 'stroke-width', 3);
+
+    let clefUP = SVGBuilder.createSVG("path");
+    clefUP.setAttributeNS (null, 'stroke-width', 3);
     if ('G2' == clef['1']) d = SVGTmp.clefG2(0, 114);
     if ('F4' == clef['1']) d = SVGTmp.clefF4(71, 85);
-    clefSVG.setAttributeNS (null, 'd', d);
-    g.append(clefSVG);
+    clefUP.setAttributeNS (null, 'd', d);
+    g.append(clefUP);
+
+    let clefDown = SVGBuilder.createSVG("path");
+    clefDown.setAttributeNS (null, 'stroke-width', 3);
+    if ('G2' == clef['2']) d = SVGTmp.clefG2(0, 272);
+    if ('F4' == clef['2']) d = SVGTmp.clefF4(71, 252);
+    clefDown.setAttributeNS (null, 'd', d);
+    g.append(clefDown);
+
     this.header.append(g);
   }
 
