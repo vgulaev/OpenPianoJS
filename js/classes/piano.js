@@ -374,7 +374,6 @@ class Piano {
   }
 
   start(index) {
-    this.invokeEvent("onStart");
     if ((undefined == index)||(0 == index)) {
       this.curentChordIndex = 0;
       this.steps = [{length: -60, dur: 2000}];
@@ -399,6 +398,7 @@ class Piano {
     this.observerStatus = "work";
     this.Errors = 0;
     this.moveObserver();
+    this.invokeEvent("onStart");
   }
 
   restart(index) {

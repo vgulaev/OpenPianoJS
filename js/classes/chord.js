@@ -10,6 +10,7 @@ class Chord {
   copy(options) {
     var res = new Chord();
     res.notes = this.notes.map((x) => (x.copy(options)));
+    res.clef = this.clef;
     return res;
   }
 

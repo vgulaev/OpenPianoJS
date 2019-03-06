@@ -80,6 +80,14 @@ class App {
     var el = document.getElementById("console");
     el.innerHTML = "";
   }
+
+  static updateFromTo() {
+    var el = document.getElementById("posFrom");
+    el.value = App.coach.from;
+    var el = document.getElementById("posTo");
+    el.value = App.coach.to;
+  }
+
 }
 
 window.addEventListener("load", async function( event ) {
@@ -98,6 +106,7 @@ window.addEventListener("load", async function( event ) {
     var element = document.getElementById("Repeats");
     element.innerHTML = App.nn;
     App.nn += 1;
+    onHappy();
   }
   //App.piano.practice(new PlayFive()); */
   var e = document.getElementById("Temp");
@@ -168,7 +177,8 @@ async function playSong(name) {
     await md.loadFromURL(name);
   }
   App.nn = 0;
-  var coach = Settings.coach(App.piano, md, Settings.range);
+  App.coach = Settings.coach(App.piano, md, Settings.range);
+  onHappy();
   // var coach = new Play10timesRule(App.piano, md, Settings.range);
   // var coach = new PlayRepeat(App.piano, md, Settings.range);
   // var coach = new PlayFaster(App.piano, md, Settings.range);
@@ -191,13 +201,14 @@ function onHappy(obj) {
   var element = document.getElementById("Stat");
   var c = App.piano.currentChord();
   if (undefined != c) {
-    element.innerHTML = c.chord.notes.slice().
+    element.innerHTML = [c.chord.notes.filter((n) => true != n.rest).
                                       sort((a, b) => a.stepLine - b.stepLine).
                                       map(x => x.toS()).
                                       filter((value, index, self) => self.indexOf(value) === index).
-                                      join(",") +
-                                      "<br>" + App.piano.curentChordIndex +
-                                      "<br>" + Stats.info();
+                                      join(","),
+                                      App.piano.curentChordIndex,
+                                      Stats.info(),
+                                      App.piano.kb.kb.map(e => Note.byteToS(e))].join('<br>');
   }
   var element = document.getElementById("InLine");
   element.innerHTML = App.piano.curentChordIndex;
