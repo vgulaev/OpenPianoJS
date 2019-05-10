@@ -201,14 +201,15 @@ function onHappy(obj) {
   var element = document.getElementById("Stat");
   var c = App.piano.currentChord();
   if (undefined != c) {
-    element.innerHTML = [c.chord.notes.filter((n) => true != n.rest).
-                                      sort((a, b) => a.stepLine - b.stepLine).
-                                      map(x => x.toS()).
-                                      filter((value, index, self) => self.indexOf(value) === index).
-                                      join(","),
-                                      App.piano.curentChordIndex,
-                                      Stats.info(),
-                                      App.piano.kb.kb.map(e => Note.byteToS(e))].join('<br>');
+    // element.innerHTML = [c.chord.notes.filter((n) => true != n.rest).
+    //                                   sort((a, b) => a.stepLine - b.stepLine).
+    //                                   map(x => x.toS()).
+    //                                   filter((value, index, self) => self.indexOf(value) === index).
+    //                                   join(","),
+    //                                   App.piano.curentChordIndex,
+    //                                   Stats.info(),
+    //                                   App.piano.kb.kb.map(e => Note.byteToS(e))].join('<br>');
+    element.innerHTML = Stats.info();
   }
   var element = document.getElementById("InLine");
   element.innerHTML = App.piano.curentChordIndex;

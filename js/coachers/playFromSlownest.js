@@ -4,9 +4,10 @@ class PlayFromSlownest {
     this.piano = piano;
     this.status = 'play'; //play or practice
 
+    this.piano.practice(this.aim);
     this.level = 0;
     this.from = range[0];
-    this.to = range[1];
+    this.to = Math.min(range[1], this.piano.musicDoc.chordArray.length - 1);
 
     var obj = this;
     this.piano.beforePracticeStep = function () {
@@ -21,7 +22,6 @@ class PlayFromSlownest {
       if (obj.piano.curentChordIndex >= obj.to) obj.onTrackOver();
     };
 
-    this.piano.practice(this.aim);
     this.piano.restart(this.from);
 
     this.originalRange = range.slice();
@@ -39,11 +39,17 @@ class PlayFromSlownest {
 
   analyzeResult() {
     let chordArray = this.piano.musicDoc.chordArray;
-    this.measureTiming = {
-      '-1': {
-        timeStart: 0
-      }
-    };
+    // this.measureTiming = {
+    //   '-1': {
+    //     timeStart: 0
+    //   }
+    // };
+    this.measureTiming = {};
+    let minIndex = -1;
+    if (this.from > 0) {
+      minIndex = chordArray[this.from - 1].chord.measure;
+    }
+    this.measureTiming[minIndex] = { timeStart: 0,  length: 0};
     let m;
     for (let i = this.from; i <= this.to; i++) {
       m = chordArray[i].chord.measure;
@@ -55,8 +61,8 @@ class PlayFromSlownest {
         };
       }
     }
-    delete this.measureTiming[-1];
-    this.longestIndex = 0;
+    delete this.measureTiming[minIndex];
+    this.longestIndex = minIndex + 1;
     for (let e of Object.entries(this.measureTiming)) {
       if (e[1].length > this.measureTiming[this.longestIndex].length) this.longestIndex = e[0];
     }
