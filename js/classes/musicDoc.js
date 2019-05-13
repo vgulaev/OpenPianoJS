@@ -43,10 +43,12 @@ class MusicDoc {
 
     for (var i = 0; i < measureXML.length; i++) {
       if (i != 0) voiceTicker.calibrate();
-      clef = Clef.checkClef(measureXML[i], clef);
       let beamIndex = 0;
-      for (var noteXML of measureXML[i].getElementsByTagName("note")) {
-        var note = new Note(noteXML);
+      for (var childNode of measureXML[i].children) {
+        let k = ['note', 'attributes'].indexOf(childNode.tagName);
+        if (1 == k) clef = Clef.checkClef(childNode, clef);
+        if (-1 == k || 1 == k) continue;
+        var note = new Note(childNode);
         if (note.chord != true) {
           curChordTick = voiceTicker.nextTick(note.voice, note.duration);
           if (undefined === this.chordOnTick[curChordTick]) this.chordOnTick[curChordTick] = new Chord(i, clef);

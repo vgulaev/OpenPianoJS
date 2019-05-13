@@ -224,6 +224,7 @@ class Piano {
       }
       App.tieBuilder.x = x;
       c.render(options);
+      App.currentClef = c.clef;
 
       c.g.setAttributeNS(null, "transform", `translate(${x})`);
       g.append(c.g);

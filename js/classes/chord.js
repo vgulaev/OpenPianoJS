@@ -78,6 +78,19 @@ class Chord {
       var note = SVGBuilder.drawNote(gg, this.notes[i], dx + shift, skipStem);
     }
     g.append(gg);
+
+    if (App.currentClef != this.clef && undefined != App.currentClef) {
+      let d;
+      if (App.currentClef[1] != this.clef[1]) {
+        let clef = SVGBuilder.createSVG("path");
+        clef.setAttributeNS (null, 'stroke-width', 1);
+        if ('G2' == this.clef[1]) d = SVGTmp.clefG2(dx - 65, 114);
+        if ('F4' == this.clef[1]) d = SVGTmp.clefF4(dx - 20, 85);
+        clef.setAttributeNS (null, 'd', d);
+        g.append(clef);
+      }
+    }
+
     this.g = g;
     this.xborder = 10 + dx;
     this.weight = 70 + dx;
