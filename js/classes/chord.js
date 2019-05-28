@@ -85,7 +85,15 @@ class Chord {
         let clef = SVGBuilder.createSVG("path");
         clef.setAttributeNS (null, 'stroke-width', 1);
         if ('G2' == this.clef[1]) d = SVGTmp.clefG2(dx - 65, 114);
+        if ('G2$1' == this.clef[1]) d = SVGTmp.clefG2(dx - 65, 114);
         if ('F4' == this.clef[1]) d = SVGTmp.clefF4(dx - 20, 85);
+        clef.setAttributeNS (null, 'd', d);
+        g.append(clef);
+      } else if (App.currentClef[2] != this.clef[2]) {
+        let clef = SVGBuilder.createSVG("path");
+        clef.setAttributeNS (null, 'stroke-width', 1);
+        if ('G2' == this.clef[2]) d = SVGTmp.clefG2(dx - 65, 272);
+        if ('F4' == this.clef[2]) d = SVGTmp.clefF4(dx - 20, 252);
         clef.setAttributeNS (null, 'd', d);
         g.append(clef);
       }

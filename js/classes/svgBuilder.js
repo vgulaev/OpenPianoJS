@@ -141,11 +141,17 @@ class SVGBuilder {
     accidental.setAttributeNS (null, 'stroke-width', 1);
     var d = "";
     if (undefined == n.alter) d = SVGTmp.natural(x, y);
-    if (-1 == n.alter) d = SVGTmp.flat(x, y);
+    if (n.alter < 0) d = SVGTmp.flat(x, y);
     if (1 == n.alter) d = SVGTmp.sharp(x, y);
     if (2 == n.alter) d = SVGTmp.doubleSharp(x, y);
     accidental.setAttributeNS (null, 'd', d);
     g.append(accidental);
+    if (-2 == n.alter) {
+      accidental = SVGBuilder.createSVG("path");
+      d = SVGTmp.flat(x - 10, y);
+      accidental.setAttributeNS (null, 'd', d);
+      g.append(accidental);
+    }
   }
 
   static tiePath(x, y, l, n) {
@@ -264,6 +270,8 @@ class SVGBuilder {
         let dn = 31;
         if ('G2' == n.parentChord.clef[1]) {
           dn = 31;
+        } else if ('G2$1' == n.parentChord.clef[1]) {
+          dn = 38;
         } else if ('F4' == n.parentChord.clef[1]) {
           dn = 19;
         };

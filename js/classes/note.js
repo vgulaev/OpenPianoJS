@@ -101,6 +101,8 @@ class Note {
 
   alterSign() {
     switch (this.alter) {
+      case -2:
+        return "bb";
       case -1:
         return "b";
       case 1:
