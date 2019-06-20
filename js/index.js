@@ -29,6 +29,16 @@ class App {
     rubicon.setAttributeNS(null, "opacity", "0.5");
     tenLines.append(rubicon);
 
+    var metronome = SVGBuilder.createSVG("circle");
+    metronome.setAttributeNS(null, "cx", "390");
+    metronome.setAttributeNS(null, "cy", "63");
+    metronome.setAttributeNS(null, "r", "9");
+    metronome.setAttributeNS(null, "stroke", "red");
+    metronome.setAttributeNS(null, "fill", "red");
+    // metronome.setAttributeNS(null, "opacity", "0.5");
+    tenLines.append(metronome);
+    Metronome.ball = metronome;
+
     var element = document.getElementById("TenLines");
     element.append(tenLines);
 

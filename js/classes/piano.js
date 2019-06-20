@@ -321,26 +321,27 @@ class Piano {
   }
 
   onMIDIMessage( event ) {
-    if (144 == event.data[0]) {
-      console.log(event.data[2]);
-    }
+    // if (144 == event.data[0]) {
+    // }
     //128 - up 144 - press key
     //skip pedal
+    if (248 == event.data[0] || 254 == event.data[0]) return; // YAMAHA bug?!?, don't know
     if (176 == event.data[0] || 177 == event.data[0]) return;
+    // if (128 == event.data[0]) return; //For Casio piano
+    // if (0 == event.data[2]) return; //For YAMAHA
     this.kb.push(event);
-    if (128 == event.data[0]) return;
+    // console.log(event.data);
+
     Stats.pressKey();
     var c = this.musicDoc.chordArray[this.curentChordIndex].chord;
-    //if (this.kb.include(c.sign)) {
-    if (this.kb.last(c.sign.count) == c.sign.sign) {
+
+    if (this.kb.has(c.sign.kb)) {
       c.makeGreen();
-      this.kb.pop(c.sign.count);
+      this.kb.remove(c.sign.kb);
       this.practiceStep();
       this.invokeEvent("onCorrect");
-      //console.log("ok == " + event.data[0]);
     } else {
-      // if ((144 == event.data[0])){
-      if ((144 == event.data[0])&&(this.kb.kb.length == c.sign.kb.length)) {
+      if ((144 == event.data[0])&&(this.kb.kb.count == c.sign.kb.count)) {
         this.processError();
       }
     }
@@ -368,7 +369,7 @@ class Piano {
     return this.musicDoc.chordArray[this.curentChordIndex];
   }
 
-  practiceStep() {
+  practiceStep(type) {
     this.invokeEvent("beforePracticeStep");
     this.updateClef();
     var c = this.currentChord().chord;
@@ -394,7 +395,12 @@ class Piano {
     var ticks = c.tick - this.musicDoc.chordArray[this.curentChordIndex - 1].tick;
     var ms = 60000 / this._perMinute / this.musicDoc.divisions * ticks;
     this.steps.push({length: -length, dur: ms});
-    if ("" == c.chord.sign.sign) this.practiceStep();
+    if ('rest' == type) {
+      Metronome.dur += ms;
+    } else {
+      Metronome.reset(ms);
+    }
+    if (0 == c.chord.sign.kb.size) this.practiceStep('rest');
     if ("stop" == this.observerStatus) {
       this.observerStatus = "work";
       this.moveObserver();
@@ -436,7 +442,7 @@ class Piano {
       if (new_x_k != last_x) {
         use.setAttributeNS(null, "x", new_x_k);
         last_x = new_x_k;
-        //console.log(Math.ceil((window.performance.now() - ss)/1000) );
+        Metronome.tick();
       }
       requestAnimationFrame(step);
     }
@@ -460,6 +466,7 @@ class Piano {
     if ((undefined == index)||(0 == index)) {
       this.curentChordIndex = 0;
       this.steps = [{length: -60, dur: 2000}];
+      Metronome.reset(2000);
     } else {
       this.curentChordIndex = index;
       this.steps = [];
