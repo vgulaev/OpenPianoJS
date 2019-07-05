@@ -341,7 +341,8 @@ class Piano {
       this.practiceStep();
       this.invokeEvent("onCorrect");
     } else {
-      if ((144 == event.data[0])&&(this.kb.kb.count == c.sign.kb.count)) {
+      console.log();
+      if ((144 == event.data[0])&&(this.kb.kb.size == c.sign.kb.size)) {
         this.processError();
       }
     }
