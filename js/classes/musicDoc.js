@@ -48,6 +48,7 @@ class MusicDoc {
         let k = ['note', 'attributes'].indexOf(childNode.tagName);
         if (1 == k) clef = Clef.checkClef(childNode, clef);
         if (-1 == k || 1 == k) continue;
+         if (null != childNode.querySelector('grace')) continue;
         var note = new Note(childNode);
         if (note.chord != true) {
           curChordTick = voiceTicker.nextTick(note.voice, note.duration);
