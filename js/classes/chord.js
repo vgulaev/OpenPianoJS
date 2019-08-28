@@ -23,7 +23,14 @@ class Chord {
       }, new KBSign());
   }
 
+  renderV20(options = {}) {
+    var g = SVGBuilder.createSVG ("g");
+    g.setAttributeNS (null, "stroke", "black");
+    this.g = g;
+  }
+
   render(options = {}) {
+    // return this.renderV20(options = {});
     var g = SVGBuilder.createSVG ("g");
     g.setAttributeNS (null, "stroke", "black");
 
@@ -75,6 +82,7 @@ class Chord {
           skipStem = false;
         }
       }
+      skipStem = skipStem && (undefined == this.notes[i].beam);
       var note = SVGBuilder.drawNote(gg, this.notes[i], dx + shift, skipStem);
     }
     g.append(gg);

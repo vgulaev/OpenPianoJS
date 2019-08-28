@@ -2,6 +2,7 @@ MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
   {name:"Beethoven Sonata 14 C# Minor", fileName: "data/xml/Beethoven Sonata 14 C Sharp Minor.musicxml"},
   {name:"Beethoven Bagatelle No. 25 in A minor", fileName: "data/xml/Beethoven Bagatelle No. 25 in A minor.musicxml"},
+  {name:"Burgmuller - Op.100 - Arabesque", fileName: "data/xml/Burgmuller - Op.100 - Arabesque.musicxml"},
   // {name:"Beethoven Op. 53", fileName: "data/xml/Beethoven-Op._53.xml"},
   // {name:"BWV Praeambulum in F Major", fileName: "data/xml/BWV Praeambulum in F Major.xml"},
   {name:"BWV 846 Prelude C Major", fileName: "data/xml/BWV 846 Prelude C Major.xml"},
@@ -18,8 +19,8 @@ MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   {name:"Canon D dur", fileName: "data/xml/Canon D dur.musicxml"},
   {name:"F Major", fileName: "data/xml/F Major.musicxml"},
   {name:"F Major diverge", fileName: "data/xml/F Major diverge.musicxml"},
-  {name:"C major double time", fileName: "data/xml/C major double time.musicxml"},
-  {name:"C major double time II", fileName: "data/xml/C major double time II.musicxml"},
+  // {name:"C major double time", fileName: "data/xml/C major double time.musicxml"},
+  // {name:"C major double time II", fileName: "data/xml/C major double time II.musicxml"},
   {name:"D dur", fileName: "data/xml/D dur.musicxml"},
   {name:"B Major", fileName: "data/xml/B major.musicxml"},
   // {name:"Gliere 43 №1", fileName: "data/xml/Gliere 43 №1.musicxml"},
@@ -82,7 +83,10 @@ MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   // {name:"Песенка про кузнечика", fileName: "data/xml/Песенка про кузнечика.xml"}
   ];
 
-Settings = {}
+Settings = {
+  // fileName: "data/xml/Beethoven Sonata 14 C Sharp Minor.musicxml"
+  fileName: "data/xml/test.musicxml"
+}
 
 Settings.staff = 0;
 Settings.temp = 40;
@@ -98,21 +102,8 @@ Settings.coach = function (a, m, s) {
 
 k = 16 * 2;
 
-// Settings.range = [26, 50];
-// Settings.range = [0, 13];
-// Settings.range = [0, 51];
-// Settings.range = [50, 114];
-// Settings.range = [0, 114];
-// Settings.range = [0, 114];
-// Settings.range = [55, 79];
-// Settings.range = [59, 79];
-// Settings.range = [0, 94];
-// Settings.range = [510, 615];
 // Settings.range = [0, 152];
-// Settings.range = [105, 10000];
-// Settings.range = [89, 94];
-// Settings.range = [92, 94];
-// Settings.range = [0, 94];
-// Settings.range = [127, 143];
+
+// Settings.range = [0, 34];
 
 if (undefined == Settings.range) Settings.range = [0, 10000];
