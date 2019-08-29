@@ -84,8 +84,8 @@ MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   ];
 
 Settings = {
-  // fileName: "data/xml/Beethoven Sonata 14 C Sharp Minor.musicxml"
-  fileName: "data/xml/test.musicxml"
+  fileName: "data/xml/Beethoven Sonata 14 C Sharp Minor.musicxml"
+  // fileName: "data/xml/test.musicxml"
 }
 
 Settings.staff = 0;
