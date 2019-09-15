@@ -22,10 +22,10 @@ class MusicDoc {
 
   async loadFromURL(url) {
     var xml;
-    await Ut.get(url, function () {
-      xml = this.responseXML;
-    });
-    this.loadFromXML(xml);
+    await Ut.get20(url)
+      .then((data) => {
+        this.loadFromStr(data);
+      });
   }
 
   loadFromXML(xml) {
