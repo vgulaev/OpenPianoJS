@@ -138,7 +138,21 @@ window.addEventListener("load", async function( event ) {
   e.value = Settings.range[1];
   e.addEventListener("change", function() {
     Settings.range[1] = parseInt(e.value);
-  }, false)
+  }, false);
+
+  e = document.getElementById("songName");
+  e.addEventListener("keyup", () => {
+    let items = pieceList();
+    if (undefined != App.menu) {
+      App.menu.element.remove();
+    }
+    App.menu = new Menu(e, items.map( (x, i) => [i, x.name] ), 10);
+    App.menu.select(function(key, value) {
+      e.value = value;
+      App.setting.fileName = key;
+      playSong(items[key].fileName);
+    });
+  });
 });
 
 window.addEventListener("keydown", function (event) {
@@ -259,9 +273,9 @@ function pieceList() {
   return MusicFiles;
 }
 
-function changeSong(button) {
+function changeSong(input) {
   var items = pieceList();
-  var m = new Menu(button, items.map( (x, i) => [i, x.name] ), 10);
+  var m = new Menu(input, items.map( (x, i) => [i, x.name] ), 10);
   m.select(function(key, value) {
     button.innerHTML = value;
     App.setting.fileName = key;
