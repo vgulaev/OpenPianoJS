@@ -67,7 +67,7 @@ class SVGBuilder {
 
     a.length = 0;
 
-    for (var i = 2; i < 4; i++) {
+    for (var i = 2; i < 5; i++) {
       a = App.beamBuilder[n.v2.beamIndex][i];
       if (0 == a.length) break;
       ax.length = 0;

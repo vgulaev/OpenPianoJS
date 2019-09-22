@@ -341,8 +341,8 @@ class Piano {
       this.practiceStep();
       this.invokeEvent("onCorrect");
     } else {
-      console.log();
-      if ((144 == event.data[0])&&(this.kb.kb.size == c.sign.kb.size)) {
+      // if ((144 == event.data[0])&&(this.kb.kb.size == c.sign.kb.size)) {
+      if ((144 == event.data[0]) && (!c.sign.kb.has(event.data[1]))) {
         this.processError();
       }
     }
@@ -493,6 +493,7 @@ class Piano {
   }
 
   restart(index) {
+    Metronome.reset();
     if ("work" == this.observerStatus) {
       this.onSelfRepeat = function () {
         this.start(index);

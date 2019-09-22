@@ -8,7 +8,7 @@ class App {
     var tenLines = SVGBuilder.createSVG ("svg");
     var width = window.innerWidth - head.width.baseVal.value - 20;
     tenLines.setAttributeNS (null, "width", width);
-    tenLines.setAttributeNS (null, "height", head.height.baseVal.value);
+    tenLines.setAttributeNS (null, "height", head.height.baseVal.value + 20);
     for (var j = 84; j <= 262; j += 158) {
       for (var i = 0; i < 5; i++) {
         var line = SVGBuilder.createSVG ("line");

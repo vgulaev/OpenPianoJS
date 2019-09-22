@@ -19,19 +19,34 @@ class PlayBlind {
     };
 
     this.piano.onErrorCoach = () => {
-      var noteOnMessage = [0x90, 48, 0x40];    // note on, middle C, full velocity
-      this.piano.output.send( noteOnMessage );  //omitting the timestamp means send immediately.
-      var noteOnMessage = [0x90, 49, 0x40];    // note on, middle C, full velocity
-      this.piano.output.send( noteOnMessage );  //omitting the timestamp means send immediately.
-      var noteOnMessage = [0x80, 48, 0x40];    // note on, middle C, full velocity
-      this.piano.output.send( noteOnMessage, window.performance.now() + 500);  //omitting the timestamp means send immediately.
-      var noteOnMessage = [0x80, 49, 0x40];    // note on, middle C, full velocity
-      this.piano.output.send( noteOnMessage, window.performance.now() + 500);  //omitting the timestamp means send immediately.
+      this.piano.curentChordIndex
+      for (let i = 0; i < 4; i++) {
+        let index = this.piano.curentChordIndex + i;
+        if (index == this.piano.musicDoc.chordArray.length) break;
+        this.piano.musicDoc.chordArray[index].chord.g.style.opacity = 1;
+      }
+      // var noteOnMessage = [0x90, 48, 0x40];    // note on, middle C, full velocity
+      // this.piano.output.send( noteOnMessage );  //omitting the timestamp means send immediately.
+      // var noteOnMessage = [0x90, 49, 0x40];    // note on, middle C, full velocity
+      // this.piano.output.send( noteOnMessage );  //omitting the timestamp means send immediately.
+      // var noteOnMessage = [0x80, 48, 0x40];    // note on, middle C, full velocity
+      // this.piano.output.send( noteOnMessage, window.performance.now() + 500);  //omitting the timestamp means send immediately.
+      // var noteOnMessage = [0x80, 49, 0x40];    // note on, middle C, full velocity
+      // this.piano.output.send( noteOnMessage, window.performance.now() + 500);  //omitting the timestamp means send immediately.
     }
 
 
     this.piano.practice(this.aim);
+
+    this.hideChord();
+
     this.piano.restart(this.from);
+  }
+
+  hideChord() {
+    for (let c of this.piano.musicDoc.chordArray) {
+      c.chord.g.style.opacity = 0;
+    }
   }
 
   timeSign() {
@@ -56,6 +71,7 @@ class PlayBlind {
   }
 
   onTrackOver() {
+      this.hideChord();
       this.changeTempo();
       this.piano.restart(this.from);
   }
