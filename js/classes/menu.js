@@ -11,9 +11,10 @@ class Menu {
     }
   }
 
-  constructor(button, items) {
+  constructor(button, items, length) {
     this.button = button;
     this.items = items;
+    this.length = length;
   }
 
   centeredElement() {

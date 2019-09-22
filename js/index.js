@@ -261,7 +261,7 @@ function pieceList() {
 
 function changeSong(button) {
   var items = pieceList();
-  var m = new Menu(button, items.map( (x, i) => [i, x.name] ) );
+  var m = new Menu(button, items.map( (x, i) => [i, x.name] ), 10);
   m.select(function(key, value) {
     button.innerHTML = value;
     App.setting.fileName = key;
