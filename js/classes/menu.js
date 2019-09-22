@@ -11,15 +11,16 @@ class Menu {
     }
   }
 
-  constructor(button, items) {
-    this.button = button;
-    this.items = items;
+  constructor(input, items, length) {
+    this.input = input;
+    this.items = items.filter(e => -1 != e[1].toLowerCase().indexOf(input.value)).slice(0, length);
+    this.length = length;
   }
 
   centeredElement() {
-    this.element.style.left = this.button.offsetLeft + "px";
-    this.element.style.top = this.button.offsetTop + this.button.clientHeight + "px";
-    this.element.style.width = this.button.clientWidth + "px";
+    this.element.style.left = this.input.offsetLeft + "px";
+    this.element.style.top = this.input.offsetTop + this.input.clientHeight + "px";
+    this.element.style.width = this.input.clientWidth + "px";
   }
 
   renderItem(parent, item) {
