@@ -37,4 +37,22 @@ class Ut {
   static min(numArray) {
     return Math.min.apply(null, numArray);
   }
+
+  static loadjs(src) {
+    return new Promise((resolve, reject) => {
+      let script = document.createElement('script');
+      let loaded;
+      script.src = src;
+      script.async = false;
+
+      script.onreadystatechange = script.onload = function() {
+        if (!loaded) {
+          resolve();
+        }
+        loaded = true;
+      };
+
+      document.head.appendChild(script);
+    });
+  }
 }

@@ -5,24 +5,28 @@ MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   {name:"Burgmuller - Op.100 - Arabesque", fileName: "data/xml/Burgmuller - Op.100 - Arabesque.musicxml"},
   // {name:"Beethoven Op. 53", fileName: "data/xml/Beethoven-Op._53.xml"},
   // {name:"BWV Praeambulum in F Major", fileName: "data/xml/BWV Praeambulum in F Major.xml"},
+  {name:"BWV 565", fileName: "data/xml/BWV-565.musicxml"},
+  {name:"BWV 772 J. S. Bach Inventio 1", fileName: "data/xml/BWV 772 J._S._Bach_Invention_Nr._1.musicxml"},
+  {name:"BWV 773 J. S. Bach Inventio 2", fileName: "data/xml/BWV 773 J.S.Bach_Inventio_2.musicxml"},
   {name:"BWV 846 Prelude C Major", fileName: "data/xml/BWV 846 Prelude C Major.xml"},
   // {name:"BWV 846 Harmony", fileName: "data/xml/BWV-846-Harmony.xml"},
   {name:"BWV 847 Prelude C Minor", fileName: "data/xml/BWV 847 Prelude C Minor.musicxml"},
   // {name:"BWV-847 Harmony", fileName: "data/xml/BWV-847_Harmony.musicxml"},
   {name:"BWV 849 Prelude C# Minor", fileName: "data/xml/BWV 849 Prelude C sharp Minor.musicxml"},
-  {name:"BWV 855 Prelude E Minor", fileName: "data/xml/BWV-855_in_E_Minor.musicxml"},
+  // {name:"BWV 855 Prelude E Minor", fileName: "data/xml/BWV-855_in_E_Minor.musicxml"},
   // {name:"BWV-847 C minor Harmony", fileName: "data/xml/BWV-847 C minor Harmony.musicxml"},
   {name:"BWV 858 Prelude F-sharp Major", fileName: "data/xml/BWV-858_Prelude_F_sharp_Major.xml"},
   {name:"BWV 999 Little Preambule C Minor", fileName: "data/xml/BWV-999 Little Preambule C Minor.musicxml"},
   // {name:"By the Seaside", fileName: "data/xml/By the Seaside.musicxml"},
   {name:"BWV 1068 - Air on the G String", fileName: "data/xml/BWV 1068 - Air on the G String.musicxml"},
   {name:"Canon D dur", fileName: "data/xml/Canon D dur.musicxml"},
+  {name:"D dur", fileName: "data/xml/D dur.musicxml"},
   {name:"F Major", fileName: "data/xml/F Major.musicxml"},
   {name:"F Major diverge", fileName: "data/xml/F Major diverge.musicxml"},
+  {name:"G minor octave", fileName: "data/xml/G minor octave.musicxml"},
   // {name:"C major double time", fileName: "data/xml/C major double time.musicxml"},
   // {name:"C major double time II", fileName: "data/xml/C major double time II.musicxml"},
-  {name:"D dur", fileName: "data/xml/D dur.musicxml"},
-  {name:"B Major", fileName: "data/xml/B major.musicxml"},
+  // {name:"B Major", fileName: "data/xml/B major.musicxml"},
   // {name:"Gliere 43 №1", fileName: "data/xml/Gliere 43 №1.musicxml"},
   // {name:"D 935 Ab Major", fileName: "data/xml/D 935 Importu.musicxml"},
   // {name:"Heller Sailor's Song", fileName: "data/xml/Heller - Sailor's Song op.musicxml"},
@@ -67,9 +71,11 @@ MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   {name:"Gymnopedie", fileName: "data/xml/Gymnopedie.musicxml"},
   {name:"La Candeur", fileName: "data/xml/La Candeur.musicxml"},
   {name:"Mozart Sonata 16", fileName: "data/xml/Mozart-Sonata_16.musicxml"},
+  {name:"Ode to Joy", fileName: "data/xml/Ode to Joy.musicxml"},
+  {name:"Prelude in G Minor Op. 23 No. 5", fileName: "data/xml/Prelude_in_G_Minor_Op._23_No._5.musicxml"},
   {name:"Primavera", fileName: "data/xml/primavera.musicxml"},
   {name:"The Clowns", fileName: "data/xml/The_Clowns.musicxml"},
-  {name:"The Pink Panther Theme", fileName: "data/xml/The pink panther theme.musicxml"},
+  // {name:"The Pink Panther Theme", fileName: "data/xml/The pink panther theme.musicxml"},
   {name:"The Entertainer", fileName: "data/xml/The Entertainer.musicxml"},
   // {name:"This Love", fileName: "data/xml/This Love.musicxml"},
   // {name:"Sarabande", fileName: "data/xml/Sarabande_de_Haendel.musicxml"},
@@ -91,19 +97,15 @@ Settings = {
 Settings.staff = 0;
 Settings.temp = 40;
 
-Settings.coach = function (a, m, s) {
-  // Metronome.disable();
-  // var coach = new PlayRepeat(App.piano, md, Settings.range);
-  // return (new Play10timesRule(a, m, s));
-  // return (new PlayFromSlownest(a, m, s));
-  return (new PlayFaster(a, m, s));
-  // return (new PlayBlind(a, m, s));
+if ('localhost:8080' == location.host) {
+  Ut.loadjs('conf/localSettings.js')
+    .then(() => {
+      console.log('locals loaded');
+    });
+} else {
+  Settings.coach = function (a, m, s) {
+    return (new PlayFaster(a, m, s));
+  }
 }
-
-k = 16 * 2;
-
-// Settings.range = [0, 152];
-
-// Settings.range = [0, 34];
 
 if (undefined == Settings.range) Settings.range = [0, 10000];
