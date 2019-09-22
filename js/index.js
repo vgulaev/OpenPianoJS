@@ -106,9 +106,9 @@ window.addEventListener("load", async function( event ) {
 
   App.setting = new SettingsCore();
   var p = pieceList();
-  playSong(p[App.setting.fileName].fileName);
-  // let el = p.find((x) => 'Beethoven Sonata 14 C# Minor' == x['name']);
-  // playSong(el.fileName);
+  // playSong(p[App.setting.fileName].fileName);
+  let el = p.find((x) => 'Beethoven Sonata 14 C# Minor' == x['name']);
+  playSong(el.fileName);
 
   App.piano.onError = onHappy;
   App.piano.onCorrect = onHappy;
