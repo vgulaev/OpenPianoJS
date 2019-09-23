@@ -1,7 +1,7 @@
 class SettingsCore {
   constructor() {
     this.hash = {};
-    this._fileName = 0;
+    this._fileName = 2; // from Setting.js MusicFiles
     this._temp = 60;
     this._staff = 0;
     this.parseFromHash();
