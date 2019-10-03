@@ -91,7 +91,39 @@ class Piano {
 
     var n;
 
-    if (-5 == this.musicDoc.keyFifths) {
+    if (-6 == this.musicDoc.keyFifths) {
+      n = new Note({step: "A", alter: -1, octave: 4, staff: 1});
+      SVGBuilder.drawAccidental(124, n.y, n, g);
+      n = new Note({step: "B", alter: -1, octave: 4, staff: 1});
+      SVGBuilder.drawAccidental(110, n.y, n, g);
+      n = new Note({step: "E", alter: -1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(115, n.y, n, g);
+      n = new Note({step: "D", alter: -1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(125, n.y, n, g);
+      n = new Note({step: "G", alter: -1, octave: 4, staff: 1});
+      SVGBuilder.drawAccidental(135, n.y, n, g);
+      n = new Note({step: "C", alter: -1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(135, n.y, n, g);
+
+      n = new Note({step: "E", alter: -1, octave: 3, staff: 2});
+      SVGBuilder.drawAccidental(115, n.y, n, g);
+      n = new Note({step: "B", alter: -1, octave: 2, staff: 2});
+      SVGBuilder.drawAccidental(110, n.y, n, g);
+      n = new Note({step: "A", alter: -1, octave: 2, staff: 2});
+      SVGBuilder.drawAccidental(124, n.y, n, g);
+      n = new Note({step: "D", alter: -1, octave: 3, staff: 2});
+      SVGBuilder.drawAccidental(124, n.y, n, g);
+      n = new Note({step: "G", alter: -1, octave: 2, staff: 2});
+      SVGBuilder.drawAccidental(135, n.y, n, g);
+      n = new Note({step: "C", alter: -1, octave: 3, staff: 2});
+      SVGBuilder.drawAccidental(135, n.y, n, g);
+      App.keyFifths["B-1"] = true;
+      App.keyFifths["A-1"] = true;
+      App.keyFifths["E-1"] = true;
+      App.keyFifths["D-1"] = true;
+      App.keyFifths["G-1"] = true;
+      App.keyFifths["C-1"] = true;
+    } else if (-5 == this.musicDoc.keyFifths) {
       n = new Note({step: "A", alter: -1, octave: 4, staff: 1});
       SVGBuilder.drawAccidental(124, n.y, n, g);
       n = new Note({step: "B", alter: -1, octave: 4, staff: 1});
@@ -426,9 +458,10 @@ class Piano {
         }
         return;
       } else if (2 < obj.steps.length) {
-        for (var i = 1; i < obj.steps.length - 1; i++) {
-          if (false == obj.pullUp) break;
-          obj.steps[i].dur = Math.ceil(obj.steps[i].dur * 0.99);
+        if (true == obj.pullUp) {
+          for (var i = 1; i < obj.steps.length - 1; i++) {
+            obj.steps[i].dur = Math.ceil(obj.steps[i].dur * 0.99);
+          }
         }
       }
       var v = obj.steps[0].length / obj.steps[0].dur;

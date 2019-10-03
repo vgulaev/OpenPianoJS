@@ -138,18 +138,28 @@ window.addEventListener("load", async function( event ) {
     Settings.range[1] = parseInt(e.value);
   }, false);
 
+
+  let items = pieceList();
   e = document.getElementById("songName");
-  e.addEventListener("keyup", () => {
-    let items = pieceList();
-    if (undefined != App.menu) {
+
+  function selectNewSong(key, value) {
+    e.value = value;
+    App.setting.fileName = key;
+    playSong(items[key].fileName);
+  }
+
+  e.addEventListener("keyup", (eventData) => {
+    if ("Enter" == eventData.key) {
+      let firstElement = App.menu.element.querySelector('div');
+      selectNewSong(firstElement.id, firstElement.innerHTML);
       App.menu.element.remove();
+    } else {
+      if ((undefined != App.menu)&&(undefined != App.menu.element)) {
+        App.menu.element.remove();
+      }
+      App.menu = new Menu(e, items.map( (x, i) => [i, x.name] ), 10);
+      App.menu.select((key, value) => selectNewSong(key, value));
     }
-    App.menu = new Menu(e, items.map( (x, i) => [i, x.name] ), 10);
-    App.menu.select(function(key, value) {
-      e.value = value;
-      App.setting.fileName = key;
-      playSong(items[key].fileName);
-    });
   });
 });
 

@@ -64,6 +64,7 @@ class Note {
     initProperty("duration", options, 0);
     initProperty("type", options, "");
     initProperty("staff", options, 0);
+    initProperty("v2", options, { tie: {} });
     initProperty("fingering", options, undefined);
   }
 

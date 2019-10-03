@@ -2,6 +2,7 @@ class PlayFaster {
   constructor(piano, md, range) {
     this.aim = md;
     this.piano = piano;
+    this.piano.pullUp = true;
 
     this.from = range[0];
     this.to = range[1];

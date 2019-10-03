@@ -55,4 +55,8 @@ class Ut {
       document.head.appendChild(script);
     });
   }
+
+  static rnd(x) {
+    return Math.floor(Math.random() * x);
+  }
 }
