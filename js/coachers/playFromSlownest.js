@@ -2,6 +2,7 @@ class PlayFromSlownest {
   constructor(piano, md, range) {
     this.aim = md;
     this.piano = piano;
+    this.piano.pullUp = true;
     this.status = 'play'; //play or practice
 
     this.piano.practice(this.aim);
@@ -89,7 +90,6 @@ class PlayFromSlownest {
     if ('play' == this.status) {
       this.status = 'practice';
       this.analyzeResult();
-      this.piano.pullUp = false;
       this.piano.practice(this.aim);
       this.piano.restart(this.from);
     } else {
