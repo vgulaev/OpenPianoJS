@@ -38,6 +38,7 @@ class MusicDoc {
     let voiceTicker = new VoiceTicker(xml);
     let measureXML = xml.getElementsByTagName("measure");
     let curChordTick = 0;
+    let graceIndex = 0;
     let curChord = null;
     let clef = Clef.get('G2:F4');
 
@@ -48,10 +49,15 @@ class MusicDoc {
         let k = ['note', 'attributes'].indexOf(childNode.tagName);
         if (1 == k) clef = Clef.checkClef(childNode, clef);
         if (-1 == k || 1 == k) continue;
-         if (null != childNode.querySelector('grace')) continue;
         var note = new Note(childNode);
         if (note.chord != true) {
-          curChordTick = voiceTicker.nextTick(note.voice, note.duration);
+          if (true == note.grace) {
+            curChordTick = voiceTicker.featureTick(note.voice) - 0.5 + 0.1 * graceIndex;
+            graceIndex += 1;
+          } else {
+            graceIndex = 0;
+            curChordTick = voiceTicker.nextTick(note.voice, note.duration);
+          }
           if (undefined === this.chordOnTick[curChordTick]) this.chordOnTick[curChordTick] = new Chord(i, clef);
           curChord = this.chordOnTick[curChordTick];
         }

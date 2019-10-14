@@ -28,7 +28,7 @@ class Note {
     }
 
     var properties = [
-      [() => true, ["rest", "chord", "dot", "staccato"] ],
+      [() => true, ["rest", "chord", "dot", "staccato", "grace"] ],
       [x => parseInt(x.innerHTML), ["duration", "octave", "voice", "staff", "alter", "fingering"]],
       [x => x.innerHTML, ["step", "type", "stem"]],
       [x => x.getAttribute("type"), ["tie"]],

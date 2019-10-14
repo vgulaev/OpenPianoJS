@@ -1,38 +1,21 @@
-class PlayFive {
-  static createChords(amount) {
-    let two = [];
-    let notes = "CDEFG".split('');
-    for (let i of notes) {
-      for (let j of notes) {
+class PlayTriplets {
+  static noteGenerator() {
+    let n = "CDEFG".split('');
+    let nn = [];
+    for (let i of n) {
+      for (let j of n) {
         if (i == j) continue;
-        two.push(i + j);
+        nn.push([i, j]);
       }
     }
-
-    let intervals = {};
-
-    for (let i of two) {
-      intervals[i] = []
-      for (let j of two) {
-        if (i == j) continue;
-        if (i[0] == j[0]) continue;
-        if (i[1] == j[1]) continue;
-        intervals[i].push(j);
+    return [
+      () => {
+        return [n[Ut.rnd(5)]];
+      },
+      () => {
+        return nn[Ut.rnd(20)];
       }
-    }
-
-    let res = []
-
-    res.push(two[Ut.rnd(two.length)]);
-    for (let i = 0; i < amount; i++) {
-      let c = res[res.length - 1];
-      let o = intervals[c];
-      let j = Ut.rnd(o.length);
-      res.push(intervals[c].splice(j, 1)[0]);
-      if (0 == intervals[c].length) delete intervals[c];
-    }
-
-    return res;
+    ];
   }
 
   createNoteExercise() {
@@ -44,18 +27,26 @@ class PlayFive {
 
     let clef = Clef.get('G2:F4');
     let curChordTick = 0;
-    let c = PlayFive.createChords(this.to);
+    let ng = PlayTriplets.noteGenerator();
     let m = Math.floor(this.to / 4);
     for (let i = 0; i < m; i++) {
       for (let j = 0; j < 4; j++) {
         let curChord = new Chord(i, clef);
-        let note1 = new Note({step: c[i*4 + j][0], octave: 5, staff: 1, duration: 1, type: "quarter"});
-        let note2 = new Note({step: c[i*4 + j][1], octave: 3, staff: 2, duration: 1, type: "quarter"});
+
+        for (let n of ng[0].call()) {
+          let note1 = new Note({step: n, octave: 5, staff: 1, duration: 1, type: "quarter"});
+          note1.parentChord = curChord;
+          curChord.notes.push(note1);
+        }
+        for (let n of ng[1].call()) {
+          let note1 = new Note({step: n, octave: 3, staff: 2, duration: 1, type: "quarter"});
+          note1.parentChord = curChord;
+          curChord.notes.push(note1);
+        }
+        ng.reverse();
+
         md.chordOnTick[curChordTick] = curChord;
-        note1.parentChord = curChord;
-        note2.parentChord = curChord;
-        curChord.notes.push(note1);
-        curChord.notes.push(note2);
+
         curChordTick++;
       }
     }

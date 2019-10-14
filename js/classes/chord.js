@@ -65,6 +65,10 @@ class Chord {
     var skipStem = false;
     for (var i = 0; i < this.notes.length; i++) {
       var n = this.notes[i];
+      if (true == n.grace) {
+        gg.setAttributeNS (null, "fill", "grey");
+        gg.setAttributeNS (null, "stroke", "grey");
+      }
       if ("up" == n.stem) {
         if ((i > 0) && (n.staff == this.notes[i-1].staff) && (1 == n.stepLine - this.notes[i-1].stepLine) ) {
           shift = 19;
