@@ -7,6 +7,10 @@ class VoiceTicker {
     });
   }
 
+  featureTick(voice) {
+    return this.indexes[voice]["index"] + this.indexes[voice]["duration"];
+  }
+
   nextTick(voice, duration) {
     if ( undefined === this.indexes[voice].duration ) {
       this.indexes[voice].duration = duration;
