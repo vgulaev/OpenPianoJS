@@ -1,6 +1,6 @@
 class PlayTriplets {
   static noteGenerator() {
-    let n = "CDEFG".split('');
+    let n = "CDEFGAB".split('');
     let nn = [];
     for (let i of n) {
       for (let j of n) {
@@ -10,10 +10,10 @@ class PlayTriplets {
     }
     return [
       () => {
-        return [n[Ut.rnd(5)]];
+        return [n[Ut.rnd(n.length)]];
       },
       () => {
-        return nn[Ut.rnd(20)];
+        return nn[Ut.rnd(nn.length)];
       }
     ];
   }

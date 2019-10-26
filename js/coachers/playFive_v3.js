@@ -50,6 +50,7 @@ class PlayFive {
       for (let j = 0; j < 4; j++) {
         let curChord = new Chord(i, clef);
         let note1 = new Note({step: c[i*4 + j][0], octave: 5, staff: 1, duration: 1, type: "quarter"});
+        // let note2 = new Note({step: c[i*4 + j][0], octave: 3, staff: 2, duration: 1, type: "quarter"});
         let note2 = new Note({step: c[i*4 + j][1], octave: 3, staff: 2, duration: 1, type: "quarter"});
         md.chordOnTick[curChordTick] = curChord;
         note1.parentChord = curChord;
