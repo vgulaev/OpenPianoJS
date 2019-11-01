@@ -9,11 +9,15 @@ class PlayTriplets {
       }
     }
     return [
-      () => {
-        return [n[Ut.rnd(n.length)]];
+      (p) => {
+        let f = n.filter((e) => !p.includes(e));
+        p.length = 0;
+        return f[Ut.rnd(f.length)];
       },
-      () => {
-        return nn[Ut.rnd(nn.length)];
+      (p) => {
+        let f = nn.filter((e) => !e.includes(p[0]));
+        p.length = 0;
+        return f[Ut.rnd(f.length)];
       }
     ];
   }
@@ -29,16 +33,19 @@ class PlayTriplets {
     let curChordTick = 0;
     let ng = PlayTriplets.noteGenerator();
     let m = Math.floor(this.to / 4);
+    let p = [[], []]
     for (let i = 0; i < m; i++) {
       for (let j = 0; j < 4; j++) {
         let curChord = new Chord(i, clef);
 
-        for (let n of ng[0].call()) {
+        for (let n of ng[0].call(null, p[0])) {
+          p[0].push(n);
           let note1 = new Note({step: n, octave: 5, staff: 1, duration: 1, type: "quarter"});
           note1.parentChord = curChord;
           curChord.notes.push(note1);
         }
-        for (let n of ng[1].call()) {
+        for (let n of ng[1].call(null, p[1])) {
+          p[1].push(n);
           let note1 = new Note({step: n, octave: 3, staff: 2, duration: 1, type: "quarter"});
           note1.parentChord = curChord;
           curChord.notes.push(note1);

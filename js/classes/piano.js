@@ -220,6 +220,16 @@ class Piano {
       SVGBuilder.drawAccidental(105, n.y, n, g);
       App.keyFifths["C1"] = true;
       App.keyFifths["F1"] = true;
+    } else if (3 == this.musicDoc.keyFifths) {
+      n = new Note({step: "F", alter: 1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(105, n.y, n, g);
+      n = new Note({step: "C", alter: 1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(115, n.y, n, g);
+      n = new Note({step: "G", alter: 1, octave: 5, staff: 1});
+      SVGBuilder.drawAccidental(125, n.y, n, g);
+      App.keyFifths["F1"] = true;
+      App.keyFifths["C1"] = true;
+      App.keyFifths["G1"] = true;
     } else if (4 == this.musicDoc.keyFifths) {
       n = new Note({step: "F", alter: 1, octave: 5, staff: 1});
       SVGBuilder.drawAccidental(105, n.y, n, g);
