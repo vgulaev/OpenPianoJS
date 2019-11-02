@@ -1,6 +1,7 @@
 MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
   {name:"Beethoven Sonata 14 C# Minor", fileName: "data/xml/Beethoven Sonata 14 C Sharp Minor.musicxml"},
+  {name:"Beethoven Sonata 21 Op. 53", fileName: "data/xml/Beethoven Piano_Sonata_No.21_Op.53.musicxml"},
   {name:"Beethoven Bagatelle No. 25 in A minor", fileName: "data/xml/Beethoven Bagatelle No. 25 in A minor.musicxml"},
   {name:"Burgmuller - Op.100 - Arabesque", fileName: "data/xml/Burgmuller - Op.100 - Arabesque.musicxml"},
   // {name:"Beethoven Op. 53", fileName: "data/xml/Beethoven-Op._53.xml"},
