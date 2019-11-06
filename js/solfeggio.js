@@ -10,7 +10,8 @@ function playPitch(pitch) {
 }
 
 function initMusic() {
-  selectedPreset = _tone_0000_Aspirin_sf2_file;
+  // selectedPreset = _tone_0000_Aspirin_sf2_file;
+  selectedPreset = _tone_0000_Chaos_sf2_file;
   AudioContextFunc = window.AudioContext || window.webkitAudioContext;
   audioContext = new AudioContextFunc();
   player = new WebAudioFontPlayer();

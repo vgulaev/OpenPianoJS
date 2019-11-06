@@ -3,7 +3,8 @@
 
   let libs = [
     'lib/webaudiofontdata/WebAudioFontPlayer.js?v=' + rnd,
-    'lib/webaudiofontdata/0000_Aspirin_sf2_file.js?v=' + rnd
+    'lib/webaudiofontdata/0000_Aspirin_sf2_file.js?v=' + rnd,
+    'lib/webaudiofontdata/0000_Chaos_sf2_file.js?v=' + rnd
   ];
   if ('vgulaev.github.io' == location.host) {
 
