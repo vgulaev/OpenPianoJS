@@ -1,14 +1,16 @@
 (function () {
   let rnd = Math.random();
 
-  let libs = [
-    'lib/webaudiofontdata/WebAudioFontPlayer.js?v=' + rnd,
-    'lib/webaudiofontdata/0000_Aspirin_sf2_file.js?v=' + rnd,
-    'lib/webaudiofontdata/0000_Chaos_sf2_file.js?v=' + rnd
-  ];
+  let prefix = 'lib';
   if ('vgulaev.github.io' == location.host) {
-
+    prefix = 'https://surikov.github.io';
   }
+
+  let libs = [
+    `${prefix}/webaudiofont/npm/dist/WebAudioFontPlayer.js?v=` + rnd,
+    `${prefix}/webaudiofontdata/sound/0000_Aspirin_sf2_file.js?v=` + rnd,
+    `${prefix}/webaudiofontdata/sound/0000_Chaos_sf2_file.js?v=` + rnd
+  ];
 
   libs.concat(
   [
