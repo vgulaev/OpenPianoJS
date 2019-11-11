@@ -213,9 +213,6 @@ async function playSong(name) {
   App.nn = 0;
   App.coach = Settings.coach(App.piano, md, Settings.range);
   onHappy();
-  // var coach = new Play10timesRule(App.piano, md, Settings.range);
-  // var coach = new PlayRepeat(App.piano, md, Settings.range);
-  // var coach = new PlayFaster(App.piano, md, Settings.range);
 }
 
 function onSetTemp() {
@@ -310,6 +307,14 @@ function openMusicXML(button) {
       var e = document.getElementById("musicXML");
       e.click();
     }
+  });
+}
+
+function chooseCoach(button) {
+  var m = new Menu(button, [[1, "PlayFaster"], [2, "Five same"], [3, "Five diff"], [4, "PlayTriplets"]]);
+  m.select(function(key, value) {
+    App.setting.coach = key;
+    location.reload();
   });
 }
 

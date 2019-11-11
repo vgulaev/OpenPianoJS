@@ -49,9 +49,20 @@ class PlayFive {
     for (let i = 0; i < m; i++) {
       for (let j = 0; j < 4; j++) {
         let curChord = new Chord(i, clef);
-        let note1 = new Note({step: c[i*4 + j][0], octave: 5, staff: 1, duration: 1, type: "quarter"});
+        let note1 = new Note({step: c[i*4 + j][0], octave: 5, staff: 1, duration: 1, type: "quarter",
+          fingering: this.steps.right[c[i*4 + j][0]]
+        });
         // let note2 = new Note({step: c[i*4 + j][0], octave: 3, staff: 2, duration: 1, type: "quarter"});
-        let note2 = new Note({step: c[i*4 + j][1], octave: 3, staff: 2, duration: 1, type: "quarter"});
+        let note2;
+        if ('same note' == this.mode) {
+          note2 = new Note({step: c[i*4 + j][0], octave: 3, staff: 2, duration: 1, type: "quarter",
+            fingering: this.steps.right[c[i*4 + j][0]]
+          });
+        } else {
+          note2 = new Note({step: c[i*4 + j][1], octave: 3, staff: 2, duration: 1, type: "quarter",
+            fingering: this.steps.right[c[i*4 + j][1]]
+          });
+        }
         md.chordOnTick[curChordTick] = curChord;
         note1.parentChord = curChord;
         note2.parentChord = curChord;
@@ -65,10 +76,16 @@ class PlayFive {
     return md;
   }
 
-  constructor(piano, md) {
+  constructor(piano, md, mode) {
     this.from = 0;
     this.to = 20 * 4;
     this.correctInRow = 0;
+    this.mode = mode;
+
+    this.steps = {
+      left: {'C': 5, 'D': 4, 'E': 3, 'F': 2, 'G': 1},
+      right: {'C': 1, 'D': 2, 'E': 3, 'F': 4, 'G': 5}
+    }
 
     this.aim = this.createNoteExercise();
     this.piano = piano;

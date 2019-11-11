@@ -67,7 +67,6 @@ class PlayFromSlownest {
     for (let e of Object.entries(this.measureTiming)) {
       if (e[1].length > this.measureTiming[this.longestIndex].length) this.longestIndex = e[0];
     }
-    // this.measureTiming[m - 1].length =
     let nextIndex = parseInt(this.longestIndex) + 1;
     this.from = this.measureTiming[this.longestIndex].chordIndex;
     this.to = this.measureTiming[nextIndex].chordIndex;

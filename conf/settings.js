@@ -113,7 +113,15 @@ if ('localhost:8080' == location.host) {
     });
 } else {
   Settings.coach = function (a, m, s) {
-    return (new PlayFaster(a, m, s));
+    if (2 == App.setting.coach) {
+      return (new PlayFive(a, m, 'same note'));
+    } else if (3 == App.setting.coach) {
+      return (new PlayFive(a, m, ''));
+    } else if (4 == App.setting.coach) {
+      return (new PlayTriplets(a, m));
+    } else {
+      return (new PlayFaster(a, m, s));
+    }
   }
 }
 

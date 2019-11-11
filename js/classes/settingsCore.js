@@ -4,6 +4,7 @@ class SettingsCore {
     this._fileName = 2; // from Setting.js MusicFiles
     this._temp = 60;
     this._staff = 0;
+    this._coach = 0;
     this.parseFromHash();
   }
 
@@ -20,6 +21,9 @@ class SettingsCore {
       if (undefined != s["s"]) {
         this.staff = parseInt(s["s"]);
       }
+      if (undefined != s["c"]) {
+        this.coach = parseInt(s["c"]);
+      }
     } catch (e) {
       console.log("parseFromHash");
     }
@@ -28,6 +32,20 @@ class SettingsCore {
   updateHash(key, value) {
     this.hash[key] = value;
     document.location.hash = JSON.stringify(this.hash).split('"').join('');
+  }
+
+  set coach( value ) {
+    this._coach = value;
+    this.updateHash("c", value);
+  }
+
+  get coach() {
+    return this._coach;
+  }
+
+  set temp( value ) {
+    this._temp = value;
+    this.updateHash("t", value);
   }
 
   set temp( value ) {

@@ -33,12 +33,13 @@ class Play10timesRule {
   }
 
   createPracticeTrack() {
-    var m = this. piano.musicDoc;
+    var m = this.piano.musicDoc;
     var stats = [];
     var ms = 60000 / this.piano.perMinute / m.divisions;
     var el = {};
     el.right = m.chordArray[this.from];
     for (var i = this.from + 1; i < m.chordArray.length; i++) {
+      if (true == m.chordArray[i].chord.notes[0].grace) continue;
       if (undefined == m.chordArray[i].userTime) break;
       var el = { left: el.right };
       el.right = m.chordArray[i];
