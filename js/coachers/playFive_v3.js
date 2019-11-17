@@ -50,17 +50,17 @@ class PlayFive {
       for (let j = 0; j < 4; j++) {
         let curChord = new Chord(i, clef);
         let note1 = new Note({step: c[i*4 + j][0], octave: 5, staff: 1, duration: 1, type: "quarter",
-          fingering: this.steps.right[c[i*4 + j][0]]
+          // fingering: this.steps.right[c[i*4 + j][0]]
         });
         // let note2 = new Note({step: c[i*4 + j][0], octave: 3, staff: 2, duration: 1, type: "quarter"});
         let note2;
         if ('same note' == this.mode) {
           note2 = new Note({step: c[i*4 + j][0], octave: 3, staff: 2, duration: 1, type: "quarter",
-            fingering: this.steps.right[c[i*4 + j][0]]
+            // fingering: this.steps.right[c[i*4 + j][0]]
           });
         } else {
           note2 = new Note({step: c[i*4 + j][1], octave: 3, staff: 2, duration: 1, type: "quarter",
-            fingering: this.steps.right[c[i*4 + j][1]]
+            // fingering: this.steps.right[c[i*4 + j][1]]
           });
         }
         md.chordOnTick[curChordTick] = curChord;

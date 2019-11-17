@@ -42,10 +42,18 @@ class PlayFaster {
     var dTick = c1.tick - c0.tick;
     var curTemp = Math.ceil(60000 / (t1 - t0) * dTick / this.piano.musicDoc.divisions);
     this.piano.perMinute = curTemp;
+
+    if ((this.from < 2) && (10000 == this.to)) {
+      let name = pieceList()[App.setting.fileName].name;
+      let row = {'name': name, day: Ut.getDateYYMMDDHHSS(), lengthInSec: Math.floor((t1 - t0)/1000)};
+      row.id = row.name + '_' + row.day;
+      let transaction = App.db.transaction('sheetsTiming');
+      transaction.add(row);
+    }
   }
 
   onTrackOver() {
-      this.changeTempo();
-      this.piano.restart(this.from);
+    this.changeTempo();
+    this.piano.restart(this.from);
   }
 }

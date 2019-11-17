@@ -59,4 +59,19 @@ class Ut {
   static rnd(x) {
     return Math.floor(Math.random() * x);
   }
+
+  static l0(x) {
+    return x < 10 ? '0' + x : x;
+  }
+
+  static getDateYYMMDDHHSS() {
+    let d = new Date();
+    let mm = d.getMonth() + 1;
+    let dd = d.getDate();
+    let yy = d.getFullYear();
+    let hh = d.getHours();
+    let mi = d.getMinutes();
+    let r = [yy, mm, dd, hh, mi].map(e => Ut.l0(e));
+    return r[0] + '-' + r[1] + '-' + r[2] + ' ' + r[3] + ':' + r[4];
+  }
 }

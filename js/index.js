@@ -83,6 +83,7 @@ class App {
     await App.initSVG();
     App.piano = new Piano(App.tenLines);
     App.piano.header = document.querySelector("#GrandStaffHead > svg");
+    App.db = new OwnDB();
     App.initMIDI();
   }
 
@@ -166,10 +167,10 @@ window.addEventListener("load", async function( event ) {
 window.addEventListener("keydown", function (event) {
   if (('ArrowRight' == event.key) || ('ArrowLeft' == event.key) && ('root' == event.srcElement.id)) {
     if ('ArrowRight' == event.key) {
-      Settings.range[0] += 1;
+      // Settings.range[0] += 1;
       App.piano.practiceStep();
     } else {
-      Settings.range[0] = App.piano.curentChordIndex - 1;
+      // Settings.range[0] = App.piano.curentChordIndex - 1;
       playSong(App.songName);
     }
     e = document.getElementById("posFrom");
