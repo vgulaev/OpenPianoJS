@@ -20,9 +20,9 @@ function fillReport() {
   }
   function addSubTotalRow(subTotal) {
     var el = document.createElement("div");
+    el.classList.add('divTableRow');
     let minute = (subTotal/1000/60 % 60).toFixed(0);
     let hour = subTotal/1000/60/60;
-    el.classList.add('divTableRow');
     el.innerHTML = `<div class="divTableCell">Total:</div>
         <div class="divTableCell">${hour.toFixed(0)} h ${minute} m</div>
         <div class="divTableCell"></div>

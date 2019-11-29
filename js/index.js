@@ -83,7 +83,9 @@ class App {
     await App.initSVG();
     App.piano = new Piano(App.tenLines);
     App.piano.header = document.querySelector("#GrandStaffHead > svg");
-    App.db = new OwnDB();
+    (new OwnDB()).then((db) => {
+      App.db = db;
+    });
     App.initMIDI();
   }
 
