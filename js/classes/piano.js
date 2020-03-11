@@ -412,12 +412,14 @@ class Piano {
     return this.musicDoc.chordArray[this.curentChordIndex];
   }
 
-  practiceStep(type) {
+  // options
+  practiceStep(options) {
     this.invokeEvent("beforePracticeStep");
     this.updateClef();
+    var d = (undefined == options["direction"] ? 1 : options["direction"]);
     var c = this.currentChord().chord;
     var length = c.weight - c.xborder;
-    this.curentChordIndex += 1;
+    this.curentChordIndex += d;
     if (this.curentChordIndex == this.musicDoc.chordArray.length) {
       if (null == this.onTrackOver) {
         if ("work" == this.observerStatus) {
@@ -438,7 +440,7 @@ class Piano {
     var ticks = c.tick - this.musicDoc.chordArray[this.curentChordIndex - 1].tick;
     var ms = 60000 / this._perMinute / this.musicDoc.divisions * ticks;
     this.steps.push({length: -length, dur: ms});
-    if ('rest' == type) {
+    if ('rest' == options) {
       Metronome.dur += ms;
     } else {
       Metronome.reset(ms);

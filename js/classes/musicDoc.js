@@ -22,7 +22,7 @@ class MusicDoc {
 
   async loadFromURL(url) {
     var xml;
-    await Ut.get20(url)
+    await Ut.get20(url, true)
       .then((data) => {
         this.loadFromStr(data);
       });
@@ -47,7 +47,9 @@ class MusicDoc {
       let beamIndex = 0;
       for (var childNode of measureXML[i].children) {
         let k = ['note', 'attributes'].indexOf(childNode.tagName);
-        if (1 == k) clef = Clef.checkClef(childNode, clef);
+        if (1 == k) {
+          clef = Clef.checkClef(childNode, clef);
+        }
         if (-1 == k || 1 == k) continue;
         var note = new Note(childNode);
         if (note.chord != true) {

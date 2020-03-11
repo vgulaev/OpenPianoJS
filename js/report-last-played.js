@@ -17,7 +17,7 @@ function renderTable(cursor, index) {
   items.forEach((row) => {
     let key = [row.name].join('-');
     if (!(key in data)) {
-      data[key] = {'date': row.day, 'total': 0}
+      data[key] = {'date': row.day, 'total': row.lengthInSec}
     } else {
       if (data[key]['date'] < row.day) {
         data[key]['date'] = row.day;

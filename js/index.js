@@ -170,10 +170,11 @@ window.addEventListener("keydown", function (event) {
   if (('ArrowRight' == event.key) || ('ArrowLeft' == event.key) && ('root' == event.srcElement.id)) {
     if ('ArrowRight' == event.key) {
       // Settings.range[0] += 1;
-      App.piano.practiceStep();
+      App.piano.practiceStep({'direction': 1});
     } else {
       // Settings.range[0] = App.piano.curentChordIndex - 1;
-      playSong(App.songName);
+      // playSong(App.songName);
+      App.piano.practiceStep({'direction': -1});
     }
     e = document.getElementById("posFrom");
     e.value = Settings.range[0];
