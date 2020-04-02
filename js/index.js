@@ -144,6 +144,7 @@ window.addEventListener("load", async function( event ) {
 
   let items = pieceList();
   e = document.getElementById("songName");
+  App.songName = e;
 
   function selectNewSong(key, value) {
     e.value = value;
@@ -166,6 +167,19 @@ window.addEventListener("load", async function( event ) {
   });
 });
 
+window.addEventListener("touchend", function (event) {
+  let changedTouches = event.changedTouches;
+  if (0 == changedTouches.length) return;
+  if (changedTouches[0].pageY < App.songName.getBoundingClientRect().bottom * 1.1) return;
+  let board = document.body.offsetWidth / 2;
+  if (changedTouches[0].pageX < board) {
+    App.piano.practiceStep({'direction': -1});
+  } else {
+    App.piano.practiceStep({'direction': 1});
+  }
+  onHappy();
+});
+
 window.addEventListener("keydown", function (event) {
   if (('ArrowRight' == event.key) || ('ArrowLeft' == event.key) && ('root' == event.srcElement.id)) {
     if ('ArrowRight' == event.key) {
@@ -176,6 +190,7 @@ window.addEventListener("keydown", function (event) {
       // playSong(App.songName);
       App.piano.practiceStep({'direction': -1});
     }
+    onHappy();
     e = document.getElementById("posFrom");
     e.value = Settings.range[0];
     }
