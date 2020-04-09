@@ -41,6 +41,7 @@ class MusicDoc {
     let graceIndex = 0;
     let curChord = null;
     let clef = Clef.get('G2:F4');
+    let fifths = this.keyFifths;
 
     for (var i = 0; i < measureXML.length; i++) {
       if (i != 0) voiceTicker.calibrate();
@@ -49,6 +50,14 @@ class MusicDoc {
         let k = ['note', 'attributes'].indexOf(childNode.tagName);
         if (1 == k) {
           clef = Clef.checkClef(childNode, clef);
+          for (let attNode of childNode.children) {
+            if ('key' == attNode.tagName) {
+              let nodes = attNode.getElementsByTagName('fifths');
+              if (nodes.length > 0) {
+                fifths = parseInt(nodes[0].innerHTML);
+              }
+            }
+          }
         }
         if (-1 == k || 1 == k) continue;
         var note = new Note(childNode);
@@ -60,7 +69,9 @@ class MusicDoc {
             graceIndex = 0;
             curChordTick = voiceTicker.nextTick(note.voice, note.duration);
           }
-          if (undefined === this.chordOnTick[curChordTick]) this.chordOnTick[curChordTick] = new Chord(i, clef);
+          if (undefined === this.chordOnTick[curChordTick]) {
+            this.chordOnTick[curChordTick] = new Chord(i, clef, fifths);
+          }
           curChord = this.chordOnTick[curChordTick];
         }
         note.parentChord = curChord;

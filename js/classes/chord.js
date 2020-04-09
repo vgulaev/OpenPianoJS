@@ -1,10 +1,11 @@
 class Chord {
-  constructor(measure = 0, clef) {
+  constructor(measure = 0, clef, fifths) {
     this.notes = new Array();
     this.g = null;
     this.sign = "";
     this.measure = measure;
     this.clef = clef;
+    this.fifths = fifths;
   }
 
   copy(options) {
@@ -33,6 +34,15 @@ class Chord {
     // return this.renderV20(options = {});
     var g = SVGBuilder.createSVG ("g");
     g.setAttributeNS (null, "stroke", "black");
+
+    if (Math.abs(this.fifths) != Object.keys(App.keyFifths).length) {
+      App.keyFifths = {};
+      let gf = SVGBuilder.createSVG("g");
+      gf.setAttributeNS (null, "class", "fifths");
+      Fifths.drawAccidental(this.fifths, gf, -80);
+      g.append(gf);
+      Fifths.circle(this.fifths).forEach((e) => App.keyFifths[e] = true);
+    }
 
     var dx = 0;
     if (options["drawBarLine"]) {
