@@ -13,7 +13,7 @@ class Menu {
 
   constructor(input, items, length) {
     this.input = input;
-    let re = new RegExp(input.value.replace(/ /g, '.*'));
+    let re = new RegExp(input.value.toLowerCase().replace(/ /g, '.*'));
     this.items = items.filter(e => re.test(e[1].toLowerCase())).slice(0, length);
     this.length = length;
   }

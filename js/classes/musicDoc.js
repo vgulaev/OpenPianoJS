@@ -73,6 +73,12 @@ class MusicDoc {
             this.chordOnTick[curChordTick] = new Chord(i, clef, fifths);
           }
           curChord = this.chordOnTick[curChordTick];
+          if (curChord.clef[2] != clef[2]) {
+            let tmpClef = Clef.get([curChord.clef[1], clef[2]].join(':'));
+            Object.keys(this.chordOnTick)
+            .filter((e) => e >= curChordTick)
+            .forEach((e) => this.chordOnTick[e].clef = tmpClef);
+          }
         }
         note.parentChord = curChord;
         if (undefined != note.beam) {

@@ -15,6 +15,7 @@ class PlayErrorCleaner {
     this.piano = piano;
     this.status = "play"; // play or practice
     this.deltas = this.getDeltas();
+    this.piano.pullUp = true;
 
     this.from = range[0];
     this.to = range[1];

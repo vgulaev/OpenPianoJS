@@ -278,6 +278,7 @@ class Piano {
     this.invokeEvent("afterPracticeStep");
   }
 
+
   async moveObserver() {
     var last_x = 0, new_x = 0, new_x_k = 0;
     var start = window.performance.now();
@@ -285,7 +286,6 @@ class Piano {
     var use = this.use;
     var obj = this;
     var k = parseInt(use.getAttributeNS(null, "x"));
-
     function step() {
       if (0 == obj.steps.length) {
         obj.observerStatus = "stop";
