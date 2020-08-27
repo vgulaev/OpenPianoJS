@@ -154,8 +154,39 @@ class SVGBuilder {
     }
   }
 
+  static tieSlur(n) {
+    // let l = App.slur["stop"].x - App.slur["start"].x - 25;
+    // let x = App.slur["start"].x;
+    // let y = App.slur["start"].y;
+
+    // var path = SVGBuilder.createSVG("path");
+
+    // var k = "above" == App.slur.placement ? -1: 1;
+
+    // var dy = 20;
+    // if ("down" == n.stem) {
+    //   dy = -4;
+    // }
+
+    // var ll = -(l + x);
+    // var x1 = ll * 0.10;
+    // var x2 = ll * 0.90;
+    // var y1 = ll * 0.15 * k;
+    // var y2 = y1 + 2.5 * k;
+    // var dy = App.slur["start"].y - App.slur["stop"].y
+
+    // // var res = `m ${x},${y + dy} c ${x1},${y1} ${x2},${y1} ${ll},0 ${-x1},${y2} ${-x2},${y2} ${-ll},0`;
+    // var res = `m ${x} ${y + 20 * k} c 0 0, ${ll / 2 * k} ${dy / 2 * k}, ${ll} ${dy + 20 * k}`;
+
+    // path.setAttributeNS(null, 'd', res);
+    // path.setAttributeNS(null, 'stroke-width', 2);
+    // path.setAttributeNS(null, 'fill', "transparent");
+    // return path;
+  }
+
   static tiePath(x, y, l, n) {
     var path = SVGBuilder.createSVG("path");
+
     var k = "down" == n.stem ? 1: -1;
     var dy = 20;
     if ("down" == n.stem) {
@@ -294,6 +325,22 @@ class SVGBuilder {
         } else if (n.stepLine < dn - 2) {
             this.additionalLine(g, x, 317, dn - 3, n.stepLine);
         }
+      }
+    }
+
+    if (undefined != n.slur) {
+      App.slur[n.slur.type] = {
+        x: App.absolutX, y: y
+      };
+      if ("start" == n.slur.type) {
+        App.slur.placement = n.slur.placement;
+      }
+      if ("stop" == n.slur.type) {
+        let s = this.drawLine(App.slur["start"].x - App.slur["stop"].x + 25, y + 50, x, y + 50);
+        // let l = App.slur["start"].x - App.slur["stop"].x + 25 + x;
+        // let s = this.tieSlur(n);
+        g.append(s);
+        // console.log(App.slur);
       }
     }
 

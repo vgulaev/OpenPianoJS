@@ -33,6 +33,10 @@ class Note {
       [x => x.innerHTML, ["step", "type", "stem"]],
       [x => x.getAttribute("type"), ["tie"]],
       [x => {
+        this.slur = {type: x.getAttribute("type"), number: x.getAttribute("number"), placement: x.getAttribute("placement")};
+        return this.slur;
+      }, ["slur"]],
+      [x => {
         var el = [x.getAttribute("number"), x.innerHTML];
         (undefined == this.beam) ? this.beam = [el] : this.beam.push(el);
         return this.beam;

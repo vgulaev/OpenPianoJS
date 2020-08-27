@@ -97,6 +97,7 @@ class Chord {
         }
       }
       skipStem = skipStem && (undefined == this.notes[i].beam);
+
       var note = SVGBuilder.drawNote(gg, this.notes[i], dx + shift, skipStem);
     }
     g.append(gg);

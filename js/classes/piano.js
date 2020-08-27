@@ -105,12 +105,14 @@ class Piano {
     var g = SVGBuilder.createSVG("g");
     g.setAttributeNS (null, "id", "SheetMusic");
 
-    var x = 0;
+    // var x = 0;
+    App.absolutX = 0;
     var a = this.musicDoc.chordArray;
     var options = {};
-    App.tieBuilder = {"1": {}, "2": {}, x: x};
+    App.tieBuilder = {"1": {}, "2": {}, x: App.absolutX};
 
     App.beamBuilder = {};
+    App.slur = {};
 
     for (var i = 0; i < a.length; i++) {
       var c = a[i].chord;
@@ -120,14 +122,14 @@ class Piano {
       } else {
         options["drawBarLine"] = false;
       }
-      App.tieBuilder.x = x;
+      App.tieBuilder.x = App.absolutX;
       c.render(options);
       App.currentClef = c.clef;
 
-      c.g.setAttributeNS(null, "transform", `translate(${x})`);
+      c.g.setAttributeNS(null, "transform", `translate(${App.absolutX})`);
       g.append(c.g);
 
-      x += c.weight;
+      App.absolutX += c.weight;
     }
 
     var def = SVGBuilder.createSVG("def");
