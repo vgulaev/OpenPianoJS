@@ -336,10 +336,10 @@ class SVGBuilder {
         App.slur.placement = n.slur.placement;
       }
       if ("stop" == n.slur.type) {
-        let s = this.drawLine(App.slur["start"].x - App.slur["stop"].x + 25, y + 50, x, y + 50);
+        // let s = this.drawLine(App.slur["start"].x - App.slur["stop"].x + 25, y + 50, x, y + 50);
         // let l = App.slur["start"].x - App.slur["stop"].x + 25 + x;
         // let s = this.tieSlur(n);
-        g.append(s);
+        // g.append(s);
         // console.log(App.slur);
       }
     }
