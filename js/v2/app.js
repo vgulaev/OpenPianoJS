@@ -11,5 +11,4 @@ class App {
 window.addEventListener("load", async function( event ) {
   app = new App();
   app.load('data/xml/test.musicxml');
-  console.log(app);
 });

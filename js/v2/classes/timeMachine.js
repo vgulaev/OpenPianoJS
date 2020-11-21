@@ -2,11 +2,25 @@ class TimeMachine {
   constructor(divisions) {
     this.divisions = divisions;
     this.arrowOfTime = {};
-    this.notes = [];
     this.tickOffset = 0;
+    this.graces = [];
+    this.notes = [];
   }
 
-  push(node) {
+  pushOrCreate(key, note, dk = 0) {
+    let fkey = key * 10 - dk;
+    if (!(fkey in this.arrowOfTime)) {
+      this.arrowOfTime[fkey] = {
+        chord: [note.toString()],
+        g: SVGBuilder.createSVG('g')
+      };
+    } else {
+      this.arrowOfTime[fkey].chord.push(note.toString());
+    }
+    note.tick = fkey;
+  }
+
+  push(node, bar) {
     if ('backup' == node.tagName) {
       this.tick -= parseInt(node.querySelector('duration').innerHTML);
       return;
@@ -17,21 +31,28 @@ class TimeMachine {
       return;
     }
 
-    let note = new Note(node);
+    let note = new Note(node, bar);
     this.notes.push(note);
 
-    if (note.grace) return;
+    if (note.grace) {
+      this.graces.push(note);
+      return;
+    }
 
     let key = this.tick + this.tickOffset;
+
+    if (this.graces.length > 0) {
+      this.graces.reverse().forEach( (n, i) => {
+        this.pushOrCreate(key, n, i+1);
+      });
+      this.graces = [];
+    }
+
     if (undefined == note.chord) {
-      if (!(key in this.arrowOfTime)) {
-        this.arrowOfTime[key] = [note.toString()];
-      } else {
-        this.arrowOfTime[key].push(note.toString());
-      }
+      this.pushOrCreate(key, note);
       this.tick += note.duration;
     } else {
-      this.arrowOfTime[key - note.duration].push(note.toString());
+      this.pushOrCreate(key - note.duration, note);
     }
   }
 }

@@ -1,36 +1,56 @@
 class Note {
-  constructor(xml) {
+  constructor(xml, bar) {
     this.xml = xml;
-    this.parseChildren(this, xml);
+    this.bar = bar;
+    Ut.parseChildren(this, xml);
+    this.parseBeam();
   }
 
-  parseChildren(o, xml) {
-    for (let c of xml.children) {
-      if (0 == c.childElementCount) {
-        if ('' == c.innerHTML) {
-          o[c.tagName] = true
-        } else {
-          let i = parseInt(c.innerHTML);
-          if (isNaN(i)) {
-            o[c.tagName] = c.innerHTML;
-          } else {
-            o[c.tagName] = i;
-          }
-        }
-      } else {
-        o[c.tagName] = {};
-        this.parseChildren(o[c.tagName], c);
-      }
-    }
+  get stepLine() {
+    if (this.rest) return 0;
+    return this.pitch.octave * 7 + Note.sToStep[this.pitch.step];
   }
 
+  parseBeam() {
+    let beam = this.xml.querySelectorAll('beam');
+    if (0 == beam.length) return;
+  }
 
   toString() {
     if (this.rest) return 'rest'
-    // let step = this.xml.querySelector('step').innerHTML;
-    // let alter = this.xml.querySelector('alter');
-    // let octave = this.xml.querySelector('octave').innerHTML;
-
     return this.pitch.step.toString() + this.pitch.octave.toString();
   }
 }
+
+Note.tonesToS = {
+  0: 'C',
+  2: 'D',
+  4: 'E',
+  5: 'F',
+  7: 'G',
+  9: 'A',
+  11: 'B' }
+
+Note.tones = { 'C': 0,
+  'D': 2,
+  'E': 4,
+  'F': 5,
+  'G': 7,
+  'A': 9,
+  'B': 11 }
+
+Note.stepToS = { 0: 'C',
+  1: 'D',
+  2: 'E',
+  3: 'F',
+  4: 'G',
+  5: 'A',
+  6: 'B' }
+
+Note.sToStep = { 'C': 0,
+  'D': 1,
+  'E': 2,
+  'F': 3,
+  'G': 4,
+  'A': 5,
+  'B': 6 }

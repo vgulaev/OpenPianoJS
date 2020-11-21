@@ -12,13 +12,13 @@ class GrandStaffHeader {
     this.root.append(SVGTmp.grandBracket());
 
     this.drawStaffLine();
-    // this.setClef('g8', 1);
-    // this.setClef('f', 2);
-    this.setClef('g', 2);
-    this.setClef('f', 1);
+    // // this.setClef('g8', 1);
+    // // this.setClef('f', 2);
+    // this.setClef('g', 2);
+    // this.setClef('f', 1);
 
-    this.setKeySignature(7);
-    this.setTimeSignature(12, 8);
+    // this.setKeySignature(7);
+    // this.setTimeSignature(12, 8);
 
     this.grandStaff.root.append(this.root);
   }
@@ -31,33 +31,17 @@ class GrandStaffHeader {
     });
   }
 
-  clefOffset(type, staff) {
-    let res = {x: 32}
-    if (1 == staff) {
-      if (-1 != ['g', '8g', 'g8'].indexOf(type))
-        res.y = 128;
-      if (-1 != ['f', '8f', 'f8'].indexOf(type))
-        res.y = 101;
-    } else {
-      if (-1 != ['f', '8f', 'f8'].indexOf(type))
-        res.y = 259;
-      if (-1 != ['g', '8g', 'g8'].indexOf(type))
-        res.y = 286;
-    }
-    return res;
-  }
-
   keySignatureOffset(staff) {
     let y;
     if (1 == staff) {
-      if (-1 != ['g', '8g', 'g8'].indexOf(this.clef[staff]))
+      if (-1 != ['G0', '8G', 'G8'].indexOf(this.clef[staff]))
         y = 114;
-      if (-1 != ['f', '8f', 'f8'].indexOf(this.clef[staff]))
+      if (-1 != ['F0', '8f', 'f8'].indexOf(this.clef[staff]))
         y = 129;
     } else {
-      if (-1 != ['g', '8g', 'g8'].indexOf(this.clef[staff]))
+      if (-1 != ['G0', '8G', 'G8'].indexOf(this.clef[staff]))
         y = 272;
-      if (-1 != ['f', '8f', 'f8'].indexOf(this.clef[staff]))
+      if (-1 != ['F0', '8f', 'f8'].indexOf(this.clef[staff]))
         y = 287;
     }
     return y;
@@ -111,15 +95,15 @@ class GrandStaffHeader {
     this.root.append(g);
   }
 
-  setClef(type, staff) {
-    this.clef[staff] = type;
-    let id = `Clef${staff}`;
-    let o = this.clefOffset(type, staff);
+  setClef(clef) {
+    this.clef[clef.number] = clef.toS();
+    let id = `Clef${clef.number}`;
+    let o = Ut.clefOffset(clef);
     let t = document.getElementById(id);
     if (t != null)
       t.remove();
-    t = SVGBuilder.emmentaler({x: o['x'], y: o['y'], text: emm.Clef[type]});
-    t.setAttributeNS(null, 'id', `Clef${staff}`);
+    t = SVGBuilder.emmentaler({x: o['x'], y: o['y'], text: emm.Clef[clef.toS()]});
+    t.setAttributeNS(null, 'id', `Clef${clef.number}`);
 
     this.root.append(t);
   }
