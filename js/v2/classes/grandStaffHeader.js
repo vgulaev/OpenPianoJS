@@ -2,9 +2,10 @@ class GrandStaffHeader {
   constructor(grandStaff) {
     this.grandStaff = grandStaff;
     this.width = 210;
+    this.height = 450;
     this.clef = {};
     this.root = SVGBuilder.createSVG('svg');
-    this.root.setAttributeNS(null, 'height', 450);
+    this.root.setAttributeNS(null, 'height', this.height);
     this.root.setAttributeNS(null, 'width', this.width);
 
     this.root.append(SVGBuilder.line({x1: 25, y1: 84, x2: 25, y2: 302, 'stroke-width': 2, stroke: 'black'}));
