@@ -11,11 +11,15 @@ class Note {
     return this.pitch.octave * 7 + Note.sToStep[this.pitch.step];
   }
 
-  y(dline) {
-    // if (1 == this.staff)
-    let baseY = 137;
+  drawLine(clef) {
+    return this.stepLine - Note.clefLine[clef[this.staff].toS()];
+  }
 
-    return baseY + 7.5 * (this.stepLine - 31);
+  drawY(clef) {
+    let baseY = {1: 152, 2: 309.5};
+    let r = baseY[this.staff] - 7.5 * this.drawLine(clef);
+    if (isNaN(r)) fsdgdsgsdg;
+    return r;
   }
 
   parseBeam() {
@@ -29,6 +33,13 @@ class Note {
   }
 }
 
+Note.clefLine = {
+  'G0': 29,
+  'G-1': 22,
+  'G1': 36,
+  'F0': 17
+}
+
 Note.tonesToS = {
   0: 'C',
   2: 'D',
@@ -36,7 +47,8 @@ Note.tonesToS = {
   5: 'F',
   7: 'G',
   9: 'A',
-  11: 'B' }
+  11: 'B'
+}
 
 Note.tones = { 'C': 0,
   'D': 2,
@@ -44,7 +56,8 @@ Note.tones = { 'C': 0,
   'F': 5,
   'G': 7,
   'A': 9,
-  'B': 11 }
+  'B': 11
+}
 
 Note.stepToS = { 0: 'C',
   1: 'D',
@@ -52,7 +65,8 @@ Note.stepToS = { 0: 'C',
   3: 'F',
   4: 'G',
   5: 'A',
-  6: 'B' }
+  6: 'B'
+}
 
 Note.sToStep = { 'C': 0,
   'D': 1,
@@ -60,4 +74,5 @@ Note.sToStep = { 'C': 0,
   'F': 3,
   'G': 4,
   'A': 5,
-  'B': 6 }
+  'B': 6
+}

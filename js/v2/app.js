@@ -11,6 +11,7 @@ class App {
 window.addEventListener('load', async function( event ) {
   app = new App();
   app.load('data/xml/test1.musicxml');
+  // app.load('data/xml/Beethoven Symphony No. 5 1 st movement Piano solo.musicxml');
 });
 
 // mousestate = {

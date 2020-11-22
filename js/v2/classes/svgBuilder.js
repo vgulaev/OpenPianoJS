@@ -20,6 +20,7 @@ class SVGBuilder {
   static emmentaler(o) {
     let e = SVGBuilder.createSVG('text');
     e.setAttributeNS(null, 'x', o.x);
+    if (isNaN(o.y)) fsdgdsgsdg;
     e.setAttributeNS(null, 'y', o.y);
     e.innerHTML = o.text;
     e.style.fontFamily = 'Emmentaler';
@@ -42,14 +43,14 @@ class SVGBuilder {
   static keySignatureOffset(clef, staff) {
     let y;
     if (1 == staff) {
-      if (-1 != ['G0', '8G', 'G8'].indexOf(clef))
+      if (-1 != clef.indexOf('G'))
         y = 114;
-      if (-1 != ['F0', '8f', 'f8'].indexOf(clef))
+      if (-1 != clef.indexOf('F'))
         y = 129;
     } else {
-      if (-1 != ['G0', '8G', 'G8'].indexOf(clef))
+      if (-1 != clef.indexOf('G'))
         y = 272;
-      if (-1 != ['F0', '8f', 'f8'].indexOf(clef))
+      if (-1 != clef.indexOf('F'))
         y = 287;
     }
     return y;

@@ -36,9 +36,6 @@ class Sheet {
     for (let m of this.measures) {
       let beats = m.querySelector('beats');
       let bar = new Measure(m);
-      // if (null == bar.keyFifths) {
-      //   bar.keyFifths = this.bars[this.bars.length - 1].keyFifths;
-      // }
       this.bars.push(bar);
       if (null != beats) {
         timeMachine.beats = parseInt(beats.innerHTML);

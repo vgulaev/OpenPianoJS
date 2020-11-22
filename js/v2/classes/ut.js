@@ -46,14 +46,14 @@ class Ut {
   static clefOffset(clef) {
     let res = {x: 32}
     if (1 == clef.number) {
-      if (-1 != ['G0', 'G-1', 'G8'].indexOf(clef.toS()))
+      if (-1 != clef.toS().indexOf('G'))
         res.y = 128;
-      if (-1 != ['F0', '8F', 'F8'].indexOf(clef.toS()))
+      if (-1 != clef.toS().indexOf('F'))
         res.y = 101;
     } else {
-      if (-1 != ['F0', '8F', 'F8'].indexOf(clef.toS()))
+      if (-1 != clef.toS().indexOf('F'))
         res.y = 259;
-      if (-1 != ['G0', '8G', 'G8'].indexOf(clef.toS()))
+      if (-1 != clef.toS().indexOf('G'))
         res.y = 286;
     }
     return res;
