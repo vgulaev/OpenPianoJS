@@ -11,11 +11,11 @@ class TimeMachine {
     let fkey = key * 10 - dk;
     if (!(fkey in this.arrowOfTime)) {
       this.arrowOfTime[fkey] = {
-        chord: [note.toString()],
+        chord: [note],
         g: SVGBuilder.createSVG('g')
       };
     } else {
-      this.arrowOfTime[fkey].chord.push(note.toString());
+      this.arrowOfTime[fkey].chord.push(note);
     }
     note.tick = fkey;
   }

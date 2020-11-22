@@ -36,21 +36,21 @@ class Sheet {
     for (let m of this.measures) {
       let beats = m.querySelector('beats');
       let bar = new Measure(m);
-      if (null == bar.keyFifths) {
-        bar.keyFifths = this.bars[this.bars.length - 1].keyFifths;
-      }
+      // if (null == bar.keyFifths) {
+      //   bar.keyFifths = this.bars[this.bars.length - 1].keyFifths;
+      // }
       this.bars.push(bar);
       if (null != beats) {
         timeMachine.beats = parseInt(beats.innerHTML);
       }
-      bar.from = timeMachine.tickOffset;
+      bar.from = timeMachine.tickOffset * 10;
       timeMachine.tick = 0;
       for (let childNode of m.children) {
         if (-1 != ['note', 'backup', 'forward'].indexOf(childNode.tagName))
           timeMachine.push(childNode, bar);
       }
       timeMachine.tickOffset += timeMachine.beats * this.divisions;
-      bar.to = timeMachine.tickOffset;
+      bar.to = timeMachine.tickOffset * 10;
     }
     this.timeMachine = timeMachine;
     this.render();
@@ -73,9 +73,10 @@ class Sheet {
 
   itterateAndRender(xml) {
     for (let c of xml.children) {
-      this.pM.print(c);
+      this.pM.startPrint(c);
       if (c.childElementCount > 0)
         this.itterateAndRender(c);
+      this.pM.finishPrint(c);
     }
   }
 

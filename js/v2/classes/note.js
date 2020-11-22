@@ -11,6 +11,13 @@ class Note {
     return this.pitch.octave * 7 + Note.sToStep[this.pitch.step];
   }
 
+  y(dline) {
+    // if (1 == this.staff)
+    let baseY = 137;
+
+    return baseY + 7.5 * (this.stepLine - 31);
+  }
+
   parseBeam() {
     let beam = this.xml.querySelectorAll('beam');
     if (0 == beam.length) return;

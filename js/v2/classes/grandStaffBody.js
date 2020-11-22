@@ -3,7 +3,7 @@ class GrandStaffBody {
     this.grandStaff = grandStaff;
     this.root = SVGBuilder.createSVG('svg');
     this.height = this.grandStaff.header.height;
-    this.width = window.innerWidth - this.grandStaff.header.root.width.baseVal.value - 20;
+    this.width = window.innerWidth - this.grandStaff.header.root.width.baseVal.value - 50;
     this.root.setAttributeNS(null, 'height', this.height);
     this.root.setAttributeNS(null, 'width', this.width);
 

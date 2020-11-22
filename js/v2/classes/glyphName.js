@@ -23,5 +23,15 @@ emm = {
   Notehead: {
     s0: '\u{E0A2}',
     s2: '\u{E0A4}'
+  },
+  Rest: {
+    128: '\u{E4EA}',
+    64: '\u{E4E9}',
+    32: '\u{E4E8}',
+    16: '\u{E4E7}',
+    eighth: '\u{E4E6}',
+    quarter: '\u{E4E5}',
+    half: '\u{E4E4}',
+    whole: '\u{E4E3}'
   }
 }

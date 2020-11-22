@@ -12,10 +12,6 @@ class GrandStaffHeader {
     this.root.append(SVGTmp.grandBracket());
 
     this.drawStaffLine();
-    // // this.setClef('g8', 1);
-    // // this.setClef('f', 2);
-    // this.setClef('g', 2);
-    // this.setClef('f', 1);
 
     // this.setKeySignature(7);
     // this.setTimeSignature(12, 8);
@@ -29,22 +25,6 @@ class GrandStaffHeader {
         this.root.append(SVGBuilder.line({x1: 25, y1: y, x2: this.width, y2: y, 'stroke-width': 2, stroke: 'black'}));
       }
     });
-  }
-
-  keySignatureOffset(staff) {
-    let y;
-    if (1 == staff) {
-      if (-1 != ['G0', '8G', 'G8'].indexOf(this.clef[staff]))
-        y = 114;
-      if (-1 != ['F0', '8f', 'f8'].indexOf(this.clef[staff]))
-        y = 129;
-    } else {
-      if (-1 != ['G0', '8G', 'G8'].indexOf(this.clef[staff]))
-        y = 272;
-      if (-1 != ['F0', '8f', 'f8'].indexOf(this.clef[staff]))
-        y = 287;
-    }
-    return y;
   }
 
   findOrCreate(name, tag) {
@@ -68,30 +48,9 @@ class GrandStaffHeader {
     this.root.append(g);
   }
 
-  setKeySignature(count) {
+  setKeySignature(fifths) {
     let g = this.findOrCreate(`KeySignature`, 'g');
-    g.innerHTML = '';
-    let yy;
-    let acc;
-    let ys;
-    if (count < 0) {
-      yy = [0, -22.5];
-      ys = (new Array(7)).fill(1).map( (e, i) => [{x: 73 + 12 * i, y: yy[i % 2] + Math.floor(i / 2) * 7.5}][0]).slice(0, Math.abs(count));
-      acc = emm.Accidental.flat;
-    } else {
-      yy = [-32, -9.5, -39.5, -17, 5.5, -24.5, -2];
-      ys = (new Array(7)).fill(1).map( (e, i) => [{x: 73 + 12 * i, y: yy[i]}][0]).slice(0, Math.abs(count));
-      acc = emm.Accidental.sharp;
-    }
-
-    [1, 2].forEach( staff => {
-      let dy = this.keySignatureOffset(staff);
-      ys.forEach( (xy, i) => {
-        let t = SVGBuilder.emmentaler({x: xy.x, y: dy + xy.y, text: acc});
-        g.append(t);
-      });
-    });
-
+    g.innerHTML = SVGBuilder.keySignature(this.clef[1], this.clef[2], fifths, 73).innerHTML;
     this.root.append(g);
   }
 
