@@ -21,6 +21,7 @@ class SVGBuilder {
   }
 
   static emmentaler(o) {
+    // if (undefined == o.text) gfdsgsdgsgsdg;
     let e = SVGBuilder.createSVG('text');
     e.setAttributeNS(null, 'x', o.x);
     if (isNaN(o.y)) fsdgdsgsdg;

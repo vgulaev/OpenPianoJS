@@ -32,7 +32,8 @@ class Note {
   }
 
   beamKey() {
-    return this.staff.toString() + 'v' + this.voice.toString();
+    //return this.staff.toString() + 'v' + this.voice.toString();
+    return this.voice.toString();
   }
 
   toString() {

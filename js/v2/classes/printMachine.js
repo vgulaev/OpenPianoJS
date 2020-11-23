@@ -138,7 +138,7 @@ class PrintMachine {
     acc.forEach((n, i) => {
       n.y = n.drawY(this.drawClef);
       if (i > 0) {
-        if (2 > (n.stepLine - acc[i-1].stepLine)) {
+        if (3 > (n.stepLine - acc[i-1].stepLine)) {
           x += 16;
           dx = Math.max(dx, x - this.cursor);
         } else {
@@ -194,6 +194,9 @@ class PrintMachine {
       if (0 == this.measureIndex) {
         clef1 = this.sheet.grandStaff.header.clef[1];
         clef2 = this.sheet.grandStaff.header.clef[2];
+      } else {
+        clef1 = this.drawClef[1].toS();
+        clef2 = this.drawClef[2].toS();
       }
       let g = SVGBuilder.keySignature(clef1, clef2, m.fifths, this.cursor);
       this.sheet.g.append(g);

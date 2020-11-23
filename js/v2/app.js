@@ -12,6 +12,10 @@ window.addEventListener('load', async function( event ) {
   app = new App();
   app.load('data/xml/test1.musicxml');
   // app.load('data/xml/Beethoven Symphony No. 5 1 st movement Piano solo.musicxml');
+  // app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
+  // app.load('data/xml/Prelude_in_G_Minor_Op._23_No._5.musicxml');
+  // app.load('data/xml/Maksim Mrvica - Croatian Rhapsody.musicxml');
+  // app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
 });
 
 // mousestate = {
@@ -33,18 +37,18 @@ window.addEventListener('load', async function( event ) {
 //     // console.log(event);
 // });
 
-// window.addEventListener("keydown", function (event) {
-//   //  && ('root' == event.srcElement.id)
-//   function move(dx) {
-//     let x = parseInt(app.grandStaff.sheet.use.getAttribute('x'));
-//     app.grandStaff.sheet.use.setAttribute('x', x + dx);
-//     setTimeout(() => move(dx), 100);
-//   }
-//   if (('ArrowRight' == event.key) || ('ArrowLeft' == event.key)) {
-//     if ('ArrowRight' == event.key) {
-//       move(1);
-//     } else {
-//       move(-1);
-//     }
-//   }
-// });
+window.addEventListener("keydown", function (event) {
+  //  && ('root' == event.srcElement.id)
+  function move(dx) {
+    let x = parseInt(app.grandStaff.sheet.use.getAttribute('x'));
+    app.grandStaff.sheet.use.setAttribute('x', x + dx);
+    setTimeout(() => move(dx), 1);
+  }
+  if (('ArrowRight' == event.key) || ('ArrowLeft' == event.key)) {
+    if ('ArrowRight' == event.key) {
+      move(1);
+    } else {
+      move(-1);
+    }
+  }
+});
