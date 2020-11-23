@@ -13,7 +13,10 @@ class SVGBuilder {
 
   static line(o) {
     let e = SVGBuilder.createSVG ('line');
-    Object.keys(o).forEach( p => e.setAttributeNS (null, p, o[p]));
+    Object.keys(o).forEach( p => {
+      if ('string' != typeof o[p] && isNaN(o[p])) dfgdgfdggd;
+      e.setAttributeNS (null, p, o[p])
+    });
     return e;
   }
 

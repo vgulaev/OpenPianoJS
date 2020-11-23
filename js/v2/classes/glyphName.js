@@ -38,5 +38,31 @@ emm = {
     quarter: '\u{E4E5}',
     half: '\u{E4E4}',
     whole: '\u{E4E3}'
+  },
+  Dot: {
+    dot: '\u{002E}',
+    upper: '\u{E044}'
+  },
+  Flag: {
+    eighth: {
+      up: '\u{E240}',
+      down: '\u{E241}'
+    },
+    16: {
+      up: '\u{E242}',
+      down: '\u{E243}'
+    },
+    32: {
+      up: '\u{E244}',
+      down: '\u{E245}'
+    },
+    64: {
+      up: '\u{E246}',
+      down: '\u{E247}'
+    },
+    128: {
+      up: '\u{E248}',
+      down: '\u{E249}'
+    }
   }
 }

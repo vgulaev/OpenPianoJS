@@ -9,28 +9,17 @@ class PrintMachine {
       'clef': 0,
       'note': 0
     }
-    // this.state = {
-    //   clef: {}
-    // };
     this.drawClef = {};
     this.noteIndex = 0;
     this.measureIndex = 0;
     this.cursor = 0;
     this.assignToNextTick = [];
+    this.sb = new StemBuilder(this);
     this.restYOffset = {
       1: 112,
       2: 270
     }
   }
-
-  // copyState() {
-  //   return {
-  //     clef: {
-  //       1: this.state.clef[1],
-  //       2: this.state.clef[2]
-  //     }
-  //   }
-  // }
 
   measure(xml) {
     let e = SVGBuilder.line({x1: this.cursor, y1: 84, x2: this.cursor, y2: 302, 'stroke-width': 2, stroke: 'black'})
@@ -73,9 +62,44 @@ class PrintMachine {
     console.log('drawStem');
   }
 
-  drawAdditionalLines(n) {
-    // let l = n.drawLine();
+  drawAdditionalLineNote(tick, note) {
+    let l = note.drawLine(this.drawClef);
+    let c = Math.floor(Math.abs(l > 0 ? l - 9 : l - 1) / 2);
 
+    let border = {
+      1: {
+        1: 84,
+        '-1': 144
+      },
+      2: {
+        1: 242,
+        '-1': 302
+      }
+    }
+    let dx = Math.sign(l);
+    let x1 = this.cursor - 7;
+    let x2 = this.cursor + 25;
+
+    for (let i = 1; i <= c; i++) {
+      let y = border[note.staff][dx] - dx * 15 * i;
+      let e = SVGBuilder.line({x1: x1, y1: y, x2: x2, y2: y, 'stroke-width': 2, stroke: 'black'});
+      this.sheet.g.append(e);
+    }
+  }
+
+  drawAdditionalLineTick(tick) {
+    [1, 2].forEach(staff => {
+      let edge = tick.chord
+        .filter(n => (undefined == n.rest) && (staff == n.staff) && (n.drawLine(this.drawClef) < 0 || n.drawLine(this.drawClef) > 10))
+        .sort((a, b) => a.drawLine(this.drawClef) - b.drawLine(this.drawClef));
+      if (0 == edge.length) return;
+      if (edge.length > 1) {
+        edge = [edge[0], edge[edge.length - 1]];
+      }
+      edge.forEach(n => {
+        this.drawAdditionalLineNote(tick, n);
+      });
+    });
   }
 
   drawNote(tick, n, i) {
@@ -87,19 +111,23 @@ class PrintMachine {
     }
     n.x = this.cursor;
     if (i > 0) {
-      if (1 == (n.stepLine - tick.chord[i-1].stepLine)) {
+      if (1 == (n.stepLine - tick.chord[i-1].stepLine) && (n.staff == tick.chord[i-1].staff)) {
         let dx = 16;
         n.x += ((this.cursor == tick.chord[i-1].x) ? 16 : 0);
       }
     }
 
-    if (0 > n.drawLine(this.drawClef) || n.drawLine(this.drawClef) > 10) {
-      this.drawAdditionalLines(n);
-    }
-
     n.y = n.drawY(this.drawClef);
     let t = SVGBuilder.emmentaler({x: n.x, y: n.y, text: nhead});
     tick.g.append(t);
+
+    if (n.dot) {
+      let s = emm.Dot.dot;
+      if (1 == Math.abs(n.drawLine(this.drawClef)) % 2)
+        s = emm.Dot.upper;
+      let d = SVGBuilder.emmentaler({x: n.x + 22, y: n.y, text: s});
+      tick.g.append(d);
+    }
   }
 
   drawAccidental(tick) {
@@ -123,10 +151,6 @@ class PrintMachine {
     this.cursor += (dx + 16);
   }
 
-  drawStem(tick) {
-
-  }
-
   drawTick(tick) {
     if (tick.clef instanceof Array) {
       tick.clef.forEach(c => {
@@ -141,6 +165,8 @@ class PrintMachine {
 
     this.drawAccidental(tick);
 
+    this.drawAdditionalLineTick(tick);
+
     tick.chord.forEach( (n, i) => {
       if (n.rest) {
         let ntype = n.type;
@@ -149,13 +175,14 @@ class PrintMachine {
         tick.g.append(t);
         return;
       }
+      this.sb.push(n);
       this.drawNote(tick, n, i);
     });
 
-    this.drawStem(tick);
+    this.sb.draw();
 
     tick.x = this.cursor;
-    this.cursor += 40;
+    this.cursor += 50;
   }
 
   drawTicksInMeasure() {
