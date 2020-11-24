@@ -8,8 +8,18 @@ class GrandStaffBody {
     this.root.setAttributeNS(null, 'width', this.width);
 
     this.drawStaffLine();
+    this.drawRubicon();
 
     this.grandStaff.root.append(this.root);
+  }
+
+  drawRubicon() {
+    var rubicon = SVGBuilder.createSVG("polygon");
+    rubicon.setAttributeNS(null, "points", "380,54 400,54 400,332 380,332")
+    rubicon.setAttributeNS(null, "stroke", "blue");
+    rubicon.setAttributeNS(null, "fill", "blue");
+    rubicon.setAttributeNS(null, "opacity", "0.5");
+    this.root.append(rubicon);
   }
 
   drawStaffLine() {

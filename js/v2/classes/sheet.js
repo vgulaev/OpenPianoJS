@@ -2,13 +2,18 @@ class Sheet {
   constructor(grandStaff) {
     this.grandStaff = grandStaff;
     this.bars = [];
+    this.use = SVGBuilder.createSVG('use');
+    this.timeMachine = new TimeMachine();
   }
 
-  async load(url) {
-    Ut.get(url, true)
-      .then((data) => {
-        this.loadFromStr(data);
-      });
+  load(url) {
+    return new Promise((resolve, reject) => {
+      Ut.get(url, true)
+        .then((data) => {
+          this.loadFromStr(data);
+          resolve();
+        });
+    });
   }
 
   setAttr() {
@@ -30,7 +35,7 @@ class Sheet {
     this.setAttr();
 
     this.measures = xml.querySelectorAll('measure');
-    let timeMachine = new TimeMachine(this.divisions);
+    let timeMachine = this.timeMachine;
 
     let k = 0;
     for (let m of this.measures) {
@@ -49,8 +54,15 @@ class Sheet {
       timeMachine.tickOffset += timeMachine.beats * this.divisions;
       bar.to = timeMachine.tickOffset * 10;
     }
-    this.timeMachine = timeMachine;
+    this.timeMachine.tickKeys = Object.keys(timeMachine.arrowOfTime).sort((a, b) => a - b);
     this.render();
+    this.setStartPoint();
+  }
+
+  setStartPoint() {
+    let key = this.timeMachine.tickKeys[0];
+    let x = this.timeMachine.arrowOfTime[key].x;
+    this.use.setAttributeNS(null, "x", 450 - x);
   }
 
   createRenderRoot() {
@@ -59,9 +71,6 @@ class Sheet {
     this.g.setAttributeNS(null, 'id', 'SheetMusic');
     def.append(this.g);
 
-    this.use = SVGBuilder.createSVG('use');
-    this.use.setAttributeNS(null, "x", 450);
-    this.use.setAttributeNS(null, "x", 10);
     this.use.setAttributeNS(null, "href", "#SheetMusic");
 
     this.grandStaff.body.root.append(def);

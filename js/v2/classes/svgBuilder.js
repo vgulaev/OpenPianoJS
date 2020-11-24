@@ -89,5 +89,11 @@ class SVGBuilder {
 
     return g;
   }
+
+  static setAttr(obj, attr) {
+    Object.keys(attr).forEach( p => {
+      obj.setAttributeNS(null, p, attr[p])
+    });
+  }
 }
 

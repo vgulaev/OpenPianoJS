@@ -43,6 +43,10 @@ emm = {
     dot: '\u{002E}',
     upper: '\u{E044}'
   },
+  Articulation: {
+    staccato: '',
+    staccatissimo: ''
+  },
   Flag: {
     eighth: {
       up: '\u{E240}',

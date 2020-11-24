@@ -4,6 +4,7 @@ class Note {
     this.bar = bar;
     Ut.parseChildren(this, xml);
     this.parseBeam();
+    this.parseTie();
   }
 
   get stepLine() {
@@ -22,6 +23,12 @@ class Note {
     return r;
   }
 
+  parseTie() {
+    let tie = this.xml.querySelectorAll('tie');
+    if (0 == tie.length) return;
+    this.tie = tie.length;
+  }
+
   parseBeam() {
     let beam = this.xml.querySelectorAll('beam');
     if (0 == beam.length) return;
@@ -32,13 +39,17 @@ class Note {
   }
 
   beamKey() {
-    //return this.staff.toString() + 'v' + this.voice.toString();
     return this.voice.toString();
+  }
+
+  tieKey() {
+    return this.voice.toString() + 'n' + this.toString();
   }
 
   toString() {
     if (this.rest) return 'rest'
-    return this.pitch.step.toString() + this.pitch.octave.toString();
+    let p = this.pitch;
+    return p.step.toString() + ((undefined != p.alter) ? 'a' + p.alter.toString() : '') + 'o' + p.octave.toString();
   }
 }
 

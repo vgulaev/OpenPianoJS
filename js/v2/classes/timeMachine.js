@@ -1,10 +1,26 @@
 class TimeMachine {
-  constructor(divisions) {
-    this.divisions = divisions;
+  constructor() {
     this.arrowOfTime = {};
     this.tickOffset = 0;
     this.graces = [];
     this.notes = [];
+  }
+
+  createGElement() {
+    let g = SVGBuilder.createSVG('g');
+    let a = SVGBuilder.createSVG ("animate");
+    a.setAttributeNS(null, "attributeName", "fill");
+    a.setAttributeNS(null, "values", "green;black");
+    a.setAttributeNS(null, "dur", "5s");
+    a.setAttributeNS(null, "begin", "indefinite");
+    g.append(a);
+    // a = SVGBuilder.createSVG ("animate");
+    // a.setAttributeNS(null, "attributeName", "stroke");
+    // a.setAttributeNS(null, "values", "green;black");
+    // a.setAttributeNS(null, "dur", "5s");
+    // a.setAttributeNS(null, "begin", "indefinite");
+    // g.append(a);
+    return g;
   }
 
   pushOrCreate(key, note, dk = 0) {
@@ -12,7 +28,7 @@ class TimeMachine {
     if (!(fkey in this.arrowOfTime)) {
       this.arrowOfTime[fkey] = {
         chord: [note],
-        g: SVGBuilder.createSVG('g')
+        g: this.createGElement()
       };
     } else {
       this.arrowOfTime[fkey].chord.push(note);

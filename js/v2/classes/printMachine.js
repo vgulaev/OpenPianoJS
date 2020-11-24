@@ -15,6 +15,8 @@ class PrintMachine {
     this.cursor = 0;
     this.assignToNextTick = [];
     this.sb = new StemBuilder(this);
+    this.tb = new TieBuilder(this);
+    this.articulation = new ArticulationBuilder(this);
     this.restYOffset = {
       1: 112,
       2: 270
@@ -32,10 +34,6 @@ class PrintMachine {
   clef(xml) {
     let c = new Clef(xml);
     this.assignToNextTick.push(c);
-  }
-
-  note_y(note) {
-
   }
 
   note(xml) {
@@ -56,10 +54,6 @@ class PrintMachine {
     if (xml.tagName in this.printClasses) {
       this[xml.tagName](xml);
     }
-  }
-
-  drawStem(n) {
-    console.log('drawStem');
   }
 
   drawAdditionalLineNote(tick, note) {
@@ -119,6 +113,10 @@ class PrintMachine {
 
     n.y = n.drawY(this.drawClef);
     let t = SVGBuilder.emmentaler({x: n.x, y: n.y, text: nhead});
+
+    if (n.grace) {
+      t.style.fontSize = '45px';
+    }
     tick.g.append(t);
 
     if (n.dot) {
@@ -138,7 +136,7 @@ class PrintMachine {
     acc.forEach((n, i) => {
       n.y = n.drawY(this.drawClef);
       if (i > 0) {
-        if (3 > (n.stepLine - acc[i-1].stepLine)) {
+        if (3 > (n.stepLine - acc[i-1].stepLine) && n.staff == acc[i-1].staff) {
           x += 16;
           dx = Math.max(dx, x - this.cursor);
         } else {
@@ -175,14 +173,21 @@ class PrintMachine {
         tick.g.append(t);
         return;
       }
-      this.sb.push(n);
       this.drawNote(tick, n, i);
+      this.sb.push(n);
+      this.tb.push(n);
+      this.articulation.push(n);
     });
 
     this.sb.draw();
+    this.articulation.draw();
 
     tick.x = this.cursor;
-    this.cursor += 50;
+    if (tick.chord[0].grace) {
+      this.cursor += 25;
+    } else {
+      this.cursor += 50;
+    }
   }
 
   drawTicksInMeasure() {

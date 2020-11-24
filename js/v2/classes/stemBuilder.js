@@ -84,7 +84,6 @@ class StemBuilder {
         index = Math.max(...Object.entries(this.getBeamNotHook(b[i], 1).beam)
         .filter(([k, v]) => -1 == v.indexOf('hook'))
         .map(([k, v]) => k)) - 1;
-        console.log('Hello!');
       }
 
       let l = SVGBuilder.line({x1: xy.x1, y1: xy.y1, x2: xy.x2, y2: xy.y2 + index * dy, 'stroke-width': 2, stroke: 'black'})
