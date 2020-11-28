@@ -7,3 +7,5 @@ I develop with: [Casio CDP-130](https://www.google.com/search?q=casio+cdp-130) a
 For any support issue you can ask vgulaev@yandex.ru
 
 my [facebook](https://www.facebook.com/gulaev.valentin)
+
+Проблемы: В фантазии Ре минор, моцарта - 34 такт, 44 такт - ноты слипшиеся, 57-58 такт - ноты милизмов, так 92-93

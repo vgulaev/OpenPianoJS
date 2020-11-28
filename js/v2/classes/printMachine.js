@@ -162,7 +162,6 @@ class PrintMachine {
     }
 
     this.drawAccidental(tick);
-
     this.drawAdditionalLineTick(tick);
 
     tick.chord.forEach( (n, i) => {

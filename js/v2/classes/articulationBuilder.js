@@ -15,10 +15,18 @@ class ArticulationBuilder {
 
   drawVoice(v) {
     let a = v.filter(n => n.notations).filter(n => n.notations.articulations);
+    let ys = v.map(n => n.y).sort((a, b) => a - b);
     if (0 == a.length) return;
     let n = a[0];
 
-    console.log('drawVoice');
+    let baseY = ys[0];
+    // let k =
+    // if (n.stem == 'up') {
+
+    // }
+    // let t = SVGBuilder.emmentaler({x: n.x + 7, y: n.y + 11, text: emm.Articulation['staccatissimo']['up']});
+    let t = SVGBuilder.emmentaler({x: n.x + 7, y: n.y + 11, text: emm.Articulation['staccato']});
+    this.g.append(t);
   }
 
   draw() {

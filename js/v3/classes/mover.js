@@ -1,24 +1,25 @@
 class Mover {
   constructor(grandStaff) {
     this.use = grandStaff.sheet.use;
-    this.tm = grandStaff.sheet.timeMachine;
-    this.at = this.tm.arrowOfTime;
-    this.status = 'stay'; //move
-    this.from = 0;
-    this.to = 0;
-    this.v0 = 50 / 1000;
-    this.a = 0;
+    this.curX = 0;
+    // this.tm = grandStaff.sheet.timeMachine;
+    // this.at = this.tm.arrowOfTime;
+    // this.status = 'stay'; //move
+    // this.from = 0;
+    // this.to = 0;
+    // this.v0 = 50 / 1000;
+    // this.a = 0;
   }
 
   setPoint(x) {
     this.curX = x;
-    this.use.setAttributeNS(null, "x", 400 - this.curX);
+    this.use.setAttributeNS(null, "x", 200 - this.curX);
   }
 
   updateStartPoint() {
-    this.curIndex = 0;
-    this.curKey = this.tm.tickKeys[0];
-    this.setPoint(this.at[this.curKey].x);
+    // this.curIndex = 0;
+    // this.curKey = this.tm.tickKeys[0];
+    // this.setPoint(this.at[this.curKey].x);
   }
 
   startGreenAnimation() {
@@ -29,17 +30,13 @@ class Mover {
   }
 
   next() {
-    this.startGreenAnimation();
-    this.curIndex += 1;
-    this.curKey = this.tm.tickKeys[this.curIndex];
-    this.setPoint(this.at[this.curKey].x);
+    this.curX += 10;
+    this.setPoint(this.curX)
   }
 
   prev() {
-    if (0 == this.curIndex) return;
-    this.curIndex -= 1;
-    this.curKey = this.tm.tickKeys[this.curIndex];
-    this.setPoint(this.at[this.curKey].x);
+    this.curX -= 10;
+    this.setPoint(this.curX)
   }
 
   moving() {
