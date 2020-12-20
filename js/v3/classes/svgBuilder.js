@@ -15,7 +15,7 @@ class SVGBuilder {
     let e = SVGBuilder.createSVG ('line');
     Object.keys(o).forEach( p => {
       if ('string' != typeof o[p] && isNaN(o[p])) dfgdgfdggd;
-      e.setAttributeNS (null, p, o[p])
+      e.setAttributeNS(null, p, o[p])
     });
     return e;
   }
@@ -87,6 +87,17 @@ class SVGBuilder {
       });
     });
 
+    return g;
+  }
+
+  static setTimeSignature(beats, type, x) {
+    let g = SVGBuilder.createSVG('g');
+    [0, 158].forEach(dy => {
+      [
+        {x: x, y: 99 + dy, text: SVGBuilder.toEmm(beats)},
+        {x: x, y: 129 + dy, text: SVGBuilder.toEmm(type)},
+      ].forEach( e => g.append(SVGBuilder.emmentaler({x: e.x, y: e.y, text: e.text})));
+    })
     return g;
   }
 
