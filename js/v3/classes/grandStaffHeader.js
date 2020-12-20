@@ -12,10 +12,6 @@ class GrandStaffHeader {
     this.root.append(SVGTmp.grandBracket());
 
     this.drawStaffLine();
-
-    // this.setKeySignature(7);
-    // this.setTimeSignature(12, 8);
-
     this.grandStaff.root.append(this.root);
   }
 
@@ -34,18 +30,6 @@ class GrandStaffHeader {
       e.setAttributeNS(null, 'id', name);
     }
     return e;
-  }
-
-  setTimeSignature(beats, type) {
-    let g = this.findOrCreate(`TimeSignature`, 'g');
-    g.innerHTML = '';
-    [0, 158].forEach(dy => {
-      [
-        {x: 165, y: 99 + dy, text: SVGBuilder.toEmm(beats)},
-        {x: 165, y: 129 + dy, text: SVGBuilder.toEmm(type)},
-      ].forEach( e => g.append(SVGBuilder.emmentaler({x: e.x, y: e.y, text: e.text})));
-    })
-    this.root.append(g);
   }
 
   setKeySignature(fifths) {

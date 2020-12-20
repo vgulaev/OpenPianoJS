@@ -29,9 +29,7 @@ class Sheet {
     this.measures.forEach((m, i) => {
       let measure = new Measure(m);
       this.pm.draw(measure);
-      console.log(measure.number);
       Ut.iterateChildren(m, node => {
-        // console.log(node.tagName);
         if (parsedTags.has(node.tagName)) {
           this.tm.push(node);
         }

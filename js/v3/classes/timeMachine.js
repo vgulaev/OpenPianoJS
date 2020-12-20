@@ -7,7 +7,10 @@ class TimeMachine {
     this.graces = [];
     this.notes = [];
     this.fab = {
-      'note': Note
+      'note': Note,
+      'clef': Clef,
+      'key': Fifths,
+      'time': Beats
     }
   }
 
@@ -52,7 +55,6 @@ class TimeMachine {
 
   checkKey(key) {
     if (!(key in this.arrowOfTime)) {
-      this.keysForDraw.push(key);
       this.arrowOfTime[key] = new TimePoint(this);
     }
   }

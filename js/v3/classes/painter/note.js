@@ -9,19 +9,13 @@ class Note {
     return this.pitch.octave * 7 + Note.sToStep[this.pitch.step];
   }
 
-  drawLine() {
-    let clef;
-    if (1 == this.staff) {
-      clef = 'G0';
-    } else {
-      clef = 'F0';
-    }
-    return this.stepLine - Note.clefLine[clef];
+  drawLine(clef) {
+    return this.stepLine - Note.clefLine[clef.toS()];
   }
 
-  drawY() {
+  drawY(clef) {
     let baseY = {1: 152, 2: 309.5};
-    let r = baseY[this.staff] - 7.5 * this.drawLine();
+    let r = baseY[this.staff] - 7.5 * this.drawLine(clef);
     if (isNaN(r)) fsdgdsgsdg;
     return r;
   }
@@ -37,7 +31,7 @@ class Note {
     // this.x = pm.cursor;
     // this.y = this.drawY(pm);
     this.x = pm.cursor;
-    this.y = this.drawY();
+    this.y = this.drawY(pm.drawClef[this.staff]);
 
     let t = SVGBuilder.emmentaler({x: this.x, y: this.y, text: nhead});
     pm.tm.arrowOfTime[this.tick].g.append(t);
