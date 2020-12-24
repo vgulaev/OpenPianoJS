@@ -1,4 +1,4 @@
-emm = {
+export const emm = {
   Clef: {
     G0: '\u{E173}',
     'G-1': '\u{E052}',
