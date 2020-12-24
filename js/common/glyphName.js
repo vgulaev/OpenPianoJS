@@ -70,5 +70,8 @@ export const emm = {
       up: '\u{E248}',
       down: '\u{E249}'
     }
+  },
+  Script: {
+    arpeggio: '\u{E15B}'
   }
 }

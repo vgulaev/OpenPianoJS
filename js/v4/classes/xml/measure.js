@@ -15,19 +15,21 @@ export class Measure {
 
     Ut.iterateChildren(xml, node => {
       if ('function' == typeof this[node.tagName]) {
-        this.checkTick();
+        if (-1 != ['note', 'time', 'clef', 'key'].indexOf(node.tagName)) {
+          this.checkTick();
+        }
         this[node.tagName](node);
       }
     });
   }
 
   backup(xml) {
-    let n = new Note(xml);
+    let n = new Key(xml);
     this.curTick -= n.duration;
   }
 
   forward(xml) {
-    let n = new Note(xml);
+    let n = new Key(xml);
     this.curTick += n.duration;
   }
 
