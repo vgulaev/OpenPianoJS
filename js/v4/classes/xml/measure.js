@@ -2,6 +2,7 @@ import {Clef} from './clef.js';
 import {Key} from './key.js';
 import {Note} from './note.js';
 import {SVGBuilder} from '../svgBuilder.js';
+import {Time} from './time.js';
 import {TimePoint} from './timePoint.js';
 import {Ut} from '../ut.js';
 
@@ -40,6 +41,11 @@ export class Measure {
         this.curTick += n.duration;
       }
     }
+  }
+
+  time(xml) {
+    let t = new Time(xml);
+    this.timePoint[this.curTick].push(t);
   }
 
   clef(xml) {

@@ -1,3 +1,5 @@
+import {emm} from '../../common/glyphName.js'
+
 export class SVGBuilder {
   static get xmlns() {
     return 'http://www.w3.org/2000/svg';
@@ -70,11 +72,11 @@ export class SVGBuilder {
     let ys;
     if (fifths < 0) {
       yy = [0, -22.5];
-      ys = (new Array(7)).fill(1).map( (e, i) => [{x: dx + 12 * i, y: yy[i % 2] + Math.floor(i / 2) * 7.5}][0]).slice(0, Math.abs(fifths));
+      ys = (new Array(7)).fill(1).map( (e, i) => [{x: dx + 14 * i, y: yy[i % 2] + Math.floor(i / 2) * 7.5}][0]).slice(0, Math.abs(fifths));
       acc = emm.Accidental.flat;
     } else {
       yy = [-32, -9.5, -39.5, -17, 5.5, -24.5, -2];
-      ys = (new Array(7)).fill(1).map( (e, i) => [{x: dx + 12 * i, y: yy[i]}][0]).slice(0, Math.abs(fifths));
+      ys = (new Array(7)).fill(1).map( (e, i) => [{x: dx + 14 * i, y: yy[i]}][0]).slice(0, Math.abs(fifths));
       acc = emm.Accidental.sharp;
     }
 
@@ -91,7 +93,7 @@ export class SVGBuilder {
 
   static setTimeSignature(beats, type, x) {
     let g = SVGBuilder.createSVG('g');
-    [0, 158].forEach(dy => {
+    [14, 172].forEach(dy => {
       [
         {x: x, y: 99 + dy, text: SVGBuilder.toEmm(beats)},
         {x: x, y: 129 + dy, text: SVGBuilder.toEmm(type)},

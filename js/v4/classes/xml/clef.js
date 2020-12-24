@@ -15,6 +15,7 @@ export class Clef {
     o.x = pm.cursor;
     let t = SVGBuilder.emmentaler({x: o['x'], y: o['y'], text: emm.Clef[this.toS()]});
     pm.g.append(t);
+    pm.drawClefs[this.number] = this;
   }
 
   toS() {
