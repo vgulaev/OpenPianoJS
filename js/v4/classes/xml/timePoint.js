@@ -71,33 +71,42 @@ export class TimePoint {
     }
   }
 
-  pushArpeggiate(pm, voice) {
+  pushArpeggiate(pm, x, voice) {
     let edge = voice.sort((a, b) => a.stepLine - b.stepLine);
     let staff = edge[0].staff;
     edge = [edge[0], edge[edge.length - 1]].map(e => e.drawY(pm.drawClefs[e.staff]));
 
     let g = SVGBuilder.createSVG('g');
     for (let y = edge[0]; y > edge[1]; y -= 15) {
-      let a = SVGBuilder.emmentaler({x: pm.cursor, y: y, text: emm.Script.arpeggio});
+      let a = SVGBuilder.emmentaler({x: x, y: y, text: emm.Script.arpeggio});
       g.append(a);
     }
     pm.g.append(g);
-    // pm.cursor += 15;
-    this.beforeNotesElements[staff].push({
-      g: g,
-      x: 15
-    });
   }
 
   checkArpeggiate(pm) {
     Object
       .keys(this.voices)
       .filter(e => this.voices[e][0].notations && this.voices[e][0].notations.arpeggiate)
-      .forEach(e => this.pushArpeggiate(pm, this.voices[e]));
+      .forEach(e => {
+        this.beforeNotesElements[this.voices[e][0].staff].push({
+          callBack: this.pushArpeggiate,
+          width: 15
+        });
+      });
   }
 
-  proccessBeforeNotesElements(pm){
+  drawBeforeNotesElements(pm) {
+    let maxes = [1, 2].map(e => this.beforeNotesElements[e].map(x => x.width).reduce((acc, cur) => acc += cur, 0));
+    let maxWidth = Math.max(...maxes);
+    let minWidth = Math.min(...maxes);
+
+    console.log('drawBeforeNotesElements');
+  }
+
+  proccessBeforeNotesElements(pm) {
     this.checkArpeggiate(pm);
+    this.drawBeforeNotesElements(pm);
   }
 
   draw(pm) {
