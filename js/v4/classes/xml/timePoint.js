@@ -100,18 +100,26 @@ export class TimePoint {
     let maxes = [1, 2].map(e => this.beforeNotesElements[e].map(x => x.width).reduce((acc, cur) => acc += cur, 0));
     let maxWidth = Math.max(...maxes);
     let minWidth = Math.min(...maxes);
+    if (0 == maxWidth && 0 ==minWidth) {
+      return;
+    }
 
     console.log('drawBeforeNotesElements');
   }
 
-  proccessBeforeNotesElements(pm) {
+  proccessBeforeNotesElements(pm) {drawSignature
     this.checkArpeggiate(pm);
     this.drawBeforeNotesElements(pm);
   }
 
+  drawNotes(pm) {
+
+  }
+
   draw(pm) {
     this.drawSignature(pm);
-    this.proccessBeforeNotesElements(pm);
+    // this.proccessBeforeNotesElements(pm);
+    this.drawNotes(pm);
     let t = SVGBuilder.text({x: pm.cursor, y: 71, text: 'TP'});
     pm.g.append(t);
     pm.cursor += 30;
