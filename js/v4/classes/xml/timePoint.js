@@ -1,4 +1,5 @@
 import {emm} from '../../../common/glyphName.js'
+import {cconst} from '../../../common/commonConst.js'
 import {SVGBuilder} from '../svgBuilder.js';
 
 export class TimePoint {
@@ -6,7 +7,6 @@ export class TimePoint {
     this.notes = [];
     this.voices = {};
     this.staff = {'1': [], '2': []};
-    this.beforeNotesElements = {'1': [], '2': []};
   }
 
   push(el) {
@@ -74,7 +74,7 @@ export class TimePoint {
   pushArpeggiate(pm, x, voice) {
     let edge = voice.sort((a, b) => a.stepLine - b.stepLine);
     let staff = edge[0].staff;
-    edge = [edge[0], edge[edge.length - 1]].map(e => e.drawY(pm.drawClefs[e.staff]));
+    edge = [edge[0], edge[edge.length - 1]].map(e => e.drawY(pm));
 
     let g = SVGBuilder.createSVG('g');
     for (let y = edge[0]; y > edge[1]; y -= 15) {
@@ -85,31 +85,51 @@ export class TimePoint {
   }
 
   checkArpeggiate(pm) {
-    Object
+    let voices = Object
       .keys(this.voices)
-      .filter(e => this.voices[e][0].notations && this.voices[e][0].notations.arpeggiate)
-      .forEach(e => {
-        this.beforeNotesElements[this.voices[e][0].staff].push({
-          callBack: this.pushArpeggiate,
-          width: 15
-        });
-      });
+      .filter(e => this.voices[e][0].notations && this.voices[e][0].notations.arpeggiate);
+    if (0 == voices.length) return;
+    voices.forEach(e => {
+      this.pushArpeggiate(pm, pm.cursor, this.voices[e]);
+    });
+    pm.cursor += 20;
   }
 
-  drawBeforeNotesElements(pm) {
-    let maxes = [1, 2].map(e => this.beforeNotesElements[e].map(x => x.width).reduce((acc, cur) => acc += cur, 0));
-    let maxWidth = Math.max(...maxes);
-    let minWidth = Math.min(...maxes);
-    if (0 == maxWidth && 0 ==minWidth) {
-      return;
-    }
-
-    console.log('drawBeforeNotesElements');
+  drawAccidentalAtStaff(pm, staff) {
+    let acc = staff.filter(n => n.accidental).sort((a, b) => a.drawLine(pm) - b.drawLine(pm));
+    if (0 == acc.length) return 0;
+    let x = 0;
+    let lastLine = -100;
+    let g = SVGBuilder.createSVG('g');
+    let xs = acc.map(n => {
+      let dl = n.drawLine(pm);
+      if (lastLine == dl) return false;
+      if (dl - lastLine < 4 && -x < 2 * cconst.accidentalWidth) {
+        x -= cconst.accidentalWidth;
+      } else {
+        x = 0;
+      }
+      lastLine = dl;
+      return {x: x, y: n.drawY(pm), text: emm.Accidental[n.accidental]};
+    }).filter(e => e);
+    let minX = Math.min(...(xs.map(e => e.x)));
+    xs.forEach(e => {
+      e.x = pm.cursor - minX + e.x;
+      let a = SVGBuilder.emmentaler(e);
+      g.append(a);
+    });
+    pm.g.append(g);
+    return Math.abs(minX) + cconst.accidentalWidth;
   }
 
-  proccessBeforeNotesElements(pm) {drawSignature
+  drawAccidental(pm) {
+    let dX = ['1', '2'].map( s => this.drawAccidentalAtStaff(pm, this.staff[s]));
+    pm.cursor += Math.max(...dX);
+  }
+
+  proccessBeforeNotesElements(pm) {
     this.checkArpeggiate(pm);
-    this.drawBeforeNotesElements(pm);
+    this.drawAccidental(pm);
   }
 
   drawNotes(pm) {
@@ -118,7 +138,8 @@ export class TimePoint {
 
   draw(pm) {
     this.drawSignature(pm);
-    // this.proccessBeforeNotesElements(pm);
+    this.proccessBeforeNotesElements(pm);
+    this.x = pm.cursor;
     this.drawNotes(pm);
     let t = SVGBuilder.text({x: pm.cursor, y: 71, text: 'TP'});
     pm.g.append(t);

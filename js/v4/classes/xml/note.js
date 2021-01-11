@@ -16,13 +16,15 @@ export class Note {
 
   }
 
-  drawLine(clef) {
+  drawLine(pm) {
+    let clef = pm.drawClefs[this.staff];
     return this.stepLine - Note.clefLine[clef.toS()];
   }
 
-  drawY(clef) {
+  drawY(pm) {
+    let clef = pm.drawClefs[this.staff];
     let baseY = {1: 152, 2: 309.5};
-    let r = baseY[this.staff] - 7.5 * this.drawLine(clef);
+    let r = baseY[this.staff] - 7.5 * this.drawLine(pm);
     if (isNaN(r)) fsdgdsgsdg;
     return r;
   }

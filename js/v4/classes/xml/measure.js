@@ -15,7 +15,10 @@ export class Measure {
 
     Ut.iterateChildren(xml, node => {
       if ('function' == typeof this[node.tagName]) {
-        if (-1 != ['note', 'time', 'clef', 'key'].indexOf(node.tagName)) {
+        if (
+          -1 != ['note', 'time', 'clef', 'key'].indexOf(node.tagName)
+          && null == node.querySelector('chord')
+          ) {
           this.checkTick();
         }
         this[node.tagName](node);

@@ -13,7 +13,7 @@ class App {
     this.sheet
       .load(url)
       .then(() => {
-        this.mover.updateStartPoint();
+        this.mover.assign(this.sheet);
       });
     // this.grandStaff.load(url)
     //   .then(() => {
@@ -22,14 +22,14 @@ class App {
   }
 }
 
+globalThis.app = new App();
 window.addEventListener('load', function( event ) {
-  var app = new App();
-  app.load('data/xml/test1.musicxml');
+  // app.load('data/xml/test2.musicxml');
   // app.load('data/xml/Beethoven Symphony No. 5 1 st movement Piano solo.musicxml');
   // app.load('data/xml/BWV 847 Prelude C Minor.musicxml');
   // app.load('data/xml/Canon_in_D_full.musicxml');
   // app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
-  // app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
+  app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
   // app.load('data/xml/Jingle_Bells.musicxml');
   // app.load('data/xml/Maksim Mrvica - Croatian Rhapsody.musicxml');
   // app.load('data/xml/Mozart-Fantasia in D Minor K. 397.musicxml');

@@ -17,9 +17,25 @@ export class Mover {
     });
   }
 
+  assign(sheet) {
+    this.sheet = sheet;
+    this.timeArrow = sheet
+      .measures
+      .map((m, i) => Object
+                      .keys(m.timePoint)
+                      .sort((a, b) => a-b)
+                      .map(t => ({m: i, t: t, x: m.timePoint[t].x})))
+      .flat();
+    // this.keys = this.timeArrow.
+    this.curIndex = 0;
+    this.setPoint(this.sheet.measures[39].timePoint[0].x)
+    // this.setPoint(this.timeArrow[this.curIndex].x);
+    console.log('sheet');
+  }
+
   setPoint(x) {
     this.curX = x;
-    this.use.setAttributeNS(null, "x", 200 - this.curX);
+    this.use.setAttributeNS(null, "x", 400 - this.curX);
   }
 
   updateStartPoint() {
@@ -34,13 +50,19 @@ export class Mover {
   }
 
   next() {
-    this.curX += 10;
-    this.setPoint(this.curX)
+    if (this.keys.length - 1 == this.curIndex) return;
+    this.curIndex += 1;
+    this.setPoint(this.timeArrow[this.curIndex].x);
+    // this.curX += 10;
+    // this.setPoint(this.curX)
   }
 
   prev() {
-    this.curX -= 10;
-    this.setPoint(this.curX)
+    if (0 == this.curIndex) return;
+    this.curIndex -= 1;
+    this.setPoint(this.timeArrow[this.curIndex].x);
+    // this.curX -= 10;
+    // this.setPoint(this.curX)
   }
 
 }
