@@ -154,6 +154,7 @@ export class TimePoint {
       }
       n.draw(pm);
       lastLine = l;
+      pm.sb.push(n);
     });
     return dWidth;
   }
@@ -169,11 +170,11 @@ export class TimePoint {
   drawSingleStemAtVoice(pm, voice) {
     if (1 == voice.length && voice[0].rest) return;
     let root = voice.find(n => !n.chord);
-    if (root.beam || 'none' == root.stem) return;
+    if ('none' == root.stem) return;
     let xs = (Array.from(new Set(voice.map(n => n.x)))).sort((a, b) => a - b);
     let ys = voice.map(n => n.y).sort((a, b) => a - b);
     let edge = [ys[0], ys[ys.length - 1]];
-    let stemLength = 53;
+    let stemLength = cconst.stemLength;
     if (16 == root.type) {
       stemLength += 3;
     } else if (32 == root.type) {
@@ -192,7 +193,10 @@ export class TimePoint {
     let x = (1 == xs.length ? ('up' == root.stem ? xs[0] + 17 : xs[0]) : xs[1]) + 1;
     let l = SVGBuilder.line({x1: x, y1: edge[0], x2: x, y2: edge[1]});
     pm.g.append(l);
-    if (-1 == ['whole', 'half', 'quarter'].indexOf(root.type)) {
+    if (root.beam) {
+
+    }
+    if (-1 == ['whole', 'half', 'quarter'].indexOf(root.type) && !root.beam) {
       let y = ('up' == root.stem ? edge[0] : edge[1]);
       let f = SVGBuilder.emmentaler({x: x + 1, y: y, text: emm.Flag[root.type][root.stem]})
       pm.g.append(f);
@@ -200,13 +204,25 @@ export class TimePoint {
   }
 
   drawSingleStem(pm) {
+    // let root = voice.find(n => !n.chord);
+    // if (!root.beam) return;
     Object.keys(this.voices).forEach(v => this.drawSingleStemAtVoice(pm, this.voices[v]));
+  }
+
+  drawBeamAtVoice(pm) {
+
+    console.log('drawBeamAtVoice');
+  }
+
+  drawBeam(pm) {
+    Object.keys(this.voices).forEach(v => this.drawBeamAtVoice(pm, this.voices[v]));
   }
 
   drawNotes(pm) {
     let dx = [1, 2].map(s => this.drawNotesOnStaff(pm, this.staff[s]));
     this.drawRests(pm);
-    this.drawSingleStem(pm);
+    // this.drawSingleStem(pm);
+    // this.drawBeam(pm);
     pm.cursor += (40 + Math.max(...dx));
   }
 
@@ -247,6 +263,7 @@ export class TimePoint {
     this.drawAdditionalLines(pm);
     this.x = pm.cursor;
     this.drawNotes(pm);
+    pm.sb.draw();
     // let t = SVGBuilder.text({x: pm.cursor, y: 71, text: 'TP'});
     // pm.g.append(t);
   }

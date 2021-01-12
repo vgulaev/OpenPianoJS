@@ -11,11 +11,20 @@ export class Note {
     } else {
       this.stepLine = this.pitch.octave * 7 + Note.sToStep[this.pitch.step];
     }
-    // if
-    // s0: '\u{E192}',
-    // s1: '\u{E193}',
-    // s2: '\u{E194}'
+    this.parseBeam();
+  }
 
+  parseBeam() {
+    let beam = this.xml.querySelectorAll('beam');
+    if (0 == beam.length) return;
+    this.beam = {};
+    beam.forEach(b => {
+      this.beam[b.getAttribute('number')] = b.innerHTML;
+    });
+  }
+
+  beamKey() {
+    return this.voice.toString();
   }
 
   drawLine(pm) {
