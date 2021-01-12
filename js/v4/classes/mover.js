@@ -26,11 +26,11 @@ export class Mover {
                       .sort((a, b) => a-b)
                       .map(t => ({m: i, t: t, x: m.timePoint[t].x})))
       .flat();
-    // this.keys = this.timeArrow.
-    this.curIndex = 0;
-    this.setPoint(this.sheet.measures[39].timePoint[0].x)
+    let x = this.sheet.measures[25].timePoint[0].x;
+    this.curIndex = this.timeArrow.findIndex(e => e.x == x);
+    this.setPoint(x)
+    // this.curIndex = 0;
     // this.setPoint(this.timeArrow[this.curIndex].x);
-    console.log('sheet');
   }
 
   setPoint(x) {
@@ -50,7 +50,7 @@ export class Mover {
   }
 
   next() {
-    if (this.keys.length - 1 == this.curIndex) return;
+    if (this.timeArrow.length - 1 == this.curIndex) return;
     this.curIndex += 1;
     this.setPoint(this.timeArrow[this.curIndex].x);
     // this.curX += 10;

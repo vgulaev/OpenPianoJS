@@ -14,6 +14,8 @@ export class SVGBuilder {
   }
 
   static line(o) {
+    if (!o['stroke-width']) o['stroke-width'] = 2;
+    if (!o['stroke']) o['stroke'] = 'black';
     let e = SVGBuilder.createSVG ('line');
     Object.keys(o).forEach( p => {
       if ('string' != typeof o[p] && isNaN(o[p])) dfgdgfdggd;
@@ -25,7 +27,7 @@ export class SVGBuilder {
   static emmentaler(o) {
     let e = SVGBuilder.createSVG('text');
     e.setAttributeNS(null, 'x', o.x);
-    if (isNaN(o.y)) fsdgdsgsdg;
+    if (isNaN(o.y) || !o.text) fsdgdsgsdg;
     e.setAttributeNS(null, 'y', o.y);
     e.innerHTML = o.text;
     e.style.fontFamily = 'Emmentaler';

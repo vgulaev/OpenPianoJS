@@ -1,5 +1,5 @@
-import {emm} from '../../../common/glyphName.js'
 import {cconst} from '../../../common/commonConst.js'
+import {emm} from '../../../common/glyphName.js'
 import {SVGBuilder} from '../svgBuilder.js';
 
 export class TimePoint {
@@ -7,6 +7,7 @@ export class TimePoint {
     this.notes = [];
     this.voices = {};
     this.staff = {'1': [], '2': []};
+
   }
 
   push(el) {
@@ -77,7 +78,7 @@ export class TimePoint {
     edge = [edge[0], edge[edge.length - 1]].map(e => e.drawY(pm));
 
     let g = SVGBuilder.createSVG('g');
-    for (let y = edge[0]; y > edge[1]; y -= 15) {
+    for (let y = edge[0]; y > edge[1]; y -= 14) {
       let a = SVGBuilder.emmentaler({x: x, y: y, text: emm.Script.arpeggio});
       g.append(a);
     }
@@ -119,7 +120,7 @@ export class TimePoint {
       g.append(a);
     });
     pm.g.append(g);
-    return Math.abs(minX) + cconst.accidentalWidth;
+    return Math.abs(minX) + cconst.accidentalWidth + 4;
   }
 
   drawAccidental(pm) {
@@ -132,17 +133,121 @@ export class TimePoint {
     this.drawAccidental(pm);
   }
 
-  drawNotes(pm) {
+  drawNotesOnStaff(pm, staff) {
+    let lastLine = -100;
+    let lastHead;
+    let notes = staff.sort((a, b) => a.drawLine(pm) - b.drawLine(pm));
+    let k = 1;
+    let dWidth = 0;
+    notes.filter(n => !n.rest).forEach(n => {
+      let l = n.drawLine(pm);
+      n.y = n.drawY(pm);
+      n.x = pm.cursor;
+      if (1 == l - lastLine) {
+        if (1 == k) {
+          n.x = pm.cursor + 17;
+          dWidth = 17;
+        }
+        k *= -1;
+      } else {
+        k = 1;
+      }
+      n.draw(pm);
+      lastLine = l;
+    });
+    return dWidth;
+  }
 
+  drawRests(pm) {
+    [1, 2].forEach(s => {
+      if (1 == this.staff[s].length) {
+        if (this.staff[s][0].rest) this.staff[s][0].drawRest(pm);
+      }
+    });
+  }
+
+  drawSingleStemAtVoice(pm, voice) {
+    if (1 == voice.length && voice[0].rest) return;
+    let root = voice.find(n => !n.chord);
+    if (root.beam || 'none' == root.stem) return;
+    let xs = (Array.from(new Set(voice.map(n => n.x)))).sort((a, b) => a - b);
+    let ys = voice.map(n => n.y).sort((a, b) => a - b);
+    let edge = [ys[0], ys[ys.length - 1]];
+    let stemLength = 53;
+    if (16 == root.type) {
+      stemLength += 3;
+    } else if (32 == root.type) {
+      stemLength += 10;
+    } else if (64 == root.type) {
+      stemLength += 30;
+    } else if (128 == root.type) {
+      stemLength += 30;
+    }
+    if ('up' == root.stem) {
+      edge[0] -= stemLength;
+    } else {
+      edge[0] += 2;
+      edge[1] += stemLength;
+    }
+    let x = (1 == xs.length ? ('up' == root.stem ? xs[0] + 17 : xs[0]) : xs[1]) + 1;
+    let l = SVGBuilder.line({x1: x, y1: edge[0], x2: x, y2: edge[1]});
+    pm.g.append(l);
+    if (-1 == ['whole', 'half', 'quarter'].indexOf(root.type)) {
+      let y = ('up' == root.stem ? edge[0] : edge[1]);
+      let f = SVGBuilder.emmentaler({x: x + 1, y: y, text: emm.Flag[root.type][root.stem]})
+      pm.g.append(f);
+    }
+  }
+
+  drawSingleStem(pm) {
+    Object.keys(this.voices).forEach(v => this.drawSingleStemAtVoice(pm, this.voices[v]));
+  }
+
+  drawNotes(pm) {
+    let dx = [1, 2].map(s => this.drawNotesOnStaff(pm, this.staff[s]));
+    this.drawRests(pm);
+    this.drawSingleStem(pm);
+    pm.cursor += (40 + Math.max(...dx));
+  }
+
+  drawAdditionalLineNote(pm, note) {
+    let l = note.drawLine(pm);
+    let c = Math.floor(Math.abs(l > 0 ? l - 9 : l - 1) / 2);
+
+    let kx = Math.sign(l)
+    let key = (1 == kx ? 'yUp' : 'yDown');
+    let x1 = pm.cursor - 7;
+    let x2 = pm.cursor + 25;
+
+    for (let i = 1; i <= c; i++) {
+      let y = cconst.staff[note.staff][key] - kx * 15 * i;
+      let e = SVGBuilder.line({x1: x1, y1: y, x2: x2, y2: y});
+      pm.g.append(e);
+    }
+  }
+
+  drawAdditionalLines(pm) {
+    [1, 2].forEach(s => {
+      let edge = this.staff[s]
+        .filter(n => (undefined == n.rest) && (s == n.staff) && (n.drawLine(pm) < 0 || n.drawLine(pm) > 10))
+        .sort((a, b) => a.drawLine(pm) - b.drawLine(pm));
+      if (0 == edge.length) return;
+      if (edge.length > 1) {
+        edge = [edge[0], edge[edge.length - 1]];
+      }
+      edge.forEach(n => {
+        this.drawAdditionalLineNote(pm, n);
+      });
+    });
   }
 
   draw(pm) {
     this.drawSignature(pm);
     this.proccessBeforeNotesElements(pm);
+    this.drawAdditionalLines(pm);
     this.x = pm.cursor;
     this.drawNotes(pm);
-    let t = SVGBuilder.text({x: pm.cursor, y: 71, text: 'TP'});
-    pm.g.append(t);
-    pm.cursor += 30;
+    // let t = SVGBuilder.text({x: pm.cursor, y: 71, text: 'TP'});
+    // pm.g.append(t);
   }
 }
