@@ -9,5 +9,6 @@ export const cconst = {
       yDown: 302
     }
   },
+  stemLength: 53,
   accidentalWidth: 14
 }
