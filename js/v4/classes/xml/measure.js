@@ -74,7 +74,7 @@ export class Measure {
     let t = SVGBuilder.text({x: pm.cursor - 5, y: 71, text: this.xml.getAttribute('number')});
     pm.g.append(t);
     pm.g.append(e);
-    pm.cursor += 10;
+    pm.cursor += 20;
     Object.keys(this.timePoint)
       .map(e => parseInt(e))
       .sort((a, b) => a-b)

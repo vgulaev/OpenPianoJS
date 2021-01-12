@@ -24,9 +24,12 @@ class App {
 
 globalThis.app = new App();
 window.addEventListener('load', function( event ) {
-  // app.load('data/xml/test2.musicxml');
+  // app.load('data/xml/test3.musicxml');
   // app.load('data/xml/Beethoven Symphony No. 5 1 st movement Piano solo.musicxml');
+  // app.load('data/xml/Beethoven Sonata 14 C Sharp Minor.musicxml');
+  // app.load('data/xml/Beethoven Piano_Sonata_No.21_Op.53.musicxml');
   // app.load('data/xml/BWV 847 Prelude C Minor.musicxml');
+  // app.load('data/xml/BWV-565.musicxml');
   // app.load('data/xml/Canon_in_D_full.musicxml');
   // app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
   app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');

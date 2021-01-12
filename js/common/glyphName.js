@@ -30,14 +30,14 @@ export const emm = {
     s2: '\u{E194}'
   },
   Rest: {
-    128: '\u{E4EA}',
-    64: '\u{E4E9}',
-    32: '\u{E4E8}',
-    16: '\u{E4E7}',
-    eighth: '\u{E4E6}',
-    quarter: '\u{E4E5}',
-    half: '\u{E4E4}',
-    whole: '\u{E4E3}'
+    128: '\u{E10E}',
+    64: '\u{E10D}',
+    32: '\u{E10C}',
+    16: '\u{E10B}',
+    eighth: '\u{E10A}',
+    quarter: '\u{E108}',
+    half: '\u{E101}',
+    whole: '\u{E100}'
   },
   Dot: {
     dot: '\u{002E}',
@@ -51,24 +51,24 @@ export const emm = {
   },
   Flag: {
     eighth: {
-      up: '\u{E240}',
-      down: '\u{E241}'
+      up: '\u{E21D}',
+      down: '\u{E222}'
     },
     16: {
-      up: '\u{E242}',
-      down: '\u{E243}'
+      up: '\u{E21E}',
+      down: '\u{E223}'
     },
     32: {
-      up: '\u{E244}',
-      down: '\u{E245}'
+      up: '\u{E21F}',
+      down: '\u{E224}'
     },
     64: {
-      up: '\u{E246}',
-      down: '\u{E247}'
+      up: '\u{E220}',
+      down: '\u{E225}'
     },
     128: {
-      up: '\u{E248}',
-      down: '\u{E249}'
+      up: '\u{E221}',
+      down: '\u{E226}'
     }
   },
   Script: {
