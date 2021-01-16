@@ -48,6 +48,9 @@ export class Note {
       head = 's1';
     }
     let e = SVGBuilder.emmentaler({x: this.x, y: this.y, text: emm.Notehead[head]});
+    if (this.grace) {
+      e.style.fontSize = '38px';
+    }
     pm.g.append(e);
     this.g = e;
   }

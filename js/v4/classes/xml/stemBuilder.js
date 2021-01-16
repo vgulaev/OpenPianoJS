@@ -24,10 +24,12 @@ export class StemBuilder {
     let edge;
     let x;
     let k = 1;
+    let dx = 18;
+    if (voice[0].grace) dx = 11;
     let dy = StemBuilder.stemHeight[voice[0].type];
     if (voice[0].stem == 'up') {
       edge = [voice[0], voice[voice.length - 1]];
-      x = edge[0].x + 18;
+      x = edge[0].x + dx;
     } else {
       edge = [voice[voice.length - 1], voice[0]];
       x = edge[0].x + 1;
@@ -153,6 +155,7 @@ export class StemBuilder {
 
   pushBeam(v) {
     let b = this.getBeamNotHook(v, 1);
+    console.log(b.beam);
     let key = b.beamKey();
 
     if (b.beamKey() in this.bvoises) {

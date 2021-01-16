@@ -1,6 +1,7 @@
 import {cconst} from '../../../common/commonConst.js'
 import {emm} from '../../../common/glyphName.js'
 import {Note} from './note.js';
+import {StemBuilder} from './stemBuilder.js'
 import {SVGBuilder} from '../svgBuilder.js';
 
 export class TimePoint {
@@ -8,7 +9,6 @@ export class TimePoint {
     this.notes = [];
     this.voices = {};
     this.staff = {'1': [], '2': []};
-
   }
 
   push(el) {
@@ -230,8 +230,50 @@ export class TimePoint {
     [1, 2].forEach(s => { this.drawAugmentationDotesAtStaff(pm, this.staff[s]) });
   }
 
+  addNilsAtGraces() {
+    let keys = Object.keys(this.graces);
+    let gracesLength = Math.max(...keys.map(k => this.graces[k].length));;
+    keys.forEach(k => {
+      if (gracesLength == this.graces[k].length) return;
+      for (var i = this.graces[k].length; i < gracesLength; i++) {
+        this.graces[k].unshift(null);
+      }
+    })
+  }
+
+  drawGraces(pm) {
+    if (!this.graces) return;
+    let sb = new StemBuilder(pm);
+    this.addNilsAtGraces();
+    let keys = Object.keys(this.graces);
+    let x = pm.cursor;
+    let dxAcc;
+    for (var i = 0; i < this.graces[keys[0]].length; i++) {
+      dxAcc = 0;
+      keys.forEach(k => {
+        let n = this.graces[k][i];
+        if (!n) return;
+        if (n.accidental) {
+          let op = {x : x + 3, y: n.drawY(pm), text: emm.Accidental[n.accidental]};
+          let a = SVGBuilder.emmentaler(op);
+          a.style.fontSize = '38px';
+          pm.g.append(a);
+          dxAcc = 15;
+        }
+        n.x = x + dxAcc;
+        n.y = n.drawY(pm);
+        n.draw(pm);
+        sb.push(n);
+      });
+      sb.draw();
+      x += (15 + dxAcc);
+    }
+    pm.cursor = x;
+  }
+
   draw(pm) {
     this.drawSignature(pm);
+    this.drawGraces(pm);
     this.proccessBeforeNotesElements(pm);
     this.drawAdditionalLines(pm);
     this.x = pm.cursor;
