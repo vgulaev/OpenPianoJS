@@ -23,12 +23,11 @@ export class StemBuilder {
   xyStem(voice) {
     let edge;
     let x;
-    let k;
+    let k = 1;
     let dy = StemBuilder.stemHeight[voice[0].type];
     if (voice[0].stem == 'up') {
       edge = [voice[0], voice[voice.length - 1]];
       x = edge[0].x + 18;
-      k = 1;
     } else {
       edge = [voice[voice.length - 1], voice[0]];
       x = edge[0].x + 1;
@@ -60,13 +59,19 @@ export class StemBuilder {
     this.g.append(f);
   }
 
+  getK(coords) {
+    let s = coords[0];
+    let e = coords[coords.length - 1];
+    return (e.y2 - s.y2) / (e.x2 - s.x2);
+  }
+
   drawBeam(b, coords, index) {
     let dy = 10;
     if ('down' == b[0][0].stem) dy = -10;
 
     let s = coords[0];
     let e = coords[coords.length - 1];
-    let k = (e.y2 - s.y2) / (e.x2 - s.x2 + 2);
+    let k = this.getK(coords);
     let l = SVGBuilder.line({x1: s.x2 - 1, y1: s.y2 + index * dy, x2: e.x2 + 1, y2: e.y2 + index * dy, 'stroke-width': 5})
     this.g.append(l);
 
@@ -77,9 +82,26 @@ export class StemBuilder {
     })
   }
 
+  drawHooks(note, xy, k) {
+    if (!note.hasHook) return;
+    let dy = 10;
+    if ('down' == note.stem) dy = -10;
+
+    Object.entries(note.beam).forEach(([key, v]) => {
+      if (-1 == v.indexOf('hook')) return;
+      let dx = -17;
+      if ('forward hook' == v) dx = 17;
+      let y1 = xy.y2 + (key - 1) * dy;
+      let y2 = y1 + dx * k;
+      let l = SVGBuilder.line({x1: xy.x2, y1: y1, x2: xy.x2 + dx, y2: y2, 'stroke-width': 5});
+      this.g.append(l);
+    });
+  }
+
   drawBeamSteams(b, coords) {
     let dy = 10;
     if ('down' == b[0][0].stem) dy = -10;
+    let k = this.getK(coords);
 
     coords.forEach((xy, i) => {
       let index = 0;
@@ -89,8 +111,11 @@ export class StemBuilder {
         .map(([k, v]) => k)) - 1;
       }
 
-      let l = SVGBuilder.line({x1: xy.x1, y1: xy.y1, x2: xy.x2, y2: xy.y2 + index * dy, 'stroke-width': 2, stroke: 'black'})
+      let stemXY = {x1: xy.x1, y1: xy.y1, x2: xy.x2, y2: xy.y2 + index * dy};
+      let l = SVGBuilder.line(stemXY);
       this.g.append(l);
+
+      this.drawHooks(xy.beam, stemXY, k);
     });
   }
 
@@ -122,6 +147,7 @@ export class StemBuilder {
       if  (ys[0] > m && ys[ys.length - 1] > m)
         coords.forEach(xy => xy.y2 = m);
     }
+
     return coords;
   }
 

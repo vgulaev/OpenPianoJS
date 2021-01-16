@@ -1,9 +1,9 @@
 export const emm = {
   Clef: {
-    G0: '\u{E173}',
-    'G-1': '\u{E052}',
-    'G1': '\u{E053}',
-    F0: '\u{E171}'
+    G: '\u{E173}',
+    // 'G-1': '\u{E052}',
+    // 'G1': '\u{E053}',
+    F: '\u{E171}'
   },
   Accidental: {
     flat: '\u{E11B}',
@@ -40,8 +40,7 @@ export const emm = {
     whole: '\u{E100}'
   },
   Dot: {
-    dot: '\u{002E}',
-    upper: '\u{E044}'
+    dot: '\u{E131}'
   },
   Articulation: {
     staccato: '\u{E4A2}',

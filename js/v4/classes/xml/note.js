@@ -20,6 +20,7 @@ export class Note {
     this.beam = {};
     beam.forEach(b => {
       this.beam[b.getAttribute('number')] = b.innerHTML;
+      this.hasHook = (-1 != b.innerHTML.indexOf('hook'));
     });
   }
 
@@ -56,7 +57,8 @@ export class Note {
     if (!this.type) head = 'whole';
     let dy = 37;
     if ('whole' == head) dy = 53;
-    let e = SVGBuilder.emmentaler({x: pm.cursor, y: Note.baseY[this.staff] - dy, text: emm.Rest[head]});
+    this.y = Note.baseY[this.staff] - dy;
+    let e = SVGBuilder.emmentaler({x: pm.cursor, y: this.y, text: emm.Rest[head]});
     pm.g.append(e);
     this.g = e;
   }

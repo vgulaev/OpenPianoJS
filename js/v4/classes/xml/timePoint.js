@@ -1,5 +1,6 @@
 import {cconst} from '../../../common/commonConst.js'
 import {emm} from '../../../common/glyphName.js'
+import {Note} from './note.js';
 import {SVGBuilder} from '../svgBuilder.js';
 
 export class TimePoint {
@@ -167,62 +168,9 @@ export class TimePoint {
     });
   }
 
-  drawSingleStemAtVoice(pm, voice) {
-    if (1 == voice.length && voice[0].rest) return;
-    let root = voice.find(n => !n.chord);
-    if ('none' == root.stem) return;
-    let xs = (Array.from(new Set(voice.map(n => n.x)))).sort((a, b) => a - b);
-    let ys = voice.map(n => n.y).sort((a, b) => a - b);
-    let edge = [ys[0], ys[ys.length - 1]];
-    let stemLength = cconst.stemLength;
-    if (16 == root.type) {
-      stemLength += 3;
-    } else if (32 == root.type) {
-      stemLength += 10;
-    } else if (64 == root.type) {
-      stemLength += 30;
-    } else if (128 == root.type) {
-      stemLength += 30;
-    }
-    if ('up' == root.stem) {
-      edge[0] -= stemLength;
-    } else {
-      edge[0] += 2;
-      edge[1] += stemLength;
-    }
-    let x = (1 == xs.length ? ('up' == root.stem ? xs[0] + 17 : xs[0]) : xs[1]) + 1;
-    let l = SVGBuilder.line({x1: x, y1: edge[0], x2: x, y2: edge[1]});
-    pm.g.append(l);
-    if (root.beam) {
-
-    }
-    if (-1 == ['whole', 'half', 'quarter'].indexOf(root.type) && !root.beam) {
-      let y = ('up' == root.stem ? edge[0] : edge[1]);
-      let f = SVGBuilder.emmentaler({x: x + 1, y: y, text: emm.Flag[root.type][root.stem]})
-      pm.g.append(f);
-    }
-  }
-
-  drawSingleStem(pm) {
-    // let root = voice.find(n => !n.chord);
-    // if (!root.beam) return;
-    Object.keys(this.voices).forEach(v => this.drawSingleStemAtVoice(pm, this.voices[v]));
-  }
-
-  drawBeamAtVoice(pm) {
-
-    console.log('drawBeamAtVoice');
-  }
-
-  drawBeam(pm) {
-    Object.keys(this.voices).forEach(v => this.drawBeamAtVoice(pm, this.voices[v]));
-  }
-
   drawNotes(pm) {
     let dx = [1, 2].map(s => this.drawNotesOnStaff(pm, this.staff[s]));
     this.drawRests(pm);
-    // this.drawSingleStem(pm);
-    // this.drawBeam(pm);
     pm.cursor += (40 + Math.max(...dx));
   }
 
@@ -257,14 +205,38 @@ export class TimePoint {
     });
   }
 
+  drawAugmentationDotesAtStaff(pm, staff) {
+    let doted = staff.filter(n => n.dot && !n.rest).sort((a,b)=> (a.y - b.y));
+    if (0 == doted.length) return;
+
+    let lastLine = 100;
+    let a = doted.map(n => {
+      let l = n.drawLine(pm);
+      let newL = l;
+      if (1 == Math.abs(l) % 2) {
+        newL = ((lastLine == l + 1) ? l - 1 : l + 1);
+      }
+      lastLine = newL;
+      return {l: newL, n: n};
+    })
+    .forEach(el => {
+      let y = Note.baseY[el.n.staff] - 7.5 * el.l;
+      let e = SVGBuilder.emmentaler({x: pm.cursor - 15, y: y, text: emm.Dot.dot});
+      pm.g.append(e);
+    });
+  }
+
+  drawAugmentationDotes(pm) {
+    [1, 2].forEach(s => { this.drawAugmentationDotesAtStaff(pm, this.staff[s]) });
+  }
+
   draw(pm) {
     this.drawSignature(pm);
     this.proccessBeforeNotesElements(pm);
     this.drawAdditionalLines(pm);
     this.x = pm.cursor;
     this.drawNotes(pm);
+    this.drawAugmentationDotes(pm);
     pm.sb.draw();
-    // let t = SVGBuilder.text({x: pm.cursor, y: 71, text: 'TP'});
-    // pm.g.append(t);
   }
 }

@@ -26,7 +26,7 @@ export class Mover {
                       .sort((a, b) => a-b)
                       .map(t => ({m: i, t: t, x: m.timePoint[t].x})))
       .flat();
-    // let x = this.sheet.measures[18].timePoint[0].x;
+    // let x = this.sheet.measures[11].timePoint[0].x;
     // this.curIndex = this.timeArrow.findIndex(e => e.x == x);
     // this.setPoint(x)
     this.curIndex = 0;
