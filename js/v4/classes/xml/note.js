@@ -34,6 +34,13 @@ export class Note {
     });
   }
 
+  tieStatus() {
+    if (2 == this.tie.length) {
+      return 'continue';
+    }
+    return this.tie[0].type;
+  }
+
   beamKey() {
     return this.voice.toString();
   }

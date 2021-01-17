@@ -33,8 +33,8 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/BWV-565.musicxml');
   // app.load('data/xml/Canon_in_D_full.musicxml');
   // app.load('data/xml/Chopin_-_Nocturne_Op_9_No_1_B_Flat_Minor.musicxml');
-  // app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
-  app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
+  app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
+  // app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
   // app.load('data/xml/Jingle_Bells.musicxml');
   // app.load('data/xml/Maksim Mrvica - Croatian Rhapsody.musicxml');
   // app.load('data/xml/Mozart-Fantasia in D Minor K. 397.musicxml');
