@@ -156,6 +156,7 @@ export class TimePoint {
       n.draw(pm);
       lastLine = l;
       pm.sb.push(n);
+      pm.tb.push(n);
     });
     return dWidth;
   }
@@ -280,5 +281,6 @@ export class TimePoint {
     this.drawNotes(pm);
     this.drawAugmentationDotes(pm);
     pm.sb.draw();
+    pm.tb.draw();
   }
 }

@@ -13,6 +13,13 @@ export class Mover {
         } else if ('ArrowLeft' == event.key) {
           this.prev();
         }
+      } else if ('Home' == event.key) {
+        this.curIndex = 0;
+        this.setPoint(this.timeArrow[this.curIndex].x);
+      } else if ('End' == event.key) {
+        let x = this.sheet.measures[this.sheet.measures.length - 1].timePoint[0].x;
+        this.curIndex = this.timeArrow.findIndex(e => e.x == x);
+        this.setPoint(x)
       }
     });
   }

@@ -12,6 +12,16 @@ export class Note {
       this.stepLine = this.pitch.octave * 7 + Note.sToStep[this.pitch.step];
     }
     this.parseBeam();
+    this.parseTie();
+  }
+
+  parseTie() {
+    let tie = this.xml.querySelectorAll('tie');
+    if (0 == tie.length) return;
+    this.tie = [];
+    tie.forEach(t => {
+      this.tie.push({type: t.getAttributeNS(null, 'type')});
+    });
   }
 
   parseBeam() {
@@ -64,6 +74,14 @@ export class Note {
     let e = SVGBuilder.emmentaler({x: pm.cursor, y: this.y, text: emm.Rest[head]});
     pm.g.append(e);
     this.g = e;
+  }
+
+  toS() {
+    let s = this.pitch.step + this.pitch.octave;
+    if (this.pitch.alter) {
+      s += 'a' + this.pitch.alter;
+    }
+    return s;
   }
 }
 

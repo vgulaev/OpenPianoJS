@@ -155,7 +155,6 @@ export class StemBuilder {
 
   pushBeam(v) {
     let b = this.getBeamNotHook(v, 1);
-    console.log(b.beam);
     let key = b.beamKey();
 
     if (b.beamKey() in this.bvoises) {

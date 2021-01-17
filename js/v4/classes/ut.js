@@ -24,7 +24,14 @@ export class Ut {
     for (let c of xml.children) {
       if (0 == c.childElementCount) {
         if ('' == c.innerHTML) {
-          o[c.tagName] = true
+          if (0 == c.attributes.length) {
+            o[c.tagName] = true
+          } else {
+            o[c.tagName] = {};
+            for (let a of c.attributes) {
+              o[c.tagName][a.name] = a.value;
+            }
+          }
         } else {
           let i = parseInt(c.innerHTML);
           if (isNaN(i)) {
