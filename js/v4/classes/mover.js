@@ -61,7 +61,12 @@ export class Mover {
   startGreenAnimation() {
     let c = this.cc.items[this.curIndex];
     c.notes.forEach(n => {
-      n.g.style['display'] = 'none';
+      n.g.setAttributeNS(null, 'stroke', 'green');
+      n.g.setAttributeNS(null, 'fill', 'green');
+      // n.g.style.color = 'green';
+      // n.g.style.display = 'none';
+      // n.g.style.animation = 'example';
+      // n.g.style.animationDuration = '4s';
     });
   }
 
