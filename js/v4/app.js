@@ -42,10 +42,10 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
   // app.load('data/xml/Jingle_Bells.musicxml');
   // app.load('data/xml/Maksim Mrvica - Croatian Rhapsody.musicxml');
-  // app.load('data/xml/Mozart-Fantasia in D Minor K. 397.musicxml');
+  app.load('data/xml/Mozart-Fantasia in D Minor K. 397.musicxml');
   // app.load('data/xml/Mozart-Sonata_16.musicxml');
   // app.load('data/xml/Prelude_in_G_Minor_Op._23_No._5.musicxml');
-  app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._IX. Новая кукла.musicxml');
+  // app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._IX. Новая кукла.musicxml');
 
   // app.load('data/xml/test.musicxml');
 });

@@ -30,6 +30,7 @@ export class SVGBuilder {
     if (isNaN(o.y) || !o.text) fsdgdsgsdg;
     e.setAttributeNS(null, 'y', o.y);
     e.innerHTML = o.text;
+    // e.style.display = 'inline';
     e.style.fontFamily = 'Emmentaler';
     e.style.fontSize = SVGBuilder.fontSize;
     return e;

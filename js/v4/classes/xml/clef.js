@@ -10,16 +10,23 @@ export class Clef {
     Ut.parseChildren(this, xml);
   }
 
-  draw(pm) {
+  drawG(x) {
+    let g = SVGBuilder.createSVG('g');
     let o = Ut.clefOffset(this);
-    o.x = pm.cursor;
+    if (x) o.x = x;
     let t = SVGBuilder.emmentaler({x: o['x'], y: o['y'], text: emm.Clef[this.sign]});
-    pm.g.append(t);
+    g.append(t);
     if (1 == this['clef-octave-change'] && 'G' == this.sign) {
       let t = SVGBuilder.emmentaler({x: o['x'] + 13, y: o['y'] - 69, text: emm.Number[8]});
       t.style.fontSize = '25px';
-      pm.g.append(t);
+      g.append(t);
     }
+    return g;
+  }
+
+  draw(pm) {
+    let g = this.drawG(pm.cursor);
+    pm.g.append(g);
     pm.drawClefs[this.number] = this;
   }
 

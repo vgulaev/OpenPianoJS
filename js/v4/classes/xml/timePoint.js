@@ -5,10 +5,11 @@ import {StemBuilder} from './stemBuilder.js'
 import {SVGBuilder} from '../svgBuilder.js';
 
 export class TimePoint {
-  constructor() {
+  constructor(measure) {
     this.notes = [];
     this.voices = {};
     this.staff = {'1': [], '2': []};
+    this.measure = measure;
   }
 
   push(el) {
@@ -272,6 +273,10 @@ export class TimePoint {
     pm.cursor = x;
   }
 
+  updateClef(pm) {
+    this.headerClefs = Object.assign({}, pm.drawClefs)
+  }
+
   draw(pm) {
     this.drawSignature(pm);
     this.drawGraces(pm);
@@ -282,5 +287,6 @@ export class TimePoint {
     this.drawAugmentationDotes(pm);
     pm.sb.draw();
     pm.tb.draw();
+    this.updateClef(pm);
   }
 }

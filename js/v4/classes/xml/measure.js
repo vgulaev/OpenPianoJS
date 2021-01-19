@@ -24,6 +24,18 @@ export class Measure {
         this[node.tagName](node);
       }
     });
+
+    this.setTimeAndFifths();
+  }
+
+  setTimeAndFifths() {
+    ['timeSignature', 'fifths'].forEach(k => {
+      if (this[k]) {
+        Measure[k] = this[k];
+      } else {
+        this[k] = Measure[k];
+      }
+    });
   }
 
   backup(xml) {
@@ -51,6 +63,7 @@ export class Measure {
   time(xml) {
     let t = new Time(xml);
     this.timePoint[this.curTick].push(t);
+    this.timeSignature = t;
   }
 
   clef(xml) {
@@ -61,11 +74,12 @@ export class Measure {
   key(xml) {
     let k = new Key(xml);
     this.timePoint[this.curTick].push(k);
+    this.fifths = k;
   }
 
   checkTick() {
     if (!(this.curTick in this.timePoint)) {
-      this.timePoint[this.curTick] = new TimePoint();
+      this.timePoint[this.curTick] = new TimePoint(this);
     }
   }
 

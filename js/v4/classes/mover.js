@@ -1,6 +1,7 @@
 export class Mover {
-  constructor(grandStaff) {
-    this.use = grandStaff.sheet.use;
+  constructor(app) {
+    this.header = app.grandStaff.header;
+    this.use = app.sheet.use;
     this.curX = 0;
     this.initListeners();
   }
@@ -22,35 +23,51 @@ export class Mover {
         this.setPoint(x)
       }
     });
+
+    window.addEventListener("touchend", event => {
+      let changedTouches = event.changedTouches;
+      if (0 == changedTouches.length) return;
+      // if (changedTouches[0].pageY < App.songName.getBoundingClientRect().bottom * 1.1) return;
+      let board = document.body.offsetWidth / 2;
+      if (changedTouches[0].pageX < board) {
+        this.prev();
+      } else {
+        this.next();
+      }
+    });
   }
 
   assign(cc) {
     this.cc = cc;
-    // let x = this.sheet.measures[11].timePoint[0].x;
-    // this.curIndex = this.timeArrow.findIndex(e => e.x == x);
-    // this.setPoint(x)
     this.curIndex = 0;
     this.setPoint(this.cc.items[this.curIndex].x);
+  }
+
+  updateHeader() {
+    let tp = this.cc.items[this.curIndex].tp;
+    let clefs = tp.headerClefs;
+    this.header.setClef(clefs[1]);
+    this.header.setClef(clefs[2]);
+    this.header.setKeySignature(tp.measure.fifths.fifths);
   }
 
   setPoint(x) {
     this.curX = x;
     this.use.setAttributeNS(null, "x", 400 - this.curX);
-  }
-
-  updateStartPoint() {
-    this.setPoint(0);
+    this.updateHeader();
   }
 
   startGreenAnimation() {
-    var c = this.at[this.curKey].g.getElementsByTagName("animate");
-    for (var e of c) {
-      e.beginElement();
-    }
+    let c = this.cc.items[this.curIndex];
+    c.notes.forEach(n => {
+      console.log(n.g.style.fontSize, `*** ${n.g.style.display}`);
+      n.g.style['display'] = 'none';
+    });
   }
 
   next() {
     if (this.cc.items.length - 1 == this.curIndex) return;
+    this.startGreenAnimation();
     this.curIndex += 1;
     this.setPoint(this.cc.items[this.curIndex].x);
   }

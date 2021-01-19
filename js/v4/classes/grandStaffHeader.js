@@ -1,5 +1,7 @@
+import {emm} from '../../common/glyphName.js'
 import {SVGBuilder} from './svgBuilder.js';
 import {SVGTmp} from './svgTemplate.js';
+import {Ut} from './ut.js';
 
 export class GrandStaffHeader {
   constructor(grandStaff) {
@@ -36,19 +38,21 @@ export class GrandStaffHeader {
   }
 
   setKeySignature(fifths) {
+    if (this.fifths == fifths) return;
+    this.fifths = fifths;
     let g = this.findOrCreate(`KeySignature`, 'g');
     g.innerHTML = SVGBuilder.keySignature(this.clef[1], this.clef[2], fifths, 73).innerHTML;
     this.root.append(g);
   }
 
   setClef(clef) {
+    if (this.clef[clef.number] == clef.toS()) return;
     this.clef[clef.number] = clef.toS();
     let id = `Clef${clef.number}`;
-    let o = Ut.clefOffset(clef);
     let t = document.getElementById(id);
     if (t != null)
       t.remove();
-    t = SVGBuilder.emmentaler({x: o['x'], y: o['y'], text: emm.Clef[clef.toS()]});
+    t = clef.drawG();
     t.setAttributeNS(null, 'id', `Clef${clef.number}`);
 
     this.root.append(t);

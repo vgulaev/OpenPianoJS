@@ -37,7 +37,8 @@ export const emm = {
     eighth: '\u{E10A}',
     quarter: '\u{E108}',
     half: '\u{E101}',
-    whole: '\u{E100}'
+    whole: '\u{E100}',
+    breve: '\u{E106}',
   },
   Dot: {
     dot: '\u{E131}'
