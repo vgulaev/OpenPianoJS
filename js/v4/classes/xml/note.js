@@ -13,6 +13,7 @@ export class Note {
     }
     this.parseBeam();
     this.parseTie();
+    this.midiByte = this.setMidiByte();
   }
 
   parseTie() {
@@ -35,10 +36,17 @@ export class Note {
   }
 
   tieStatus() {
+    if (!this.tie) return;
     if (2 == this.tie.length) {
       return 'continue';
     }
     return this.tie[0].type;
+  }
+
+  setMidiByte() {
+    let p = this.pitch;
+    if ((this.rest) || (-1 != ['continue', 'stop'].indexOf(this.tieStatus()))) return -1;
+    return 12 + p.octave * 12 + Note.tones[p.step] + ( p.alter ? p.alter : 0 );
   }
 
   beamKey() {
@@ -111,4 +119,14 @@ Note.sToStep = { 'C': 0,
   'G': 4,
   'A': 5,
   'B': 6
+}
+
+Note.tones = {
+  'C': 0,
+  'D': 2,
+  'E': 4,
+  'F': 5,
+  'G': 7,
+  'A': 9,
+  'B': 11
 }

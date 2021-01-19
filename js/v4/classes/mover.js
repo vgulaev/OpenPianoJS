@@ -24,20 +24,13 @@ export class Mover {
     });
   }
 
-  assign(sheet) {
-    this.sheet = sheet;
-    this.timeArrow = sheet
-      .measures
-      .map((m, i) => Object
-                      .keys(m.timePoint)
-                      .sort((a, b) => a-b)
-                      .map(t => ({m: i, t: t, x: m.timePoint[t].x})))
-      .flat();
+  assign(cc) {
+    this.cc = cc;
     // let x = this.sheet.measures[11].timePoint[0].x;
     // this.curIndex = this.timeArrow.findIndex(e => e.x == x);
     // this.setPoint(x)
     this.curIndex = 0;
-    this.setPoint(this.timeArrow[this.curIndex].x);
+    this.setPoint(this.cc.items[this.curIndex].x);
   }
 
   setPoint(x) {
@@ -57,19 +50,29 @@ export class Mover {
   }
 
   next() {
-    if (this.timeArrow.length - 1 == this.curIndex) return;
+    if (this.cc.items.length - 1 == this.curIndex) return;
     this.curIndex += 1;
-    this.setPoint(this.timeArrow[this.curIndex].x);
-    // this.curX += 10;
-    // this.setPoint(this.curX)
+    this.setPoint(this.cc.items[this.curIndex].x);
   }
 
   prev() {
     if (0 == this.curIndex) return;
     this.curIndex -= 1;
-    this.setPoint(this.timeArrow[this.curIndex].x);
-    // this.curX -= 10;
-    // this.setPoint(this.curX)
+    this.setPoint(this.cc.items[this.curIndex].x);
   }
 
+  step(pressed) {
+    let c = this.cc.items[this.curIndex];
+    let included = true;
+    for (let k of [...c.keys]) {
+      included &&= pressed.has(k);
+      if (!included) break;
+    }
+    if (included) {
+      this.next();
+    } else {
+      console.log(c.keys, pressed);
+    }
+    // console.log(included);
+  }
 }
