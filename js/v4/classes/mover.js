@@ -1,7 +1,8 @@
 export class Mover {
   constructor(app) {
     this.header = app.grandStaff.header;
-    this.use = app.sheet.use;
+    // this.use = app.sheet.use;
+    this.g = app.sheet.g;
     this.curX = 0;
     this.initListeners();
   }
@@ -53,14 +54,13 @@ export class Mover {
 
   setPoint(x) {
     this.curX = x;
-    this.use.setAttributeNS(null, "x", 400 - this.curX);
+    this.g.setAttributeNS(null, 'transform',`translate(${400 - this.curX})`);
     this.updateHeader();
   }
 
   startGreenAnimation() {
     let c = this.cc.items[this.curIndex];
     c.notes.forEach(n => {
-      console.log(n.g.style.fontSize, `*** ${n.g.style.display}`);
       n.g.style['display'] = 'none';
     });
   }

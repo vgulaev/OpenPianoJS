@@ -9,21 +9,16 @@ export class Sheet {
     this.grandStaff = app.grandStaff;
     this.measures = [];
     this.items = [];
-    this.use = SVGBuilder.createSVG('use');
+    // this.use = SVGBuilder.createSVG('use');
     this.createRenderRoot();
     this.pm = new PrintMachine(this.g);
   }
 
   createRenderRoot() {
-    let def = SVGBuilder.createSVG('def');
     this.g = SVGBuilder.createSVG('g');
     this.g.setAttributeNS(null, 'id', 'SheetMusic');
-    def.append(this.g);
 
-    this.use.setAttributeNS(null, "href", "#SheetMusic");
-
-    this.grandStaff.body.root.append(def);
-    this.grandStaff.body.root.append(this.use);
+    this.grandStaff.body.root.append(this.g);
   }
 
   parseXML(data) {
