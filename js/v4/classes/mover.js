@@ -1,7 +1,8 @@
+import {SVGBuilder} from './svgBuilder.js';
+
 export class Mover {
   constructor(app) {
     this.header = app.grandStaff.header;
-    // this.use = app.sheet.use;
     this.g = app.sheet.g;
     this.curX = 0;
     this.initListeners();
@@ -42,6 +43,7 @@ export class Mover {
     this.cc = cc;
     this.curIndex = 0;
     this.setPoint(this.cc.items[this.curIndex].x);
+    this.updateHeader();
   }
 
   updateHeader() {
@@ -50,37 +52,67 @@ export class Mover {
     this.header.setClef(clefs[1]);
     this.header.setClef(clefs[2]);
     this.header.setKeySignature(tp.measure.fifths.fifths);
+    this.header.setKeySignature(tp.measure.fifths.fifths);
+    this.header.setTimeSignature(tp.measure.timeSignature);
   }
 
   setPoint(x) {
     this.curX = x;
     this.g.setAttributeNS(null, 'transform',`translate(${400 - this.curX})`);
-    this.updateHeader();
+  }
+
+  getAnimation() {
+    let a = ['stroke', 'fill'].map(attr => {
+      let e = SVGBuilder.createSVG('animate');
+      e.setAttributeNS(null, 'attributeName', attr);
+      e.setAttributeNS(null, 'from', 'green');
+      e.setAttributeNS(null, 'to', 'black');
+      e.setAttributeNS(null, 'dur', '2s');
+      e.addEventListener('endEvent', () => {
+        setTimeout(() => e.remove(), 2000);
+      });
+      return e;
+    });
+    return a;
   }
 
   startGreenAnimation() {
     let c = this.cc.items[this.curIndex];
+
     c.notes.forEach(n => {
-      n.g.setAttributeNS(null, 'stroke', 'green');
-      n.g.setAttributeNS(null, 'fill', 'green');
-      // n.g.style.color = 'green';
-      // n.g.style.display = 'none';
-      // n.g.style.animation = 'example';
-      // n.g.style.animationDuration = '4s';
+      let a = this.getAnimation();
+      a.forEach(e => n.g.append(e));
+      a.forEach(e => e.beginElement());
     });
+  }
+
+  move() {
+    this.curX += 1;
+    this.setPoint(this.curX);
+    if (this.curX < this.moveTo) {
+      requestAnimationFrame(() => this.move());
+    } else {
+      this.curX = this.moveTo;
+    }
   }
 
   next() {
     if (this.cc.items.length - 1 == this.curIndex) return;
     this.startGreenAnimation();
     this.curIndex += 1;
-    this.setPoint(this.cc.items[this.curIndex].x);
+    this.moveTo = this.cc.items[this.curIndex].x;
+    this.updateHeader();
+    this.move();
+    // this.setPoint(this.cc.items[this.curIndex].x);
   }
 
   prev() {
     if (0 == this.curIndex) return;
     this.curIndex -= 1;
-    this.setPoint(this.cc.items[this.curIndex].x);
+    let x = this.cc.items[this.curIndex].x;
+    this.moveTo = x;
+    this.setPoint(x);
+    this.updateHeader();
   }
 
   step(pressed) {

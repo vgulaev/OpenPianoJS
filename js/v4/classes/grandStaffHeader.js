@@ -45,6 +45,15 @@ export class GrandStaffHeader {
     this.root.append(g);
   }
 
+  setTimeSignature(time) {
+    if (this.time == time) return;
+    this.time = time;
+    let x = 73 + Math.abs(this.fifths) * 14 + 10;
+    let g = this.findOrCreate(`TimeSignature`, 'g');
+    g.innerHTML = SVGBuilder.setTimeSignature(time['beats'], time['beat-type'], x).innerHTML;
+    this.root.append(g);
+  }
+
   setClef(clef) {
     if (this.clef[clef.number] == clef.toS()) return;
     this.clef[clef.number] = clef.toS();
