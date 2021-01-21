@@ -56,7 +56,13 @@ export class FragmentCoacher {
     let startButton = document.createElement('button');
     startButton.innerHTML = 'Начало фрагмента';
     startButton.addEventListener('click', () => {
-      this.from.index = this.app.mover.curIndex;
+      if ('Начало фрагмента' == startButton.innerHTML) {
+        this.from.index = this.app.mover.curIndex;
+        startButton.innerHTML = 'С начала';
+      } else {
+        this.from.index = 0;
+        startButton.innerHTML = 'Начало фрагмента';
+      }
       this.setLineX('from');
     });
     app.ui.UIHeader.append(startButton);
@@ -64,9 +70,16 @@ export class FragmentCoacher {
     let endButton = document.createElement('button');
     endButton.innerHTML = 'Конец фрагмента';
     endButton.addEventListener('click', () => {
-      this.to.index = this.app.mover.curIndex;
-      this.setLineX('to');
-      this.setStartFragment();
+      if ('Конец фрагмента' == endButton.innerHTML) {
+        this.to.index = this.app.mover.curIndex;
+        this.setLineX('to');
+        this.setStartFragment();
+        endButton.innerHTML = 'До конца';
+      } else {
+        this.to.index = this.app.cc.items.length - 1;
+        this.setLineX('to');
+        endButton.innerHTML = 'Конец фрагмента';
+      }
     });
     app.ui.UIHeader.append(endButton);
   }

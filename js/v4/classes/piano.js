@@ -1,4 +1,5 @@
 import {MIDIPiano} from './midiPiano.js';
+import {Ut} from './ut.js';
 
 export class Piano {
   init(mover) {

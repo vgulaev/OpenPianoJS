@@ -1,4 +1,5 @@
 import {SVGBuilder} from './svgBuilder.js';
+import {Ut} from './ut.js';
 
 export class Mover {
   constructor(app) {
@@ -6,21 +7,11 @@ export class Mover {
     this.header = app.grandStaff.header;
     this.g = app.sheet.g;
     this.curX = 0;
-    this.curV = 0;
+    this.curV = 200 / 2000;
     this.status = 'stopped';
     this.initListeners();
-    this.events = {
-      onNext: [],
-      onSheetEnd: []
-    };
-  }
-
-  addEventListener(eventName, callBack) {
-    this.events[eventName].push(callBack);
-  }
-
-  dispatchEvent(eventName) {
-    this.events[eventName].forEach(e => e.call(null, this));
+    Ut.addEvents(this, ['onNext', 'onSheetEnd']);
+    this.debug = document.getElementById('Debug');
   }
 
   initListeners() {
@@ -32,8 +23,7 @@ export class Mover {
           this.prev();
         }
       } else if ('Home' == event.key) {
-        this.curIndex = 0;
-        this.setPoint(this.timeArrow[this.curIndex].x);
+        this.setCurIndex(0);
       } else if ('End' == event.key) {
         let x = this.sheet.measures[this.sheet.measures.length - 1].timePoint[0].x;
         this.curIndex = this.timeArrow.findIndex(e => e.x == x);
@@ -106,26 +96,38 @@ export class Mover {
     });
   }
 
-  averageV() {
-    let startIndex = this.curIndex - 1;
-    if (startIndex < 1) return 0;
-    if (!this.cc.items[startIndex].time) return 0;
-    let s = this.cc.items[startIndex].time
-    let endIndex = -1;
-    for (let i = 1; i < 6; i++) {
-      endIndex = startIndex - i;
-      if (endIndex < 0) break;
-      if (!this.cc.items[startIndex].time) break;
-    }
-    if (!e) return 0;
+  dXYZ(name, x1, x0) {
+    return this.cc.items[x1][name] - this.cc.items[x0][name];
+  }
 
+  averageV(dt) {
+    if (0 == this.curIndex) return this.curV;
+    let index = this.curIndex - 1;
+    for (let i = 0; i < 6; i++) {
+      if (index < 0) break;
+      if (!this.cc.items[index].time) break;
+      index -= 1;
+    }
+    index += 1;
+    if (index < 0) return this.curV;
+    let v = this.dXYZ('x', this.curIndex - 1, index) / this.dXYZ('time', this.curIndex - 1, index);
+    if (!v) return this.curV;
+    if (this.moveTo - this.curX > 150) return v *= 1.5;
+    v = this.curV + (v - this.curV) / 4000 * dt;
+
+    return v;
   }
 
   move() {
     let time = performance.now();
-    // let dx = (time - this.lastMovedTime) *
-    this.curX += 1;
-    this.setPoint(this.curX);
+    let dt = (time - this.lastMovedTime);
+    let dx = dt * this.curV;
+    if (dx > 1) {
+      this.lastMovedTime = time;
+      this.curV = this.averageV(dt);
+      this.curX += dx;
+      this.setPoint(Math.floor(this.curX));
+    }
     if (this.curX < this.moveTo) {
       requestAnimationFrame(() => this.move());
     } else {
@@ -173,7 +175,7 @@ export class Mover {
     if (included) {
       this.next();
     } else {
-      console.log(c.keys, pressed);
+      // console.log(c.keys, pressed);
     }
     // console.log(included);
   }

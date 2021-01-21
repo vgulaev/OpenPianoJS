@@ -62,4 +62,16 @@ export class Ut {
     }
     return res;
   }
+
+  static addEvents(obj, events) {
+    obj.events = {};
+    events.forEach(e => obj.events[e] = []);
+    obj.addEventListener = (eventName, callBack) => {
+      obj.events[eventName].push(callBack);
+    };
+
+    obj.dispatchEvent = (eventName) => {
+      obj.events[eventName].forEach(e => e.call(null, obj));
+    };
+  }
 }
