@@ -2,10 +2,25 @@ import {SVGBuilder} from './svgBuilder.js';
 
 export class Mover {
   constructor(app) {
+    this.app = app;
     this.header = app.grandStaff.header;
     this.g = app.sheet.g;
     this.curX = 0;
+    this.curV = 0;
+    this.status = 'stopped';
     this.initListeners();
+    this.events = {
+      onNext: [],
+      onSheetEnd: []
+    };
+  }
+
+  addEventListener(eventName, callBack) {
+    this.events[eventName].push(callBack);
+  }
+
+  dispatchEvent(eventName) {
+    this.events[eventName].forEach(e => e.call(null, this));
   }
 
   initListeners() {
@@ -29,7 +44,7 @@ export class Mover {
     window.addEventListener("touchend", event => {
       let changedTouches = event.changedTouches;
       if (0 == changedTouches.length) return;
-      // if (changedTouches[0].pageY < App.songName.getBoundingClientRect().bottom * 1.1) return;
+      if (changedTouches[0].pageY < this.app.ui.UIHeader.getBoundingClientRect().bottom * 1.1) return;
       let board = document.body.offsetWidth / 2;
       if (changedTouches[0].pageX < board) {
         this.prev();
@@ -41,8 +56,13 @@ export class Mover {
 
   assign(cc) {
     this.cc = cc;
-    this.curIndex = 0;
-    this.setPoint(this.cc.items[this.curIndex].x);
+    this.setCurIndex(0);
+  }
+
+  setCurIndex(index) {
+    this.curIndex = index;
+    this.moveTo = this.cc.items[this.curIndex].x;
+    this.setPoint(this.moveTo);
     this.updateHeader();
   }
 
@@ -86,23 +106,51 @@ export class Mover {
     });
   }
 
+  averageV() {
+    let startIndex = this.curIndex - 1;
+    if (startIndex < 1) return 0;
+    if (!this.cc.items[startIndex].time) return 0;
+    let s = this.cc.items[startIndex].time
+    let endIndex = -1;
+    for (let i = 1; i < 6; i++) {
+      endIndex = startIndex - i;
+      if (endIndex < 0) break;
+      if (!this.cc.items[startIndex].time) break;
+    }
+    if (!e) return 0;
+
+  }
+
   move() {
+    let time = performance.now();
+    // let dx = (time - this.lastMovedTime) *
     this.curX += 1;
     this.setPoint(this.curX);
     if (this.curX < this.moveTo) {
       requestAnimationFrame(() => this.move());
     } else {
       this.curX = this.moveTo;
+      this.status = 'stopped';
+    }
+  }
+
+  startMove() {
+    if ('stopped' == this.status) {
+      this.status = 'move';
+      this.lastMovedTime = performance.now();
+      this.move();
     }
   }
 
   next() {
-    if (this.cc.items.length - 1 == this.curIndex) return;
+    if (this.cc.items.length - 1 == this.curIndex) return this.dispatchEvent('onSheetEnd');
     this.startGreenAnimation();
+    this.cc.items[this.curIndex].time = performance.now();
     this.curIndex += 1;
     this.moveTo = this.cc.items[this.curIndex].x;
     this.updateHeader();
-    this.move();
+    this.startMove();
+    this.dispatchEvent('onNext');
     // this.setPoint(this.cc.items[this.curIndex].x);
   }
 

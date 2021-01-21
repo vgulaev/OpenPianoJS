@@ -84,7 +84,7 @@ export class Measure {
   }
 
   draw(pm) {
-    let e = SVGBuilder.line({x1: pm.cursor, y1: 84, x2: pm.cursor, y2: 302, 'stroke-width': 2, stroke: 'black'})
+    let e = SVGBuilder.line({x1: pm.cursor, y1: 84, x2: pm.cursor, y2: 302})
     let t = SVGBuilder.text({x: pm.cursor - 5, y: 71, text: this.xml.getAttribute('number')});
     pm.g.append(t);
     pm.g.append(e);
