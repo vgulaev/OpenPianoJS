@@ -4,16 +4,21 @@ import {Ut} from '../ut.js';
 
 export class Note {
   constructor(xml) {
+    if (!xml) return;
     this.xml = xml;
     Ut.parseChildren(this, xml);
     if (this.rest) {
       this.stepLine = 0;
     } else {
-      this.stepLine = this.pitch.octave * 7 + Note.sToStep[this.pitch.step];
+      this.stepLine = this.setStepLine();
     }
     this.parseBeam();
     this.parseTie();
     this.midiByte = this.setMidiByte();
+  }
+
+  setStepLine() {
+    return this.pitch.octave * 7 + Note.sToStep[this.pitch.step];
   }
 
   parseTie() {
@@ -65,7 +70,7 @@ export class Note {
     return r;
   }
 
-  draw(pm) {
+  drawG() {
     let head = 's2';
     if ('whole' == this.type) {
       head = 's0';
@@ -76,8 +81,12 @@ export class Note {
     if (this.grace) {
       e.style.fontSize = '38px';
     }
-    pm.g.append(e);
-    this.g = e;
+    return e
+  }
+
+  draw(pm) {
+    this.g = this.drawG();
+    pm.g.append(this.g);
   }
 
   drawRest(pm) {
@@ -129,4 +138,14 @@ Note.tones = {
   'G': 7,
   'A': 9,
   'B': 11
+}
+
+Note.tonesToS = {
+  0: 'C',
+  2: 'D',
+  4: 'E',
+  5: 'F',
+  7: 'G',
+  9: 'A',
+  11: 'B'
 }

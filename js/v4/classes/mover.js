@@ -1,3 +1,5 @@
+import {emm} from '../../common/glyphName.js'
+import {Note} from './xml/note.js';
 import {SVGBuilder} from './svgBuilder.js';
 import {Ut} from './ut.js';
 
@@ -10,7 +12,7 @@ export class Mover {
     this.curV = 200 / 2000;
     this.status = 'stopped';
     this.initListeners();
-    Ut.addEvents(this, ['onNext', 'onSheetEnd']);
+    Ut.addEvents(this, ['onNext', 'onSheetEnd', 'afterIndexUpdated']);
     this.debug = document.getElementById('Debug');
   }
 
@@ -115,7 +117,7 @@ export class Mover {
     if (this.moveTo - this.curX > 150) return v *= 1.5;
     v = this.curV + (v - this.curV) / 4000 * dt;
 
-    return v;
+    return Math.max(v, 0.05);
   }
 
   move() {
@@ -149,6 +151,7 @@ export class Mover {
     this.startGreenAnimation();
     this.cc.items[this.curIndex].time = performance.now();
     this.curIndex += 1;
+    this.dispatchEvent('afterIndexUpdated');
     this.moveTo = this.cc.items[this.curIndex].x;
     this.updateHeader();
     this.startMove();
@@ -159,10 +162,64 @@ export class Mover {
   prev() {
     if (0 == this.curIndex) return;
     this.curIndex -= 1;
+    this.dispatchEvent('afterIndexUpdated');
     let x = this.cc.items[this.curIndex].x;
     this.moveTo = x;
     this.setPoint(x);
     this.updateHeader();
+  }
+
+  drawWrongNote(note) {
+      let c = this.cc.items[this.curIndex];
+      note.stepLine = note.setStepLine();
+      note.y = note.drawY({drawClefs: c.tp.headerClefs});
+      let g = SVGBuilder.createSVG('g');
+      let n = note.drawG(c.tp.headerClefs);
+      let acc = {
+        '-1': 'flat',
+        0: 'natural',
+        1: 'sharp'
+      }[note.pitch.alter]
+      let a = SVGBuilder.emmentaler({x: note.x - 14, y: note.y, text: emm.Accidental[acc]});
+      ['stroke', 'fill'].forEach(attr => {
+        n.setAttributeNS(null, attr, 'red');
+        a.setAttributeNS(null, attr, 'red');
+      });
+      g.append(n);
+      g.append(a);
+
+      this.g.append(g);
+      setTimeout(() => g.remove(), 2000);
+  }
+
+  drawWrongNotes(pressed) {
+    let c = this.cc.items[this.curIndex];
+    let wKeys = [...pressed].filter(k => !c.keys.has(k));
+    if (0 == wKeys.length) return;
+    let noteWithKey = c.notes.map(n => [n, n.midiByte])
+    wKeys.forEach(wk => {
+      let nearNote = noteWithKey.map(nwk => [nwk[0], Math.abs(nwk[1] - wk)]).sort((a, b) => a[1]-b[1])[0][0];
+      let wNote = Object.assign({}, nearNote);
+      Object.setPrototypeOf(wNote, new Note());
+
+      let octave = Math.floor((wk - 12) / 12);
+      let step = wk - 12 - octave * 12;
+      let alter = 0;
+      if (!Note.tonesToS[step]) {
+        if (c.tp.measure.fifths.fifths < 0) {
+          alter = -1;
+        } else {
+          alter = 1;
+        }
+        step = step - alter;
+      }
+      wNote.pitch = {
+        octave: octave,
+        step: Note.tonesToS[step],
+        alter: alter
+      };
+      this.drawWrongNote(wNote);
+    });
   }
 
   step(pressed) {
@@ -173,10 +230,10 @@ export class Mover {
       if (!included) break;
     }
     if (included) {
+      c.keys.forEach(k => {pressed.delete(k)});
       this.next();
     } else {
-      // console.log(c.keys, pressed);
+      this.drawWrongNotes(pressed);
     }
-    // console.log(included);
   }
 }

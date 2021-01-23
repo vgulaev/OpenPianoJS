@@ -1,16 +1,19 @@
 import {cconst} from '../../common/commonConst.js';
 import {SVGBuilder} from '../classes/svgBuilder.js';
+import {Settings} from '../../../conf/localSettings.js'
 
 export class FragmentCoacher {
   constructor(app) {
     this.app = app;
+    let s = (Settings.range ? Settings.range[0] : 0);
+    let e = (Settings.range ? Settings.range[1] : this.app.cc.items.length - 1);
     this.from = {
-      index: 0,
-      line: this.createLineAt(0, 'from'),
+      index: s,
+      line: this.createLineAt(s, 'from'),
     };
     this.to = {
-      index: this.app.cc.items.length - 1,
-      line: this.createLineAt(this.app.cc.items.length - 1, 'to'),
+      index: e,
+      line: this.createLineAt(e, 'to'),
     };
     this.initListeners();
     this.setStartFragment();
