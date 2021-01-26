@@ -10,6 +10,7 @@ export class TimePoint {
     this.voices = {};
     this.staff = {'1': [], '2': []};
     this.measure = measure;
+    this.tick = measure.curTick;
   }
 
   push(el) {

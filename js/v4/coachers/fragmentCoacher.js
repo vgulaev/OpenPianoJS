@@ -34,11 +34,14 @@ export class FragmentCoacher {
 
   initListeners() {
     this.app.mover.addEventListener('onNext', (event) => {
+      let tp = event.cc.items[event.curIndex].tp;
+      // console.log(tp.tick);
       if (event.curIndex > this.to.index) {
         this.setStartFragment();
       }
     });
     this.app.mover.addEventListener('onSheetEnd', (event) => {
+      // this.updateTemp();
       this.setStartFragment();
     })
   }

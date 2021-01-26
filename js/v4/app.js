@@ -32,23 +32,26 @@ class App {
 
 globalThis.app = new App();
 window.addEventListener('load', function( event ) {
+  // app.load('data/xml/Beethoven Bagatelle No. 25 in A minor.musicxml');
   // app.load('data/xml/Beethoven Piano_Sonata_No.21_Op.53.musicxml');
   // app.load('data/xml/Beethoven Sonata 14 C Sharp Minor.musicxml');
   // app.load('data/xml/Beethoven Sonata No. 8 Op. 13 Pathetique - Second Ab major.musicxml');
+  app.load('data/xml/Beethoven Sonate No. 17 Tempest 3rd Movement.musicxml');
   // app.load('data/xml/Beethoven Symphony No. 5 1 st movement Piano solo.musicxml');
-  //app.load('data/xml/Beethoven Bagatelle No. 25 in A minor.musicxml');
-  //app.load('data/xml/BWV 847 Prelude C Minor.musicxml');
+  // app.load('data/xml/billie jean.musicxml');
+  // app.load('data/xml/BWV 847 Prelude C Minor.musicxml');
   // app.load('data/xml/BWV-565.musicxml');
   // app.load('data/xml/Canon_in_D_full.musicxml');
+  // app.load('data/xml/Chopin Sonata_No.2_in_B-flat_minor.musicxml');
   // app.load('data/xml/Chopin_-_Nocturne_Op_9_No_1_B_Flat_Minor.musicxml');
-  //app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
-  app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
+  // app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
+  // app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
   // app.load('data/xml/Jingle_Bells.musicxml');
-  //app.load('data/xml/Maksim Mrvica - Croatian Rhapsody.musicxml');
-  //app.load('data/xml/Mozart-Fantasia in D Minor K. 397.musicxml');
-  //app.load('data/xml/Mozart-Sonata_16.musicxml');
+  // app.load('data/xml/Maksim Mrvica - Croatian Rhapsody.musicxml');
+  // app.load('data/xml/Mozart-Fantasia in D Minor K. 397.musicxml');
+  // app.load('data/xml/Mozart-Sonata_16.musicxml');
   // app.load('data/xml/Prelude_in_G_Minor_Op._23_No._5.musicxml');
-  //app.load('data/xml/River_Flows_in_You.musicxml');
+  // app.load('data/xml/River_Flows_in_You.musicxml');
   // app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._IX. Новая кукла.musicxml');
 
   // app.load('data/xml/test.musicxml');

@@ -17,7 +17,7 @@ export class Mover {
   }
 
   initListeners() {
-    window.addEventListener("keydown", event => {
+    window.addEventListener('keydown', event => {
       if (('ArrowRight' == event.key) || ('ArrowLeft' == event.key) || ('ArrowDown' == event.key)) {
         if ('ArrowRight' == event.key) {
           this.next();
@@ -33,7 +33,7 @@ export class Mover {
       }
     });
 
-    window.addEventListener("touchend", event => {
+    window.addEventListener('touchend', event => {
       let changedTouches = event.changedTouches;
       if (0 == changedTouches.length) return;
       if (changedTouches[0].pageY < this.app.ui.UIHeader.getBoundingClientRect().bottom * 1.1) return;
@@ -189,7 +189,7 @@ export class Mover {
       g.append(a);
 
       this.g.append(g);
-      setTimeout(() => g.remove(), 2000);
+      setTimeout(() => g.remove(), 1500);
   }
 
   drawWrongNotes(pressed) {

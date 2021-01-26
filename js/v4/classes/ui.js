@@ -1,3 +1,5 @@
+import {Menu} from './ui/menu.js'
+
 export class UI {
   constructor(app) {
     this.app = app;
@@ -10,9 +12,7 @@ export class UI {
   }
 
   createSheetList() {
-    let e = document.createElement('input');
-    e.setAttribute('id', 'SheetList');
-    this.UIHeader.append(e);
+    new Menu(this.UIHeader);
   }
 
   createTodayPlay() {

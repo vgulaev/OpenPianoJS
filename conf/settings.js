@@ -1,4 +1,4 @@
-MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
+export const MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   {name:"Blue dabune", fileName: "data/xml/Blue dabune.xml"},
   {name:"Beethoven Bagatelle No. 25 in A minor", fileName: "data/xml/Beethoven Bagatelle No. 25 in A minor.musicxml"},
   {name:"Beethoven Ode to Joy", fileName: "data/xml/Beethoven - Ode to Joy.musicxml"},
@@ -148,28 +148,28 @@ MusicFiles = [ {name:"Test", fileName: "data/xml/test.musicxml"},
   // {name:"Песенка про кузнечика", fileName: "data/xml/Песенка про кузнечика.xml"}
   ];
 
-Settings = {}
+// Settings = {}
 
-Settings.staff = 0;
-Settings.temp = 40;
+// Settings.staff = 0;
+// Settings.temp = 40;
 
-if ('localhost:8080' == location.host) {
-  Ut.loadjs('conf/localSettings.js')
-    .then(() => {
-      console.log('locals loaded');
-    });
-} else {
-  Settings.coach = function (a, m, s) {
-    if (2 == App.setting.coach) {
-      return (new PlayFive(a, m, 'same note'));
-    } else if (3 == App.setting.coach) {
-      return (new PlayFive(a, m, ''));
-    } else if (4 == App.setting.coach) {
-      return (new PlayTriplets(a, m));
-    } else {
-      return (new PlayFaster(a, m, s));
-    }
-  }
-}
+// if ('localhost:8080' == location.host) {
+//   Ut.loadjs('conf/localSettings.js')
+//     .then(() => {
+//       console.log('locals loaded');
+//     });
+// } else {
+//   Settings.coach = function (a, m, s) {
+//     if (2 == App.setting.coach) {
+//       return (new PlayFive(a, m, 'same note'));
+//     } else if (3 == App.setting.coach) {
+//       return (new PlayFive(a, m, ''));
+//     } else if (4 == App.setting.coach) {
+//       return (new PlayTriplets(a, m));
+//     } else {
+//       return (new PlayFaster(a, m, s));
+//     }
+//   }
+// }
 
-if (undefined == Settings.range) Settings.range = [0, 10000];
+// if (undefined == Settings.range) Settings.range = [0, 10000];

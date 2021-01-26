@@ -60,6 +60,10 @@ export class Measure {
     }
   }
 
+  divisions(xml) {
+    this.tickPerBit = parseInt(xml.innerHTML);
+  }
+
   time(xml) {
     let t = new Time(xml);
     this.timePoint[this.curTick].push(t);
