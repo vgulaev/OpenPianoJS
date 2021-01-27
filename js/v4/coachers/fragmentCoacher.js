@@ -5,6 +5,12 @@ import {Settings} from '../../../conf/localSettings.js'
 export class FragmentCoacher {
   constructor(app) {
     this.app = app;
+    this.initListeners();
+    // this.init();
+    this.addButtons();
+  }
+
+  init() {
     let s = (Settings.range ? Settings.range[0] : 0);
     let e = (Settings.range ? Settings.range[1] : this.app.cc.items.length - 1);
     this.from = {
@@ -15,9 +21,7 @@ export class FragmentCoacher {
       index: e,
       line: this.createLineAt(e, 'to'),
     };
-    this.initListeners();
     this.setStartFragment();
-    this.addButtons();
   }
 
   getX(index) {
@@ -71,7 +75,7 @@ export class FragmentCoacher {
       }
       this.setLineX('from');
     });
-    app.ui.UIHeader.append(startButton);
+    this.app.ui.UIHeader.append(startButton);
 
     let endButton = document.createElement('button');
     endButton.innerHTML = 'Конец фрагмента';
@@ -87,6 +91,6 @@ export class FragmentCoacher {
         endButton.innerHTML = 'Конец фрагмента';
       }
     });
-    app.ui.UIHeader.append(endButton);
+    this.app.ui.UIHeader.append(endButton);
   }
 }

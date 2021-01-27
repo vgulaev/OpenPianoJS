@@ -12,7 +12,11 @@ export class UI {
   }
 
   createSheetList() {
-    new Menu(this.UIHeader);
+    this.menu = new Menu(this.UIHeader);
+    this.menu.addEventListener('onItemSelected', e => {
+      let peace = e.itemDiv.children[0];
+      this.app.load(peace.getAttribute('fileName'));
+    });
   }
 
   createTodayPlay() {

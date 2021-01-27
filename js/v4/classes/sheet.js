@@ -7,17 +7,19 @@ export class Sheet {
   constructor(app) {
     this.app = app;
     this.grandStaff = app.grandStaff;
+    this.createRenderRoot();
+    this.init();
+  }
+
+  init() {
     this.measures = [];
     this.items = [];
-    // this.use = SVGBuilder.createSVG('use');
-    this.createRenderRoot();
     this.pm = new PrintMachine(this.g);
   }
 
   createRenderRoot() {
     this.g = SVGBuilder.createSVG('g');
     this.g.setAttributeNS(null, 'id', 'SheetMusic');
-
     this.grandStaff.body.root.append(this.g);
   }
 
@@ -36,6 +38,8 @@ export class Sheet {
   }
 
   load(url) {
+    this.init();
+    this.g.innerHTML = '';
     return new Promise((resolve, reject) => {
       Ut.get(url)
         .then(data => {
