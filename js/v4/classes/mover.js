@@ -7,7 +7,7 @@ export class Mover {
   constructor(app) {
     this.app = app;
     this.header = app.grandStaff.header;
-    this.g = app.sheet.g;
+    this.g = app.sheet.sheetMusic;
     this.curX = 0;
     this.curV = 200 / 2000;
     this.status = 'stopped';

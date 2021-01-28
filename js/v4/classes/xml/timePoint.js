@@ -278,6 +278,46 @@ export class TimePoint {
     this.headerClefs = Object.assign({}, pm.drawClefs)
   }
 
+  rect(e) {
+    let rect = SVGBuilder.createSVG('rect');
+    let SVGRect = e.getBBox();
+    rect.setAttribute('x', SVGRect.x);
+    rect.setAttribute('y', SVGRect.y);
+    rect.setAttribute('width', SVGRect.width);
+    rect.setAttribute('height', SVGRect.height);
+    rect.setAttribute('fill', 'white');
+    return rect;
+  }
+
+  drawFingering(pm) {
+    [1, 2].forEach(s => {
+      let f = this.staff[s]
+        .filter(n => n.notations?.technical?.fingering)
+        .map(n => [n.y, n.notations.technical.fingering]);
+      if (0 == f.length) return;
+      let text;
+      let y;
+      if (1 == s) {
+        text = f.map(e => e[1])
+          .sort()
+          .map((e, i) => `<tspan x="${this.x}" dy="-20">${e}</tspan>`)
+          .join('');
+        y = Math.min(100, ...f.map(e => e[0]));
+      } else {
+        text = f.map(e => e[1])
+          .sort()
+          .map((e, i) => `<tspan x="${this.x}" dy="20">${e}</tspan>`)
+          .join('');
+        y = Math.max(308, ...f.map(e => e[0] + 10));
+      }
+      let e = SVGBuilder.text({x: this.x, y: y, text: text});
+      e.style.fontSize = '26px';
+      pm.secondLayer.append(e);
+      let rect = this.rect(e);
+      pm.secondLayer.insertBefore(rect, e);
+    });
+  }
+
   draw(pm) {
     this.drawSignature(pm);
     this.drawGraces(pm);
@@ -286,6 +326,7 @@ export class TimePoint {
     this.x = pm.cursor;
     this.drawNotes(pm);
     this.drawAugmentationDotes(pm);
+    this.drawFingering(pm);
     pm.sb.draw();
     pm.tb.draw();
     this.updateClef(pm);

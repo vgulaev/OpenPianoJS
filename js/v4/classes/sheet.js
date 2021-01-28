@@ -14,13 +14,23 @@ export class Sheet {
   init() {
     this.measures = [];
     this.items = [];
-    this.pm = new PrintMachine(this.g);
+    this.pm = new PrintMachine(this);
   }
 
   createRenderRoot() {
-    this.g = SVGBuilder.createSVG('g');
-    this.g.setAttributeNS(null, 'id', 'SheetMusic');
-    this.grandStaff.body.root.append(this.g);
+    this.sheetMusic = SVGBuilder.createSVG('g');
+    this.sheetMusic.setAttributeNS(null, 'id', 'SheetMusic');
+
+    this.firstLayer = SVGBuilder.createSVG('g');
+    this.firstLayer.setAttributeNS(null, 'id', 'firstLayer');
+    this.sheetMusic.append(this.firstLayer);
+    this.secondLayer = SVGBuilder.createSVG('g');
+    this.secondLayer.setAttributeNS(null, 'id', 'secondLayer');
+    this.sheetMusic.append(this.secondLayer);
+
+    this.g = this.firstLayer;
+
+    this.grandStaff.body.root.append(this.sheetMusic);
   }
 
   parseXML(data) {
