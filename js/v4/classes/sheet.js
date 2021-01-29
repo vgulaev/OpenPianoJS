@@ -14,6 +14,8 @@ export class Sheet {
   init() {
     this.measures = [];
     this.items = [];
+    this.firstLayer.innerHTML = '';
+    this.secondLayer.innerHTML = '';
     this.pm = new PrintMachine(this);
   }
 
