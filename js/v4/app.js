@@ -40,9 +40,9 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/Beethoven Sonate No. 17 Tempest 3rd Movement.musicxml');
   // app.load('data/xml/Beethoven Symphony No. 5 1 st movement Piano solo.musicxml');
   // app.load('data/xml/billie jean.musicxml');
-  // app.load('data/xml/BWV 847 Prelude C Minor.musicxml');
+  app.load('data/xml/BWV 847 Prelude C Minor.musicxml');
   // app.load('data/xml/BWV-565.musicxml');
-  app.load('data/xml/Canon_in_D_full.musicxml');
+  // app.load('data/xml/Canon_in_D_full.musicxml');
   // app.load('data/xml/Chopin Sonata_No.2_in_B-flat_minor.musicxml');
   // app.load('data/xml/Chopin_-_Nocturne_Op_9_No_1_B_Flat_Minor.musicxml');
   // app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');

@@ -12,7 +12,7 @@ export class Mover {
     this.curV = 200 / 2000;
     this.status = 'stopped';
     this.initListeners();
-    Ut.addEvents(this, ['onNext', 'onSheetEnd', 'afterIndexUpdated']);
+    Ut.addEvents(this, ['onNext', 'onSheetEnd', 'beforeIndexUpdated', 'afterIndexUpdated']);
     this.debug = document.getElementById('Debug');
   }
 
@@ -150,6 +150,7 @@ export class Mover {
     if (this.cc.items.length - 1 == this.curIndex) return this.dispatchEvent('onSheetEnd');
     this.startGreenAnimation();
     this.cc.items[this.curIndex].time = performance.now();
+    this.dispatchEvent('beforeIndexUpdated');
     this.curIndex += 1;
     this.dispatchEvent('afterIndexUpdated');
     this.moveTo = this.cc.items[this.curIndex].x;
