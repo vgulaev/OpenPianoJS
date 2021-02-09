@@ -4,3 +4,4 @@ conf/
 lib/
 hw.js
 data/xml/test*
+*.log
