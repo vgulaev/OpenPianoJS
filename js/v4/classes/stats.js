@@ -1,3 +1,5 @@
+import { OwnDB } from './ownDB.js';
+
 export class Stats {
   static pressKey() {
     var n = performance.now();
@@ -46,6 +48,16 @@ export class Stats {
     }
     return res;
   }
+
+  static init() {
+    new OwnDB('stat2021').then(db => Stats.db = db);
+  }
+
+  static addSpendTime(object) {
+    let store = Stats.db.store('SpendTime');
+    store.add(object);
+    //{name: 'any name', 'from': 10, 'to': 100, 'timeLength': 3245, 'errors': 0}
+  }
 }
 
-// Stats.loadState();
+

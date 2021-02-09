@@ -8,7 +8,8 @@ export class UI {
     this.createSheetList();
     this.createTodayPlay();
     this.createIndexInfo();
-    this.createTempInfo();
+    this.createSheetActivity();
+    this.createTempAndRepeatsInfo();
   }
 
   createSheetList() {
@@ -30,17 +31,38 @@ export class UI {
 
   createIndexInfo() {
     let e = document.createElement('div');
-    e.innerHTML = 'Index: ' + this.app.stats.info();
+    e.innerHTML = 'Index: 0';
     this.UIFooter.append(e);
     this.app.mover.addEventListener('afterIndexUpdated', (event) => {
-      e.innerHTML = 'Index: ' + this.app.mover.curIndex;
+      e.innerHTML = 'Index: ' + this.app.mover.curIndex + ` of ${this.app.mover.cc.items.length}`;
     });
   }
 
-  createTempInfo() {
+  createSheetActivity() {
     let e = document.createElement('div');
-    e.innerHTML = 'Temp: 60';
-    e.style.cssText = "position: absolute; text-align: center; font-family: sans-serif; font-size: 30px; margin-left: auto; margin-right: auto; left: 0; right: 0;";
+    e.innerHTML = 'sheet acctivity';
     this.UIFooter.append(e);
+    this.sheetActivity = e;
+  }
+
+  createTempAndRepeatsInfo() {
+    let e = document.createElement('div');
+    e.style.cssText = "position: absolute; text-align: center; font-family: sans-serif; font-size: 30px; margin-left: auto; margin-right: auto; left: 0; right: 0;";
+    // e.innerHTML = 'Temp: 60';
+    this.temp = document.createElement('div');
+    this.temp.innerHTML = 'Temp: 60';
+    this.repeats = document.createElement('div');
+    this.repeats.innerHTML = 'Repeat: 1';
+    this.errors = document.createElement('div');
+    this.errors.innerHTML = 'Errors: 0';
+
+    e.append(this.temp);
+    e.append(this.repeats);
+    e.append(this.errors);
+    this.UIFooter.append(e);
+
+    this.app.mover.addEventListener('onErrorNotePressed', (event) => {
+      this.errors.innerHTML = 'Errors: ' + this.app.sheet.errors;
+    });
   }
 }

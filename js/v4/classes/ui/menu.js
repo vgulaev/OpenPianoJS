@@ -49,6 +49,7 @@ export class Menu {
       if ('Enter' == event.key) {
         this.dispatchEvent('onItemSelected');
         this.itemDiv.textContent = '';
+        this.input.blur();
       } else {
         this.showItems();
       }

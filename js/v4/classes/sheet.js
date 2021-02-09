@@ -16,6 +16,7 @@ export class Sheet {
     this.items = [];
     this.firstLayer.innerHTML = '';
     this.secondLayer.innerHTML = '';
+    this.errors = 0;
     this.pm = new PrintMachine(this);
   }
 

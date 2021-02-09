@@ -19,6 +19,7 @@ export class Piano {
     this.dispatchEvent('onMIDIKeyPressed');
     if (144 == event.data[0]) {
       this.keys.add(event.data[1]);
+      this.mover.checkNoteCorrectness(event.data[1]);
       this.mover.step(this.keys);
     } else {
       this.keys.delete(event.data[1]);
