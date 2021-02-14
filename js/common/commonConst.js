@@ -1,4 +1,4 @@
-cconst = {
+export const cconst = {
   staff: {
     1: {
       yUp: 84,
@@ -8,5 +8,7 @@ cconst = {
       yUp: 242,
       yDown: 302
     }
-  }
+  },
+  stemLength: 53,
+  accidentalWidth: 14
 }
