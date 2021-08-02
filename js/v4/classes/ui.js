@@ -6,6 +6,7 @@ export class UI {
     this.UIHeader = document.getElementById('Header');
     this.UIFooter = document.getElementById('Footer');
     this.createSheetList();
+    this.createRestart();
     this.createTodayPlay();
     this.createIndexInfo();
     this.createSheetActivity();
@@ -18,6 +19,15 @@ export class UI {
       let peace = e.itemDiv.children[0];
       this.app.load(peace.getAttribute('fileName'));
     });
+  }
+
+  createRestart() {
+    let restartButton = document.createElement('button');
+    restartButton.innerHTML = 'restart';
+    restartButton.addEventListener('click', () => {
+      this.app.mover.setCurIndex(0);
+    });
+    this.UIHeader.append(restartButton);
   }
 
   createTodayPlay() {

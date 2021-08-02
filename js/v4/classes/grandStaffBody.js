@@ -9,7 +9,7 @@ export class GrandStaffBody {
     this.root.setAttributeNS(null, 'height', this.height);
     this.root.setAttributeNS(null, 'width', this.width);
 
-    this.drawStaffLine();
+    this.drawStaffLine(this.root, this.width);
     this.drawRubicon();
 
     this.grandStaff.root.append(this.root);
@@ -24,10 +24,10 @@ export class GrandStaffBody {
     this.root.append(rubicon);
   }
 
-  drawStaffLine() {
+  drawStaffLine(g, width) {
     [84, 242].forEach( lvl => {
       for (let y = lvl; y <= lvl + 15 * 4; y += 15) {
-        this.root.append(SVGBuilder.line({x1: 0, y1: y, x2: this.width, y2: y, 'stroke-width': 2, stroke: 'black'}));
+        g.append(SVGBuilder.line({x1: 0, y1: y, x2: width, y2: y, 'stroke-width': 2, stroke: 'black'}));
       }
     });
   }

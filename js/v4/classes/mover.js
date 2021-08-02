@@ -27,8 +27,9 @@ export class Mover {
       } else if ('Home' == event.key) {
         this.setCurIndex(0);
       } else if ('End' == event.key) {
-        let x = this.sheet.measures[this.sheet.measures.length - 1].timePoint[0].x;
-        this.curIndex = this.timeArrow.findIndex(e => e.x == x);
+        // let x = this.sheet.measures[this.sheet.measures.length - 1].timePoint[0].x;
+        // this.curIndex = this.timeArrow.findIndex(e => e.x == x);
+        let x = this.cc.items[this.cc.items.length - 1].x;
         this.setPoint(x)
       }
     });
@@ -49,6 +50,10 @@ export class Mover {
   assign(cc) {
     this.cc = cc;
     this.setCurIndex(0);
+  }
+
+  getCurrentCC() {
+    return this.cc.items[this.curIndex];
   }
 
   setCurIndex(index) {

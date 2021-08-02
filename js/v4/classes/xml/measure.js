@@ -49,6 +49,8 @@ export class Measure {
   }
 
   note(xml) {
+    if (xml.innerHTML.includes('size="cue"'))
+      return;
     let n = new Note(xml);
     if (n.chord) {
       this.timePoint[this.curTick - n.duration].push(n);

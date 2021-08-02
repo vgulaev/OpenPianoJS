@@ -302,6 +302,7 @@ export class TimePoint {
           .sort()
           .map((e, i) => `<tspan x="${this.x}" dy="-20">${e}</tspan>`)
           .join('');
+
         y = Math.min(100, ...f.map(e => e[0]));
       } else {
         text = f.map(e => e[1])

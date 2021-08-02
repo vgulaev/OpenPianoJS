@@ -33,7 +33,12 @@ export class Ut {
             }
           }
         } else {
-          let i = parseInt(c.innerHTML);
+          let i;
+          if ('fingering' == c.tagName) {
+            i = c.innerHTML;
+          } else {
+            i = parseInt(c.innerHTML);
+          }
           if (isNaN(i)) {
             o[c.tagName] = c.innerHTML;
           } else {
