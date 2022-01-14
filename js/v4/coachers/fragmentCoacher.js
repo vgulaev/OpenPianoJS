@@ -1,9 +1,11 @@
 import {cconst} from '../../common/commonConst.js';
-import {SVGBuilder} from '../classes/svgBuilder.js';
+import {Coacher} from './coacher.js'
 import {Settings} from '../../../conf/localSettings.js'
+import {SVGBuilder} from '../classes/svgBuilder.js';
 
 export class FragmentCoacher {
   constructor(app) {
+    Coacher.call(this);
     this.app = app;
     this.initListeners();
     this.addButtons();
@@ -79,14 +81,6 @@ export class FragmentCoacher {
 
   getX(index) {
     return this.app.cc.items[index].x
-  }
-
-  createLineAt(index, pos) {
-    let dx = ('to' == pos ? 25 : -7);
-    let x = this.getX(index) + dx;
-    let l = SVGBuilder.line({x1: x, y1: 84, x2: x, y2: 302, 'stroke-width': 4, stroke: 'green'});
-    this.app.sheet.g.append(l);
-    return l;
   }
 
   calcMeasureTemp(mover) {

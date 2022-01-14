@@ -3,49 +3,18 @@ import {SVGBuilder} from '../classes/svgBuilder.js';
 import {Settings} from '../../../conf/localSettings.js'
 import {Coacher} from './coacher.js'
 
-export class LearnCoacher {
+export class TempoCoacher {
   constructor(app) {
     Coacher.call(this);
     this.app = app;
     this.initListeners();
-    this.addButtons();
-  }
-
-  createBlankRect() {
-    let m = this.app.sheet.measures;
-    let first = m[0].timePoint[0];
-    let last = m[m.length - 1];
-
-    let tp = last.timePoint;
-    let lastTPIndex = Math.max(...Object.keys(tp).map((x) => parseInt(x)));
-
-    this.firstX = first.x;
-    this.lastX = tp[lastTPIndex].x;
-    let width = this.lastX - this.firstX;
-
-    this.g = SVGBuilder.createSVG('g');
-
-    this.rect = [];
-    for (let i = 2; i >= 0; i--) {
-      let rect = SVGBuilder.createSVG('rect');
-      rect.setAttributeNS(null, 'x', this.firstX);
-      rect.setAttributeNS(null, 'y', 10);
-      rect.setAttributeNS(null, 'width', width);
-      rect.setAttributeNS(null, 'height', 400);
-      rect.setAttributeNS(null, 'fill', 'white');
-      this.rect.push(rect);
-      this.g.append(rect);
-    }
-
-    this.app.grandStaff.body.drawStaffLine(this.g, width);
-    this.app.sheet.sheetMusic.append(this.g);
-    console.log('createBlankReact');
   }
 
   init() {
     this.tempo = SVGBuilder.createSVG('g');
     this.tempo.setAttributeNS(null, 'id', 'FragmentCoacher');
     this.app.sheet.secondLayer.append(this.tempo);
+
     let s = (Settings.range ? Settings.range[0] : 0);
     let e = (Settings.range ? Math.min(Settings.range[1], this.app.cc.items.length - 1) : this.app.cc.items.length - 1);
     this.from = {
@@ -56,51 +25,6 @@ export class LearnCoacher {
       index: e,
       line: this.createLineAt(e, 'to'),
     };
-    this.repeat = 0;
-    this.setStartFragment();
-    this.tickPerBit = this.app.sheet.measures[0].tickPerBit;
-    this.createBlankRect();
-
-    this.app.mover.addEventListener('onErrorNotePressed', (event) => {
-      let cc = this.app.mover.getCurrentCC();
-      let keys = Object.keys(cc.tp.measure.timePoint);
-      let tp = cc.tp.measure.timePoint;
-      let from = tp[Math.min(...keys)].x;
-      let to = tp[Math.max(...keys)].x;
-
-      this.rect[0].setAttributeNS(null, 'opacity', 1);
-      this.rect[0].setAttributeNS(null, 'width', from - this.firstX);
-
-      this.rect[1].setAttributeNS(null, 'opacity', 0);
-      this.rect[1].setAttributeNS(null, 'x', from);
-      this.rect[1].setAttributeNS(null, 'width', to - from);
-
-      this.rect[2].setAttributeNS(null, 'opacity', 1);
-      this.rect[2].setAttributeNS(null, 'x', to + 25);
-      this.rect[2].setAttributeNS(null, 'width', this.lastX - to - 25);
-      // this.rect[0].setAttributeNS(null, 'width', from - this.firstX);
-      // this.rect[1].setAttributeNS(null, 'width', from - this.firstX);
-
-      console.log('Error');
-    });
-  }
-
-  setNotesDisplay(cc, v, display) {
-    cc.items.forEach(c => {
-      c.tp.notes.forEach(n => {
-        if (!n.g) return;
-        if (n.voice == v) {
-          n.g.style.display = display;
-        }
-      });
-    });
-  }
-
-  setKeyStatus(cc, v) {
-    let vv = new Set(Array.from(v).map(e => parseInt(e)));
-    cc.items.forEach(c => {
-      c.keys = new Set(c.notes.filter(n => vv.has(n.voice)).map(n => n.midiByte));
-    })
   }
 
   getX(index) {
@@ -210,37 +134,4 @@ export class LearnCoacher {
     el.setAttributeNS(null, 'x2', x);
   }
 
-  addButtons() {
-    let startButton = document.createElement('button');
-    startButton.innerHTML = 'Начало фрагмента';
-    startButton.addEventListener('click', () => {
-      if ('Начало фрагмента' == startButton.innerHTML) {
-        this.from.index = this.app.mover.curIndex;
-        startButton.innerHTML = 'С начала';
-      } else {
-        this.from.index = 0;
-        startButton.innerHTML = 'Начало фрагмента';
-      }
-      this.repeat = 1;
-      this.setLineX('from');
-    });
-    this.app.ui.UIHeader.append(startButton);
-
-    let endButton = document.createElement('button');
-    endButton.innerHTML = 'Конец фрагмента';
-    endButton.addEventListener('click', () => {
-      this.repeat = 0;
-      if ('Конец фрагмента' == endButton.innerHTML) {
-        this.to.index = this.app.mover.curIndex;
-        this.setLineX('to');
-        this.setStartFragment();
-        endButton.innerHTML = 'До конца';
-      } else {
-        this.to.index = this.app.cc.items.length - 1;
-        this.setLineX('to');
-        endButton.innerHTML = 'Конец фрагмента';
-      }
-    });
-    this.app.ui.UIHeader.append(endButton);
-  }
 }
