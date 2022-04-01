@@ -87,6 +87,17 @@ export class Note {
   draw(pm) {
     this.g = this.drawG();
     pm.g.append(this.g);
+    if (this.notations?.articulations) {
+      let symb;
+      if (this.notations.articulations.staccato) {
+        symb = emm.Articulation.staccato
+      } else if (this.notations.articulations.accent) {
+        symb = emm.Articulation.accent
+      }
+      let dy = ('down' == this.stem ? -18 : 18)
+      let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
+      pm.g.append(e);
+    }
   }
 
   drawRest(pm) {

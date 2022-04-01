@@ -9,7 +9,7 @@
     <creator type="translator">gl52</creator>
     <encoding>
       <software>MuseScore 3.6.0</software>
-      <encoding-date>2021-08-04</encoding-date>
+      <encoding-date>2022-03-30</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="yes" value="yes"/>
@@ -37,11 +37,11 @@
     </defaults>
   <credit page="1">
     <credit-type>composer</credit-type>
-    <credit-words default-x="1457.57" default-y="2085.57" justify="right" valign="top" font-size="24">Fly</credit-words>
+    <credit-words default-x="1457.57" default-y="2085.8" justify="right" valign="top" font-size="24">Fly</credit-words>
     </credit>
   <credit page="1">
     <credit-type>composer</credit-type>
-    <credit-words default-x="1457.57" default-y="2053.73" justify="right" valign="top" font-size="12">Ludovico Einaudi</credit-words>
+    <credit-words default-x="1457.57" default-y="2053.96" justify="right" valign="top" font-size="12">Ludovico Einaudi</credit-words>
     </credit>
   <part-list>
     <score-part id="P1">
@@ -13588,9 +13588,9 @@
           <tuplet type="start" bracket="no"/>
           </notations>
         </note>
-      <note default-x="101.10" default-y="-10.00">
+      <note default-x="101.10" default-y="-15.00">
         <pitch>
-          <step>D</step>
+          <step>C</step>
           <alter>1</alter>
           <octave>5</octave>
           </pitch>
@@ -24183,13 +24183,13 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <wedge type="diminuendo" number="1" default-y="-89.43"/>
+          <octave-shift type="up" size="8" number="1" default-y="-110.98"/>
           </direction-type>
         <staff>2</staff>
         </direction>
       <direction placement="below">
         <direction-type>
-          <octave-shift type="up" size="8" number="1" default-y="-110.98"/>
+          <wedge type="diminuendo" number="1" default-y="-89.43"/>
           </direction-type>
         <staff>2</staff>
         </direction>

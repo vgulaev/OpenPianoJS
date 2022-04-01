@@ -9,7 +9,7 @@
     <creator type="lyricist">Arr.: Patrik Pietschmann</creator>
     <encoding>
       <software>MuseScore 3.6.0</software>
-      <encoding-date>2021-06-17</encoding-date>
+      <encoding-date>2022-02-09</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="yes" value="yes"/>
@@ -43,15 +43,15 @@
     </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="611.96" default-y="1527.42" justify="center" valign="top" font-size="22">Game of Thrones</credit-words>
+    <credit-words default-x="611.96" default-y="1527.63" justify="center" valign="top" font-size="22">Game of Thrones</credit-words>
     </credit>
   <credit page="1">
     <credit-type>subtitle</credit-type>
-    <credit-words default-x="611.96" default-y="1470.73" justify="center" valign="top" font-size="16">Main Theme</credit-words>
+    <credit-words default-x="611.96" default-y="1470.94" justify="center" valign="top" font-size="16">Main Theme</credit-words>
     </credit>
   <credit page="1">
     <credit-type>composer</credit-type>
-    <credit-words default-x="1167.23" default-y="1427.42" justify="right" valign="top">Ramin Djawadi
+    <credit-words default-x="1167.23" default-y="1427.63" justify="right" valign="top">Ramin Djawadi
 </credit-words>
     <credit-words>Arr.: Patrik Pietschmann</credit-words>
     </credit>
@@ -1366,6 +1366,19 @@
         <pitch>
           <step>G</step>
           <octave>3</octave>
+          </pitch>
+        <duration>6</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <dot/>
+        <stem>down</stem>
+        <staff>1</staff>
+        </note>
+      <note default-x="102.97" default-y="30.00">
+        <chord/>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
           </pitch>
         <duration>6</duration>
         <voice>1</voice>

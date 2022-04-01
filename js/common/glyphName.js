@@ -44,10 +44,12 @@ export const emm = {
     dot: '\u{E131}'
   },
   Articulation: {
-    staccato: '\u{E4A2}',
+    accent: '\u{E13B}',
+    staccato: '\u{E13D}',
     staccatissimo: {
       up: '\u{E4A7}',
-    }
+    },
+
   },
   Flag: {
     eighth: {

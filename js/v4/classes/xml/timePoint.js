@@ -224,8 +224,10 @@ export class TimePoint {
     })
     .forEach(el => {
       let y = Note.baseY[el.n.staff] - 7.5 * el.l;
-      let e = SVGBuilder.emmentaler({x: pm.cursor - 15, y: y, text: emm.Dot.dot});
-      pm.g.append(e);
+      el.n.xml.querySelectorAll('dot').forEach((dot, dotIndex) => {
+        let e = SVGBuilder.emmentaler({x: pm.cursor - 15 + dotIndex * 7, y: y, text: emm.Dot.dot});
+        pm.g.append(e);
+      })
     });
   }
 
@@ -319,6 +321,26 @@ export class TimePoint {
     });
   }
 
+  drawBeatsLine(pm) {
+    const { timeSignature } = this.measure
+    const bitDuration = 4 / timeSignature['beat-type'] * pm.sheet.measures[0].tickPerBit
+    // console.log(this.tick, this.measure.timeSignature, pm.sheet.measures[0].tickPerBit, )
+    let text
+    if (12 == timeSignature.beats || 9 == timeSignature.beats) {
+      text = ((this.tick / bitDuration % 3) + 1)
+    } else {
+      text = (this.tick / bitDuration + 1)
+    }
+
+    // console.log(this.tick, pm.sheet.measures[0].tickPerBit)
+    if (-1 == text.toFixed(2).indexOf('.00')) {
+      return
+    }
+    let e = SVGBuilder.text({x: this.x, y: 410, text: text});
+    e.style.fontSize = '20px';
+    pm.secondLayer.append(e);
+  }
+
   draw(pm) {
     this.drawSignature(pm);
     this.drawGraces(pm);
@@ -330,6 +352,7 @@ export class TimePoint {
     this.drawFingering(pm);
     pm.sb.draw();
     pm.tb.draw();
+    this.drawBeatsLine(pm)
     this.updateClef(pm);
   }
 }

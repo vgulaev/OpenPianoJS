@@ -8,7 +8,7 @@
     <creator type="composer">Johann Pachelbel</creator>
     <encoding>
       <software>MuseScore 3.6.0</software>
-      <encoding-date>2021-02-10</encoding-date>
+      <encoding-date>2022-03-04</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="yes" value="yes"/>
@@ -36,11 +36,11 @@
     </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="574.325" default-y="1419.68" justify="center" valign="top" font-size="24">Canon in D</credit-words>
+    <credit-words default-x="574.325" default-y="1419.6" justify="center" valign="top" font-size="24">Canon in D</credit-words>
     </credit>
   <credit page="1">
     <credit-type>composer</credit-type>
-    <credit-words default-x="1081.08" default-y="1319.68" justify="right" valign="top" font-size="14">Johann Pachelbel
+    <credit-words default-x="1081.08" default-y="1319.6" justify="right" valign="top" font-size="14">Johann Pachelbel
 </credit-words>
     <credit-words>Arr. by lemontart
 </credit-words>
@@ -19887,10 +19887,9 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
         </note>
-      <note default-x="205.07" default-y="-35.00">
+      <note default-x="205.07" default-y="-25.00">
         <pitch>
-          <step>F</step>
-          <alter>1</alter>
+          <step>A</step>
           <octave>4</octave>
           </pitch>
         <duration>1</duration>
@@ -21938,9 +21937,9 @@
         <stem>down</stem>
         <staff>1</staff>
         </note>
-      <note default-x="254.19" default-y="-5.00">
+      <note default-x="254.19" default-y="-10.00">
         <pitch>
-          <step>E</step>
+          <step>D</step>
           <octave>5</octave>
           </pitch>
         <duration>4</duration>

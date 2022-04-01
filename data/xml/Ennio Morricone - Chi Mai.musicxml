@@ -7,7 +7,7 @@
   <identification>
     <encoding>
       <software>MuseScore 3.6.0</software>
-      <encoding-date>2021-08-25</encoding-date>
+      <encoding-date>2022-02-26</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="yes" value="yes"/>
@@ -42,7 +42,7 @@
     </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="595.44" default-y="1627.01" justify="center" valign="top" font-size="22">Ennio Morricone - Chi Mai</credit-words>
+    <credit-words default-x="595.44" default-y="1626.68" justify="center" valign="top" font-size="22">Ennio Morricone - Chi Mai</credit-words>
     </credit>
   <part-list>
     <score-part id="P1">
@@ -997,6 +997,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">5</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="47.09" default-y="-80.00">
         <pitch>
@@ -1010,6 +1015,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">continue</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="77.68" default-y="-70.00">
         <pitch>
@@ -1022,6 +1032,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">2</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="108.27" default-y="-65.00">
         <pitch>
@@ -1034,6 +1049,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">1</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="138.86" default-y="-70.00">
         <pitch>
@@ -1119,6 +1139,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">5</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="41.58" default-y="-100.00">
         <pitch>
@@ -1131,6 +1156,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">continue</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="70.16" default-y="-90.00">
         <pitch>
@@ -1143,6 +1173,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">2</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="98.74" default-y="-85.00">
         <pitch>
@@ -1155,6 +1190,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">1</fingering>
+            </technical>
+          </notations>
         </note>
       <note default-x="127.31" default-y="-90.00">
         <pitch>

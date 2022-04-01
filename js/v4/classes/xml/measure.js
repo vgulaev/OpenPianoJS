@@ -52,8 +52,7 @@ export class Measure {
     if (xml.innerHTML.includes('size="cue"'))
       return;
     let n = new Note(xml);
-    // if (n.grace)
-    //   console.log(n)
+
     if (n.chord) {
       this.timePoint[this.curTick - (n.duration || 0)].push(n);
     } else {

@@ -9,5 +9,6 @@ export class PrintMachine {
     this.secondLayer = sheet.secondLayer;
     this.sb = new StemBuilder(this);
     this.tb = new TieBuilder(this);
+    this.sheet = sheet
   }
 }

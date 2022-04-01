@@ -15,6 +15,9 @@ export class Piano {
   }
 
   onMIDIMessage(event) {
+    if (-1 != [254, 176].indexOf(event.data[0])) {
+      return
+    }
     this.app.stats.pressKey();
     this.dispatchEvent('onMIDIKeyPressed');
     if (144 == event.data[0]) {
