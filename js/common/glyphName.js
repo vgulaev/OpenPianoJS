@@ -51,6 +51,10 @@ export const emm = {
     },
 
   },
+  Ornaments: {
+    'inverted-mordent': '\u{E160}',
+    'trill-mark': '\u{E14D}',
+  },
   Flag: {
     eighth: {
       up: '\u{E21D}',

@@ -98,6 +98,17 @@ export class Note {
       let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
       pm.g.append(e);
     }
+    if (this.notations?.ornaments) {
+      let symb;
+      if (this.notations.ornaments['inverted-mordent']) {
+        symb = emm.Ornaments['inverted-mordent']
+      } else if (this.notations.ornaments['trill-mark']) {
+        symb = emm.Ornaments['trill-mark']
+      }
+      let dy = ('down' == this.stem ? -18 : -60)
+      let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
+      pm.g.append(e);
+    }
   }
 
   drawRest(pm) {
