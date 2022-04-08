@@ -56,7 +56,7 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/BWV 848 Prelude C Major.musicxml');
   // app.load('data/xml/BWV 1068 J._S._Bach_-_Air_on_the_G_String_Piano_arrangement.musicxml');
   // app.load('data/xml/BWV 849 Prelude C sharp Minor.musicxml');
-  app.load('data/xml/BWV 853 Prelude N8 in E Flat Minor.musicxml');
+  // app.load('data/xml/BWV 853 Prelude N8 in E Flat Minor.musicxml');
   // app.load('data/xml/BWV 927.musicxml');
   // app.load('data/xml/BWV-565.musicxml');
   // app.load('data/xml/Canon_in_D_full.musicxml');
@@ -111,5 +111,5 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/The Daydream - Tears B minor.musicxml');
   // app.load('data/xml/Vivaldi_-_Violin_Concerto_in_E_major_Op._8_No._1_RV._269_Spring_for_Solo_Piano.musicxml');
   // app.load('data/xml/Yann Tiersen - Comptine Dun Autre Ete Lapres.musicxml');
-  // app.load('data/xml/test.musicxml');
+  app.load('data/xml/test.musicxml');
 });

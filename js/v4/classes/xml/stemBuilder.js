@@ -39,13 +39,12 @@ export class StemBuilder {
     if (2 == xs.size) {
       x = Math.max(...(Array.from(xs))) + 1;
     }
-
     return {
       x1: x,
       y1: edge[0].y - k * 2,
       x2: x,
       y2: edge[1].y - k * dy,
-      beam: edge[0]
+      beam: voice.filter(n => n.beam)[0] // edge[0]
     }
   }
 
@@ -104,7 +103,6 @@ export class StemBuilder {
     let dy = 10;
     if ('down' == b[0][0].stem) dy = -10;
     let k = this.getK(coords);
-
     coords.forEach((xy, i) => {
       let index = 0;
       if (b[0][0].stem != b[i][0].stem) {
@@ -116,7 +114,6 @@ export class StemBuilder {
       let stemXY = {x1: xy.x1, y1: xy.y1, x2: xy.x2, y2: xy.y2 + index * dy};
       let l = SVGBuilder.line(stemXY);
       this.g.append(l);
-
       this.drawHooks(xy.beam, stemXY, k);
     });
   }
