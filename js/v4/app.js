@@ -53,6 +53,7 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/BWV 528_Organ_Sonata_No._4_-_2._Andante_Adagio_-_Vikingur_Olafsson_Interpretation.musicxml');
   // app.load('data/xml/BWV-565.musicxml');
   // app.load('data/xml/BWV 847 Prelude C Minor.musicxml');
+  // app.load('data/xml/BWV 847 Fugue in C Minor.musicxml');
   // app.load('data/xml/BWV 848 Prelude C Major.musicxml');
   // app.load('data/xml/BWV 1068 J._S._Bach_-_Air_on_the_G_String_Piano_arrangement.musicxml');
   // app.load('data/xml/BWV 849 Prelude C sharp Minor.musicxml');
@@ -63,7 +64,7 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/Chopin - Fantaisie-Impromptu.musicxml');
   // app.load('data/xml/Chopin Sonata_No.2_in_B-flat_minor.musicxml');
   // app.load('data/xml/Chopin_-_Nocturne_Op_9_No_1_B_Flat_Minor.musicxml');
-  // app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
+  app.load('data/xml/Chopin_Nocture_opus_9_number2.musicxml');
   // app.load('data/xml/Czerny-Germer-19.musicxml');
   // app.load('data/xml/Debussy - Clair de Lune Suite Bergamasque No. 3.musicxml');
   // app.load('data/xml/Dance_of_the_Knights_Transcription_for_solo_piano.musicxml');
@@ -76,6 +77,7 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/Gnossienne_No._1.musicxml');
   // app.load('data/xml/Gymnopedie.musicxml');
   // app.load('data/xml/Grieg_-_Piano_Concerto_in_A_minor_-_1st_movement_-_Piano_Solo.musicxml');
+  // app.load('data/xml/Hanz Zimmer - Mountains.musicxml');
   // app.load('data/xml/Hanon - Ex 6.musicxml');
   // app.load('data/xml/Ilya Beshelvi - Wind.musicxml');
   // app.load('data/xml/Jingle_Bells.musicxml');
@@ -111,5 +113,5 @@ window.addEventListener('load', function( event ) {
   // app.load('data/xml/The Daydream - Tears B minor.musicxml');
   // app.load('data/xml/Vivaldi_-_Violin_Concerto_in_E_major_Op._8_No._1_RV._269_Spring_for_Solo_Piano.musicxml');
   // app.load('data/xml/Yann Tiersen - Comptine Dun Autre Ete Lapres.musicxml');
-  app.load('data/xml/test.musicxml');
+  // app.load('data/xml/test.musicxml');
 });

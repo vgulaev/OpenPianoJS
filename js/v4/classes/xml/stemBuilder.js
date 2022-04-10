@@ -44,7 +44,7 @@ export class StemBuilder {
       y1: edge[0].y - k * 2,
       x2: x,
       y2: edge[1].y - k * dy,
-      beam: voice.filter(n => n.beam)[0] // edge[0]
+      beam: voice.filter(n => n.beam)[0] || edge[0]
     }
   }
 

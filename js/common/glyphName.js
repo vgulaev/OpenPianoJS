@@ -47,7 +47,8 @@ export const emm = {
     accent: '\u{E13B}',
     staccato: '\u{E13D}',
     staccatissimo: {
-      up: '\u{E4A7}',
+      up: '\u{E13F}',
+      down: '\u{E13E}',
     },
 
   },

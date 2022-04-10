@@ -27,7 +27,10 @@ export class SVGBuilder {
   static emmentaler(o) {
     let e = SVGBuilder.createSVG('text');
     e.setAttributeNS(null, 'x', o.x);
-    if (isNaN(o.y) || !o.text) fsdgdsgsdg;
+    if (isNaN(o.y) || !o.text) {
+      console.log('Error happen with:', o)
+      throw new Error('Looks like error');
+    }
     e.setAttributeNS(null, 'y', o.y);
     e.innerHTML = o.text;
     // e.style.display = 'inline';

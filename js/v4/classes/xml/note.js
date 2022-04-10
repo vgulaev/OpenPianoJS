@@ -93,10 +93,16 @@ export class Note {
         symb = emm.Articulation.staccato
       } else if (this.notations.articulations.accent) {
         symb = emm.Articulation.accent
+      } else if (this.notations.articulations.staccatissimo) {
+        symb = emm.Articulation.staccatissimo[this.stem]
+      } else {
+        console.log(this.notations.articulations, 'should be fixed')
       }
-      let dy = ('down' == this.stem ? -18 : 18)
-      let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
-      pm.g.append(e);
+      if (symb) {
+        let dy = ('down' == this.stem ? -18 : 18)
+        let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
+        pm.g.append(e);
+      }
     }
     if (this.notations?.ornaments) {
       let symb;
