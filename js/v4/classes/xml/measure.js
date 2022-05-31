@@ -49,8 +49,8 @@ export class Measure {
   }
 
   note(xml) {
-    if (xml.innerHTML.includes('size="cue"'))
-      return;
+    // if (xml.innerHTML.includes('size="cue"'))
+    //   return console.log('HASDsadsd?>?>>>');
     let n = new Note(xml);
 
     if (n.chord) {

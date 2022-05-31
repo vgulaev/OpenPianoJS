@@ -268,6 +268,10 @@ export class TimePoint {
         n.x = x + dxAcc;
         n.y = n.drawY(pm);
         n.draw(pm);
+        let dL = n.drawLine(pm)
+        if (dL < 0 || dL > 10) {
+          this.drawAdditionalLineNote(pm, n)
+        }
         sb.push(n);
       });
       sb.draw();

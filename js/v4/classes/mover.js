@@ -78,12 +78,12 @@ export class Mover {
     this.g.setAttributeNS(null, 'transform',`translate(${400 - this.curX})`);
   }
 
-  getAnimation() {
+  getAnimation(o) {
     let a = ['stroke', 'fill'].map(attr => {
       let e = SVGBuilder.createSVG('animate');
       e.setAttributeNS(null, 'attributeName', attr);
       e.setAttributeNS(null, 'from', 'green');
-      e.setAttributeNS(null, 'to', 'black');
+      e.setAttributeNS(null, 'to', o.to);
       e.setAttributeNS(null, 'dur', '2s');
       e.addEventListener('endEvent', () => {
         setTimeout(() => e.remove(), 2000);
@@ -97,7 +97,7 @@ export class Mover {
     let c = this.cc.items[this.curIndex];
 
     c.notes.forEach(n => {
-      let a = this.getAnimation();
+      let a = this.getAnimation({to: (n.notehead?.color || 'black')});
       a.forEach(e => n.g.append(e));
       a.forEach(e => e.beginElement());
     });

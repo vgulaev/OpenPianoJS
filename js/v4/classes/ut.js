@@ -23,7 +23,7 @@ export class Ut {
   static parseChildren(o, xml) {
     for (let c of xml.children) {
       if (0 == c.childElementCount) {
-        if ('' == c.innerHTML) {
+        if ('' == c.innerHTML || 'notehead' == c.tagName) {
           if (0 == c.attributes.length) {
             o[c.tagName] = true
           } else {

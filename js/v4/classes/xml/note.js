@@ -77,7 +77,11 @@ export class Note {
     } else if ('half' == this.type) {
       head = 's1';
     }
-    let e = SVGBuilder.emmentaler({x: this.x, y: this.y, text: emm.Notehead[head]});
+    let o = {x: this.x, y: this.y, text: emm.Notehead[head]}
+    if (this.notehead?.color) {
+      o.fill = this.notehead?.color
+    }
+    let e = SVGBuilder.emmentaler(o);
     if (this.grace) {
       e.style.fontSize = '38px';
     }
@@ -110,6 +114,8 @@ export class Note {
         symb = emm.Ornaments['inverted-mordent']
       } else if (this.notations.ornaments['trill-mark']) {
         symb = emm.Ornaments['trill-mark']
+      } else if (this.notations.ornaments['mordent']) {
+        symb = emm.Ornaments['mordent']
       }
       let dy = ('down' == this.stem ? -18 : -60)
       let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
