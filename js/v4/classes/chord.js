@@ -1,3 +1,5 @@
+import {noteDur} from '../../common/commonConst.js'
+
 const checkNoteDistance = notes => {
   if (notes.length < 3) return notes
   const staff = {}
@@ -30,8 +32,17 @@ export class Chord {
     this.x = Math.min(...notes.map(n => n.x));
     this.notes = notes;
     this.errors = 0;
-    this.keys = new Set(checkNoteDistance(this.notes).map(n => n.midiByte));
-    // this.keys = new Set(this.notes.map(n => n.midiByte));
+    // this.keys = new Set(checkNoteDistance(this.notes).map(n => n.midiByte));
+    this.keys = new Set(this.notes.map(n => n.midiByte));
     this.tp = tp;
+  }
+
+  minNoteType() {
+    return Math.min(...this.notes.map(n => noteDur[n.type]))
+  }
+
+  push(note) {
+    this.notes.push(note)
+    this.keys = new Set(this.notes.map(n => n.midiByte));
   }
 }

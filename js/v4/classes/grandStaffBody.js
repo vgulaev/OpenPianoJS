@@ -21,6 +21,7 @@ export class GrandStaffBody {
     rubicon.setAttributeNS(null, "stroke", "blue");
     rubicon.setAttributeNS(null, "fill", "blue");
     rubicon.setAttributeNS(null, "opacity", "0.5");
+    this.rubicon = rubicon;
     this.root.append(rubicon);
   }
 

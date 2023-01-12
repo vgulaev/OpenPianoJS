@@ -265,7 +265,11 @@ export class TimePoint {
           pm.g.append(a);
           dxAcc = 15;
         }
-        n.x = x + dxAcc;
+        if (n.chord) {
+          n.x = x - 15;
+        } else {
+          n.x = x + dxAcc;
+        }
         n.y = n.drawY(pm);
         n.draw(pm);
         let dL = n.drawLine(pm)

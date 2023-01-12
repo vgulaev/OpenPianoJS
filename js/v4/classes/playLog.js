@@ -25,6 +25,8 @@ export class PlayLog {
       });
       this.render(sorted);
       console.log(sorted);
+      const names = new Set(sorted.map(s => s.name))
+      console.log(names)
       // renderTable();
     };
   }

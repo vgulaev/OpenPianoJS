@@ -96,9 +96,13 @@ export class Measure {
     pm.g.append(t);
     pm.g.append(e);
     pm.cursor += 20;
-    Object.keys(this.timePoint)
-      .map(e => parseInt(e))
-      .sort((a, b) => a-b)
-      .forEach(t => this.timePoint[t].draw(pm));
+    // try {
+      Object.keys(this.timePoint)
+        .map(e => parseInt(e))
+        .sort((a, b) => a-b)
+        .forEach(t => this.timePoint[t].draw(pm));
+    // } catch (err) {
+    //   console.log('Error in measure:', this.number, err)
+    // }
   }
 }

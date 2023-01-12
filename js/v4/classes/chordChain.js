@@ -19,6 +19,7 @@ export class ChordChain {
 
   parseGraces(tp) {
     let graces = tp.graces;
+    let lastChord;
     let l = Math.max(...[1, 2].map(s => (undefined == graces[s] ? 0 : graces[s].length)));
     for (let i = 0; i < l; i++) {
       let notes = [];
@@ -28,7 +29,12 @@ export class ChordChain {
         if (n) notes.push(n);
       });
       if (0 == notes.length) continue;
-      this.items.push(new Chord(notes, tp));
+      lastChord = new Chord(notes, tp)
+      if (notes[0].chord) {
+        lastChord.push(notes[0])
+      } else {
+        this.items.push(lastChord);
+      }
     }
   }
 }

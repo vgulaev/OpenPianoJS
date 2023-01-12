@@ -10,6 +10,7 @@ import {Stats} from './classes/stats.js';
 import {TempoCoacher} from './coachers/tempoCoacher.js';
 import {UI} from './classes/ui.js'
 import {Settings} from '../../conf/localSettings.js'
+import {TempoMaster} from './classes/tempoMaster.js'
 
 class App {
   constructor() {
@@ -21,6 +22,7 @@ class App {
     this.mover = new Mover(this);
     this.piano = new Piano(this);
     this.piano.init(this.mover);
+    this.tempoMaster = new TempoMaster(this);
     this.ui = new UI(this);
     this.sensei = new FragmentCoacher(this);
     // this.sensei = new LearnCoacher(this);

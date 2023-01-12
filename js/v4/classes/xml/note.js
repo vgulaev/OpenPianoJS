@@ -99,6 +99,8 @@ export class Note {
         symb = emm.Articulation.accent
       } else if (this.notations.articulations.staccatissimo) {
         symb = emm.Articulation.staccatissimo[this.stem]
+      } else if (this.notations.articulations['detached-legato']) {
+        symb = emm.Articulation['detached-legato']
       } else {
         console.log(this.notations.articulations, 'should be fixed')
       }
@@ -109,17 +111,21 @@ export class Note {
       }
     }
     if (this.notations?.ornaments) {
-      let symb;
+      let symb = true
       if (this.notations.ornaments['inverted-mordent']) {
         symb = emm.Ornaments['inverted-mordent']
       } else if (this.notations.ornaments['trill-mark']) {
         symb = emm.Ornaments['trill-mark']
       } else if (this.notations.ornaments['mordent']) {
         symb = emm.Ornaments['mordent']
+      } else if (this.notations.ornaments['wavy-line']) {
+        symb = false
       }
-      let dy = ('down' == this.stem ? -18 : -60)
-      let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
-      pm.g.append(e);
+      if (symb) {
+        let dy = ('down' == this.stem ? -18 : -60)
+        let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
+        pm.g.append(e);
+      }
     }
   }
 

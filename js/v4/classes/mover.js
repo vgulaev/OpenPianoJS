@@ -73,9 +73,40 @@ export class Mover {
     this.header.setTimeSignature(tp.measure.timeSignature);
   }
 
+  rehide() {
+    // return
+    if (this.lastReHidded == Math.floor(this.curX / 500)) {
+      return
+    }
+    this.lastReHidded = Math.floor(this.curX / 500)
+    console.log('rehide should apply', this.lastReHidded, this.g)
+    const leftX = this.lastReHidded * 500 - 1000
+    const rightX = this.lastReHidded * 500 + 1000
+
+    const texts = this.g.querySelectorAll('text')
+    texts.forEach(e => {
+      const eX = e.getAttributeNS(null, 'x')
+      if (leftX < eX && eX < rightX) {
+        e.style.display = 'inline'
+      } else {
+        e.style.display = 'none'
+      }
+    })
+    const lines = this.g.querySelectorAll('line')
+    lines.forEach(e => {
+      const eX = e.getAttributeNS(null, 'x1')
+      if (leftX < eX && eX < rightX) {
+        e.style.display = 'inline'
+      } else {
+        e.style.display = 'none'
+      }
+    })
+  }
+
   setPoint(x) {
     this.curX = x;
     this.g.setAttributeNS(null, 'transform',`translate(${400 - this.curX})`);
+    this.rehide()
   }
 
   getAnimation(o) {
@@ -156,6 +187,7 @@ export class Mover {
     if (this.cc.items.length - 1 == this.curIndex) return this.dispatchEvent('onSheetEnd');
     this.startGreenAnimation();
     this.dispatchEvent('beforeIndexUpdated');
+    this.app.tempoMaster.tick(this.cc.items[this.curIndex]);
     this.curIndex += 1;
     this.dispatchEvent('afterIndexUpdated');
     this.moveTo = this.cc.items[this.curIndex].x;

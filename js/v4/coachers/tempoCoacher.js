@@ -15,8 +15,10 @@ export class TempoCoacher {
     this.tempo.setAttributeNS(null, 'id', 'FragmentCoacher');
     this.app.sheet.secondLayer.append(this.tempo);
 
+    console.log('Settings.range', Settings.range)
     let s = (Settings.range ? Settings.range[0] : 0);
     let e = (Settings.range ? Math.min(Settings.range[1], this.app.cc.items.length - 1) : this.app.cc.items.length - 1);
+    console.log('s', s, 'e', e)
     this.from = {
       index: s,
       line: this.createLineAt(s, 'from'),

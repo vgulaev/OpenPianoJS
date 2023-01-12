@@ -50,7 +50,7 @@ export const emm = {
       up: '\u{E13F}',
       down: '\u{E13E}',
     },
-
+    'detached-legato': '\u{E141}',
   },
   Ornaments: {
     'inverted-mordent': '\u{E160}',
