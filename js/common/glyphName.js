@@ -1,74 +1,85 @@
-emm = {
+export const emm = {
   Clef: {
-    G0: '\u{E050}',
-    'G-1': '\u{E052}',
-    'G1': '\u{E053}',
-    F0: '\u{E062}'
+    G: '\u{E173}',
+    // 'G-1': '\u{E052}',
+    // 'G1': '\u{E053}',
+    F: '\u{E171}'
   },
   Accidental: {
-    flat: '\u{E260}',
-    natural: '\u{E261}',
-    sharp: '\u{E262}',
-    'double-sharp': '\u{E263}',
-    'flat-flat': '\u{E264}'
+    flat: '\u{E11B}',
+    natural: '\u{E117}',
+    sharp: '\u{E10F}',
+    'double-sharp': '\u{E126}',
+    'flat-flat': '\u{E124}'
   },
   Number: {
-    0: '\u{E080}',
-    1: '\u{E081}',
-    2: '\u{E082}',
-    3: '\u{E083}',
-    4: '\u{E084}',
-    5: '\u{E085}',
-    6: '\u{E086}',
-    7: '\u{E087}',
-    8: '\u{E088}',
-    9: '\u{E089}'
+    0: '\u{0030}',
+    1: '\u{0031}',
+    2: '\u{0032}',
+    3: '\u{0033}',
+    4: '\u{0034}',
+    5: '\u{0035}',
+    6: '\u{0036}',
+    7: '\u{0037}',
+    8: '\u{0038}',
+    9: '\u{0039}'
   },
   Notehead: {
-    s0: '\u{E0A2}',
-    s1: '\u{E0A3}',
-    s2: '\u{E0A4}'
+    s0: '\u{E192}',
+    s1: '\u{E193}',
+    s2: '\u{E194}'
   },
   Rest: {
-    128: '\u{E4EA}',
-    64: '\u{E4E9}',
-    32: '\u{E4E8}',
-    16: '\u{E4E7}',
-    eighth: '\u{E4E6}',
-    quarter: '\u{E4E5}',
-    half: '\u{E4E4}',
-    whole: '\u{E4E3}'
+    128: '\u{E10E}',
+    64: '\u{E10D}',
+    32: '\u{E10C}',
+    16: '\u{E10B}',
+    eighth: '\u{E10A}',
+    quarter: '\u{E108}',
+    half: '\u{E101}',
+    whole: '\u{E100}',
+    breve: '\u{E106}',
   },
   Dot: {
-    dot: '\u{002E}',
-    upper: '\u{E044}'
+    dot: '\u{E131}'
   },
   Articulation: {
-    staccato: '\u{E4A2}',
+    accent: '\u{E13B}',
+    staccato: '\u{E13D}',
     staccatissimo: {
-      up: '\u{E4A7}',
-    }
+      up: '\u{E13F}',
+      down: '\u{E13E}',
+    },
+    'detached-legato': '\u{E141}',
+  },
+  Ornaments: {
+    'inverted-mordent': '\u{E160}',
+    mordent: '\u{E161}',
+    'trill-mark': '\u{E14D}',
   },
   Flag: {
     eighth: {
-      up: '\u{E240}',
-      down: '\u{E241}'
+      up: '\u{E21D}',
+      down: '\u{E222}'
     },
     16: {
-      up: '\u{E242}',
-      down: '\u{E243}'
+      up: '\u{E21E}',
+      down: '\u{E223}'
     },
     32: {
-      up: '\u{E244}',
-      down: '\u{E245}'
+      up: '\u{E21F}',
+      down: '\u{E224}'
     },
     64: {
-      up: '\u{E246}',
-      down: '\u{E247}'
+      up: '\u{E220}',
+      down: '\u{E225}'
     },
     128: {
-      up: '\u{E248}',
-      down: '\u{E249}'
+      up: '\u{E221}',
+      down: '\u{E226}'
     }
+  },
+  Script: {
+    arpeggio: '\u{E15B}'
   }
 }
