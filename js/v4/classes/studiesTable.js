@@ -47,14 +47,14 @@ export class PlayLog {
       const dateKey = yyyyMMDD(e.dateTime)
       if (!result[dateKey]) {
         result[dateKey] = {
-          timeLength: e.timeLength,
+          timeLength: 0,
           date: dateKey,
           items: {}
         }
       }
       if (!result[dateKey]?.items?.[e.name]) {
         result[dateKey].items[e.name] = {
-          timeLength: e.timeLength
+          timeLength: 0
         }
       }
       result[dateKey].items[e.name].timeLength += e.timeLength
@@ -76,7 +76,6 @@ export class PlayLog {
   render(items) {
     let body = document.querySelector('body')
     const regrouped = this.regroup(items)
-    console.log(regrouped)
     const newBody = regrouped
       .map(e => `
           <div style="border-top: 1px solid black; margin-top: 10px;">${e.date}</div>
@@ -95,16 +94,6 @@ export class PlayLog {
         <div>Time spend</div>
         ${newBody}
       </div>`
-    // console.log('***', items)
-    // const result = items.group(({ dateTime }) => yyyyMMDD(dateTime))
-    // console.log(result)
-    // body.innerHTML = items.map((e) => `
-    //   <p>
-    //     Name: <span>${e.name}</span>
-    //     From: <span>${e.from}</span>
-    //     To: <span>${e.to}</span>
-    //   </p>
-    //   `).join('\n');
   }
 }
 
@@ -113,8 +102,4 @@ window.addEventListener("load", function( event ) {
     let p = new PlayLog(db);
     p.readDataFromDB();
   });
-  // body = document.getElementById('tBody');
-  // let owndb = (new OwnDB).then((db) => {
-  //   fillReport(db);
-  // });
 });

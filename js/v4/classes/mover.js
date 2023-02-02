@@ -80,8 +80,8 @@ export class Mover {
     }
     this.lastReHidded = Math.floor(this.curX / 500)
     console.log('rehide should apply', this.lastReHidded, this.g)
-    const leftX = this.lastReHidded * 500 - 1000
-    const rightX = this.lastReHidded * 500 + 1000
+    const leftX = this.lastReHidded * 500 - 1500
+    const rightX = this.lastReHidded * 500 + 1500
 
     const texts = this.g.querySelectorAll('text')
     texts.forEach(e => {
