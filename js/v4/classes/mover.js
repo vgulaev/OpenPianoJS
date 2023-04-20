@@ -34,7 +34,7 @@ export class Mover {
       }
     });
 
-    window.addEventListener('touchend', event => {
+    window.addEventListener('touchstart', event => {
       let changedTouches = event.changedTouches;
       if (0 == changedTouches.length) return;
       if (changedTouches[0].pageY < this.app.ui.UIHeader.getBoundingClientRect().bottom * 1.1) return;
@@ -79,7 +79,7 @@ export class Mover {
       return
     }
     this.lastReHidded = Math.floor(this.curX / 500)
-    console.log('rehide should apply', this.lastReHidded, this.g)
+    // console.log('rehide should apply', this.lastReHidded, this.g)
     const leftX = this.lastReHidded * 500 - 1500
     const rightX = this.lastReHidded * 500 + 1500
 

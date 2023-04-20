@@ -7,8 +7,8 @@
   <identification>
     <creator type="composer">Sergei Rachmaninov</creator>
     <encoding>
-      <software>MuseScore 4.0.0</software>
-      <encoding-date>2023-01-04</encoding-date>
+      <software>MuseScore 4.0.1</software>
+      <encoding-date>2023-03-15</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -5293,8 +5293,8 @@
         </backup>
       <note>
         <pitch>
-          <step>C</step>
-          <octave>2</octave>
+          <step>A</step>
+          <octave>1</octave>
           </pitch>
         <duration>30</duration>
         <voice>5</voice>
@@ -5310,8 +5310,8 @@
       <note>
         <chord/>
         <pitch>
-          <step>C</step>
-          <octave>3</octave>
+          <step>A</step>
+          <octave>2</octave>
           </pitch>
         <duration>30</duration>
         <voice>5</voice>
@@ -11020,8 +11020,7 @@
         </note>
       <note>
         <pitch>
-          <step>E</step>
-          <alter>-1</alter>
+          <step>D</step>
           <octave>4</octave>
           </pitch>
         <duration>30</duration>
@@ -14265,7 +14264,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <tuplet type="start" bracket="no"/>
+          <tuplet type="start" bracket="yes"/>
           </notations>
         </note>
       <note>
@@ -14298,82 +14297,6 @@
           <normal-notes>2</normal-notes>
           </time-modification>
         <stem>down</stem>
-        <staff>1</staff>
-        <notations>
-          <tuplet type="stop"/>
-          </notations>
-        </note>
-      <backup>
-        <duration>120</duration>
-        </backup>
-      <note>
-        <pitch>
-          <step>A</step>
-          <alter>-1</alter>
-          <octave>5</octave>
-          </pitch>
-        <duration>5</duration>
-        <voice>2</voice>
-        <type>32nd</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          <normal-type>quarter</normal-type>
-          </time-modification>
-        <stem>none</stem>
-        <notehead>none</notehead>
-        <staff>1</staff>
-        <notations>
-          <tuplet type="start" bracket="yes"/>
-          </notations>
-        </note>
-      <note>
-        <pitch>
-          <step>B</step>
-          <alter>-1</alter>
-          <octave>5</octave>
-          </pitch>
-        <duration>5</duration>
-        <voice>2</voice>
-        <type>32nd</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          <normal-type>quarter</normal-type>
-          </time-modification>
-        <stem>none</stem>
-        <notehead>none</notehead>
-        <staff>1</staff>
-        </note>
-      <note>
-        <pitch>
-          <step>A</step>
-          <alter>-1</alter>
-          <octave>5</octave>
-          </pitch>
-        <duration>30</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-        <dot/>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          <normal-type>quarter</normal-type>
-          </time-modification>
-        <stem>none</stem>
-        <notehead>none</notehead>
-        <staff>1</staff>
-        </note>
-      <note print-object="no">
-        <rest/>
-        <duration>80</duration>
-        <voice>2</voice>
-        <type>half</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          <normal-type>quarter</normal-type>
-          </time-modification>
         <staff>1</staff>
         <notations>
           <tuplet type="stop"/>
@@ -15089,7 +15012,6 @@
         <staff>1</staff>
         <notations>
           <tied type="start"/>
-          <slur type="start" placement="above" number="2"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -15466,7 +15388,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <tuplet type="start" bracket="no"/>
+          <tuplet type="start" bracket="yes"/>
           </notations>
         </note>
       <note>
@@ -15501,11 +15423,6 @@
           </time-modification>
         <stem>down</stem>
         <staff>1</staff>
-        <notations>
-          <articulations>
-            <tenuto/>
-            </articulations>
-          </notations>
         </note>
       <note>
         <chord/>
@@ -15540,9 +15457,6 @@
         <staff>1</staff>
         <notations>
           <tuplet type="stop"/>
-          <articulations>
-            <tenuto/>
-            </articulations>
           </notations>
         </note>
       <note>
@@ -15561,85 +15475,6 @@
           </time-modification>
         <stem>down</stem>
         <staff>1</staff>
-        </note>
-      <backup>
-        <duration>120</duration>
-        </backup>
-      <note>
-        <pitch>
-          <step>C</step>
-          <alter>-1</alter>
-          <octave>6</octave>
-          </pitch>
-        <duration>5</duration>
-        <voice>2</voice>
-        <type>32nd</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          <normal-type>quarter</normal-type>
-          </time-modification>
-        <stem>none</stem>
-        <notehead>none</notehead>
-        <staff>1</staff>
-        <notations>
-          <tuplet type="start" bracket="yes"/>
-          <articulations>
-            <tenuto/>
-            </articulations>
-          </notations>
-        </note>
-      <note>
-        <pitch>
-          <step>D</step>
-          <alter>-1</alter>
-          <octave>6</octave>
-          </pitch>
-        <duration>5</duration>
-        <voice>2</voice>
-        <type>32nd</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          <normal-type>quarter</normal-type>
-          </time-modification>
-        <stem>none</stem>
-        <notehead>none</notehead>
-        <staff>1</staff>
-        </note>
-      <note>
-        <pitch>
-          <step>C</step>
-          <alter>-1</alter>
-          <octave>6</octave>
-          </pitch>
-        <duration>30</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-        <dot/>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          <normal-type>quarter</normal-type>
-          </time-modification>
-        <stem>none</stem>
-        <notehead>none</notehead>
-        <staff>1</staff>
-        </note>
-      <note print-object="no">
-        <rest/>
-        <duration>80</duration>
-        <voice>2</voice>
-        <type>half</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          <normal-type>quarter</normal-type>
-          </time-modification>
-        <staff>1</staff>
-        <notations>
-          <tuplet type="stop"/>
-          </notations>
         </note>
       <backup>
         <duration>240</duration>
@@ -15877,9 +15712,6 @@
         <type>half</type>
         <stem>down</stem>
         <staff>1</staff>
-        <notations>
-          <slur type="stop" number="2"/>
-          </notations>
         </note>
       <note>
         <chord/>

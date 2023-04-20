@@ -15,16 +15,19 @@ import {TempoMaster} from './classes/tempoMaster.js'
 class App {
   constructor() {
     this.stats = Stats;
-    this.stats.init();
-    this.stats.loadState();
-    this.grandStaff = new GrandStaff(this);
-    this.sheet = new Sheet(this);
-    this.mover = new Mover(this);
-    this.piano = new Piano(this);
-    this.piano.init(this.mover);
-    this.tempoMaster = new TempoMaster(this);
-    this.ui = new UI(this);
-    this.sensei = new FragmentCoacher(this);
+    return this.stats.init()
+      .then(() => {
+        this.stats.loadState();
+        this.grandStaff = new GrandStaff(this);
+        this.sheet = new Sheet(this);
+        this.mover = new Mover(this);
+        this.piano = new Piano(this);
+        this.piano.init(this.mover);
+        this.tempoMaster = new TempoMaster(this);
+        this.ui = new UI(this);
+        this.sensei = new FragmentCoacher(this);
+        return this
+      })
     // this.sensei = new LearnCoacher(this);
     // this.sensei = new TempoCoacher(this);
   }
@@ -41,7 +44,10 @@ class App {
   }
 }
 
-globalThis.app = new App();
-window.addEventListener('load', function( event ) {
-  Settings.loadDefault()
-});
+window.addEventListener('load', event => {
+  (new App())
+    .then(app => {
+      globalThis.app = app
+      Settings.loadDefault()
+    })
+})

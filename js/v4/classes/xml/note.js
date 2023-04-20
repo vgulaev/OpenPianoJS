@@ -102,7 +102,7 @@ export class Note {
       } else if (this.notations.articulations['detached-legato']) {
         symb = emm.Articulation['detached-legato']
       } else {
-        console.log(this.notations.articulations, 'should be fixed')
+        // console.log(this.notations.articulations, 'should be fixed')
       }
       if (symb) {
         let dy = ('down' == this.stem ? -18 : 18)

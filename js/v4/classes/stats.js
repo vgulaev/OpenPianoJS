@@ -50,7 +50,7 @@ export class Stats {
   }
 
   static init() {
-    new OwnDB('stat2021').then(db => Stats.db = db);
+    return (new OwnDB('stat2021')).then(db => Stats.db = db);
   }
 
   static addSpendTime(object) {

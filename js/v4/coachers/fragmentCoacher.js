@@ -31,6 +31,7 @@ export class FragmentCoacher {
     this.repeat = 0;
     this.setStartFragment();
     this.tickPerBit = this.app.sheet.measures[0].tickPerBit;
+    console.log("this.app.sheet.measures[0].tickPerBit", this.app.sheet.measures[0].tickPerBit)
     this.createVoicesButton();
   }
 
@@ -99,6 +100,11 @@ export class FragmentCoacher {
     let measureBeats = this.tickPerBit * 4 / j.tp.measure.timeSignature['beat-type'];
     let tickLength = (j.tp.measure.timeSignature.beats * measureBeats) - j.tp.tick + y.tp.tick;
     let tempo = Math.round(60000 / (y.time - j.time) * (tickLength / measureBeats));
+    if (isNaN(tempo)) {
+      console.log('this.tickPerBit', this.tickPerBit, "j.tp.measure.timeSignature['beat-type']", j.tp.measure.timeSignature['beat-type'], 'j.tp.measure.timeSignature.beats', j.tp.measure.timeSignature.beats, 'measureBeats', measureBeats, 'tiks', j.tp.tick, y.tp.tick)
+      console.log(y.time, j.time, tickLength, measureBeats)
+
+    }
     let t = SVGBuilder.text({x: x.x, y: 400, text: `tempo: ${tempo}`});
     t.style.fontSize = '38px';
     this.tempo.append(t);
@@ -217,6 +223,23 @@ export class FragmentCoacher {
         endButton.innerHTML = 'Конец фрагмента';
       }
     });
+
+    // let bb1 = document.createElement('button');
+    // bb1.innerHTML = 'Назад';
+    // bb1.addEventListener('click', () => {
+    //   this.app.mover.prev()
+    //   // console.log(this.app)
+    // });
+
+    // let bb2 = document.createElement('button');
+    // bb2.innerHTML = 'Вперед';
+    // bb2.addEventListener('click', () => {
+    //   this.app.mover.next()
+    //   // console.log(this.app)
+    // });
+
     this.app.ui.UIHeader.append(endButton);
+    // this.app.ui.UIHeader.append(bb1);
+    // this.app.ui.UIHeader.append(bb2);
   }
 }

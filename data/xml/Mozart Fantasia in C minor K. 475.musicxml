@@ -8,7 +8,7 @@
     <creator type="composer">W.A. Mozart.</creator>
     <encoding>
       <software>MuseScore 4.0.1</software>
-      <encoding-date>2023-01-28</encoding-date>
+      <encoding-date>2023-02-02</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -40,6 +40,10 @@
         <key>
           <fifths>0</fifths>
           </key>
+        <time symbol="common">
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+          </time>
         <staves>2</staves>
         <clef number="1">
           <sign>G</sign>
@@ -17553,17 +17557,31 @@
       <backup>
         <duration>24</duration>
         </backup>
+      <barline location="middle">
+        <bar-style>light-light</bar-style>
+        </barline>
+      <forward>
+        <duration>24</duration>
+        </forward>
       <backup>
-        <duration>384</duration>
+        <duration>408</duration>
         </backup>
       <note print-object="no">
-        <rest measure="yes"/>
+        <rest/>
         <duration>384</duration>
         <voice>5</voice>
+        <type>breve</type>
+        <staff>2</staff>
+        </note>
+      <note print-object="no">
+        <rest/>
+        <duration>24</duration>
+        <voice>5</voice>
+        <type>eighth</type>
         <staff>2</staff>
         </note>
       <backup>
-        <duration>384</duration>
+        <duration>408</duration>
         </backup>
       <note>
         <pitch>
@@ -17630,6 +17648,9 @@
             </technical>
           </notations>
         </note>
+      <forward>
+        <duration>24</duration>
+        </forward>
       <barline location="right">
         <bar-style>light-light</bar-style>
         </barline>
@@ -48672,9 +48693,6 @@
         <accidental>flat</accidental>
         <stem>down</stem>
         <staff>2</staff>
-        <notations>
-          <slur type="stop" number="1"/>
-          </notations>
         </note>
       <direction placement="below">
         <direction-type>
@@ -48707,7 +48725,6 @@
         <stem>up</stem>
         <staff>2</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
           <technical>
             <fingering placement="below">5</fingering>
             </technical>
