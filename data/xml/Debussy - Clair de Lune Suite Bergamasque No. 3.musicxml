@@ -6,8 +6,8 @@
     </work>
   <identification>
     <encoding>
-      <software>MuseScore 4.0.1</software>
-      <encoding-date>2023-04-19</encoding-date>
+      <software>MuseScore 4.0.2</software>
+      <encoding-date>2023-06-07</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -24742,10 +24742,14 @@
           <octave>2</octave>
           </pitch>
         <duration>2</duration>
+        <tie type="stop"/>
         <voice>5</voice>
         <type>eighth</type>
         <stem>up</stem>
         <staff>2</staff>
+        <notations>
+          <tied type="stop"/>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -24860,24 +24864,6 @@
         <dot/>
         <stem>down</stem>
         <staff>2</staff>
-        </note>
-      <note>
-        <chord/>
-        <pitch>
-          <step>A</step>
-          <alter>-1</alter>
-          <octave>2</octave>
-          </pitch>
-        <duration>12</duration>
-        <tie type="stop"/>
-        <voice>6</voice>
-        <type>half</type>
-        <dot/>
-        <stem>down</stem>
-        <staff>2</staff>
-        <notations>
-          <tied type="stop"/>
-          </notations>
         </note>
       <note print-object="no">
         <rest/>

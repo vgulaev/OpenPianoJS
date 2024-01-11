@@ -7,8 +7,8 @@
   <identification>
     <creator type="composer">Композитор / аранжировщик</creator>
     <encoding>
-      <software>MuseScore 4.0.1</software>
-      <encoding-date>2023-02-01</encoding-date>
+      <software>MuseScore 4.1.0</software>
+      <encoding-date>2023-09-13</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -22,6 +22,7 @@
       <part-abbreviation>Ф-но</part-abbreviation>
       <score-instrument id="P1-I1">
         <instrument-name>Фортепиано</instrument-name>
+        <instrument-sound>keyboard.piano.grand</instrument-sound>
         </score-instrument>
       <midi-device id="P1-I1" port="1"></midi-device>
       <midi-instrument id="P1-I1">
@@ -1319,6 +1320,11 @@
         <dot/>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -1330,6 +1336,11 @@
         <type>eighth</type>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <technical>
+            <fingering placement="below">1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -1342,6 +1353,11 @@
         <type>quarter</type>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       </measure>
     <measure number="17">
