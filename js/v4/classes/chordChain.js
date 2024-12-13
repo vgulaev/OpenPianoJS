@@ -1,4 +1,4 @@
-import {Chord} from './Chord.js';
+import {Chord} from './chord.js';
 
 export class ChordChain {
   constructor(sheet) {
