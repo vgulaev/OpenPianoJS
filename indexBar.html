@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirm email</title>
+  <script type="text/javascript">
+    window.addEventListener('load', event => {
+      const el = document.getElementById("thanks")
+      fetch("/index4.html", {
+        method: "GET",
+        // headers: {
+        //   "ngrok-skip-browser-warning": true,
+        //   Authorization: authID,
+        // },
+        // body: JSON.stringify(request),
+      })
+        .then(res => el.style.display = "flex")
+    })
+  </script>
+</head>
+<body>
+  <div id="thanks" style="display: none;">Thanks for confirmation</div>
+</body>
+</html>
