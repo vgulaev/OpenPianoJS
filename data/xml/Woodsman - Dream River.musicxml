@@ -3,8 +3,8 @@
 <score-partwise version="4.0">
   <identification>
     <encoding>
-      <software>MuseScore 4.1.1</software>
-      <encoding-date>2024-01-03</encoding-date>
+      <software>MuseScore 4.2.0</software>
+      <encoding-date>2024-01-17</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -71,6 +71,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <direction placement="below">
         <direction-type>
@@ -89,6 +94,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -102,6 +112,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -145,7 +160,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -161,6 +176,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -563,6 +583,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -575,6 +600,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -626,6 +656,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
@@ -707,7 +742,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -731,6 +766,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -744,6 +784,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -757,6 +802,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -802,7 +852,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -818,6 +868,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -1361,7 +1416,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -1394,6 +1449,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -1462,7 +1522,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -1478,6 +1538,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -1880,6 +1945,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -1892,6 +1962,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -1943,6 +2018,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
@@ -2024,7 +2104,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -2048,6 +2128,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2061,6 +2146,11 @@
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2074,6 +2164,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2119,7 +2214,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -2135,6 +2230,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2678,7 +2778,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -2710,6 +2810,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2723,6 +2828,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2735,6 +2845,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2779,7 +2894,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -2794,6 +2909,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3075,6 +3195,11 @@
         <type>quarter</type>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <direction placement="below">
         <direction-type>
@@ -3207,6 +3332,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3231,6 +3361,11 @@
         <type>quarter</type>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
@@ -3312,7 +3447,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -3336,6 +3471,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3349,6 +3489,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3361,6 +3506,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3405,7 +3555,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -3421,6 +3571,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3950,7 +4105,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -3982,6 +4137,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3995,6 +4155,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4007,6 +4172,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4051,7 +4221,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -4066,6 +4236,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4347,6 +4522,11 @@
         <type>quarter</type>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <direction placement="below">
         <direction-type>
@@ -4479,6 +4659,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4503,6 +4688,11 @@
         <type>quarter</type>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
@@ -4584,7 +4774,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -4608,6 +4798,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4621,6 +4816,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4633,6 +4833,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4677,7 +4882,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -4693,6 +4898,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4928,6 +5138,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -5222,7 +5437,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -5245,6 +5460,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -5258,6 +5478,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -5271,6 +5496,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -5322,7 +5552,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -5337,6 +5567,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -5910,7 +6145,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -5928,6 +6163,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -5940,6 +6180,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -5953,6 +6198,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -5996,7 +6246,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -6012,6 +6262,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6533,7 +6788,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -6556,6 +6811,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6569,6 +6829,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6582,6 +6847,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6627,7 +6897,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -6642,6 +6912,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6719,6 +6994,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6732,6 +7012,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6745,6 +7030,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6876,6 +7166,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6888,6 +7183,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -6901,6 +7201,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7192,7 +7497,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -7210,6 +7515,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7222,6 +7532,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7235,6 +7550,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7278,7 +7598,7 @@
         </backup>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -7294,6 +7614,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7815,7 +8140,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -7842,6 +8167,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7854,6 +8184,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>5</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7867,6 +8202,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7880,6 +8220,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7893,6 +8238,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7906,16 +8256,15 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
         </backup>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="start" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -7927,6 +8276,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">5</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -7980,7 +8334,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -7999,7 +8353,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -8017,6 +8371,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8030,6 +8389,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8043,6 +8407,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8056,6 +8425,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8068,6 +8442,11 @@
         <type>quarter</type>
         <stem>up</stem>
         <staff>1</staff>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
@@ -8084,6 +8463,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8438,14 +8822,17 @@
         <staff>2</staff>
         <beam number="1">end</beam>
         </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="stop" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       </measure>
     <measure number="53">
+      <direction placement="below">
+        <direction-type>
+          <dynamics>
+            <p/>
+            </dynamics>
+          </direction-type>
+        <staff>1</staff>
+        <sound dynamics="55.56"/>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -8458,6 +8845,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8470,6 +8862,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>5</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8483,6 +8880,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8496,6 +8898,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8509,6 +8916,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8522,16 +8934,15 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
         </backup>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="start" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -8543,6 +8954,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">5</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8594,6 +9010,12 @@
         <staff>2</staff>
         <beam number="1">begin</beam>
         </note>
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" line="yes" sign="yes"/>
+          </direction-type>
+        <staff>2</staff>
+        </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -8609,7 +9031,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -8627,6 +9049,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8640,6 +9067,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8653,6 +9085,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8666,6 +9103,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -8678,16 +9120,15 @@
         <type>quarter</type>
         <stem>up</stem>
         <staff>1</staff>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
         </backup>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="start" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -8700,6 +9141,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9054,14 +9500,17 @@
         <staff>2</staff>
         <beam number="1">end</beam>
         </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="stop" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       </measure>
     <measure number="57">
+      <direction placement="below">
+        <direction-type>
+          <dynamics>
+            <p/>
+            </dynamics>
+          </direction-type>
+        <staff>1</staff>
+        <sound dynamics="55.56"/>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -9074,6 +9523,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9086,6 +9540,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>5</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9099,6 +9558,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9112,6 +9576,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9125,6 +9594,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9138,16 +9612,15 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
         </backup>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="start" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -9159,6 +9632,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">5</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9210,6 +9688,12 @@
         <staff>2</staff>
         <beam number="1">begin</beam>
         </note>
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" line="yes" sign="yes"/>
+          </direction-type>
+        <staff>2</staff>
+        </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -9225,7 +9709,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -9243,6 +9727,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9256,6 +9745,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9269,6 +9763,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9282,6 +9781,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9294,16 +9798,15 @@
         <type>quarter</type>
         <stem>up</stem>
         <staff>1</staff>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
         </backup>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="start" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -9316,6 +9819,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9670,14 +10178,17 @@
         <staff>2</staff>
         <beam number="1">end</beam>
         </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="stop" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       </measure>
     <measure number="61">
+      <direction placement="below">
+        <direction-type>
+          <dynamics>
+            <p/>
+            </dynamics>
+          </direction-type>
+        <staff>1</staff>
+        <sound dynamics="55.56"/>
+        </direction>
       <direction placement="below">
         <direction-type>
           <wedge type="diminuendo" number="1"/>
@@ -9696,6 +10207,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9708,16 +10224,12 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>5</fingering>
+            </technical>
+          </notations>
         </note>
-      <direction placement="above">
-        <direction-type>
-          <dynamics>
-            <pp/>
-            </dynamics>
-          </direction-type>
-        <staff>1</staff>
-        <sound dynamics="45.56"/>
-        </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -9730,6 +10242,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9743,6 +10260,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9756,6 +10278,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9769,16 +10296,15 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
         </backup>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="start" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -9790,6 +10316,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">5</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9841,6 +10372,12 @@
         <staff>2</staff>
         <beam number="1">begin</beam>
         </note>
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" line="yes" sign="yes"/>
+          </direction-type>
+        <staff>2</staff>
+        </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -9856,7 +10393,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>2</staff>
         </direction>
@@ -9874,6 +10411,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9887,6 +10429,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9900,6 +10447,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9913,6 +10465,11 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -9925,16 +10482,15 @@
         <type>quarter</type>
         <stem>up</stem>
         <staff>1</staff>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
         </note>
       <backup>
         <duration>6</duration>
         </backup>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="start" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -9947,6 +10503,11 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <technical>
+            <fingering placement="below">4</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -10209,9 +10770,6 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">end</beam>
-        <notations>
-          <fermata type="upright"/>
-          </notations>
         </note>
       <direction placement="below">
         <direction-type>
@@ -10288,9 +10846,6 @@
         <stem>down</stem>
         <staff>2</staff>
         <beam number="1">end</beam>
-        <notations>
-          <fermata type="upright"/>
-          </notations>
         </note>
       <note>
         <pitch>
@@ -10387,12 +10942,6 @@
           <tied type="stop"/>
           </notations>
         </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="stop" line="yes"/>
-          </direction-type>
-        <staff>2</staff>
-        </direction>
       <barline location="right">
         <bar-style>light-heavy</bar-style>
         </barline>

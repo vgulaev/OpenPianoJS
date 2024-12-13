@@ -7,8 +7,8 @@
   <identification>
     <creator type="composer">Глиэр</creator>
     <encoding>
-      <software>MuseScore 4.1.1</software>
-      <encoding-date>2023-10-25</encoding-date>
+      <software>MuseScore 4.2.1</software>
+      <encoding-date>2024-03-13</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -9939,6 +9939,9 @@
         <dot/>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <arpeggiate/>
+          </notations>
         </note>
       <note>
         <chord/>
@@ -9953,6 +9956,9 @@
         <dot/>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <arpeggiate/>
+          </notations>
         </note>
       <note>
         <chord/>
@@ -9966,6 +9972,9 @@
         <dot/>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <arpeggiate/>
+          </notations>
         </note>
       <note>
         <chord/>
@@ -9980,6 +9989,9 @@
         <dot/>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <arpeggiate/>
+          </notations>
         </note>
       <backup>
         <duration>12</duration>
@@ -10019,6 +10031,9 @@
         <dot/>
         <stem>up</stem>
         <staff>2</staff>
+        <notations>
+          <arpeggiate/>
+          </notations>
         </note>
       <note>
         <chord/>
@@ -10033,6 +10048,9 @@
         <dot/>
         <stem>up</stem>
         <staff>2</staff>
+        <notations>
+          <arpeggiate/>
+          </notations>
         </note>
       <note>
         <chord/>
@@ -10046,6 +10064,9 @@
         <dot/>
         <stem>up</stem>
         <staff>2</staff>
+        <notations>
+          <arpeggiate/>
+          </notations>
         </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>

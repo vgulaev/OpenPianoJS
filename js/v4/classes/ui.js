@@ -25,6 +25,10 @@ export class UI {
     let restartButton = document.createElement('button');
     restartButton.innerHTML = 'restart';
     restartButton.addEventListener('click', () => {
+      if (this.app.sensei?.tempo) {
+        this.app.sensei.tempo.innerHTML = ''
+      }
+      console.log(this.app.sensei)
       this.app.mover.setCurIndex(0);
     });
     this.UIHeader.append(restartButton);

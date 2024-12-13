@@ -184,7 +184,10 @@ export class Mover {
 
   next() {
     this.cc.items[this.curIndex].time = performance.now();
-    if (this.cc.items.length - 1 == this.curIndex) return this.dispatchEvent('onSheetEnd');
+    if (this.cc.items.length - 1 == this.curIndex) {
+      console.log("+++++++++++++++++++++++++++++++++++++")
+      return this.dispatchEvent('onSheetEnd')
+    }
     this.startGreenAnimation();
     this.dispatchEvent('beforeIndexUpdated');
     this.app.tempoMaster.tick(this.cc.items[this.curIndex]);

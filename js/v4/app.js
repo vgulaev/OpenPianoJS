@@ -26,10 +26,10 @@ class App {
         this.tempoMaster = new TempoMaster(this);
         this.ui = new UI(this);
         this.sensei = new FragmentCoacher(this);
+        // this.sensei = new TempoCoacher(this);
+        // this.sensei = new LearnCoacher(this);
         return this
       })
-    // this.sensei = new LearnCoacher(this);
-    // this.sensei = new TempoCoacher(this);
   }
 
   load(url) {

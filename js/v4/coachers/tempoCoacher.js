@@ -1,24 +1,28 @@
 import {cconst} from '../../common/commonConst.js';
-import {SVGBuilder} from '../classes/svgBuilder.js';
-import {Settings} from '../../../conf/localSettings.js'
 import {Coacher} from './coacher.js'
+import {Settings} from '../../../conf/localSettings.js'
+import {SVGBuilder} from '../classes/svgBuilder.js';
+
+const measureTemps = {}
+const original = {}
 
 export class TempoCoacher {
   constructor(app) {
     Coacher.call(this);
     this.app = app;
     this.initListeners();
+    this.addButtons();
+    this.vicesButton = document.createElement('div');
+    this.vicesButton.style.display = 'inline-block';
+    this.app.ui.UIHeader.append(this.vicesButton);
   }
 
   init() {
     this.tempo = SVGBuilder.createSVG('g');
     this.tempo.setAttributeNS(null, 'id', 'FragmentCoacher');
     this.app.sheet.secondLayer.append(this.tempo);
-
-    console.log('Settings.range', Settings.range)
     let s = (Settings.range ? Settings.range[0] : 0);
     let e = (Settings.range ? Math.min(Settings.range[1], this.app.cc.items.length - 1) : this.app.cc.items.length - 1);
-    console.log('s', s, 'e', e)
     this.from = {
       index: s,
       line: this.createLineAt(s, 'from'),
@@ -27,6 +31,58 @@ export class TempoCoacher {
       index: e,
       line: this.createLineAt(e, 'to'),
     };
+    this.repeat = 0;
+    this.setStartFragment();
+    this.tickPerBit = this.app.sheet.measures[0].tickPerBit;
+    original.to = {...this.to}
+    original.from = {...this.from}
+    console.log("this.app.sheet.measures[0].tickPerBit", original, this.app.sheet.measures)
+    this.createVoicesButton();
+  }
+
+  setNotesDisplay(cc, v, display) {
+    cc.items.forEach(c => {
+      c.tp.notes.forEach(n => {
+        if (!n.g) return;
+        if (n.voice == v) {
+          n.g.style.display = display;
+        }
+      });
+    });
+  }
+
+  setKeyStatus(cc, v) {
+    let vv = new Set(Array.from(v).map(e => parseInt(e)));
+    cc.items.forEach(c => {
+      c.keys = new Set(c.notes.filter(n => vv.has(n.voice)).map(n => n.midiByte));
+    })
+  }
+
+  createVoicesButton() {
+    this.vicesButton.innerHTML = '';
+    let cc = this.app.mover.cc;
+    let voices = new Set(cc.items
+        .map(c => Object.keys(c.tp.voices))
+        .flat()
+      );
+    Array.from(voices).sort().forEach(v => {
+      let cap = `voice ${v} on`;
+      let b = document.createElement('button');
+      b.innerHTML = cap;
+      this.vicesButton.append(b);
+      b.addEventListener('click', e => {
+        if (cap == b.innerHTML) {
+          voices.delete(v);
+          this.setNotesDisplay(cc, v, 'none');
+          b.innerHTML = `voice ${v} off`;
+        } else {
+          voices.add(v);
+          this.setNotesDisplay(cc, v, 'inline');
+          b.innerHTML = cap;
+        }
+        this.setKeyStatus(cc, voices);
+      });
+    });
   }
 
   getX(index) {
@@ -49,6 +105,13 @@ export class TempoCoacher {
     let measureBeats = this.tickPerBit * 4 / j.tp.measure.timeSignature['beat-type'];
     let tickLength = (j.tp.measure.timeSignature.beats * measureBeats) - j.tp.tick + y.tp.tick;
     let tempo = Math.round(60000 / (y.time - j.time) * (tickLength / measureBeats));
+    if (isNaN(tempo)) {
+      console.log('this.tickPerBit', this.tickPerBit, "j.tp.measure.timeSignature['beat-type']", j.tp.measure.timeSignature['beat-type'], 'j.tp.measure.timeSignature.beats', j.tp.measure.timeSignature.beats, 'measureBeats', measureBeats, 'tiks', j.tp.tick, y.tp.tick)
+      console.log(y.time, j.time, tickLength, measureBeats)
+
+    }
+    measureTemps[mNumber] = tempo
+    console.log({measureTemps})
     let t = SVGBuilder.text({x: x.x, y: 400, text: `tempo: ${tempo}`});
     t.style.fontSize = '38px';
     this.tempo.append(t);
@@ -71,6 +134,10 @@ export class TempoCoacher {
     this.app.mover.addEventListener('onNext', (event) => {
       let tp = event.cc.items[event.curIndex].tp;
       if (event.curIndex > this.to.index) {
+        const sorted = Object.entries(measureTemps).sort((a, b) => a[1] - b[1])
+        const first = this.app.sheet.measures[sorted[0][0]]
+
+        console.log("aa", first)
         this.pushSpendTime();
         this.setStartFragment();
       }
@@ -78,6 +145,7 @@ export class TempoCoacher {
     this.app.mover.addEventListener('onSheetEnd', (event) => {
       this.pushSpendTime();
       this.setStartFragment();
+      console.log("************************")
     })
     this.app.mover.addEventListener('beforeIndexUpdated', (event) => {
       this.calcMeasureTemp(event);
@@ -136,4 +204,38 @@ export class TempoCoacher {
     el.setAttributeNS(null, 'x2', x);
   }
 
+  addButtons() {
+    let startButton = document.createElement('button');
+    startButton.innerHTML = 'Начало фрагмента';
+    startButton.addEventListener('click', () => {
+      if ('Начало фрагмента' == startButton.innerHTML) {
+        this.from.index = this.app.mover.curIndex;
+        startButton.innerHTML = 'С начала';
+      } else {
+        this.from.index = 0;
+        startButton.innerHTML = 'Начало фрагмента';
+      }
+      this.repeat = 1;
+      this.setLineX('from');
+    });
+    this.app.ui.UIHeader.append(startButton);
+
+    let endButton = document.createElement('button');
+    endButton.innerHTML = 'Конец фрагмента';
+    endButton.addEventListener('click', () => {
+      this.repeat = 0;
+      if ('Конец фрагмента' == endButton.innerHTML) {
+        this.to.index = this.app.mover.curIndex;
+        this.setLineX('to');
+        this.setStartFragment();
+        endButton.innerHTML = 'До конца';
+      } else {
+        this.to.index = this.app.cc.items.length - 1;
+        this.setLineX('to');
+        endButton.innerHTML = 'Конец фрагмента';
+      }
+    });
+
+    this.app.ui.UIHeader.append(endButton);
+  }
 }

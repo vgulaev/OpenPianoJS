@@ -86,6 +86,7 @@ export class Measure {
 
   checkTick() {
     if (!(this.curTick in this.timePoint)) {
+      // console.log("this.curTick:", this.curTick)
       this.timePoint[this.curTick] = new TimePoint(this);
     }
   }
@@ -96,13 +97,14 @@ export class Measure {
     pm.g.append(t);
     pm.g.append(e);
     pm.cursor += 20;
-    // try {
+    try {
       Object.keys(this.timePoint)
         .map(e => parseInt(e))
         .sort((a, b) => a-b)
         .forEach(t => this.timePoint[t].draw(pm));
-    // } catch (err) {
-    //   console.log('Error in measure:', this.number, err)
-    // }
+    } catch (err) {
+      console.log('Error in measure:', this.number, err)
+    }
+    // console.log(this.timePoint)
   }
 }

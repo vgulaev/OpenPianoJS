@@ -117,6 +117,7 @@ export class TimePoint {
       return {x: x, y: n.drawY(pm), text: emm.Accidental[n.accidental]};
     }).filter(e => e);
     let minX = Math.min(...(xs.map(e => e.x)));
+    // console.log({acc, pm})
     xs.forEach(e => {
       e.x = pm.cursor - minX + e.x;
       let a = SVGBuilder.emmentaler(e);
@@ -332,6 +333,7 @@ export class TimePoint {
   drawBeatsLine(pm) {
     const { timeSignature } = this.measure
     const bitDuration = 4 / timeSignature['beat-type'] * pm.sheet.measures[0].tickPerBit
+    // console.log({bitDuration})
     // console.log(this.tick, this.measure.timeSignature, pm.sheet.measures[0].tickPerBit, )
     let text
     if (12 == timeSignature.beats || 9 == timeSignature.beats) {

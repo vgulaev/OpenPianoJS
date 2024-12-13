@@ -652,7 +652,7 @@
           <alter>-1</alter>
           <octave>5</octave>
           </pitch>
-        <duration>131</duration>
+        <duration>130</duration>
         <voice>1</voice>
         <type>eighth</type>
         <time-modification>
@@ -1048,7 +1048,7 @@
           <step>F</step>
           <octave>5</octave>
           </pitch>
-        <duration>131</duration>
+        <duration>130</duration>
         <voice>1</voice>
         <type>eighth</type>
         <time-modification>
@@ -1266,7 +1266,7 @@
           <alter>-1</alter>
           <octave>5</octave>
           </pitch>
-        <duration>131</duration>
+        <duration>130</duration>
         <voice>1</voice>
         <type>eighth</type>
         <accidental>flat</accidental>
@@ -3477,7 +3477,7 @@
           <alter>-1</alter>
           <octave>5</octave>
           </pitch>
-        <duration>131</duration>
+        <duration>130</duration>
         <voice>1</voice>
         <type>eighth</type>
         <time-modification>
@@ -5175,7 +5175,7 @@
           <step>G</step>
           <octave>5</octave>
           </pitch>
-        <duration>206</duration>
+        <duration>205</duration>
         <voice>1</voice>
         <type>eighth</type>
         <accidental>natural</accidental>
@@ -5192,7 +5192,7 @@
           <step>A</step>
           <octave>5</octave>
           </pitch>
-        <duration>206</duration>
+        <duration>205</duration>
         <voice>1</voice>
         <type>eighth</type>
         <accidental>natural</accidental>
@@ -23554,7 +23554,7 @@
           <alter>-1</alter>
           <octave>5</octave>
           </pitch>
-        <duration>206</duration>
+        <duration>205</duration>
         <voice>1</voice>
         <type>eighth</type>
         <time-modification>
@@ -23574,7 +23574,7 @@
           <step>F</step>
           <octave>5</octave>
           </pitch>
-        <duration>206</duration>
+        <duration>205</duration>
         <voice>1</voice>
         <type>eighth</type>
         <time-modification>

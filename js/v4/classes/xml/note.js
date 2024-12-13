@@ -91,6 +91,16 @@ export class Note {
   draw(pm) {
     this.g = this.drawG();
     pm.g.append(this.g);
+
+
+    if (this.notations?.fermata) {
+      // console.log(this.notations, 'should be fixed')
+      let symb = emm.Fermata[this.notations.fermata.type || this.notations.fermata]
+      let dy = ('down' == this.stem ? -18 : -60)
+      let e = SVGBuilder.emmentaler({x: this.x + 8, y: this.y + dy, text: symb});
+      pm.g.append(e);
+    }
+
     if (this.notations?.articulations) {
       let symb;
       if (this.notations.articulations.staccato) {
@@ -102,7 +112,7 @@ export class Note {
       } else if (this.notations.articulations['detached-legato']) {
         symb = emm.Articulation['detached-legato']
       } else {
-        // console.log(this.notations.articulations, 'should be fixed')
+        console.log(this.notations, 'should be fixed')
       }
       if (symb) {
         let dy = ('down' == this.stem ? -18 : 18)
@@ -155,10 +165,11 @@ Note.baseY = {
 }
 
 Note.clefLine = {
+  'G1': 36,
   'G0': 29,
   'G-1': 22,
-  'G1': 36,
-  'F0': 17
+  'F0': 17,
+  'F-1': 10,
 }
 
 Note.sToStep = { 'C': 0,

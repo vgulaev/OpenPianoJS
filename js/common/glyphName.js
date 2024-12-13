@@ -57,6 +57,11 @@ export const emm = {
     mordent: '\u{E161}',
     'trill-mark': '\u{E14D}',
   },
+  Fermata: {
+    'upright': '\u{E132}',
+    'inverted': '\u{E133}',
+    'angled': '\u{E134}',
+  },
   Flag: {
     eighth: {
       up: '\u{E21D}',

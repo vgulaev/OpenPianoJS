@@ -3,8 +3,8 @@
 <score-partwise version="4.0">
   <identification>
     <encoding>
-      <software>MuseScore 4.0.0</software>
-      <encoding-date>2022-12-28</encoding-date>
+      <software>MuseScore 4.2.1</software>
+      <encoding-date>2024-09-18</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -17,6 +17,7 @@
       <part-name>Piano</part-name>
       <score-instrument id="P1-I1">
         <instrument-name>Piano</instrument-name>
+        <instrument-sound>keyboard.piano</instrument-sound>
         </score-instrument>
       <midi-device id="P1-I1" port="1"></midi-device>
       <midi-instrument id="P1-I1">
@@ -2681,6 +2682,11 @@
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2696,6 +2702,11 @@
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2709,6 +2720,11 @@
         <staff>1</staff>
         <beam number="1">end</beam>
         <beam number="2">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2735,6 +2751,11 @@
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2749,6 +2770,11 @@
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -2762,6 +2788,11 @@
         <staff>1</staff>
         <beam number="1">end</beam>
         <beam number="2">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3119,6 +3150,11 @@
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3132,6 +3168,11 @@
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3145,6 +3186,11 @@
         <staff>1</staff>
         <beam number="1">end</beam>
         <beam number="2">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3171,6 +3217,11 @@
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3184,6 +3235,11 @@
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3197,6 +3253,11 @@
         <staff>1</staff>
         <beam number="1">end</beam>
         <beam number="2">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -3758,7 +3819,7 @@
         <beam number="2">end</beam>
         <notations>
           <technical>
-            <fingering>3</fingering>
+            <fingering>1</fingering>
             </technical>
           </notations>
         </note>
@@ -3998,6 +4059,85 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
         <beam number="2">begin</beam>
+        <notations>
+          <technical>
+            <fingering>4</fingering>
+            </technical>
+          </notations>
+        </note>
+      <note>
+        <pitch>
+          <step>F</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>16th</type>
+        <stem>up</stem>
+        <staff>1</staff>
+        <beam number="1">continue</beam>
+        <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
+        </note>
+      <note>
+        <pitch>
+          <step>E</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>16th</type>
+        <accidental>flat</accidental>
+        <stem>up</stem>
+        <staff>1</staff>
+        <beam number="1">continue</beam>
+        <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
+        </note>
+      <note>
+        <pitch>
+          <step>F</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>16th</type>
+        <stem>up</stem>
+        <staff>1</staff>
+        <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <notations>
+          <technical>
+            <fingering>3</fingering>
+            </technical>
+          </notations>
+        </note>
+      <note>
+        <pitch>
+          <step>D</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>16th</type>
+        <stem>up</stem>
+        <staff>1</staff>
+        <beam number="1">begin</beam>
+        <beam number="2">begin</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4026,11 +4166,15 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>flat</accidental>
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -4044,59 +4188,11 @@
         <staff>1</staff>
         <beam number="1">end</beam>
         <beam number="2">end</beam>
-        </note>
-      <note>
-        <pitch>
-          <step>D</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>16th</type>
-        <stem>up</stem>
-        <staff>1</staff>
-        <beam number="1">begin</beam>
-        <beam number="2">begin</beam>
-        </note>
-      <note>
-        <pitch>
-          <step>F</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>16th</type>
-        <stem>up</stem>
-        <staff>1</staff>
-        <beam number="1">continue</beam>
-        <beam number="2">continue</beam>
-        </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <alter>-1</alter>
-          <octave>4</octave>
-          </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>16th</type>
-        <stem>up</stem>
-        <staff>1</staff>
-        <beam number="1">continue</beam>
-        <beam number="2">continue</beam>
-        </note>
-      <note>
-        <pitch>
-          <step>F</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>16th</type>
-        <stem>up</stem>
-        <staff>1</staff>
-        <beam number="1">end</beam>
-        <beam number="2">end</beam>
+        <notations>
+          <technical>
+            <fingering>1</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -14099,7 +14195,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="start" line="yes"/>
+          <pedal type="resume" line="yes" sign="yes"/>
           </direction-type>
         <staff>1</staff>
         </direction>
@@ -14126,7 +14222,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <pedal type="stop" line="yes"/>
+          <pedal type="stop" line="yes" sign="no"/>
           </direction-type>
         <staff>1</staff>
         </direction>
@@ -14749,7 +14845,6 @@
         <voice>3</voice>
         <type>64th</type>
         <stem>none</stem>
-        <notehead>none</notehead>
         <staff>1</staff>
         <notations>
           <arpeggiate/>
@@ -15145,7 +15240,6 @@
         <voice>5</voice>
         <type>16th</type>
         <stem>up</stem>
-        <notehead>none</notehead>
         <staff>2</staff>
         <beam number="1">begin</beam>
         <beam number="2">forward hook</beam>
