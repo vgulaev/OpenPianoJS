@@ -30,9 +30,10 @@ Settings.loadDefault = () => {
   // app.load('data/xml/Beethoven - Sonate No. 2 2nd Movement.musicxml');
   // app.load('data/xml/Beethoven Sonata No. 8 Op. 13 Pathetique.musicxml');
   // app.load('data/xml/Beethoven Sonata No. 8 Op. 13 Pathetique III Rondo.musicxml');
+  // app.load('data/xml/Beethoven Sonate No. 12 Funeral March 3rd Movement.musicxml');
   // app.load('data/xml/Beethoven Sonata 14 C Sharp Minor.musicxml');
   // app.load('data/xml/Beethoven Sonata 14 C Sharp Minor 2rd Movemen.musicxml');
-  app.load('data/xml/Beethoven Sonata 14 C Sharp Minor 3rd Movemen.musicxml');
+  // app.load('data/xml/Beethoven Sonata 14 C Sharp Minor 3rd Movemen.musicxml');
   // app.load('data/xml/Beethoven Sonata No. 8 Op. 13 Pathetique - Second Ab major.musicxml');
   // app.load('data/xml/Beethoven Sonate No. 17 Tempest 3rd Movement.musicxml');
   // app.load('data/xml/Beethoven Sonata No. 23 Op. 57 Appassionata Complete.musicxml');
@@ -106,7 +107,6 @@ Settings.loadDefault = () => {
   // app.load('data/xml/Greensleeves.musicxml');
   // app.load('data/xml/Gnossienne_No._1.musicxml');
   // app.load('data/xml/Gymnopedie.musicxml');
-  // app.load("data/xml/John Towner Williams - Hedwig's theme.musicxml")
   // app.load('data/xml/Grieg - Op.43 Lyric Pieces No. 6 - To Spring.musicxml');
   // app.load('data/xml/Grieg - Op.57 No.6 - Hjemve Homesickness Nostalgia di casa.musicxml');
   // app.load('data/xml/Grieg - Op.71 Kobold.musicxml');
@@ -117,24 +117,33 @@ Settings.loadDefault = () => {
   // app.load('data/xml/Halloran Dustin - Opus No. 17.musicxml');
   // app.load('data/xml/Handel - Passacaglia_from_Suite_no.7_HWV_432_-_Georg_Frideric.musicxml');
   // app.load('data/xml/Hanon - Ex 6.musicxml');
+  // app.load('data/xml/Hans Zimmer - Interstellar Main Theme SO.musicxml');
+  // app.load('data/xml/Hans Zimmer - Interstellar Main Theme.musicxml');
   // app.load('data/xml/Hanz Zimmer - Mountains.musicxml');
   // app.load('data/xml/Hanz Zimmer - Pirates_of_the_Caribbean - Hes a Pirate.musicxml');
   // app.load('data/xml/Happy Birthday To You Piano.musicxml');
+  // app.load('data/xml/Homelander In The Hallway.musicxml');
+  // app.load('data/xml/Hisaishi - Merry Go Round of Life Howls Moving Castle.musicxml');
   // app.load('data/xml/Ilya Beshelvi - Wind.musicxml');
   // app.load('data/xml/Jingle_Bells.musicxml');
   // app.load('data/xml/John Cage - In a Landscape.musicxml');
+  // app.load('data/xml/John Field - Nocturne No. 10 in E minor H 46.musicxml');
   // app.load('data/xml/John Field - Nocturne No.5 - H.37 Edited by Liszt.musicxml');
-  //app.load('data/xml/John Field - Nocturne No. 10 in E minor H 46.musicxml');
+  // app.load('data/xml/John Towner Williams - Hedwig's theme.musicxml')
+  // app.load('data/xml/John Williams - Theme from Jaws.musicxml')
+  // app.load('data/xml/Jordan Critz - Starry Night.musicxml');
   // app.load('data/xml/LE_COUCOU_by_DAQUIN_The_Cuckoo.musicxml');
+  // app.load('data/xml/Liszt - Etude_in_G_Minor_La_Campanella_S._1413-cuted.musicxml');
   // app.load('data/xml/Liszt - Etude_in_G_Minor_La_Campanella_S._1413.musicxml');
   // app.load('data/xml/Liszt S. 136 No.10.musicxml');
-  // app.load('data/xml/Liszt - Etude_in_G_Minor_La_Campanella_S._1413-cuted.musicxml');
   // app.load('data/xml/Liszt S. 136 No.4.musicxml');
   // app.load('data/xml/Lucifer - Creep.musicxml');
   // app.load('data/xml/Ludovico Einaudi - Dietro Casa.musicxml');
   // app.load('data/xml/Maksim Mrvica - Croatian Rhapsody.musicxml');
   // app.load('data/xml/Max Richter - The Departure The Leftovers score.musicxml');
   // app.load('data/xml/May I See U Again.musicxml');
+  // app.load('data/xml/Mendelssohn - Wedding March.musicxml');
+  // app.load('data/xml/Mendelssohn - Wedding March Advanced.musicxml');
   // app.load('data/xml/Mendelssohn - Venetian Gondola Song No. 6 op. 19.musicxml');
   // app.load('data/xml/Metallica - Nothing Else Matters.musicxml');
   // app.load('data/xml/Moonlight serenade.musicxml');
@@ -146,6 +155,7 @@ Settings.loadDefault = () => {
   // app.load('data/xml/Mozart-Fantasia in D Minor K. 397.musicxml');
   // app.load('data/xml/Mozart Fantasia in C minor K. 475.musicxml');
   // app.load('data/xml/Mozart - K.265 - 12_Variations_of_Twinkle_Twinkle_Little_Star.musicxml');
+  // app.load('data/xml/Mozart - K 525 Eine Kleine Nachtmusik for Solo Piano.musicxml');
   // app.load('data/xml/Mozart-Sonata_16.musicxml');
   // app.load('data/xml/Mozart-Sonata_16_2nd_movement.musicxml');
   // app.load('data/xml/Mussorgsky - Bydlo.musicxml');
@@ -156,11 +166,14 @@ Settings.loadDefault = () => {
   // app.load('data/xml/Dominant.musicxml');
   // app.load('data/xml/My first compose.musicxml');
   // app.load('data/xml/National_Anthem_of_the_USSRRussia.musicxml');
+  // app.load('data/xml/Newman Tomas - American Beauty and Angela Undress.musicxml');
   // app.load('data/xml/Nutcracker 14a Pas de Deux Hinci version.musicxml');
   // app.load('data/xml/Nino Rota - The Godfather.musicxml');
   // app.load('data/xml/Nino Rota - The Godfather C minor.musicxml');
   // app.load('data/xml/Paganini 24 Caprice.musicxml');
+  // app.load('data/xml/Paul de Senneville - Marriage d\'amor.musicxml');
   // app.load('data/xml/Paul Mauriat - Toccata.musicxml');
+  // app.load('data/xml/Philip Glass - Glassworks - Opening 1.musicxml');
   // app.load('data/xml/Philip Glass - Walk to school.musicxml');
   // app.load('data/xml/Prelude_in_G_Minor_Op._23_No._5.musicxml');
   // app.load('data/xml/Prelude_Opus_28_No._4_in_E_Minor.musicxml');
@@ -195,7 +208,7 @@ Settings.loadDefault = () => {
   // app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._IX. Новая кукла.musicxml');
   // app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._VI. Болезнь куклы.musicxml');
   // app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._VII. Похороны куклы.musicxml');
-  // app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._XVI. Стариная француская песенка.musicxml');
+  app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._XVI. Стариная француская песенка.musicxml');
   // app.load('data/xml/Tchaikovsky_Op._39_Childrens_Album_-_P._I._XVIII. Неаполитанская песенка.musicxml');
   // app.load('data/xml/Tchaikovskys - October Autumn Song.musicxml');
   // app.load('data/xml/The Daydream - Tears B minor.musicxml');
@@ -264,7 +277,7 @@ Settings.loadDefault = () => {
 
 //Rahmaninoff
 // Settings.range = [0, 352];
-// Settings.range = [139, 2550];
+// Settings.range = [87, 2550];
 
 // 31 такт удалить последнюю четверть паузы.
 
@@ -275,7 +288,8 @@ Settings.loadDefault = () => {
 // Settings.range = [128, 255];
 // Settings.range = [528, 2550];
 // Settings.range = [381, 1120];
-// Settings.range = [253, 10000];
+// Settings.range = [1943, 10000];
+// Settings.range = [315, 10000];
 
 // http://192.168.56.10/
 

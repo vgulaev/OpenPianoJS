@@ -7,8 +7,8 @@
   <identification>
     <creator type="composer">Sergei Prokofiev</creator>
     <encoding>
-      <software>MuseScore 4.2.1</software>
-      <encoding-date>2024-02-28</encoding-date>
+      <software>MuseScore 4.4.4</software>
+      <encoding-date>2025-02-05</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -1857,7 +1857,7 @@
         <type>quarter</type>
         <accidental>natural</accidental>
         <stem>up</stem>
-        <staff>2</staff>
+        <staff>1</staff>
         </note>
       <note>
         <chord/>
@@ -1869,7 +1869,7 @@
         <voice>2</voice>
         <type>quarter</type>
         <stem>up</stem>
-        <staff>2</staff>
+        <staff>1</staff>
         </note>
       <forward>
         <duration>4</duration>
@@ -1883,7 +1883,7 @@
         <voice>2</voice>
         <type>quarter</type>
         <stem>up</stem>
-        <staff>2</staff>
+        <staff>1</staff>
         </note>
       <note>
         <chord/>
@@ -1897,7 +1897,7 @@
         <type>quarter</type>
         <accidental>flat</accidental>
         <stem>up</stem>
-        <staff>2</staff>
+        <staff>1</staff>
         </note>
       <backup>
         <duration>12</duration>
@@ -2089,7 +2089,7 @@
         <voice>2</voice>
         <type>quarter</type>
         <stem>up</stem>
-        <staff>2</staff>
+        <staff>1</staff>
         </note>
       <note>
         <chord/>
@@ -2101,7 +2101,7 @@
         <voice>2</voice>
         <type>quarter</type>
         <stem>up</stem>
-        <staff>2</staff>
+        <staff>1</staff>
         </note>
       <note>
         <rest/>
@@ -3148,7 +3148,7 @@
         <duration>1</duration>
         <voice>1</voice>
         <type>16th</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>

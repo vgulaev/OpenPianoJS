@@ -8,8 +8,8 @@
     <creator type="composer">Modest Petrovich Mussorgsky(1839 – 1881)</creator>
     <creator type="lyricist">Модест Петрович Мусоргский</creator>
     <encoding>
-      <software>MuseScore 4.1.0</software>
-      <encoding-date>2023-08-13</encoding-date>
+      <software>MuseScore 4.4.4</software>
+      <encoding-date>2025-03-28</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -66,7 +66,7 @@
         </direction>
       <direction placement="above">
         <direction-type>
-          <words font-weight="bold">Sempre moderato, pesante</words>
+          <words font-weight="bold" font-size="12">Sempre moderato, pesante</words>
           </direction-type>
         <staff>1</staff>
         <sound tempo="44"/>
@@ -92,7 +92,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start"/>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <backup>
@@ -605,7 +605,7 @@
       <backup>
         <duration>8</duration>
         </backup>
-      <direction placement="below">
+      <direction>
         <direction-type>
           <words font-style="italic">simile</words>
           </direction-type>
@@ -975,7 +975,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -1172,7 +1172,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -1430,7 +1430,7 @@
         <duration>2</duration>
         <voice>5</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>up</stem>
         <staff>2</staff>
         </note>
@@ -1484,7 +1484,7 @@
         <duration>2</duration>
         <voice>5</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>up</stem>
         <staff>2</staff>
         </note>
@@ -1580,7 +1580,7 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -1809,7 +1809,7 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -2017,7 +2017,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start"/>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <backup>
@@ -2854,7 +2854,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -3241,7 +3241,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start"/>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -3616,7 +3616,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -3860,7 +3860,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -4957,7 +4957,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">continue</beam>
@@ -4997,7 +4997,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>1</staff>
         </note>
@@ -5190,7 +5190,7 @@
         <duration>4</duration>
         <voice>6</voice>
         <type>quarter</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>2</staff>
         </note>
@@ -5584,7 +5584,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">continue</beam>
@@ -5624,7 +5624,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>1</staff>
         </note>
@@ -5817,7 +5817,7 @@
         <duration>4</duration>
         <voice>6</voice>
         <type>quarter</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>2</staff>
         </note>
@@ -6494,7 +6494,7 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -7335,7 +7335,7 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -7461,7 +7461,7 @@
         </backup>
       <note>
         <pitch>
-          <step>F</step>
+          <step>G</step>
           <alter>1</alter>
           <octave>2</octave>
           </pitch>
@@ -7487,7 +7487,7 @@
         </note>
       <note>
         <pitch>
-          <step>F</step>
+          <step>G</step>
           <alter>1</alter>
           <octave>2</octave>
           </pitch>
@@ -7580,7 +7580,7 @@
       <note>
         <chord/>
         <pitch>
-          <step>F</step>
+          <step>G</step>
           <alter>1</alter>
           <octave>2</octave>
           </pitch>
@@ -7642,7 +7642,7 @@
         </note>
       </measure>
     <measure number="32">
-      <direction placement="below">
+      <direction>
         <direction-type>
           <words font-style="italic">dim.</words>
           </direction-type>
@@ -7661,7 +7661,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -7901,7 +7901,7 @@
         <duration>4</duration>
         <voice>6</voice>
         <type>quarter</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>2</staff>
         </note>
@@ -7928,7 +7928,7 @@
         <duration>4</duration>
         <voice>6</voice>
         <type>quarter</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>down</stem>
         <staff>2</staff>
         </note>
@@ -7982,7 +7982,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -8534,10 +8534,10 @@
         </note>
       </measure>
     <measure number="35">
-      <direction placement="below">
+      <direction>
         <direction-type>
           <words font-style="italic" font-family="Leland Text"></words>
-          <words font-family="Times New Roman"> cresc.</words>
+          <words font-style="normal" font-family="Times New Roman"> cresc.</words>
           </direction-type>
         <staff>1</staff>
         </direction>
@@ -9160,7 +9160,7 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -9418,7 +9418,7 @@
         </note>
       </measure>
     <measure number="38">
-      <direction placement="below">
+      <direction>
         <direction-type>
           <words font-style="italic">con tutta forza</words>
           </direction-type>
@@ -9428,7 +9428,7 @@
         <direction-type>
           <words font-style="italic">sempre pesante e poco
 </words>
-          <words>allargando</words>
+          <words font-style="normal">allargando</words>
           </direction-type>
         <staff>1</staff>
         </direction>
@@ -9478,7 +9478,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start"/>
-          <slur type="start" placement="below" number="1"/>
+          <slur type="start" orientation="under" placement="below" number="1"/>
           </notations>
         </note>
       <note>
@@ -10252,7 +10252,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -10475,7 +10475,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -10698,7 +10698,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -11021,7 +11021,7 @@
         <duration>2</duration>
         <voice>5</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>up</stem>
         <staff>2</staff>
         </note>
@@ -11075,7 +11075,7 @@
         <duration>2</duration>
         <voice>5</voice>
         <type>eighth</type>
-        <accidental>sharp</accidental>
+        <accidental cautionary="yes" parentheses="no">sharp</accidental>
         <stem>up</stem>
         <staff>2</staff>
         </note>
@@ -11171,7 +11171,7 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <note>
@@ -11423,7 +11423,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -11714,7 +11714,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start"/>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <backup>
@@ -12353,7 +12353,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -12550,7 +12550,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -12942,7 +12942,7 @@
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           <articulations>
             <tenuto/>
             </articulations>
@@ -13275,11 +13275,8 @@
         <staff>2</staff>
         </note>
       <backup>
-        <duration>8</duration>
-        </backup>
-      <forward>
         <duration>4</duration>
-        </forward>
+        </backup>
       <note>
         <pitch>
           <step>D</step>
@@ -13754,7 +13751,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start"/>
-          <slur type="start" placement="above" number="1"/>
+          <slur type="start" orientation="over" placement="above" number="1"/>
           </notations>
         </note>
       <backup>
@@ -14143,7 +14140,7 @@
         </note>
       </measure>
     <measure number="59">
-      <direction placement="below">
+      <direction>
         <direction-type>
           <words font-style="italic">dim. e rit.</words>
           </direction-type>
@@ -14734,7 +14731,7 @@
         </note>
       </measure>
     <measure number="62">
-      <direction placement="below">
+      <direction>
         <direction-type>
           <words font-style="italic">perdendosi</words>
           </direction-type>
